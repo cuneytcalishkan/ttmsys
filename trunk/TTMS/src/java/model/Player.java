@@ -16,4 +16,6 @@ public class Player extends RegisteredUser implements PlayerDTO {
 
     @OneToMany(mappedBy = "players")
     private Tournament tournament;
+    @OneToMany(mappedBy = "players")
+    private Match match;
 }

@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,4 +23,12 @@ public interface MatchDTO {
     List<Referee> getReferees();
 
     Tournament getTournament();
+
+    Date getmDate();
+
+    Time getmTime();
+
+    long getId();
+
+    int getType();
 }

@@ -4,6 +4,7 @@
  */
 package model;
 
+import javax.persistence.OneToMany;
 import org.hibernate.annotations.Entity;
 
 /**
@@ -12,4 +13,9 @@ import org.hibernate.annotations.Entity;
  */
 @Entity
 public class Umpire extends RegisteredUser implements UmpireDTO {
+
+    @OneToMany(mappedBy = "umpires")
+    private Match match;
+    @OneToMany(mappedBy = "umpires")
+    private Tournament tournament;
 }
