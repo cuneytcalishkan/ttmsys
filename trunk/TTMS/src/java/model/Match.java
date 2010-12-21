@@ -8,7 +8,12 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -19,6 +24,9 @@ import org.hibernate.annotations.Entity;
  * @author CUNEYT
  */
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "matchtype", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue(value = "match")
 public abstract class Match implements MatchDTO {
 
     @Id

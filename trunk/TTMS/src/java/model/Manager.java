@@ -5,6 +5,7 @@
 package model;
 
 import java.util.List;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.ManyToOne;
 import org.hibernate.annotations.Entity;
 
@@ -13,6 +14,7 @@ import org.hibernate.annotations.Entity;
  * @author CUNEYT
  */
 @Entity
+@DiscriminatorValue(value = "manager")
 public class Manager extends RegisteredUser implements ManagerDTO {
 
     @ManyToOne

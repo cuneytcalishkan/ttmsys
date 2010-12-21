@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -23,6 +24,10 @@ public class Tournament implements TournamentDTO {
     private long id;
     @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
+    private Date startDate;
+    @Column(nullable = false)
+    private Date endDate;
     @ManyToOne
     private List<Player> players;
     @ManyToOne
@@ -37,6 +42,12 @@ public class Tournament implements TournamentDTO {
     private Manager manager;
 
     public Tournament() {
+    }
+
+    public Tournament(String name, Date startDate, Date endDate) {
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     @Override
@@ -109,5 +120,23 @@ public class Tournament implements TournamentDTO {
 
     public void setUmpires(List<Umpire> umpires) {
         this.umpires = umpires;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    @Override
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    @Override
+    public Date getEndDate() {
+        return endDate;
     }
 }

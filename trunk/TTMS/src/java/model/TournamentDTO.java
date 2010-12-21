@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,4 +28,8 @@ public interface TournamentDTO {
     List<Court> getCourts();
 
     Manager getManager();
+
+    Date getStartDate();
+
+    Date getEndDate();
 }
