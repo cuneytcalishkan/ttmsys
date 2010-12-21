@@ -24,7 +24,7 @@ public abstract class Match implements MatchDTO {
     @Id
     private long id;
     @Column(nullable = false)
-    private int type;
+    private String type;
     @Column(nullable = false)
     private Date mDate;
     @Column(nullable = false)
@@ -40,15 +40,15 @@ public abstract class Match implements MatchDTO {
     @OneToMany(mappedBy = "matches")
     private Tournament tournament;
     @Transient
-    public static int MENS_SINGLES = 1;
+    public static String MENS_SINGLES = "Men's Singles";
     @Transient
-    public static int MENS_DOUBLES = 2;
+    public static String MENS_DOUBLES = "Men's Doubles";
     @Transient
-    public static int WOMENS_SINGLES = 3;
+    public static String WOMENS_SINGLES = "Women's Singles";
     @Transient
-    public static int WOMENS_DOUBLES = 4;
+    public static String WOMENS_DOUBLES = "Women's Doubles";
     @Transient
-    public static int MIXED_DOUBLES = 5;
+    public static String MIXED_DOUBLES = "Mixed Doubles";
 
     public Match() {
     }
@@ -128,12 +128,12 @@ public abstract class Match implements MatchDTO {
         this.umpires = umpires;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
     @Override
-    public int getType() {
+    public String getType() {
         return type;
     }
 

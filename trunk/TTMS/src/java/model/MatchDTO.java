@@ -30,5 +30,5 @@ public interface MatchDTO {
 
     long getId();
 
-    int getType();
+    String getType();
 }
