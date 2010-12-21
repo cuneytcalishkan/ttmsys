@@ -12,7 +12,7 @@
     <mapping class="model.Manager"/>
     <mapping class="model.Match"/>
     <mapping class="model.Player"/>
-    <mapping class="model.Uprime"/>
+    <mapping class="model.Umpire"/>
     <mapping class="model.Referee"/>
     <mapping class="model.RegisteredUser"/>
     <mapping class="model.Tournament"/>
