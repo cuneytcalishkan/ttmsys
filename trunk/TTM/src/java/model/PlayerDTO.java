@@ -9,4 +9,8 @@ package model;
  * @author CUNEYT
  */
 public interface PlayerDTO extends RegisteredUserDTO {
+
+    Tournament getTournament();
+
+    Match getMatch();
 }

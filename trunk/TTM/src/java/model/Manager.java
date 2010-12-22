@@ -18,7 +18,12 @@ public class Manager extends RegisteredUser implements ManagerDTO {
     @ManyToOne
     private List<Tournament> tournaments;
 
+    public Manager(String name, String surname, String username, String password) {
+        super(name, surname, username, password);
+    }
+
     public Manager() {
+        super();
     }
 
     @Override
