@@ -39,6 +39,10 @@ public class Tournament implements TournamentDTO {
     public Tournament() {
     }
 
+    public Tournament(String name) {
+        this.name = name;
+    }
+
     @Override
     public long getId() {
         return id;
