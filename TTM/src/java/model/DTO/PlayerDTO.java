@@ -5,6 +5,7 @@
 package model.DTO;
 
 import java.util.List;
+import model.RegisteredUser;
 import model.Team;
 
 /**
@@ -14,4 +15,6 @@ import model.Team;
 public interface PlayerDTO extends RegisteredUserDTO {
 
     List<Team> getTeams();
+
+    List<RegisteredUser> getTrackers();
 }
