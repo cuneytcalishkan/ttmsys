@@ -7,14 +7,10 @@ package model;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
@@ -23,9 +19,7 @@ import javax.persistence.Transient;
  * @author CUNEYT
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tournamenttype", discriminatorType = DiscriminatorType.STRING)
-public abstract class Tournament implements TournamentDTO, Serializable {
+public class Tournament implements TournamentDTO, Serializable {
 
     @Id
     @Column(nullable = false)
@@ -58,10 +52,6 @@ public abstract class Tournament implements TournamentDTO, Serializable {
     public static String MIXED_DOUBLES = "Mixed Doubles";
 
     public Tournament() {
-    }
-
-    public Tournament(String name) {
-        this.name = name;
     }
 
     public Tournament(String name, String type) {

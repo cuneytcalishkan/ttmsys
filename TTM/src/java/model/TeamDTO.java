@@ -20,15 +20,5 @@ public interface TeamDTO {
 
     List<Player> getPlayers();
 
-    int getAces();
-
-    int getDoubleFauls();
-
-    int getFirstSPtsWon();
-
-    int getSecondSPtsWon();
-
-    int getReturnPtsWon();
-
-    int getTotalPtsWon();
+    List<MatchStatistics> getStatistics();
 }
