@@ -16,6 +16,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -35,6 +36,8 @@ public abstract class Team implements TeamDTO, Serializable {
     private Tournament tournament;
     @ManyToMany(targetEntity = Player.class)
     private List<Player> players;
+    @OneToMany(mappedBy = "team")
+    private List<MatchStatistics> statisics;
 
     @Override
     public long getId() {
@@ -57,32 +60,7 @@ public abstract class Team implements TeamDTO, Serializable {
     }
 
     @Override
-    public int getAces() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public int getDoubleFauls() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public int getFirstSPtsWon() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public int getSecondSPtsWon() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public int getReturnPtsWon() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public int getTotalPtsWon() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public List<MatchStatistics> getStatistics() {
+        return statisics;
     }
 }

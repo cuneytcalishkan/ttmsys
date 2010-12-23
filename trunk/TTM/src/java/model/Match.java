@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -33,12 +34,6 @@ public class Match implements MatchDTO, Serializable {
     private Time mTime;
     private int homeTeamScore;
     private int awayTeamScore;
-    private int aces;
-    private int doubleFauls;
-    private int firstSPtsWon;
-    private int secondSPtsWon;
-    private int returnPtsWon;
-    private int totalPtsWon;
     @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "matchid")
     private List<Set> sets;
@@ -52,6 +47,8 @@ public class Match implements MatchDTO, Serializable {
     private Court court;
     @ManyToOne
     private Tournament tournament;
+    @OneToOne(mappedBy = "match")
+    private MatchStatistics statistics;
 
     public Match() {
     }
