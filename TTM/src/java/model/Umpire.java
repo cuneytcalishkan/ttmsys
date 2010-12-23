@@ -31,6 +31,12 @@ public class Umpire extends RegisteredUser implements UmpireDTO {
         super();
     }
 
+    public void setMatchStatistics(Match m, MatchStatistics ms) {
+        if (matches.contains(m)) {
+            matches.get(matches.indexOf(m)).setStatistics(ms);
+        }
+    }
+
     public void setMatches(List<Match> matches) {
         this.matches = matches;
     }

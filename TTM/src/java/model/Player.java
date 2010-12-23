@@ -20,6 +20,8 @@ public class Player extends RegisteredUser implements PlayerDTO {
 
     @ManyToMany(mappedBy = "players")
     private List<Team> teams;
+    @ManyToMany(mappedBy = "trackList")
+    private List<RegisteredUser> trackers;
 
     public Player(String name, String surname, String username, String password) {
         super(name, surname, username, password);
@@ -41,5 +43,14 @@ public class Player extends RegisteredUser implements PlayerDTO {
     @Override
     public String toString() {
         return getName() + " " + getSurname();
+    }
+
+    @Override
+    public List<RegisteredUser> getTrackers() {
+        return trackers;
+    }
+
+    public void setTrackers(List<RegisteredUser> trackers) {
+        this.trackers = trackers;
     }
 }

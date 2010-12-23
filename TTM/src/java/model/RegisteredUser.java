@@ -6,6 +6,7 @@ package model;
 
 import model.DTO.RegisteredUserDTO;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -16,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -34,6 +36,8 @@ public class RegisteredUser extends User implements RegisteredUserDTO, Serializa
     private String username;
     @Column(nullable = false)
     private String password;
+    @ManyToMany(targetEntity = Player.class)
+    private List<Player> trackList;
 
     public RegisteredUser() {
     }
@@ -43,6 +47,12 @@ public class RegisteredUser extends User implements RegisteredUserDTO, Serializa
         this.surname = surname;
         this.username = username;
         this.password = password;
+    }
+
+    public void addToTrackList(Player p) {
+        if (!trackList.contains(p)) {
+            trackList.add(p);
+        }
     }
 
     @Override
@@ -88,5 +98,14 @@ public class RegisteredUser extends User implements RegisteredUserDTO, Serializa
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public List<Player> getTrackList() {
+        return trackList;
+    }
+
+    public void setTrackList(List<Player> trackList) {
+        this.trackList = trackList;
     }
 }
