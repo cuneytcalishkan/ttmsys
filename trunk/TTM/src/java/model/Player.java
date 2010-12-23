@@ -4,6 +4,7 @@
  */
 package model;
 
+import model.DTO.PlayerDTO;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -31,5 +32,14 @@ public class Player extends RegisteredUser implements PlayerDTO {
     @Override
     public List<Team> getTeams() {
         return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
+    }
+
+    @Override
+    public String toString() {
+        return getName() + " " + getSurname();
     }
 }

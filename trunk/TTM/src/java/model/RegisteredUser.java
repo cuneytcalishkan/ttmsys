@@ -4,6 +4,7 @@
  */
 package model;
 
+import model.DTO.RegisteredUserDTO;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;

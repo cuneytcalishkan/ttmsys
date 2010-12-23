@@ -4,6 +4,7 @@
  */
 package model;
 
+import model.DTO.TeamDTO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.DiscriminatorColumn;
@@ -39,6 +40,36 @@ public abstract class Team implements TeamDTO, Serializable {
     @OneToMany(mappedBy = "team")
     private List<MatchStatistics> statisics;
 
+    public Team() {
+    }
+
+    public Team(List<Player> players) {
+        this.players = players;
+    }
+
+    public void addPlayer(Player p) {
+    }
+
+    public List<MatchStatistics> getStatisics() {
+        return statisics;
+    }
+
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public void setStatisics(List<MatchStatistics> statisics) {
+        this.statisics = statisics;
+    }
+
+    public void setTournament(Tournament tournament) {
+        this.tournament = tournament;
+    }
+
     @Override
     public long getId() {
         return id;
@@ -62,5 +93,15 @@ public abstract class Team implements TeamDTO, Serializable {
     @Override
     public List<MatchStatistics> getStatistics() {
         return statisics;
+    }
+
+    @Override
+    public String toString() {
+        String result = "";
+        for (Player player : players) {
+            result += player.toString() + ",";
+        }
+        result = result.substring(0, result.length() - 1);
+        return result;
     }
 }

@@ -4,6 +4,7 @@
  */
 package model;
 
+import model.DTO.SetDTO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
@@ -47,6 +48,14 @@ public class Set implements SetDTO, Serializable {
 
     public void setHomeTeamScore(int homeTeamScore) {
         this.homeTeamScore = homeTeamScore;
+    }
+
+    public int getAwayTeamScore() {
+        return awayTeamScore;
+    }
+
+    public int getHomeTeamScore() {
+        return homeTeamScore;
     }
 
     @Override

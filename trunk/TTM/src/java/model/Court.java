@@ -4,6 +4,7 @@
  */
 package model;
 
+import model.DTO.CourtDTO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -38,12 +39,22 @@ public class Court implements CourtDTO, Serializable {
         this.name = name;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public Court(String name, List<Match> matches, List<Tournament> tournaments) {
+        this.name = name;
+        this.matches = matches;
+        this.tournaments = tournaments;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
+    }
+
+    public void setTournaments(List<Tournament> tournaments) {
+        this.tournaments = tournaments;
     }
 
     @Override

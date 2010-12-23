@@ -4,7 +4,10 @@
  */
 package model;
 
+import javax.persistence.Temporal;
+import model.DTO.TournamentDTO;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -28,6 +31,14 @@ public class Tournament implements TournamentDTO, Serializable {
     private String name;
     @Column(nullable = false)
     private String type;
+    @Column(nullable = false)
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date startDate;
+    @Column(nullable = false)
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date endDate;
+    @Column(nullable = false)
+    private double prize;
     @OneToMany(mappedBy = "tournament")
     private List<Team> teams;
     @OneToMany(mappedBy = "tournament")
@@ -40,6 +51,7 @@ public class Tournament implements TournamentDTO, Serializable {
     private List<Court> courts;
     @ManyToOne
     private Manager manager;
+    private String report;
     @Transient
     public static String MENS_SINGLES = "Men's Singles";
     @Transient
@@ -54,9 +66,12 @@ public class Tournament implements TournamentDTO, Serializable {
     public Tournament() {
     }
 
-    public Tournament(String name, String type) {
+    public Tournament(String name, String type, Date startDate, Date endDate, double prize) {
         this.name = name;
         this.type = type;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.prize = prize;
     }
 
     @Override
@@ -138,5 +153,41 @@ public class Tournament implements TournamentDTO, Serializable {
 
     public void setUmpires(List<Umpire> umpires) {
         this.umpires = umpires;
+    }
+
+    @Override
+    public String getReport() {
+        return report;
+    }
+
+    public void setReport(String report) {
+        this.report = report;
+    }
+
+    @Override
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    @Override
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    @Override
+    public double getPrize() {
+        return prize;
+    }
+
+    public void setPrize(double prize) {
+        this.prize = prize;
     }
 }

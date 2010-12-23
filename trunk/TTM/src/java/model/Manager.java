@@ -4,6 +4,7 @@
  */
 package model;
 
+import model.DTO.ManagerDTO;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -26,6 +27,12 @@ public class Manager extends RegisteredUser implements ManagerDTO {
 
     public Manager() {
         super();
+    }
+
+    public void setTournamentReport(Tournament t, String report) {
+        if (tournaments.contains(t)) {
+            tournaments.get(tournaments.indexOf(t)).setReport(report);
+        }
     }
 
     @Override

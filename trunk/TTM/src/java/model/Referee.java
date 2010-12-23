@@ -4,6 +4,7 @@
  */
 package model;
 
+import model.DTO.RefereeDTO;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -28,6 +29,12 @@ public class Referee extends RegisteredUser implements RefereeDTO {
 
     public Referee() {
         super();
+    }
+
+    public void setMatchReport(Match m, String report) {
+        if (matches.contains(m)) {
+            matches.get(matches.indexOf(m)).setReport(report);
+        }
     }
 
     public void setMatches(List<Match> matches) {
