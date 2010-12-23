@@ -47,7 +47,7 @@ public class Match implements MatchDTO, Serializable {
     private Court court;
     @ManyToOne
     private Tournament tournament;
-    @OneToOne(mappedBy = "match")
+    @OneToOne
     private MatchStatistics statistics;
 
     public Match() {

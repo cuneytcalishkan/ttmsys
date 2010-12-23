@@ -5,9 +5,7 @@
 package db;
 
 import controller.HibernateUtil;
-import model.RegisteredUser;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
