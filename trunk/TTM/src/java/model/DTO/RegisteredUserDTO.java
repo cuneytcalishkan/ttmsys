@@ -4,6 +4,9 @@
  */
 package model.DTO;
 
+import java.util.List;
+import model.Player;
+
 /**
  *
  * @author CUNEYT
@@ -19,4 +22,6 @@ public interface RegisteredUserDTO {
     String getPassword();
 
     String getUsername();
+
+    List<Player> getTrackList();
 }
