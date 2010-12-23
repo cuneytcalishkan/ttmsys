@@ -47,7 +47,8 @@ public abstract class Team implements TeamDTO, Serializable {
         this.players = players;
     }
 
-    public void addPlayer(Player p) {
+    public void join(Player p) throws Exception {
+        players.add(p);
     }
 
     public List<MatchStatistics> getStatisics() {
