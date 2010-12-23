@@ -10,7 +10,11 @@ import java.util.List;
  *
  * @author CUNEYT
  */
-public interface PlayerDTO extends RegisteredUserDTO {
+public interface SetDTO {
 
-    List<Team> getTeams();
+    long getId();
+
+    String getScore();
+
+    List<Game> getGames();
 }

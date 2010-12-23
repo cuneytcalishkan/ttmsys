@@ -4,13 +4,13 @@
  */
 package model;
 
-import java.util.List;
-
 /**
  *
  * @author CUNEYT
  */
-public interface PlayerDTO extends RegisteredUserDTO {
+public interface GameDTO {
 
-    List<Team> getTeams();
+    String getScore();
+
+    long getId();
 }

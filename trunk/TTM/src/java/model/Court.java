@@ -4,31 +4,32 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import org.hibernate.annotations.Entity;
 
 /**
  *
  * @author CUNEYT
  */
 @Entity
-public class Court implements CourtDTO {
+public class Court implements CourtDTO, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Column(nullable = false)
     private String name;
-    @ManyToOne
+    @OneToMany(mappedBy = "court")
     private List<Match> matches;
-    @OneToMany(mappedBy = "courts")
-    private Tournament tournament;
+    @ManyToMany(mappedBy = "courts")
+    private List<Tournament> tournaments;
 
     public Court() {
     }
@@ -61,7 +62,7 @@ public class Court implements CourtDTO {
     }
 
     @Override
-    public Tournament getTournament() {
-        return tournament;
+    public List<Tournament> getTournaments() {
+        return tournaments;
     }
 }

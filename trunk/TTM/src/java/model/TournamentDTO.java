@@ -16,13 +16,15 @@ public interface TournamentDTO {
 
     String getName();
 
+    String getType();
+
     List<Match> getMatches();
 
     List<Referee> getReferees();
 
     List<Umpire> getUmpires();
 
-    List<Player> getPlayers();
+    List<Team> getTeams();
 
     List<Court> getCourts();
 

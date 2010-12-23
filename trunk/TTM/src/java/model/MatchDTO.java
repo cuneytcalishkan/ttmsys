@@ -16,11 +16,11 @@ public interface MatchDTO {
 
     Court getCourt();
 
-    List<Player> getPlayers();
-
     List<Umpire> getUmpires();
 
     List<Referee> getReferees();
+
+    List<Set> getSets();
 
     Tournament getTournament();
 
@@ -30,5 +30,7 @@ public interface MatchDTO {
 
     long getId();
 
-    String getType();
+    String getScore();
+
+    List<Team> getTeams();
 }
