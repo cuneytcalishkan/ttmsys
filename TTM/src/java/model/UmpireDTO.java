@@ -4,13 +4,15 @@
  */
 package model;
 
+import java.util.List;
+
 /**
  *
  * @author CUNEYT
  */
 public interface UmpireDTO extends RegisteredUserDTO {
 
-    Tournament getTournament();
+    List<Tournament> getTournaments();
 
-    Match getMatch();
+    List<Match> getMatches();
 }

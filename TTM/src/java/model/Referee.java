@@ -4,20 +4,23 @@
  */
 package model;
 
-import javax.persistence.OneToMany;
-import org.hibernate.annotations.Entity;
+import java.util.List;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
 /**
  *
  * @author CUNEYT
  */
 @Entity
+@DiscriminatorValue(value = "referee")
 public class Referee extends RegisteredUser implements RefereeDTO {
 
-    @OneToMany(mappedBy = "referees")
-    private Match match;
-    @OneToMany(mappedBy = "referees")
-    private Tournament tournament;
+    @ManyToMany(mappedBy = "referees")
+    private List<Match> matches;
+    @ManyToMany(mappedBy = "referees")
+    private List<Tournament> tournaments;
 
     public Referee(String name, String surname, String username, String password) {
         super(name, surname, username, password);
@@ -27,21 +30,21 @@ public class Referee extends RegisteredUser implements RefereeDTO {
         super();
     }
 
-    public void setMatch(Match match) {
-        this.match = match;
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
     }
 
-    public void setTournament(Tournament tournament) {
-        this.tournament = tournament;
-    }
-
-    @Override
-    public Tournament getTournament() {
-        return tournament;
+    public void setTournament(List<Tournament> tournaments) {
+        this.tournaments = tournaments;
     }
 
     @Override
-    public Match getMatch() {
-        return match;
+    public List<Tournament> getTournaments() {
+        return tournaments;
+    }
+
+    @Override
+    public List<Match> getMatches() {
+        return matches;
     }
 }

@@ -18,5 +18,5 @@ public interface CourtDTO {
 
     List<Match> getMatches();
 
-    Tournament getTournament();
+    List<Tournament> getTournaments();
 }

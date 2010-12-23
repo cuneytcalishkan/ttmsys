@@ -4,43 +4,69 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import org.hibernate.annotations.Entity;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 /**
  *
  * @author CUNEYT
  */
 @Entity
-public class Tournament implements TournamentDTO {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tournamenttype", discriminatorType = DiscriminatorType.STRING)
+public abstract class Tournament implements TournamentDTO, Serializable {
 
     @Id
     @Column(nullable = false)
     private long id;
     @Column(nullable = false)
     private String name;
-    @ManyToOne
-    private List<Player> players;
-    @ManyToOne
+    @Column(nullable = false)
+    private String type;
+    @OneToMany(mappedBy = "tournament")
+    private List<Team> teams;
+    @OneToMany(mappedBy = "tournament")
     private List<Match> matches;
-    @ManyToOne
+    @ManyToMany(targetEntity = Umpire.class)
     private List<Umpire> umpires;
-    @ManyToOne
+    @ManyToMany(targetEntity = Referee.class)
     private List<Referee> referees;
-    @ManyToOne
+    @ManyToMany(targetEntity = Court.class)
     private List<Court> courts;
-    @OneToMany(mappedBy = "tournaments")
+    @ManyToOne
     private Manager manager;
+    @Transient
+    public static String MENS_SINGLES = "Men's Singles";
+    @Transient
+    public static String WOMENS_SINGLES = "Women's Singles";
+    @Transient
+    public static String MENS_DOUBLES = "Men's Doubles";
+    @Transient
+    public static String WOMENS_DOUBLES = "Women's Doubles";
+    @Transient
+    public static String MIXED_DOUBLES = "Mixed Doubles";
 
     public Tournament() {
     }
 
     public Tournament(String name) {
         this.name = name;
+    }
+
+    public Tournament(String name, String type) {
+        this.name = name;
+        this.type = type;
     }
 
     @Override
@@ -69,8 +95,8 @@ public class Tournament implements TournamentDTO {
     }
 
     @Override
-    public List<Player> getPlayers() {
-        return players;
+    public List<Team> getTeams() {
+        return teams;
     }
 
     @Override
@@ -81,6 +107,11 @@ public class Tournament implements TournamentDTO {
     @Override
     public Manager getManager() {
         return manager;
+    }
+
+    @Override
+    public String getType() {
+        return type;
     }
 
     public void setCourts(List<Court> courts) {
@@ -103,8 +134,12 @@ public class Tournament implements TournamentDTO {
         this.name = name;
     }
 
-    public void setPlayers(List<Player> players) {
-        this.players = players;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 
     public void setReferees(List<Referee> referees) {

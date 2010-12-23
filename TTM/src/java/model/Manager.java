@@ -5,17 +5,19 @@
 package model;
 
 import java.util.List;
-import javax.persistence.ManyToOne;
-import org.hibernate.annotations.Entity;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author CUNEYT
  */
 @Entity
+@DiscriminatorValue(value = "manager")
 public class Manager extends RegisteredUser implements ManagerDTO {
 
-    @ManyToOne
+    @OneToMany(mappedBy = "manager")
     private List<Tournament> tournaments;
 
     public Manager(String name, String surname, String username, String password) {

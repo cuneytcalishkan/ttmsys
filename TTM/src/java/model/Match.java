@@ -4,51 +4,54 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
-import org.hibernate.annotations.Entity;
+import javax.persistence.Temporal;
 
 /**
  *
  * @author CUNEYT
  */
-@Entity
-public abstract class Match implements MatchDTO {
+@Entity(name = "tmatch")
+public class Match implements MatchDTO, Serializable {
 
     @Id
     private long id;
     @Column(nullable = false)
-    private String type;
-    @Column(nullable = false)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date mDate;
     @Column(nullable = false)
     private Time mTime;
-    @ManyToOne
-    private List<Player> players;
-    @ManyToOne
+    private int homeTeamScore;
+    private int awayTeamScore;
+    private int aces;
+    private int doubleFauls;
+    private int firstSPtsWon;
+    private int secondSPtsWon;
+    private int returnPtsWon;
+    private int totalPtsWon;
+    @OneToMany(orphanRemoval = true)
+    @JoinColumn(name = "matchid")
+    private List<Set> sets;
+    @ManyToMany(targetEntity = Team.class)
+    private List<Team> teams;
+    @ManyToMany(targetEntity = Umpire.class)
     private List<Umpire> umpires;
-    @ManyToOne
+    @ManyToMany(targetEntity = Referee.class)
     private List<Referee> referees;
-    @OneToMany(mappedBy = "matches")
+    @ManyToOne
     private Court court;
-    @OneToMany(mappedBy = "matches")
+    @ManyToOne
     private Tournament tournament;
-    @Transient
-    public static String MENS_SINGLES = "Men's Singles";
-    @Transient
-    public static String MENS_DOUBLES = "Men's Doubles";
-    @Transient
-    public static String WOMENS_SINGLES = "Women's Singles";
-    @Transient
-    public static String WOMENS_DOUBLES = "Women's Doubles";
-    @Transient
-    public static String MIXED_DOUBLES = "Mixed Doubles";
 
     public Match() {
     }
@@ -64,10 +67,10 @@ public abstract class Match implements MatchDTO {
         this.court = court;
     }
 
-    public Match(Date mDate, Time mTime, List<Player> players, Court court) {
+    public Match(Date mDate, Time mTime, List<Team> teams, Court court) {
         this.mDate = mDate;
         this.mTime = mTime;
-        this.players = players;
+        this.teams = teams;
         this.court = court;
     }
 
@@ -77,8 +80,8 @@ public abstract class Match implements MatchDTO {
     }
 
     @Override
-    public List<Player> getPlayers() {
-        return players;
+    public List<Team> getTeams() {
+        return teams;
     }
 
     @Override
@@ -112,8 +115,8 @@ public abstract class Match implements MatchDTO {
         this.mTime = mTime;
     }
 
-    public void setPlayers(List<Player> players) {
-        this.players = players;
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 
     public void setReferees(List<Referee> referees) {
@@ -126,15 +129,6 @@ public abstract class Match implements MatchDTO {
 
     public void setUmpires(List<Umpire> umpires) {
         this.umpires = umpires;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @Override
-    public String getType() {
-        return type;
     }
 
     @Override
@@ -150,5 +144,15 @@ public abstract class Match implements MatchDTO {
     @Override
     public Time getmTime() {
         return mTime;
+    }
+
+    @Override
+    public List<Set> getSets() {
+        return sets;
+    }
+
+    @Override
+    public String getScore() {
+        return homeTeamScore + " - " + awayTeamScore;
     }
 }
