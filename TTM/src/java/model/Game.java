@@ -4,6 +4,7 @@
  */
 package model;
 
+import model.DTO.GameDTO;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,6 +33,22 @@ public class Game implements GameDTO, Serializable {
     public Game(int homeTeamScore, int awayTeamScore) {
         this.homeTeamScore = homeTeamScore;
         this.awayTeamScore = awayTeamScore;
+    }
+
+    public void setAwayTeamScore(int awayTeamScore) {
+        this.awayTeamScore = awayTeamScore;
+    }
+
+    public void setHomeTeamScore(int homeTeamScore) {
+        this.homeTeamScore = homeTeamScore;
+    }
+
+    public int getAwayTeamScore() {
+        return awayTeamScore;
+    }
+
+    public int getHomeTeamScore() {
+        return homeTeamScore;
     }
 
     @Override

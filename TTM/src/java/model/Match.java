@@ -4,6 +4,7 @@
  */
 package model;
 
+import model.DTO.MatchDTO;
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
@@ -34,6 +35,7 @@ public class Match implements MatchDTO, Serializable {
     private Time mTime;
     private int homeTeamScore;
     private int awayTeamScore;
+    private String report;
     @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "matchid")
     private List<Set> sets;
@@ -69,6 +71,22 @@ public class Match implements MatchDTO, Serializable {
         this.mTime = mTime;
         this.teams = teams;
         this.court = court;
+    }
+
+    public int getAwayTeamScore() {
+        return awayTeamScore;
+    }
+
+    public void setAwayTeamScore(int awayTeamScore) {
+        this.awayTeamScore = awayTeamScore;
+    }
+
+    public int getHomeTeamScore() {
+        return homeTeamScore;
+    }
+
+    public void setHomeTeamScore(int homeTeamScore) {
+        this.homeTeamScore = homeTeamScore;
     }
 
     @Override
@@ -128,6 +146,18 @@ public class Match implements MatchDTO, Serializable {
         this.umpires = umpires;
     }
 
+    public void setReport(String report) {
+        this.report = report;
+    }
+
+    public void setSets(List<Set> sets) {
+        this.sets = sets;
+    }
+
+    public void setStatistics(MatchStatistics statistics) {
+        this.statistics = statistics;
+    }
+
     @Override
     public long getId() {
         return id;
@@ -151,5 +181,15 @@ public class Match implements MatchDTO, Serializable {
     @Override
     public String getScore() {
         return homeTeamScore + " - " + awayTeamScore;
+    }
+
+    @Override
+    public MatchStatistics getStatistics() {
+        return statistics;
+    }
+
+    @Override
+    public String getReport() {
+        return report;
     }
 }
