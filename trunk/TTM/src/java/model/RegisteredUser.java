@@ -38,6 +38,7 @@ public class RegisteredUser extends User implements RegisteredUserDTO, Serializa
     private String password;
     @ManyToMany(targetEntity = Player.class)
     private List<Player> trackList;
+    private boolean active = false;
 
     public RegisteredUser() {
     }
@@ -57,6 +58,15 @@ public class RegisteredUser extends User implements RegisteredUserDTO, Serializa
 
     public void removeFromTrackList(Player p) {
         trackList.remove(p);
+    }
+
+    @Override
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @Override
