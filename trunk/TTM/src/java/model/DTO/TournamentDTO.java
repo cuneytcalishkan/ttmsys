@@ -7,6 +7,7 @@ package model.DTO;
 import java.util.Date;
 import java.util.List;
 import model.Court;
+import model.Draw;
 import model.Manager;
 import model.Match;
 import model.Referee;
@@ -44,4 +45,6 @@ public interface TournamentDTO {
     Date getEndDate();
 
     double getPrize();
+
+    Draw getDraw();
 }
