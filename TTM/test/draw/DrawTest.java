@@ -7,6 +7,7 @@ package draw;
 import java.util.ArrayList;
 import java.util.Date;
 import model.DoublesTeam;
+import model.Draw;
 import model.Player;
 import model.Team;
 import model.Tournament;
@@ -48,7 +49,7 @@ public class DrawTest {
     public void GenerateDraws() {
         Tournament t = new Tournament("Test Tournament", Tournament.MENS_DOUBLES, new Date(), new Date(System.currentTimeMillis() + 100000), 1200);
         ArrayList<Team> teams = new ArrayList<Team>();
-        for (int i = 1; i < 12; i++) {
+        for (int i = 1; i < 17; i++) {
             ArrayList<Player> tp = new ArrayList<Player>();
             tp.add(new Player("Player1", "" + i, "player1" + i, ""));
             tp.add(new Player("Player2", "" + i, "player2" + i, ""));
@@ -56,5 +57,7 @@ public class DrawTest {
         }
         t.setTeams(teams);
         t.generateDraw();
+        Draw d = t.getDraw();
+        System.out.println(d.traverse(d, 0));
     }
 }

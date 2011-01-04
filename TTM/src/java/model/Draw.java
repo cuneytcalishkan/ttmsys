@@ -91,4 +91,24 @@ public class Draw implements Serializable, DrawDTO {
     public void setId(long id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return homeTeam + " vs " + awayTeam;
+    }
+
+    public String traverse(Draw d, int level) {
+        String result = "";
+        for (int i = 0; i < level; i++) {
+            result += "\t";
+        }
+        result += d + "\n";
+        if (d.homeDraw != null) {
+            result += traverse(d.homeDraw, level + 1);
+        }
+        if (d.awayDraw != null) {
+            result += traverse(d.awayDraw, level + 1);
+        }
+        return result;
+    }
 }
