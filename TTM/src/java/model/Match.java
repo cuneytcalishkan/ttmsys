@@ -7,6 +7,7 @@ package model;
 import model.DTO.MatchDTO;
 import java.io.Serializable;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -191,5 +192,14 @@ public class Match implements MatchDTO, Serializable {
     @Override
     public String getReport() {
         return report;
+    }
+
+    @Override
+    public String toString() {
+
+        String result = "";
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-YYYY");
+        result += teams.get(0) + " vs " + teams.get(1) + ", " + df.format(mDate) + ", " + mTime;
+        return result;
     }
 }

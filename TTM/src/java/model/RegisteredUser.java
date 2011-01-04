@@ -55,6 +55,10 @@ public class RegisteredUser extends User implements RegisteredUserDTO, Serializa
         }
     }
 
+    public void removeFromTrackList(Player p) {
+        trackList.remove(p);
+    }
+
     @Override
     public long getId() {
         return id;
