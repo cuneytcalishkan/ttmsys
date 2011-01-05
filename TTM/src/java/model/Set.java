@@ -14,10 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-/**
- *
- * @author CUNEYT
- */
 @Entity(name = "mset")
 public class Set implements SetDTO, Serializable {
 

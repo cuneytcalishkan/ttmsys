@@ -10,10 +10,6 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 
-/**
- *
- * @author CUNEYT
- */
 @Entity
 @DiscriminatorValue(value = "referee")
 public class Referee extends RegisteredUser implements RefereeDTO {

@@ -7,10 +7,6 @@ package model.DTO;
 import java.util.List;
 import model.Game;
 
-/**
- *
- * @author CUNEYT
- */
 public interface SetDTO {
 
     long getId();

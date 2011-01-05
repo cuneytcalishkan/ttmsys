@@ -13,10 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-/**
- *
- * @author CUNEYT
- */
 @Entity
 public class MatchStatistics implements MatchStatisticsDTO, Serializable {
 

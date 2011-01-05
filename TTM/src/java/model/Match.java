@@ -20,10 +20,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
-/**
- *
- * @author CUNEYT
- */
 @Entity(name = "tmatch")
 public class Match implements MatchDTO, Serializable {
 

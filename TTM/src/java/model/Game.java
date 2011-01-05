@@ -12,10 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- *
- * @author CUNEYT
- */
 @Entity
 public class Game implements GameDTO, Serializable {
 

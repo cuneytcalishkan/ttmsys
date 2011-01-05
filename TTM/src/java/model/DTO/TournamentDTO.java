@@ -14,10 +14,6 @@ import model.Referee;
 import model.Team;
 import model.Umpire;
 
-/**
- *
- * @author CUNEYT
- */
 public interface TournamentDTO {
 
     long getId();

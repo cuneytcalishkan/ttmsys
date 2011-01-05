@@ -15,10 +15,6 @@ import model.Team;
 import model.Tournament;
 import model.Umpire;
 
-/**
- *
- * @author CUNEYT
- */
 public interface MatchDTO {
 
     Court getCourt();

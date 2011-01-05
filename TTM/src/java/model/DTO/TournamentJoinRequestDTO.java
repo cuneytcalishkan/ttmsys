@@ -4,9 +4,14 @@
  */
 package model.DTO;
 
-public interface GameDTO {
+import model.Team;
+import model.Tournament;
 
-    String getScore();
+public interface TournamentJoinRequestDTO {
 
     long getId();
+
+    Tournament getTournament();
+
+    Team getTeam();
 }

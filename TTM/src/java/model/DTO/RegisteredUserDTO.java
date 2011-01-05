@@ -7,10 +7,6 @@ package model.DTO;
 import java.util.List;
 import model.Player;
 
-/**
- *
- * @author CUNEYT
- */
 public interface RegisteredUserDTO {
 
     long getId();

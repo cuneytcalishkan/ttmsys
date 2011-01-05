@@ -5,13 +5,15 @@
 package model.DTO;
 
 import java.util.List;
+import model.MembershipRequest;
 import model.Tournament;
+import model.TournamentJoinRequest;
 
-/**
- *
- * @author CUNEYT
- */
 public interface ManagerDTO extends RegisteredUserDTO {
 
     List<Tournament> getTournaments();
+
+    List<TournamentJoinRequest> getTournamentRequests();
+
+    List<MembershipRequest> getMembershipRequests();
 }
