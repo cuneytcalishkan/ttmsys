@@ -8,6 +8,7 @@ import model.DTO.MatchDTO;
 import java.io.Serializable;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -50,24 +51,62 @@ public class Match implements MatchDTO, Serializable {
     private MatchStatistics statistics;
 
     public Match() {
+        sets = new ArrayList<Set>();
+        teams = new ArrayList<Team>();
+        umpires = new ArrayList<Umpire>();
+        referees = new ArrayList<Referee>();
     }
 
     public Match(Date mDate, Time mTime) {
+        this();
         this.mDate = mDate;
         this.mTime = mTime;
     }
 
     public Match(Date mDate, Time mTime, Court court) {
-        this.mDate = mDate;
-        this.mTime = mTime;
+        this(mDate, mTime);
         this.court = court;
     }
 
     public Match(Date mDate, Time mTime, List<Team> teams, Court court) {
-        this.mDate = mDate;
-        this.mTime = mTime;
+        this(mDate, mTime, court);
         this.teams = teams;
-        this.court = court;
+    }
+
+    public void addSet(Set s) {
+        if (sets == null) {
+            sets = new ArrayList<Set>();
+        }
+        if (!sets.contains(s)) {
+            sets.add(s);
+        }
+    }
+
+    public void addReferee(Referee r) {
+        if (referees == null) {
+            referees = new ArrayList<Referee>();
+        }
+        if (!referees.contains(r)) {
+            referees.add(r);
+        }
+    }
+
+    public void addUmpire(Umpire u) {
+        if (umpires == null) {
+            umpires = new ArrayList<Umpire>();
+        }
+        if (!umpires.contains(u)) {
+            umpires.add(u);
+        }
+    }
+
+    public void addTeam(Team t) {
+        if (teams == null) {
+            teams = new ArrayList<Team>();
+        }
+        if (!teams.contains(t)) {
+            teams.add(t);
+        }
     }
 
     public int getAwayTeamScore() {

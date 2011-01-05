@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import model.DTO.RefereeDTO;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
@@ -21,10 +22,17 @@ public class Referee extends RegisteredUser implements RefereeDTO {
 
     public Referee(String name, String surname, String username, String password) {
         super(name, surname, username, password);
+        init();
     }
 
     public Referee() {
         super();
+        init();
+    }
+
+    private void init() {
+        matches = new ArrayList<Match>();
+        tournaments = new ArrayList<Tournament>();
     }
 
     public void setMatchReport(Match m, String report) {

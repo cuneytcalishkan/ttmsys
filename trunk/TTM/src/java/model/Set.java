@@ -6,6 +6,7 @@ package model;
 
 import model.DTO.SetDTO;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,11 +28,22 @@ public class Set implements SetDTO, Serializable {
     private List<Game> games;
 
     public Set() {
+        games = new ArrayList<Game>();
     }
 
     public Set(int homeTeamScore, int awayTeamScore) {
+        this();
         this.homeTeamScore = homeTeamScore;
         this.awayTeamScore = awayTeamScore;
+    }
+
+    public void addGame(Game g) {
+        if (games == null) {
+            games = new ArrayList<Game>();
+        }
+        if (!games.contains(g)) {
+            games.add(g);
+        }
     }
 
     public void setAwayTeamScore(int awayTeamScore) {

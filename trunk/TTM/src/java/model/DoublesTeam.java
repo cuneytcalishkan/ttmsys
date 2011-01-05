@@ -23,7 +23,9 @@ public class DoublesTeam extends Team {
     @Override
     public void join(Player p) throws Exception {
         if (getPlayers().size() < 2) {
-            getPlayers().add(p);
+            if (!getPlayers().contains(p)) {
+                getPlayers().add(p);
+            }
         } else {
             throw new Exception("Team capacity is full.");
         }

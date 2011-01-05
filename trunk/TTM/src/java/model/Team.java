@@ -6,6 +6,7 @@ package model;
 
 import model.DTO.TeamDTO;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -34,9 +35,11 @@ public abstract class Team implements TeamDTO, Serializable {
     @ManyToMany(targetEntity = Player.class)
     private List<Player> players;
     @OneToMany(mappedBy = "team")
-    private List<MatchStatistics> statisics;
+    private List<MatchStatistics> statistics;
 
     public Team() {
+        players = new ArrayList<Player>();
+        statistics = new ArrayList<MatchStatistics>();
     }
 
     public Team(List<Player> players) {
@@ -47,8 +50,9 @@ public abstract class Team implements TeamDTO, Serializable {
         players.add(p);
     }
 
-    public List<MatchStatistics> getStatisics() {
-        return statisics;
+    @Override
+    public List<MatchStatistics> getStatistics() {
+        return statistics;
     }
 
     public void setMatches(List<Match> matches) {
@@ -59,8 +63,8 @@ public abstract class Team implements TeamDTO, Serializable {
         this.players = players;
     }
 
-    public void setStatisics(List<MatchStatistics> statisics) {
-        this.statisics = statisics;
+    public void setStatistics(List<MatchStatistics> statistics) {
+        this.statistics = statistics;
     }
 
     public void setTournament(Tournament tournament) {
@@ -85,11 +89,6 @@ public abstract class Team implements TeamDTO, Serializable {
     @Override
     public List<Player> getPlayers() {
         return players;
-    }
-
-    @Override
-    public List<MatchStatistics> getStatistics() {
-        return statisics;
     }
 
     @Override

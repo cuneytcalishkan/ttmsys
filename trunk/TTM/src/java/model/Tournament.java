@@ -7,6 +7,7 @@ package model;
 import javax.persistence.Temporal;
 import model.DTO.TournamentDTO;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -66,6 +67,11 @@ public class Tournament implements TournamentDTO, Serializable {
     public static String MIXED_DOUBLES = "Mixed Doubles";
 
     public Tournament() {
+        teams = new ArrayList<Team>();
+        matches = new ArrayList<Match>();
+        umpires = new ArrayList<Umpire>();
+        referees = new ArrayList<Referee>();
+        courts = new ArrayList<Court>();
     }
 
     public Tournament(String name, String type, Date startDate, Date endDate, double prize) {

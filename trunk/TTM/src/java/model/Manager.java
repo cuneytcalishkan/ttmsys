@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import model.DTO.ManagerDTO;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
@@ -23,10 +24,36 @@ public class Manager extends RegisteredUser implements ManagerDTO {
 
     public Manager(String name, String surname, String username, String password) {
         super(name, surname, username, password);
+        init();
     }
 
     public Manager() {
         super();
+        init();
+    }
+
+    private void init() {
+        tournaments = new ArrayList<Tournament>();
+        membershipRequests = new ArrayList<MembershipRequest>();
+        tournamentRequests = new ArrayList<TournamentJoinRequest>();
+    }
+
+    public void addTournamentJoinRequest(TournamentJoinRequest tjr) {
+        if (tournamentRequests == null) {
+            tournamentRequests = new ArrayList<TournamentJoinRequest>();
+        }
+        if (!tournamentRequests.contains(tjr)) {
+            tournamentRequests.add(tjr);
+        }
+    }
+
+    public void addMembershipRequest(MembershipRequest mr) {
+        if (membershipRequests == null) {
+            membershipRequests = new ArrayList<MembershipRequest>();
+        }
+        if (!membershipRequests.contains(mr)) {
+            membershipRequests.add(mr);
+        }
     }
 
     public void setTournamentReport(Tournament t, String report) {

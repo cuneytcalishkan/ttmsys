@@ -4,7 +4,6 @@
  */
 package model;
 
-import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -12,8 +11,9 @@ import javax.persistence.Entity;
 @DiscriminatorValue(value = "singles")
 public class SinglesTeam extends Team {
 
-    public SinglesTeam(List<Player> players) {
-        super(players);
+    public SinglesTeam(Player player) throws Exception {
+        this();
+        join(player);
     }
 
     public SinglesTeam() {
