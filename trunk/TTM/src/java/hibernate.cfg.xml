@@ -21,5 +21,7 @@
     <mapping class="model.Game"/>
     <mapping class="model.MatchStatistics"/>
     <mapping class="model.Draw"/>
+    <mapping class="model.MembershipRequest"/>
+    <mapping class="model.TournamentJoinRequest"/>
   </session-factory>
 </hibernate-configuration>

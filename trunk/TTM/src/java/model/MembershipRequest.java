@@ -4,26 +4,16 @@
  */
 package model;
 
-import model.DTO.RegisteredUserDTO;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToMany;
+import model.DTO.MembershipRequestDTO;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "usertype", discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue(value = "registereduser")
-public class RegisteredUser extends User implements RegisteredUserDTO, Serializable {
+public class MembershipRequest implements Serializable, MembershipRequestDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,27 +26,37 @@ public class RegisteredUser extends User implements RegisteredUserDTO, Serializa
     private String username;
     @Column(nullable = false)
     private String password;
-    @ManyToMany(targetEntity = Player.class)
-    private List<Player> trackList;
+    @Column(nullable = false)
+    private String type;
 
-    public RegisteredUser() {
+    public MembershipRequest() {
     }
 
-    public RegisteredUser(String name, String surname, String username, String password) {
+    public MembershipRequest(String name, String surname, String username, String password, String type) {
         this.name = name;
         this.surname = surname;
         this.username = username;
         this.password = password;
+        this.type = type;
     }
 
-    public void addToTrackList(Player p) {
-        if (!trackList.contains(p)) {
-            trackList.add(p);
+    public RegisteredUser verifyMembership(boolean ok) {
+
+        if (!ok) {
+            return null;
+        } else {
+            if (type.equals("manager")) {
+                return new Manager(name, surname, username, password);
+            } else if (type.equals("player")) {
+                return new Player(name, surname, username, password);
+            } else if (type.equals("referee")) {
+                return new Referee(name, surname, username, password);
+            } else if (type.equals("umpire")) {
+                return new Umpire(name, surname, username, password);
+            } else {
+                return new RegisteredUser(name, surname, username, password);
+            }
         }
-    }
-
-    public void removeFromTrackList(Player p) {
-        trackList.remove(p);
     }
 
     @Override
@@ -96,20 +96,20 @@ public class RegisteredUser extends User implements RegisteredUserDTO, Serializa
     }
 
     @Override
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Override
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    @Override
-    public List<Player> getTrackList() {
-        return trackList;
-    }
-
-    public void setTrackList(List<Player> trackList) {
-        this.trackList = trackList;
     }
 }

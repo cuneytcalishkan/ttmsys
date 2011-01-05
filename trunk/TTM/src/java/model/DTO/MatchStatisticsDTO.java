@@ -7,10 +7,6 @@ package model.DTO;
 import model.Match;
 import model.Team;
 
-/**
- *
- * @author CUNEYT
- */
 public interface MatchStatisticsDTO {
 
     Team getTeam();

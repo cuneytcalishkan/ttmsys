@@ -8,10 +8,6 @@ import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-/**
- *
- * @author CUNEYT
- */
 @Entity
 @DiscriminatorValue(value = "singles")
 public class SinglesTeam extends Team {

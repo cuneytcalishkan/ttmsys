@@ -8,10 +8,6 @@ import java.util.List;
 import model.RegisteredUser;
 import model.Team;
 
-/**
- *
- * @author CUNEYT
- */
 public interface PlayerDTO extends RegisteredUserDTO {
 
     List<Team> getTeams();

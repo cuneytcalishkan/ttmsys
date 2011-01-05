@@ -8,10 +8,6 @@ import java.util.List;
 import model.Match;
 import model.Tournament;
 
-/**
- *
- * @author CUNEYT
- */
 public interface UmpireDTO extends RegisteredUserDTO {
 
     List<Tournament> getTournaments();

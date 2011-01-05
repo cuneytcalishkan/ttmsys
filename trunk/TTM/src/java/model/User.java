@@ -4,10 +4,6 @@
  */
 package model;
 
-/**
- *
- * @author CUNEYT
- */
 public class User {
 
     public User() {

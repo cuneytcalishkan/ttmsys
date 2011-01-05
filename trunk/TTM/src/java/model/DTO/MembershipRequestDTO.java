@@ -4,17 +4,17 @@
  */
 package model.DTO;
 
-import java.util.List;
-import model.Match;
-import model.Tournament;
-
-public interface CourtDTO {
+public interface MembershipRequestDTO {
 
     long getId();
 
     String getName();
 
-    List<Match> getMatches();
+    String getSurname();
 
-    List<Tournament> getTournaments();
+    String getUsername();
+
+    String getPassword();
+
+    String getType();
 }

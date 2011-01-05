@@ -21,10 +21,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
-/**
- *
- * @author CUNEYT
- */
 @Entity
 public class Tournament implements TournamentDTO, Serializable {
 
@@ -78,6 +74,12 @@ public class Tournament implements TournamentDTO, Serializable {
         this.startDate = startDate;
         this.endDate = endDate;
         this.prize = prize;
+    }
+
+    public void joinTournament(Team t) {
+        if (!teams.contains(t)) {
+            teams.add(t);
+        }
     }
 
     @Override

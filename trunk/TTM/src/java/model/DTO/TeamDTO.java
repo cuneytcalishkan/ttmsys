@@ -10,10 +10,6 @@ import model.MatchStatistics;
 import model.Player;
 import model.Tournament;
 
-/**
- *
- * @author CUNEYT
- */
 public interface TeamDTO {
 
     long getId();
