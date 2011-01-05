@@ -6,6 +6,7 @@ package model;
 
 import model.DTO.CourtDTO;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -29,6 +30,8 @@ public class Court implements CourtDTO, Serializable {
     private List<Tournament> tournaments;
 
     public Court() {
+        matches = new ArrayList<Match>();
+        tournaments = new ArrayList<Tournament>();
     }
 
     public Court(String name) {

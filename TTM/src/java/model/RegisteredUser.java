@@ -6,6 +6,7 @@ package model;
 
 import model.DTO.RegisteredUserDTO;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -32,7 +33,7 @@ public class RegisteredUser extends User implements RegisteredUserDTO, Serializa
     private String name;
     @Column(nullable = false)
     private String surname;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
     @Column(nullable = false)
     private String password;
@@ -40,9 +41,11 @@ public class RegisteredUser extends User implements RegisteredUserDTO, Serializa
     private List<Player> trackList;
 
     public RegisteredUser() {
+        trackList = new ArrayList<Player>();
     }
 
     public RegisteredUser(String name, String surname, String username, String password) {
+        this();
         this.name = name;
         this.surname = surname;
         this.username = username;
@@ -50,6 +53,9 @@ public class RegisteredUser extends User implements RegisteredUserDTO, Serializa
     }
 
     public void addToTrackList(Player p) {
+        if (trackList == null) {
+            trackList = new ArrayList<Player>();
+        }
         if (!trackList.contains(p)) {
             trackList.add(p);
         }

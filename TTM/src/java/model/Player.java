@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import model.DTO.PlayerDTO;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
@@ -21,10 +22,17 @@ public class Player extends RegisteredUser implements PlayerDTO {
 
     public Player(String name, String surname, String username, String password) {
         super(name, surname, username, password);
+        init();
     }
 
     public Player() {
         super();
+        init();
+    }
+
+    private void init() {
+        teams = new ArrayList<Team>();
+        trackers = new ArrayList<RegisteredUser>();
     }
 
     @Override
