@@ -31,12 +31,6 @@ public class TournamentJoinRequest implements Serializable, TournamentJoinReques
         this.team = team;
     }
 
-    public void verifyRequest(boolean ok) {
-        if (ok) {
-            tournament.joinTournament(team);
-        }
-    }
-
     @Override
     public long getId() {
         return id;
