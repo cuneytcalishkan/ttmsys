@@ -40,25 +40,6 @@ public class MembershipRequest implements Serializable, MembershipRequestDTO {
         this.type = type;
     }
 
-    public RegisteredUser verifyMembership(boolean ok) {
-
-        if (!ok) {
-            return null;
-        } else {
-            if (type.equals("manager")) {
-                return new Manager(name, surname, username, password);
-            } else if (type.equals("player")) {
-                return new Player(name, surname, username, password);
-            } else if (type.equals("referee")) {
-                return new Referee(name, surname, username, password);
-            } else if (type.equals("umpire")) {
-                return new Umpire(name, surname, username, password);
-            } else {
-                return new RegisteredUser(name, surname, username, password);
-            }
-        }
-    }
-
     @Override
     public long getId() {
         return id;

@@ -32,6 +32,37 @@ public class Manager extends RegisteredUser implements ManagerDTO {
         init();
     }
 
+    public void verifyTournamentRequest(TournamentJoinRequest tjr, boolean ok) {
+        if (ok) {
+            if (tournaments.contains(tjr.getTournament())) {
+                tournaments.get(tournaments.indexOf(tjr)).joinTournament(tjr.getTeam());
+                tournamentRequests.remove(tjr);
+            }
+        }
+    }
+
+    public RegisteredUser verifyMembership(MembershipRequest mr, boolean ok) {
+        try {
+            if (!ok) {
+                return null;
+            } else {
+                if (mr.getType().equals("manager")) {
+                    return new Manager(mr.getName(), mr.getSurname(), mr.getUsername(), mr.getPassword());
+                } else if (mr.getType().equals("player")) {
+                    return new Player(mr.getName(), mr.getSurname(), mr.getUsername(), mr.getPassword());
+                } else if (mr.getType().equals("referee")) {
+                    return new Referee(mr.getName(), mr.getSurname(), mr.getUsername(), mr.getPassword());
+                } else if (mr.getType().equals("umpire")) {
+                    return new Umpire(mr.getName(), mr.getSurname(), mr.getUsername(), mr.getPassword());
+                } else {
+                    return new RegisteredUser(mr.getName(), mr.getSurname(), mr.getUsername(), mr.getPassword());
+                }
+            }
+        } finally {
+            membershipRequests.remove(mr);
+        }
+    }
+
     private void init() {
         tournaments = new ArrayList<Tournament>();
         membershipRequests = new ArrayList<MembershipRequest>();
