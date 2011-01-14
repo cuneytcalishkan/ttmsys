@@ -5,13 +5,12 @@
 
 package view;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import model.Tournament;
 
 
@@ -26,10 +25,8 @@ public class MainPageManagedBean {
     }
 
     public List<Tournament> getTournaments(){
-        /*Query q = em.createQuery("from Tournament");
-        List list = q.getResultList();*/
-        List<Tournament> list = new ArrayList();
-        list.add(new Tournament("name", "23", new Date(), new Date(), 23));
+        Query q = em.createQuery("from Tournament");
+        List list = q.getResultList();
         return list;
     }
 

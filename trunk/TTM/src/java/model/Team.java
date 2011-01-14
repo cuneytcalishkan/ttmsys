@@ -22,7 +22,7 @@ import javax.persistence.OneToMany;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "teamtype", discriminatorType = DiscriminatorType.STRING)
-public abstract class Team implements Serializable {
+public class Team implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
