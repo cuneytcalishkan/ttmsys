@@ -1,7 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 
-<!-- =========== FULL CONFIGURATION FILE ================================== -->
-
 <faces-config version="2.0"
     xmlns="http://java.sun.com/xml/ns/javaee" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -18,7 +16,7 @@
     <navigation-rule>
         <navigation-case>
             <from-outcome>index</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
+            <to-view-id>/main.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>login</from-outcome>
@@ -26,7 +24,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>create</from-outcome>
-            <to-view-id>/newUser.xhtml</to-view-id>            
+            <to-view-id>/newUser.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>

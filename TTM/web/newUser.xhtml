@@ -13,38 +13,41 @@
                 <h:panelGrid columns="3" border="0">
                     First Name: <h:inputText id="fname"
                                              requiredMessage="*"
-                                             value="#{userManager.name}"
+                                             value="#{User.name}"
                                              required="true"/>
                     <h:message for="create:fname" style="color: red"/>
                     Last Name: <h:inputText id="lname"
                                             requiredMessage="*"
-                                            value="#{userManager.surname}"
+                                            value="#{User.surname}"
                                             required="true"/>
                     <h:message for="create:lname" style="color: red"/>
                     Username: <h:inputText id="username"
                                            requiredMessage="*"
-                                           value="#{userManager.username}"
+                                           value="#{User.username}"
                                            required="true"/>
                     <h:message for="create:username" style="color: red"/>
                     Password: <h:inputSecret id="password"
                                              requiredMessage="*"
-                                             value="#{userManager.password}"
+                                             value="#{User.password}"
                                              required="true"/>
                     <h:message for="create:password" style="color: red"/>
                     Password (verify): <h:inputSecret id="passwordv"
                                                       requiredMessage="*"
-                                                      value="#{userManager.passwordv}"
+                                                      value="#{User.passwordv}"
                                                       required="true"/>
                     <h:message for="create:passwordv" style="color: red"/>
                     Registration Type: <h:selectOneMenu id="type"
                                                         requiredMessage="*"
-                                                        value="#{userManager.type}"
-                                                        required="true"/>
+                                                        value="#{User.type}"
+                                                        required="true">
+                        <f:selectItems value="#{User.userTypes}"/>
+
+                    </h:selectOneMenu>
                     <h:message for="create:type" style="color: red"/>
                 </h:panelGrid>
                 <h:commandButton id="submit"
                                  value="Create"
-                                 action="#{userManager.createUser}"/>
+                                 action="#{User.createUser}"/>
                 <h:messages style="color: red" globalOnly="true"/>
             </h:form>
         </f:view>

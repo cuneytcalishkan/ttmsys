@@ -22,7 +22,7 @@ import model.Manager;
 import model.MembershipRequest;
 import model.RegisteredUser;
 
-@ManagedBean(name="User")
+@ManagedBean(name = "User")
 @SessionScoped
 public class RegisteredUserManager {
 
@@ -91,6 +91,11 @@ public class RegisteredUserManager {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String[] getUserTypes() {
+        String[] types = new String[]{"registereduser", "manager", "player", "referee", "umpire"};
+        return types;
     }
 
     public String validateUser() {
