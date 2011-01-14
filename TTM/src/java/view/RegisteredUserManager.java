@@ -4,6 +4,7 @@
  */
 package view;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -17,6 +18,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
+import model.Manager;
+import model.MembershipRequest;
 import model.RegisteredUser;
 
 @Named(value = "userManager")
@@ -29,6 +32,7 @@ public class RegisteredUserManager {
     private String passwordv;
     private String name;
     private String surname;
+    private String type;
     @PersistenceContext
     private EntityManager em;
     @Resource
@@ -74,6 +78,14 @@ public class RegisteredUserManager {
         this.username = username;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String validateUser() {
         FacesContext context = FacesContext.getCurrentInstance();
         RegisteredUser user = getUser();
@@ -108,30 +120,65 @@ public class RegisteredUserManager {
         }
     }
 
+    public Manager getManager() {
+        try {
+            Query getByUsername = em.createQuery("from Manager man");
+            List<Manager> managers = getByUsername.getResultList();
+            if (managers.isEmpty()) {
+                return null;
+            }
+            return managers.get(0);
+        } catch (NoResultException nre) {
+            return null;
+        }
+    }
+
     public String createUser() {
         FacesContext context = FacesContext.getCurrentInstance();
-        RegisteredUser ruser = getUser();
-        if (ruser == null) {
+        RegisteredUser usr = getUser();
+        if (usr == null) {
             if (!password.equals(passwordv)) {
                 FacesMessage message = new FacesMessage("The specified passwords do not match. Please try again");
                 context.addMessage(null, message);
                 return null;
             }
-            ruser = new RegisteredUser(name, surname, username, password);
-            try {
-                utx.begin();
-                em.persist(ruser);
-                utx.commit();
-                return "login";
-            } catch (Exception e) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        "Error creating user!",
-                        "Unexpected error when creating your account.  Please contact the system Administrator");
-                context.addMessage(null, message);
-                Logger.getAnonymousLogger().log(Level.SEVERE,
-                        "Unable to create new user",
-                        e);
-                return null;
+            Manager man = getManager();
+            if (man != null) {
+                MembershipRequest mr = new MembershipRequest(name, surname, username, password, type);
+                man.addMembershipRequest(mr);
+                try {
+                    utx.begin();
+                    em.persist(man);
+                    utx.commit();
+                    return "login";
+                } catch (Exception e) {
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Error creating user!",
+                            "Unexpected error when creating your account.  Please contact the system Administrator");
+                    context.addMessage(null, message);
+                    Logger.getAnonymousLogger().log(Level.SEVERE,
+                            "Unable to create new user",
+                            e);
+                    return null;
+                }
+            } else {
+                RegisteredUser ruser = new RegisteredUser(name, surname, username, password);
+
+                try {
+                    utx.begin();
+                    em.persist(ruser);
+                    utx.commit();
+                    return "login";
+                } catch (Exception e) {
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Error creating user!",
+                            "Unexpected error when creating your account.  Please contact the system Administrator");
+                    context.addMessage(null, message);
+                    Logger.getAnonymousLogger().log(Level.SEVERE,
+                            "Unable to create new user",
+                            e);
+                    return null;
+                }
             }
         } else {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
