@@ -4,7 +4,6 @@
  */
 package model;
 
-import model.DTO.RegisteredUserDTO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ import javax.persistence.ManyToMany;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "usertype", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "registereduser")
-public class RegisteredUser extends User implements RegisteredUserDTO, Serializable {
+public class RegisteredUser extends User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -65,7 +64,6 @@ public class RegisteredUser extends User implements RegisteredUserDTO, Serializa
         trackList.remove(p);
     }
 
-    @Override
     public long getId() {
         return id;
     }
@@ -74,7 +72,6 @@ public class RegisteredUser extends User implements RegisteredUserDTO, Serializa
         this.id = id;
     }
 
-    @Override
     public String getName() {
         return name;
     }
@@ -83,7 +80,6 @@ public class RegisteredUser extends User implements RegisteredUserDTO, Serializa
         this.name = name;
     }
 
-    @Override
     public String getPassword() {
         return password;
     }
@@ -92,7 +88,6 @@ public class RegisteredUser extends User implements RegisteredUserDTO, Serializa
         this.password = password;
     }
 
-    @Override
     public String getSurname() {
         return surname;
     }
@@ -101,7 +96,6 @@ public class RegisteredUser extends User implements RegisteredUserDTO, Serializa
         this.surname = surname;
     }
 
-    @Override
     public String getUsername() {
         return username;
     }
@@ -110,7 +104,6 @@ public class RegisteredUser extends User implements RegisteredUserDTO, Serializa
         this.username = username;
     }
 
-    @Override
     public List<Player> getTrackList() {
         return trackList;
     }

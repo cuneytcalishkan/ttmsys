@@ -10,10 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import model.DTO.DrawDTO;
 
 @Entity
-public class Draw implements Serializable, DrawDTO {
+public class Draw implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,7 +46,6 @@ public class Draw implements Serializable, DrawDTO {
         this.awayDraw = awayDraw;
     }
 
-    @Override
     public Draw getAwayDraw() {
         return awayDraw;
     }
@@ -56,7 +54,6 @@ public class Draw implements Serializable, DrawDTO {
         this.awayDraw = awayDraw;
     }
 
-    @Override
     public Team getAwayTeam() {
         return awayTeam;
     }
@@ -65,7 +62,6 @@ public class Draw implements Serializable, DrawDTO {
         this.awayTeam = awayTeam;
     }
 
-    @Override
     public Draw getHomeDraw() {
         return homeDraw;
     }
@@ -74,7 +70,6 @@ public class Draw implements Serializable, DrawDTO {
         this.homeDraw = homeDraw;
     }
 
-    @Override
     public Team getHomeTeam() {
         return homeTeam;
     }
@@ -83,7 +78,6 @@ public class Draw implements Serializable, DrawDTO {
         this.homeTeam = homeTeam;
     }
 
-    @Override
     public long getId() {
         return id;
     }

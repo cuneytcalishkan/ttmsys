@@ -4,19 +4,13 @@
  */
 package view;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.annotation.Resource;
+import controller.RegisteredUserFacade;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
-import javax.transaction.UserTransaction;
 import model.RegisteredUser;
 
 @Named(value = "userManager")
@@ -29,10 +23,8 @@ public class RegisteredUserManager {
     private String passwordv;
     private String name;
     private String surname;
-    @PersistenceContext
-    private EntityManager em;
-    @Resource
-    private UserTransaction utx;
+    @EJB
+    private RegisteredUserFacade ruf;
 
     public String getName() {
         return name;
@@ -98,39 +90,7 @@ public class RegisteredUserManager {
     }
 
     public String createUser() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        RegisteredUser ruser = getUser();
-        if (ruser == null) {
-            if (!password.equals(passwordv)) {
-                FacesMessage message = new FacesMessage("The specified passwords do not match. Please try again");
-                context.addMessage(null, message);
-                return null;
-            }
-            ruser = new RegisteredUser(name, surname, username, password);
-            try {
-                utx.begin();
-                em.persist(ruser);
-                utx.commit();
-                return "login";
-            } catch (Exception e) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        "Error creating user!",
-                        "Unexpected error when creating your account.  Please contact the system Administrator");
-                context.addMessage(null, message);
-                Logger.getAnonymousLogger().log(Level.SEVERE,
-                        "Unable to create new user",
-                        e);
-                return null;
-            }
-        } else {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    "Username '"
-                    + username
-                    + "' already exists!  ",
-                    "Please choose a different username.");
-            context.addMessage(null, message);
-            return null;
-        }
+        return ruf.createUser(name, surname, username, password, passwordv);
     }
 
     public String logout() {
@@ -143,13 +103,6 @@ public class RegisteredUserManager {
     }
 
     private RegisteredUser getUser() {
-        try {
-            Query getByUsername = em.createQuery("from RegisteredUser ru where ru.username = :username");
-            getByUsername.setParameter("username", username);
-            RegisteredUser user = (RegisteredUser) getByUsername.getSingleResult();
-            return user;
-        } catch (NoResultException nre) {
-            return null;
-        }
+        return ruf.getUser(username);
     }
 }

@@ -4,7 +4,6 @@
  */
 package model;
 
-import model.DTO.TeamDTO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,7 @@ import javax.persistence.OneToMany;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "teamtype", discriminatorType = DiscriminatorType.STRING)
-public abstract class Team implements TeamDTO, Serializable {
+public abstract class Team implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,7 +49,6 @@ public abstract class Team implements TeamDTO, Serializable {
         players.add(p);
     }
 
-    @Override
     public List<MatchStatistics> getStatistics() {
         return statistics;
     }
@@ -71,22 +69,18 @@ public abstract class Team implements TeamDTO, Serializable {
         this.tournament = tournament;
     }
 
-    @Override
     public long getId() {
         return id;
     }
 
-    @Override
     public List<Match> getMatches() {
         return matches;
     }
 
-    @Override
     public Tournament getTournament() {
         return tournament;
     }
 
-    @Override
     public List<Player> getPlayers() {
         return players;
     }

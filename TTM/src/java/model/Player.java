@@ -5,7 +5,6 @@
 package model;
 
 import java.util.ArrayList;
-import model.DTO.PlayerDTO;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -13,7 +12,7 @@ import javax.persistence.ManyToMany;
 
 @Entity
 @DiscriminatorValue(value = "player")
-public class Player extends RegisteredUser implements PlayerDTO {
+public class Player extends RegisteredUser {
 
     @ManyToMany(mappedBy = "players")
     private List<Team> teams;
@@ -35,7 +34,6 @@ public class Player extends RegisteredUser implements PlayerDTO {
         trackers = new ArrayList<RegisteredUser>();
     }
 
-    @Override
     public List<Team> getTeams() {
         return teams;
     }
@@ -49,7 +47,6 @@ public class Player extends RegisteredUser implements PlayerDTO {
         return getName() + " " + getSurname();
     }
 
-    @Override
     public List<RegisteredUser> getTrackers() {
         return trackers;
     }

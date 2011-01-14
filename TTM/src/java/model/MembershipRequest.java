@@ -10,10 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import model.DTO.MembershipRequestDTO;
 
 @Entity
-public class MembershipRequest implements Serializable, MembershipRequestDTO {
+public class MembershipRequest implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,7 +39,6 @@ public class MembershipRequest implements Serializable, MembershipRequestDTO {
         this.type = type;
     }
 
-    @Override
     public long getId() {
         return id;
     }
@@ -49,7 +47,6 @@ public class MembershipRequest implements Serializable, MembershipRequestDTO {
         this.id = id;
     }
 
-    @Override
     public String getName() {
         return name;
     }
@@ -58,7 +55,6 @@ public class MembershipRequest implements Serializable, MembershipRequestDTO {
         this.name = name;
     }
 
-    @Override
     public String getPassword() {
         return password;
     }
@@ -67,7 +63,6 @@ public class MembershipRequest implements Serializable, MembershipRequestDTO {
         this.password = password;
     }
 
-    @Override
     public String getSurname() {
         return surname;
     }
@@ -76,7 +71,6 @@ public class MembershipRequest implements Serializable, MembershipRequestDTO {
         this.surname = surname;
     }
 
-    @Override
     public String getType() {
         return type;
     }
@@ -85,7 +79,6 @@ public class MembershipRequest implements Serializable, MembershipRequestDTO {
         this.type = type;
     }
 
-    @Override
     public String getUsername() {
         return username;
     }

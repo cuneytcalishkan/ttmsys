@@ -5,7 +5,6 @@
 package model;
 
 import java.util.ArrayList;
-import model.DTO.ManagerDTO;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -13,7 +12,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue(value = "manager")
-public class Manager extends RegisteredUser implements ManagerDTO {
+public class Manager extends RegisteredUser {
 
     @OneToMany(mappedBy = "manager")
     private List<Tournament> tournaments;
@@ -93,7 +92,6 @@ public class Manager extends RegisteredUser implements ManagerDTO {
         }
     }
 
-    @Override
     public List<Tournament> getTournaments() {
         return tournaments;
     }
@@ -102,7 +100,6 @@ public class Manager extends RegisteredUser implements ManagerDTO {
         this.tournaments = tournaments;
     }
 
-    @Override
     public List<MembershipRequest> getMembershipRequests() {
         return membershipRequests;
     }
@@ -115,7 +112,6 @@ public class Manager extends RegisteredUser implements ManagerDTO {
         this.tournamentRequests = tournamentRequests;
     }
 
-    @Override
     public List<TournamentJoinRequest> getTournamentRequests() {
         return tournamentRequests;
     }

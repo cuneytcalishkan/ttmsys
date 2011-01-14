@@ -4,7 +4,6 @@
  */
 package model;
 
-import model.DTO.CourtDTO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Court implements CourtDTO, Serializable {
+public class Court implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -56,22 +55,18 @@ public class Court implements CourtDTO, Serializable {
         this.tournaments = tournaments;
     }
 
-    @Override
     public long getId() {
         return id;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public List<Match> getMatches() {
         return matches;
     }
 
-    @Override
     public List<Tournament> getTournaments() {
         return tournaments;
     }

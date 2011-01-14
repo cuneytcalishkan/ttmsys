@@ -4,7 +4,6 @@
  */
 package model;
 
-import model.DTO.MatchDTO;
 import java.io.Serializable;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
@@ -22,7 +21,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 @Entity(name = "tmatch")
-public class Match implements MatchDTO, Serializable {
+public class Match implements Serializable {
 
     @Id
     private long id;
@@ -125,27 +124,22 @@ public class Match implements MatchDTO, Serializable {
         this.homeTeamScore = homeTeamScore;
     }
 
-    @Override
     public Court getCourt() {
         return court;
     }
 
-    @Override
     public List<Team> getTeams() {
         return teams;
     }
 
-    @Override
     public List<Umpire> getUmpires() {
         return umpires;
     }
 
-    @Override
     public List<Referee> getReferees() {
         return referees;
     }
 
-    @Override
     public Tournament getTournament() {
         return tournament;
     }
@@ -194,37 +188,30 @@ public class Match implements MatchDTO, Serializable {
         this.statistics = statistics;
     }
 
-    @Override
     public long getId() {
         return id;
     }
 
-    @Override
     public Date getmDate() {
         return mDate;
     }
 
-    @Override
     public Time getmTime() {
         return mTime;
     }
 
-    @Override
     public List<Set> getSets() {
         return sets;
     }
 
-    @Override
     public String getScore() {
         return homeTeamScore + " - " + awayTeamScore;
     }
 
-    @Override
     public MatchStatistics getStatistics() {
         return statistics;
     }
 
-    @Override
     public String getReport() {
         return report;
     }

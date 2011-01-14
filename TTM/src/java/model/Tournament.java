@@ -5,7 +5,6 @@
 package model;
 
 import javax.persistence.Temporal;
-import model.DTO.TournamentDTO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,7 +22,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 @Entity
-public class Tournament implements TournamentDTO, Serializable {
+public class Tournament implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -88,52 +87,42 @@ public class Tournament implements TournamentDTO, Serializable {
         }
     }
 
-    @Override
     public long getId() {
         return id;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public List<Match> getMatches() {
         return matches;
     }
 
-    @Override
     public List<Referee> getReferees() {
         return referees;
     }
 
-    @Override
     public List<Umpire> getUmpires() {
         return umpires;
     }
 
-    @Override
     public List<Team> getTeams() {
         return teams;
     }
 
-    @Override
     public List<Court> getCourts() {
         return courts;
     }
 
-    @Override
     public Manager getManager() {
         return manager;
     }
 
-    @Override
     public String getType() {
         return type;
     }
 
-    @Override
     public Draw getDraw() {
         return draw;
     }
@@ -178,7 +167,6 @@ public class Tournament implements TournamentDTO, Serializable {
         this.umpires = umpires;
     }
 
-    @Override
     public String getReport() {
         return report;
     }
@@ -187,12 +175,10 @@ public class Tournament implements TournamentDTO, Serializable {
         this.report = report;
     }
 
-    @Override
     public Date getStartDate() {
         return startDate;
     }
 
-    @Override
     public Date getEndDate() {
         return endDate;
     }
@@ -205,7 +191,6 @@ public class Tournament implements TournamentDTO, Serializable {
         this.startDate = startDate;
     }
 
-    @Override
     public double getPrize() {
         return prize;
     }

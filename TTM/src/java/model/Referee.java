@@ -5,7 +5,6 @@
 package model;
 
 import java.util.ArrayList;
-import model.DTO.RefereeDTO;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -13,7 +12,7 @@ import javax.persistence.ManyToMany;
 
 @Entity
 @DiscriminatorValue(value = "referee")
-public class Referee extends RegisteredUser implements RefereeDTO {
+public class Referee extends RegisteredUser {
 
     @ManyToMany(mappedBy = "referees")
     private List<Match> matches;
@@ -49,12 +48,10 @@ public class Referee extends RegisteredUser implements RefereeDTO {
         this.tournaments = tournaments;
     }
 
-    @Override
     public List<Tournament> getTournaments() {
         return tournaments;
     }
 
-    @Override
     public List<Match> getMatches() {
         return matches;
     }
