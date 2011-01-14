@@ -36,6 +36,11 @@
                                                       value="#{userManager.passwordv}"
                                                       required="true"/>
                     <h:message for="create:passwordv" style="color: red"/>
+                    Registration Type: <h:selectOneMenu id="type"
+                                                        requiredMessage="*"
+                                                        value="#{userManager.type}"
+                                                        required="true"/>
+                    <h:message for="create:type" style="color: red"/>
                 </h:panelGrid>
                 <h:commandButton id="submit"
                                  value="Create"
