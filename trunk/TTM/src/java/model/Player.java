@@ -42,6 +42,14 @@ public class Player extends RegisteredUser {
         this.teams = teams;
     }
 
+    public void addTeam(Team team) {
+        teams.add(team);
+    }
+
+    public void removeTeam(Team team){
+        teams.remove(team);
+    }
+
     @Override
     public String toString() {
         return getName() + " " + getSurname();
