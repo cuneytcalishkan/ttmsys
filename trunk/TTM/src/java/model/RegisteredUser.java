@@ -23,7 +23,7 @@ import javax.persistence.ManyToMany;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "usertype", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "registereduser")
-public class RegisteredUser extends User implements Serializable {
+public class RegisteredUser implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
