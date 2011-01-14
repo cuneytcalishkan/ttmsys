@@ -3,7 +3,22 @@
   <persistence-unit name="TTMPU" transaction-type="JTA">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <jta-data-source>jndi/ttms</jta-data-source>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <class>model.Court</class>
+    <class>model.Draw</class>
+    <class>model.Game</class>
+    <class>model.Manager</class>
+    <class>model.Match</class>
+    <class>model.MatchStatistics</class>
+    <class>model.MembershipRequest</class>
+    <class>model.Player</class>
+    <class>model.Referee</class>
+    <class>model.RegisteredUser</class>
+    <class>model.Set</class>
+    <class>model.Team</class>
+    <class>model.Tournament</class>
+    <class>model.TournamentJoinRequest</class>
+    <class>model.Umpire</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
     </properties>
   </persistence-unit>

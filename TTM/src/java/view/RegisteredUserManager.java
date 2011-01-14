@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
-import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -22,8 +22,8 @@ import model.Manager;
 import model.MembershipRequest;
 import model.RegisteredUser;
 
-@Named(value = "userManager")
-@RequestScoped
+@ManagedBean(name="User")
+@SessionScoped
 public class RegisteredUserManager {
 
     public static final String USER_SESSION_KEY = "user";
@@ -37,6 +37,13 @@ public class RegisteredUserManager {
     private EntityManager em;
     @Resource
     private UserTransaction utx;
+
+    public RegisteredUserManager() {
+    }
+
+    public RegisteredUserManager(EntityManager em) {
+        this.em = em;
+    }
 
     public String getName() {
         return name;
