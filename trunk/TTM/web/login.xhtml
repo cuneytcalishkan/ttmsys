@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Login to Tennis Tournament Management System</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        <h2>Login</h2>
+        <h:form>
+            <p>
+                <h:outputLabel for="username" value="Username"/>
+                <h:inputText id="username" value="#{userManager.username}"/>
+            </p>
+            <p>
+                <h:outputLabel for="password" value="Password"/>
+                <h:inputSecret id="password" value="#{userManager.password}"/>
+            </p>
+            <p>
+                <h:commandButton value="Login" action="#{userManager.validateUser}"/>
+                <h:commandButton value="Register" action="create"/>
+            </p>
+        </h:form>
+    </h:body>
+</html>
+

@@ -34,7 +34,7 @@ public class Match implements MatchDTO, Serializable {
     private int homeTeamScore;
     private int awayTeamScore;
     private String report;
-    @OneToMany(orphanRemoval = true)
+    @OneToMany
     @JoinColumn(name = "matchid")
     private List<Set> sets;
     @ManyToMany(targetEntity = Team.class)
