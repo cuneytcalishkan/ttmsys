@@ -4,7 +4,6 @@
  */
 package model;
 
-import model.DTO.SetDTO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity(name = "mset")
-public class Set implements SetDTO, Serializable {
+public class Set implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -66,17 +65,14 @@ public class Set implements SetDTO, Serializable {
         return homeTeamScore;
     }
 
-    @Override
     public long getId() {
         return id;
     }
 
-    @Override
     public String getScore() {
         return homeTeamScore + " - " + awayTeamScore;
     }
 
-    @Override
     public List<Game> getGames() {
         return games;
     }

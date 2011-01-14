@@ -4,7 +4,6 @@
  */
 package model;
 
-import model.DTO.GameDTO;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Game implements GameDTO, Serializable {
+public class Game implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,12 +46,10 @@ public class Game implements GameDTO, Serializable {
         return homeTeamScore;
     }
 
-    @Override
     public String getScore() {
         return homeTeamScore + " - " + awayTeamScore;
     }
 
-    @Override
     public long getId() {
         return id;
     }

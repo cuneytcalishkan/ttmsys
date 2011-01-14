@@ -10,10 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import model.DTO.TournamentJoinRequestDTO;
 
 @Entity
-public class TournamentJoinRequest implements Serializable, TournamentJoinRequestDTO {
+public class TournamentJoinRequest implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,7 +30,6 @@ public class TournamentJoinRequest implements Serializable, TournamentJoinReques
         this.team = team;
     }
 
-    @Override
     public long getId() {
         return id;
     }
@@ -40,7 +38,6 @@ public class TournamentJoinRequest implements Serializable, TournamentJoinReques
         this.id = id;
     }
 
-    @Override
     public Team getTeam() {
         return team;
     }
@@ -49,7 +46,6 @@ public class TournamentJoinRequest implements Serializable, TournamentJoinReques
         this.team = team;
     }
 
-    @Override
     public Tournament getTournament() {
         return tournament;
     }
