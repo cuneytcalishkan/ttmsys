@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Create New User</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form id="create">
+                <h:panelGrid columns="3" border="0">
+                    First Name: <h:inputText id="fname"
+                                             requiredMessage="*"
+                                             value="#{userManager.name}"
+                                             required="true"/>
+                    <h:message for="create:fname" style="color: red"/>
+                    Last Name: <h:inputText id="lname"
+                                            requiredMessage="*"
+                                            value="#{userManager.surname}"
+                                            required="true"/>
+                    <h:message for="create:lname" style="color: red"/>
+                    Username: <h:inputText id="username"
+                                           requiredMessage="*"
+                                           value="#{userManager.username}"
+                                           required="true"/>
+                    <h:message for="create:username" style="color: red"/>
+                    Password: <h:inputSecret id="password"
+                                             requiredMessage="*"
+                                             value="#{userManager.password}"
+                                             required="true"/>
+                    <h:message for="create:password" style="color: red"/>
+                    Password (verify): <h:inputSecret id="passwordv"
+                                                      requiredMessage="*"
+                                                      value="#{userManager.passwordv}"
+                                                      required="true"/>
+                    <h:message for="create:passwordv" style="color: red"/>
+                </h:panelGrid>
+                <h:commandButton id="submit"
+                                 value="Create"
+                                 action="#{userManager.createUser}"/>
+                <h:messages style="color: red" globalOnly="true"/>
+            </h:form>
+        </f:view>
+    </h:body>
+</html>
+

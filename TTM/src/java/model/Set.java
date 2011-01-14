@@ -23,7 +23,7 @@ public class Set implements SetDTO, Serializable {
     private long id;
     private int homeTeamScore;
     private int awayTeamScore;
-    @OneToMany(orphanRemoval = true)
+    @OneToMany
     @JoinColumn(name = "setid")
     private List<Game> games;
 

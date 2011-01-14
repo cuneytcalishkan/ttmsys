@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+    <persistence-unit name="TTMPU" transaction-type="JTA">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <jta-data-source>jndi/ttms</jta-data-source>
+        <class>model.Court</class>
+        <class>model.Draw</class>
+        <class>model.Game</class>
+        <class>model.Manager</class>
+        <class>model.Match</class>
+        <class>model.MatchStatistics</class>
+        <class>model.MembershipRequest</class>
+        <class>model.Player</class>
+        <class>model.Referee</class>
+        <class>model.RegisteredUser</class>
+        <class>model.Set</class>
+        <class>model.Team</class>
+        <class>model.Tournament</class>
+        <class>model.TournamentJoinRequest</class>
+        <class>model.Umpire</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties/>
+    </persistence-unit>
+</persistence>
