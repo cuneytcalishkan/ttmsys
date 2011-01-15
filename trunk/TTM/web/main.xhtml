@@ -9,8 +9,9 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:commandButton action="login" value="Login"/>
-            <h:commandButton action="create" value="Create Account" rendered="true"/>
+            <h:commandButton action="login" value="Login" rendered="#{!User.logged}"/>
+            <h:commandButton action="${User.logout}" value="Logout" rendered="#{User.logged}"/>
+            <h:commandButton action="create" value="Create Account" rendered="#{!User.logged}"/>
         </h:form>
         <hr></hr>
         <h:form>
