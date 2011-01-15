@@ -8,20 +8,20 @@
     </h:head>
     <h:body>
         <h2>Login</h2>
-            <h:messages><font color="red"></font> </h:messages>
-            <h:form>
-                <p>
-                    <h:outputLabel for="username" value="Username"/>
-                    <h:inputText id="username" value="#{User.username}"/>
-                </p>
-                <p>
-                    <h:outputLabel for="password" value="Password"/>
-                    <h:inputSecret id="password" value="#{User.password}"/>
-                </p>
-                <p>
-                    <h:commandButton value="Login" action="#{User.validateUser}"/>
-                    <h:commandButton value="Create Account" action="create"/>
-                </p>
-            </h:form>
+        <font color="#FF0000"><h:messages> </h:messages></font>
+        <h:form>
+            <p>
+                <h:outputLabel for="username" value="Username"/>
+                <h:inputText id="username" value="#{User.username}"/>
+            </p>
+            <p>
+                <h:outputLabel for="password" value="Password"/>
+                <h:inputSecret id="password" value="#{User.password}"/>
+            </p>
+            <p>
+                <h:commandButton value="Login" action="#{User.validateUser}"/>
+                <h:commandButton value="Create Account" action="create"/>
+            </p>
+        </h:form>
     </h:body>
 </html>
