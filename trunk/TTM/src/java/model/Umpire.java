@@ -8,14 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 
 @Entity
 @DiscriminatorValue(value = "umpire")
 public class Umpire extends RegisteredUser {
 
-    @ManyToMany(mappedBy = "umpires", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "umpires")
     private List<Match> matches;
     @ManyToMany(mappedBy = "umpires")
     private List<Tournament> tournaments;
