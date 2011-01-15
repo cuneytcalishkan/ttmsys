@@ -8,6 +8,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import model.Match;
 import model.Player;
 import model.Tournament;
@@ -17,6 +19,8 @@ import model.Umpire;
 @SessionScoped
 public class UmpireManagedBean {
 
+    @PersistenceContext(unitName = "TTMPU")
+    private EntityManager em;
     private Umpire current;
 
     /** Creates a new instance of UmpireManagedBean */
@@ -26,6 +30,7 @@ public class UmpireManagedBean {
     }
 
     public List<Match> getMatches() {
+    
         return current.getMatches();
     }
 
