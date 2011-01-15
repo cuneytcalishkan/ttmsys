@@ -9,7 +9,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
-import view.RegisteredUserManager;
+import view.RegisteredUserManagedBean;
 
 public class AuthenticationPhaseListener implements PhaseListener {
 
@@ -55,7 +55,7 @@ public class AuthenticationPhaseListener implements PhaseListener {
      */
     private boolean userExists(FacesContext context) {
         ExternalContext extContext = context.getExternalContext();
-        return (extContext.getSessionMap().containsKey(RegisteredUserManager.USER_SESSION_KEY));
+        return (extContext.getSessionMap().containsKey(RegisteredUserManagedBean.USER_SESSION_KEY));
     }
 
     /**
