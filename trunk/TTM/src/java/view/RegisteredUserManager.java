@@ -148,7 +148,7 @@ public class RegisteredUserManager {
 
     public Manager getManager() {
         try {
-            Query getByUsername = em.createQuery("from Manager man");
+            Query getByUsername = em.createQuery("from Manager man left join fetch man.membershipRequests");
             List<Manager> managers = getByUsername.getResultList();
             if (managers.isEmpty()) {
                 return null;
@@ -174,13 +174,14 @@ public class RegisteredUserManager {
                 man.addMembershipRequest(mr);
                 try {
                     utx.begin();
-                    em.persist(man);
+                    em.persist(mr);
+                    em.merge(man);
                     utx.commit();
                     return "login";
                 } catch (Exception e) {
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             "Error creating user!",
-                            "Unexpected error when creating your account.  Please contact the system Administrator");
+                            "Unexpected error occurred while creating your account.  Please contact the system Administrator");
                     context.addMessage(null, message);
                     Logger.getAnonymousLogger().log(Level.SEVERE,
                             "Unable to create new user",
