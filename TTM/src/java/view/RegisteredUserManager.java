@@ -33,6 +33,7 @@ public class RegisteredUserManager {
     private String name;
     private String surname;
     private String type;
+    private RegisteredUser current;
     @PersistenceContext
     private EntityManager em;
     @Resource
@@ -43,6 +44,14 @@ public class RegisteredUserManager {
 
     public RegisteredUserManager(EntityManager em) {
         this.em = em;
+    }
+
+    public RegisteredUser getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(RegisteredUser current) {
+        this.current = current;
     }
 
     public String getName() {
@@ -105,9 +114,9 @@ public class RegisteredUserManager {
 
     public String validateUser() {
         FacesContext context = FacesContext.getCurrentInstance();
-        RegisteredUser user = getUser();
-        if (user != null) {
-            if (!user.getPassword().equals(password)) {
+        current = getUser();
+        if (current != null) {
+            if (!current.getPassword().equals(password)) {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Login Failed!",
                         "The username/password specified is not correct.");
@@ -115,7 +124,7 @@ public class RegisteredUserManager {
                 return null;
             }
 
-            context.getExternalContext().getSessionMap().put(USER_SESSION_KEY, user);
+            context.getExternalContext().getSessionMap().put(USER_SESSION_KEY, current);
             return "index";
         } else {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
