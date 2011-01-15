@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import model.Match;
 import model.Player;
 import model.Tournament;
@@ -30,15 +31,20 @@ public class UmpireManagedBean {
     }
 
     public List<Match> getMatches() {
-    
-        return current.getMatches();
+        Query q = em.createQuery("SELECT m FROM Umpire u JOIN u.matches m WHERE u.id = :uid");
+        q.setParameter("uid", current.getId());
+        return q.getResultList();
     }
 
     public List<Tournament> getTournaments() {
-        return current.getTournaments();
+        Query q = em.createQuery("SELECT t FROM Umpire u JOIN u.tournaments t WHERE u.id = :uid");
+        q.setParameter("uid", current.getId());
+        return q.getResultList();
     }
 
     public List<Player> getTrackList() {
-        return current.getTrackList();
+        Query q = em.createQuery("SELECT t FROM Umpire u JOIN u.trackList t WHERE u.id = :uid");
+        q.setParameter("uid", current.getId());
+        return q.getResultList();
     }
 }
