@@ -20,7 +20,10 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
 import model.Manager;
 import model.MembershipRequest;
+import model.Player;
+import model.Referee;
 import model.RegisteredUser;
+import model.Umpire;
 
 @ManagedBean(name = "User")
 @SessionScoped
@@ -125,7 +128,17 @@ public class RegisteredUserManager {
             }
 
             context.getExternalContext().getSessionMap().put(USER_SESSION_KEY, current);
-            return "index";
+            if (current instanceof Manager) {
+                return "manager:index";
+            } else if (current instanceof Referee) {
+                return "referee:index";
+            } else if (current instanceof Umpire) {
+                return "umpire:index";
+            } else if (current instanceof Player) {
+                return "player:index";
+            } else {
+                return "registereduser:index";
+            }
         } else {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Login Failed!",

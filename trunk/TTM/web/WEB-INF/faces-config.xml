@@ -26,5 +26,25 @@
             <from-outcome>create</from-outcome>
             <to-view-id>/newUser.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>manager:index</from-outcome>
+            <to-view-id>/manager/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>player:index</from-outcome>
+            <to-view-id>/player/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>referee:index</from-outcome>
+            <to-view-id>/referee/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>umpire:index</from-outcome>
+            <to-view-id>/umpire/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>registereduser:index</from-outcome>
+            <to-view-id>/registereduser/index.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
 </faces-config>
