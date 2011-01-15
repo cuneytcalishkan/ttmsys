@@ -98,6 +98,11 @@ public class RegisteredUserManager {
         return types;
     }
 
+    public boolean isLogged() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        return context.getExternalContext().getSessionMap().containsKey(USER_SESSION_KEY);
+    }
+
     public String validateUser() {
         FacesContext context = FacesContext.getCurrentInstance();
         RegisteredUser user = getUser();
@@ -208,7 +213,7 @@ public class RegisteredUserManager {
         if (session != null) {
             session.invalidate();
         }
-        return "login";
+        return "index";
 
     }
 }
