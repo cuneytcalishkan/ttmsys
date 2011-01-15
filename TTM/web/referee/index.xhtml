@@ -2,15 +2,137 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
         <ui:include src="../main.xhtml"/>
         <p>
-            Hello from referee Facelets!
+            The tournaments you are tasked:
         </p>
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <h:dataTable value="#{refereeManagedBean.tournaments}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Name"/>
+                        </f:facet>
+                        <h:outputText value="#{item.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Manager"/>
+                        </f:facet>
+                        <h:outputText value="#{item.manager}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Type"/>
+                        </f:facet>
+                        <h:outputText value="#{item.type}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Report"/>
+                        </f:facet>
+                        <h:outputText value="#{item.report}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="StartDate"/>
+                        </f:facet>
+                        <h:outputText value="#{item.startDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="EndDate"/>
+                        </f:facet>
+                        <h:outputText value="#{item.endDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Prize"/>
+                        </f:facet>
+                        <h:outputText value="#{item.prize}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+
+        <p>
+            The matches you supervise:
+        </p>
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <h:dataTable value="#{refereeManagedBean.matches}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="AwayTeamScore"/>
+                        </f:facet>
+                        <h:outputText value="#{item.awayTeamScore}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="HomeTeamScore"/>
+                        </f:facet>
+                        <h:outputText value="#{item.homeTeamScore}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Court"/>
+                        </f:facet>
+                        <h:outputText value="#{item.court}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tournament"/>
+                        </f:facet>
+                        <h:outputText value="#{item.tournament.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="mDate"/>
+                        </f:facet>
+                        <h:outputText value="#{item.mDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="mTime"/>
+                        </f:facet>
+                        <h:outputText value="#{item.mTime}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Score"/>
+                        </f:facet>
+                        <h:outputText value="#{item.score}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Statistics"/>
+                        </f:facet>
+                        <h:outputText value="#{item.statistics}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Report"/>
+                        </f:facet>
+                        <h:outputText value="#{item.report}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+
     </h:body>
 </html>
 

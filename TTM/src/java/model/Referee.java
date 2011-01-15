@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 
 @Entity
@@ -16,7 +17,7 @@ public class Referee extends RegisteredUser {
 
     @ManyToMany(mappedBy = "referees")
     private List<Match> matches;
-    @ManyToMany(mappedBy = "referees")
+    @ManyToMany(mappedBy = "referees", fetch=FetchType.EAGER)
     private List<Tournament> tournaments;
 
     public Referee(String name, String surname, String username, String password) {
