@@ -15,7 +15,6 @@ import javax.persistence.PersistenceContext;
 import model.Match;
 import model.Referee;
 import model.Tournament;
-import org.hibernate.Hibernate;
 
 /**
  *
@@ -32,7 +31,7 @@ public class RefereeManagedBean {
     /** Creates a new instance of RefereeManagedBean */
     public RefereeManagedBean() {
         FacesContext fc = FacesContext.getCurrentInstance();
-        referee = (Referee) fc.getExternalContext().getSessionMap().get(RegisteredUserManager.USER_SESSION_KEY);
+        referee = (Referee) fc.getExternalContext().getSessionMap().get(RegisteredUserManagedBean.USER_SESSION_KEY);
     }
 
     public List<Tournament> getTournaments(){
