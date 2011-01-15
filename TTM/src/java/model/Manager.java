@@ -6,9 +6,11 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.TransactionAttribute;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
 @DiscriminatorValue(value = "manager")
@@ -81,7 +83,7 @@ public class Manager extends RegisteredUser {
         if (membershipRequests == null) {
             membershipRequests = new ArrayList<MembershipRequest>();
         }
-        if (!membershipRequests.contains(mr)) {
+        if (!getMembershipRequests().contains(mr)) {
             membershipRequests.add(mr);
         }
     }
