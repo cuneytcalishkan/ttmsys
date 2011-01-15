@@ -52,6 +52,16 @@ public class MatchStatistics implements Serializable {
         this.totalPtsWon = totalPtsWon;
     }
 
+    @Override
+    public String toString(){
+        return "Aces: " + aces +
+                "\nDouble Fauls: " + doubleFauls +
+                "\nFirst Points Won: " + firstSPtsWon +
+                "\nSecond Points Won: " + secondSPtsWon +
+                "\nReturn Points Won: " + returnPtsWon +
+                "\nTotal Points Won: " + totalPtsWon;
+    }
+
     public void setAces(int aces) {
         this.aces = aces;
     }
