@@ -49,7 +49,7 @@ public class ManagerManagedBean {
     }
 
     public List<MembershipRequest> getMembershipRequests() {
-        Query q = em.createQuery("from MembershipRequest");
+        Query q = em.createQuery("SELECT mr from MembershipRequest mr");
         return q.getResultList();
     }
 
