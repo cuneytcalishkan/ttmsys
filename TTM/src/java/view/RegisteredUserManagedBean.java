@@ -12,6 +12,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -119,6 +120,21 @@ public class RegisteredUserManagedBean {
         Query q = em.createQuery("SELECT t FROM RegisteredUser u JOIN u.trackList t");
         current.setTrackList(q.getResultList());
         return current.getTrackList();
+    }
+
+    public void removePlayer(ActionEvent event) {
+        Player p = (Player) event.getComponent().getAttributes().get("player");
+        current.removeFromTrackList(p);
+        try {
+            utx.begin();
+            em.persist(em.merge(current));
+            utx.commit();
+        } catch (Exception e) {
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
+        }
     }
 
     public String validateUser() {
