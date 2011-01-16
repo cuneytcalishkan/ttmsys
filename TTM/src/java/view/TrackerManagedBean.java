@@ -34,7 +34,7 @@ public class TrackerManagedBean {
     }
 
     public List<Player> getTrackList() {
-        Query q = em.createQuery("FROM Player pl WHERE pl NOT IN (SELECT t FROM " + current.getClass().getName() + " p JOIN p.trackList t)");
+        Query q = em.createQuery("SELECT pl FROM Player pl WHERE pl NOT IN (SELECT t FROM " + current.getClass().getName() + " p JOIN p.trackList t)");
         return q.getResultList();
     }
 
