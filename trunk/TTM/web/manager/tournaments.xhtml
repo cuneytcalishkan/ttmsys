@@ -4,13 +4,13 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>Referee Tournaments</title>
+        <title>Manager Tournaments</title>
     </h:head>
     <h:body>
         <h2><h:outputText value="The tournaments you are involved"/></h2>
         <f:view>
             <h:form>
-                <h:dataTable value="#{refereeManagedBean.tournaments}" var="item" border="1">
+                <h:dataTable value="#{managerManagedBean.tournaments}" var="item" border="1">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Name"/>
@@ -19,17 +19,10 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Manager"/>
-                        </f:facet>
-                        <h:outputText value="#{item.manager.name}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
                             <h:outputText value="Type"/>
                         </f:facet>
                         <h:outputText value="#{item.type}"/>
                     </h:column>
-
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Start Date"/>
