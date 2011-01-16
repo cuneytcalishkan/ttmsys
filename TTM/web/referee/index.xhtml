@@ -5,16 +5,14 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Tennis Tournament Management System, Referee</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
-        <ui:include src="../main.xhtml"/>
-        <p>
-            The tournaments you are tasked:
-        </p>
+        <ui:include src="../tournaments.xhtml"/>
         <f:view>
             <h:form>
-                <h1><h:outputText value="List"/></h1>
+                <h1><h:outputText value="The tournaments you are tasked:"/></h1>
                 <h:dataTable value="#{refereeManagedBean.tournaments}" var="item">
                     <h:column>
                         <f:facet name="header">
@@ -26,7 +24,7 @@
                         <f:facet name="header">
                             <h:outputText value="Manager"/>
                         </f:facet>
-                        <h:outputText value="#{item.manager}"/>
+                        <h:outputText value="#{item.manager.name}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
@@ -66,12 +64,9 @@
             </h:form>
         </f:view>
 
-        <p>
-            The matches you supervise:
-        </p>
         <f:view>
             <h:form>
-                <h1><h:outputText value="List"/></h1>
+                <h1><h:outputText value="The matches you supervise:"/></h1>
                 <h:dataTable value="#{refereeManagedBean.matches}" var="item">
                     <h:column>
                         <f:facet name="header">
