@@ -224,8 +224,8 @@ public class Match implements Serializable {
     public String toString() {
 
         String result = "";
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-YYYY");
-        result += teams.get(0) + " vs " + teams.get(1) + ", " + df.format(mDate) + ", " + mTime;
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        //result += teams.get(0) + " vs " + teams.get(1) + ", " + df.format(mDate) + ", " + mTime;
         return result;
     }
 }
