@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import model.Match;
+import model.Player;
 import model.Referee;
 import model.Tournament;
 
@@ -44,5 +45,12 @@ public class RefereeManagedBean {
         Query q = em.createQuery("SELECT m FROM Referee r JOIN r.matches m WHERE r.id = :uid");
         q.setParameter("uid", referee.getId());
         return q.getResultList();
+    }
+
+        public List<Player> getTrackList() {
+        Query q = em.createQuery("SELECT t FROM Referee r JOIN r.trackList t WHERE r.id = :rid");
+        q.setParameter("rid", referee.getId());
+        referee.setTrackList(q.getResultList());
+        return referee.getTrackList();
     }
 }
