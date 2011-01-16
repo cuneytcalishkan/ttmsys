@@ -5,13 +5,16 @@
 package view;
 
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.faces.bean.RequestScoped;
+import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
-import model.Draw;
+import model.Manager;
 import model.Tournament;
 
 @Named(value = "tournamentManagedBean")
@@ -33,18 +36,23 @@ public class TournamentManagedBean {
     public TournamentManagedBean() {
     }
 
-    public String createTournament() {
+    public void createTournament(ActionEvent event) {
+        Manager manager = (Manager) event.getComponent().getAttributes().get("manager");
+        Tournament t = new Tournament(name, type, startDate, endDate, prize);
+        t.setReport(report);
+        t.setManager(manager);
         try {
-            Tournament t = new Tournament(name, type, startDate, endDate, prize);
             utx.begin();
+            em.persist(t);
+            em.persist(em.merge(manager));
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(TournamentManagedBean.class.getName()).log(Level.SEVERE, null, e);
             try {
                 utx.rollback();
             } catch (Exception ex) {
             }
         }
-        return "";
     }
 
     public Date getEndDate() {
