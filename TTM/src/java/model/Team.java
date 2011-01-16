@@ -32,7 +32,7 @@ public class Team implements Serializable {
     private List<Match> matches;
     @ManyToOne
     private Tournament tournament;
-    @ManyToMany(targetEntity = Player.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Player.class)
     private List<Player> players;
     @OneToMany(mappedBy = "team")
     private List<MatchStatistics> statistics;
