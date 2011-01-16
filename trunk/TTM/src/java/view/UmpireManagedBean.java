@@ -33,18 +33,21 @@ public class UmpireManagedBean {
     public List<Match> getMatches() {
         Query q = em.createQuery("SELECT m FROM Umpire u JOIN u.matches m WHERE u.id = :uid");
         q.setParameter("uid", current.getId());
-        return q.getResultList();
+        current.setMatches(q.getResultList());
+        return current.getMatches();
     }
 
     public List<Tournament> getTournaments() {
         Query q = em.createQuery("SELECT t FROM Umpire u JOIN u.tournaments t WHERE u.id = :uid");
         q.setParameter("uid", current.getId());
-        return q.getResultList();
+        current.setTournaments(q.getResultList());
+        return current.getTournaments();
     }
 
     public List<Player> getTrackList() {
         Query q = em.createQuery("SELECT t FROM Umpire u JOIN u.trackList t WHERE u.id = :uid");
         q.setParameter("uid", current.getId());
-        return q.getResultList();
+        current.setTrackList(q.getResultList());
+        return current.getTrackList();
     }
 }
