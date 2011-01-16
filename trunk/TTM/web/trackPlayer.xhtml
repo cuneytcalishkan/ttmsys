@@ -19,9 +19,9 @@
                         <h:outputText value="#{item}"/>
                     </h:column>
                     <h:column>
-                        <h:commandLink value="Track" actionListener="#{trackerManagedBean.trackPlayer}">
+                        <h:commandButton value="Track" actionListener="#{trackerManagedBean.trackPlayer}">
                             <f:attribute name="player" value="#{item}"/>
-                        </h:commandLink>
+                        </h:commandButton>
                     </h:column>
                 </h:dataTable>
             </h:form>
