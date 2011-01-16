@@ -165,8 +165,6 @@ public class RegisteredUserManagedBean {
         }
     }
 
-  
-
     public String createUser() {
         FacesContext context = FacesContext.getCurrentInstance();
         RegisteredUser usr = getUser();

@@ -55,6 +55,10 @@ public class TournamentManagedBean {
         }
     }
 
+    public String newTournament() {
+        return "manager:index";
+    }
+
     public Date getEndDate() {
         return endDate;
     }
