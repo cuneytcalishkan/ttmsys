@@ -14,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
+import model.Match;
 import model.Player;
 
 @Named(value = "playerManagedBean")
@@ -36,6 +37,11 @@ public class PlayerManagedBean {
         Query q = em.createQuery("SELECT t FROM Player p JOIN p.trackList t");
         current.setTrackList(q.getResultList());
         return current.getTrackList();
+    }
+
+    public List<Match> getMatches() {
+        Query q = em.createQuery("SELECT m FROM Player p JOIN p.matches m");
+        return q.getResultList();
     }
 
     public void removePlayer(ActionEvent event) {
