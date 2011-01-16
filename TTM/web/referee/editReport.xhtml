@@ -8,7 +8,7 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:outputText value="#{refereeManagedBean.selectedMatch.statistics}"/><br/>
+            <h:outputText value="#{refereeManagedBean.selectedMatch}"/><br/>
             <h2><h:outputText value="The Report"/></h2>
             <h:inputTextarea id="report" value="#{refereeManagedBean.selectedMatch.report}"/><br/>
             <h:commandButton value="Add/Edit Report" action="#{refereeManagedBean.editReport}"/>

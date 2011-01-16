@@ -70,4 +70,9 @@ public class Court implements Serializable {
     public List<Tournament> getTournaments() {
         return tournaments;
     }
+
+    @Override
+    public String toString(){
+        return name;
+    }
 }
