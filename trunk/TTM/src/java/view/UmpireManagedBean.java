@@ -17,6 +17,7 @@ import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 import model.Match;
 import model.Player;
+import model.Team;
 import model.Tournament;
 import model.Umpire;
 
@@ -48,14 +49,14 @@ public class UmpireManagedBean implements Serializable {
         return current.getTournaments();
     }
 
-    public List<Player> getTrackList() {
+    public List<Team> getTrackList() {
         Query q = em.createQuery("SELECT t FROM Umpire u JOIN u.trackList t");
         current.setTrackList(q.getResultList());
         return current.getTrackList();
     }
 
     public void removePlayer(ActionEvent event) {
-        Player p = (Player) event.getComponent().getAttributes().get("player");
+        Team p = (Team) event.getComponent().getAttributes().get("player");
         current.removeFromTrackList(p);
         try {
             utx.begin();

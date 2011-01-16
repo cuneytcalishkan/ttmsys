@@ -17,6 +17,7 @@ import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 import model.Player;
 import model.RegisteredUser;
+import model.Team;
 
 @Named(value = "trackerManagedBean")
 @SessionScoped
@@ -40,7 +41,7 @@ public class TrackerManagedBean implements Serializable{
     }
 
     public void trackPlayer(ActionEvent event) {
-        Player p = (Player) event.getComponent().getAttributes().get("player");
+        Team p = (Team) event.getComponent().getAttributes().get("player");
         current.addToTrackList(p);
         try {
             utx.begin();

@@ -36,11 +36,11 @@ public class RegisteredUser implements Serializable {
     private String username;
     @Column(nullable = false)
     private String password;
-    @ManyToMany(targetEntity = Player.class)
-    private List<Player> trackList;
+    @ManyToMany(targetEntity = Team.class)
+    private List<Team> trackList;
 
     public RegisteredUser() {
-        trackList = new ArrayList<Player>();
+        trackList = new ArrayList<Team>();
     }
 
     public RegisteredUser(String name, String surname, String username, String password) {
@@ -51,14 +51,14 @@ public class RegisteredUser implements Serializable {
         this.password = password;
     }
 
-    public void addToTrackList(Player p) {
+    public void addToTrackList(Team p) {
         if (trackList == null) {
-            trackList = new ArrayList<Player>();
+            trackList = new ArrayList<Team>();
         }
         trackList.add(p);
     }
 
-    public void removeFromTrackList(Player p) {
+    public void removeFromTrackList(Team p) {
         trackList.remove(p);
     }
 
@@ -102,11 +102,11 @@ public class RegisteredUser implements Serializable {
         this.username = username;
     }
 
-    public List<Player> getTrackList() {
+    public List<Team> getTrackList() {
         return trackList;
     }
 
-    public void setTrackList(List<Player> trackList) {
+    public void setTrackList(List<Team> trackList) {
         this.trackList = trackList;
     }
 }

@@ -20,8 +20,8 @@ import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 import model.Manager;
 import model.MembershipRequest;
-import model.Player;
 import model.RegisteredUser;
+import model.Team;
 import model.Tournament;
 import model.TournamentJoinRequest;
 
@@ -124,7 +124,7 @@ public class ManagerManagedBean implements Serializable{
     }
 
     public void removePlayer(ActionEvent event) {
-        Player p = (Player) event.getComponent().getAttributes().get("player");
+        Team p = (Team) event.getComponent().getAttributes().get("player");
         manager.removeFromTrackList(p);
         try {
             utx.begin();
@@ -138,7 +138,7 @@ public class ManagerManagedBean implements Serializable{
         }
     }
 
-    public List<Player> getTrackList() {
+    public List<Team> getTrackList() {
         Query q = em.createQuery("SELECT t FROM Manager p JOIN p.trackList t");
         manager.setTrackList(q.getResultList());
         return manager.getTrackList();
