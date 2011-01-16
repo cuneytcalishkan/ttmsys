@@ -26,7 +26,7 @@ public class MainPageManagedBean {
 
     public List<Tournament> getTournaments() {
         java.util.Date now = new java.util.Date();
-        Query q = em.createQuery("from Tournament t where t.endDate >= :gr AND t.startDate <= :ls");
+        Query q = em.createQuery("SELECT t from Tournament t where t.endDate >= :gr AND t.startDate <= :ls");
         q.setParameter("gr", now, TemporalType.DATE);
         q.setParameter("ls", now, TemporalType.DATE);
         List list = q.getResultList();
