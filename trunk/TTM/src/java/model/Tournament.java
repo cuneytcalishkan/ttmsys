@@ -32,10 +32,10 @@ public class Tournament implements Serializable {
     @Column(nullable = false)
     private String type;
     @Column(nullable = false)
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(value = javax.persistence.TemporalType.DATE)
     private Date startDate;
     @Column(nullable = false)
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(value = javax.persistence.TemporalType.DATE)
     private Date endDate;
     @Column(nullable = false)
     private double prize;
