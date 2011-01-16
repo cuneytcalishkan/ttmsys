@@ -2,87 +2,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Tennis Tournament Management System, Manager</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
-        <ui:include src="../tournaments.xhtml"/>
-        <p>
-            Manager
-        </p>
-        <f:view>
-            <h:form>
-                <h2><h:outputText value="Membership Requests"/></h2>
-                <h:dataTable value="#{managerManagedBean.membershipRequests}" var="item" border="1">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Name"/>
-                        </f:facet>
-                        <h:outputText value="#{item.name}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Surname"/>
-                        </f:facet>
-                        <h:outputText value="#{item.surname}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Type"/>
-                        </f:facet>
-                        <h:outputText value="#{item.type}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Username"/>
-                        </f:facet>
-                        <h:outputText value="#{item.username}"/>
-                    </h:column>
-                    <h:column>
-                        <h:commandButton value="Accept" actionListener="#{managerManagedBean.acceptMembershipRequest}">
-                            <f:attribute name="request" value="#{item}"/>
-                        </h:commandButton>
-                    </h:column>
-                    <h:column>
-                        <h:commandButton value="Deny" actionListener="#{managerManagedBean.denyMembershipRequest}">
-                            <f:attribute name="request" value="#{item}"/>
-                        </h:commandButton>
-                    </h:column>
-                </h:dataTable>
-                <h2>Tournament Join Requests</h2>
-                <h:form>
-                    <h:dataTable value="#{managerManagedBean.tournamentJoinRequests}" var="item" border="1">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Tournament"/>
-                            </f:facet>
-                            <h:outputText value="#{item.tournament.name}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Team"/>
-                            </f:facet>
-                            <h:outputText value="#{item.team}"/>
-                        </h:column>
-                        <h:column>
-                            <h:commandButton value="Accept" actionListener="#{managerManagedBean.acceptTournamentJoinRequest}">
-                                <f:attribute name="tournamentrequest" value="#{item}"/>
-                            </h:commandButton>
-                        </h:column>
-                        <h:column>
-                            <h:commandButton value="Deny" actionListener="#{managerManagedBean.denyTournamentJoinRequest}">
-                                <f:attribute name="tournamentrequest" value="#{item}"/>
-                            </h:commandButton>
-                        </h:column>
-                    </h:dataTable>
-                </h:form>
-
-            </h:form>
-        </f:view>
-
+        <ui:include src="../main.xhtml"/>
+        <hr/>
+        <ui:include src="membershiprequests.xhtml"/>
+        <hr/>
+        <ui:include src="tournamentjoinrequests.xhtml"/>
+        <hr/>
     </h:body>
 </html>
 
