@@ -20,6 +20,7 @@ import javax.transaction.UserTransaction;
 import model.Manager;
 import model.MembershipRequest;
 import model.RegisteredUser;
+import model.Tournament;
 import model.TournamentJoinRequest;
 
 @Named(value = "managerManagedBean")
@@ -38,22 +39,25 @@ public class ManagerManagedBean {
         manager = (Manager) context.getExternalContext().getSessionMap().get(RegisteredUserManagedBean.USER_SESSION_KEY);
     }
 
+    public List<Tournament> getTournaments(){
+        Query q = em.createQuery("SELECT t FROM Manager m JOIN m.tournaments t");
+        return q.getResultList();
+    }
+
     public List<MembershipRequest> getMembershipRequests() {
         Query q = em.createQuery("from MembershipRequest");
         return q.getResultList();
     }
 
     public List<TournamentJoinRequest> getTournamentJoinRequests() {
-        Query q = em.createQuery("SELECT r FROM Manager m JOIN m.tournamentRequests r WHERE m.id = :mid");
-        q.setParameter("mid", manager.getId());
+        Query q = em.createQuery("SELECT r FROM Manager m JOIN m.tournamentRequests r");
         return q.getResultList();
     }
 
     public void denyTournamentJoinRequest(ActionEvent event) {
         try {
             TournamentJoinRequest req = (TournamentJoinRequest) event.getComponent().getAttributes().get("tournamentrequest");
-            Query q = em.createQuery("SELECT t FROM Manager m JOIN m.tournaments t WHERE m.id = :mid");
-            q.setParameter("mid", manager.getId());
+            Query q = em.createQuery("SELECT t FROM Manager m JOIN m.tournaments t");
             manager.setTournaments(q.getResultList());
             manager.verifyTournamentRequest(req, false);
             utx.begin();
@@ -71,8 +75,7 @@ public class ManagerManagedBean {
     public void acceptTournamentJoinRequest(ActionEvent event) {
         try {
             TournamentJoinRequest req = (TournamentJoinRequest) event.getComponent().getAttributes().get("tournamentrequest");
-            Query q = em.createQuery("SELECT t FROM Manager m JOIN m.tournaments t WHERE m.id = :mid");
-            q.setParameter("mid", manager.getId());
+            Query q = em.createQuery("SELECT t FROM Manager m JOIN m.tournaments t");
             manager.setTournaments(q.getResultList());
             manager.verifyTournamentRequest(req, true);
             utx.begin();

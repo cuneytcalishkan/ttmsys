@@ -36,8 +36,7 @@ public class RefereeManagedBean {
     }
     
     public List<Tournament> getTournaments(){
-        Query q = em.createQuery("SELECT m FROM Referee r JOIN r.tournaments m WHERE r.id = :uid");
-        q.setParameter("uid", referee.getId());
+        Query q = em.createQuery("SELECT m FROM Referee r JOIN r.tournaments m");
         return q.getResultList();
     }
 
@@ -48,8 +47,7 @@ public class RefereeManagedBean {
     }
 
         public List<Player> getTrackList() {
-        Query q = em.createQuery("SELECT t FROM Referee r JOIN r.trackList t WHERE r.id = :rid");
-        q.setParameter("rid", referee.getId());
+        Query q = em.createQuery("SELECT t FROM Referee r JOIN r.trackList t");
         referee.setTrackList(q.getResultList());
         return referee.getTrackList();
     }

@@ -116,8 +116,7 @@ public class RegisteredUserManagedBean {
     }
 
     public List<Player> getTrackList() {
-        Query q = em.createQuery("SELECT t FROM RegisteredUser u JOIN u.trackList t WHERE u.id = :uid");
-        q.setParameter("uid", current.getId());
+        Query q = em.createQuery("SELECT t FROM RegisteredUser u JOIN u.trackList t");
         current.setTrackList(q.getResultList());
         return current.getTrackList();
     }
