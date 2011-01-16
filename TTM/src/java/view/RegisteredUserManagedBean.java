@@ -106,6 +106,22 @@ public class RegisteredUserManagedBean {
         this.type = type;
     }
 
+    public String homeOutcome() {
+        String outcome = "index";
+        if (current instanceof Player) {
+            outcome = "player:index";
+        } else if (current instanceof Referee) {
+            outcome = "referee:index";
+        } else if (current instanceof Umpire) {
+            outcome = "umpire:index";
+        } else if (current instanceof Manager) {
+            outcome = "manager:index";
+        } else if (current instanceof RegisteredUser) {
+            outcome = "registereduser:index";
+        }
+        return outcome;
+    }
+
     public String[] getUserTypes() {
         String[] types = new String[]{"registereduser", "manager", "player", "referee", "umpire"};
         return types;

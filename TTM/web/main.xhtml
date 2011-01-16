@@ -8,13 +8,7 @@
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
-        <h:form>
-            <h:outputLabel value="Logged in as:#{User.current.name} #{User.current.surname} " rendered="#{User.logged}"/>
-            <h:commandButton action="login" value="Login" rendered="#{!User.logged}"/>
-            <h:commandButton action="#{User.logout}" value="Logout" rendered="#{User.logged}"/>
-            <h:commandButton action="create" value="Create Account" rendered="#{!User.logged}"/>
-            <h:commandButton action="trackplayer" value="Track Player" rendered="#{User.logged}"/>
-        </h:form>
+        <ui:include src="header.xhtml"/>
         <ui:include src="tournaments.xhtml"/>
     </h:body>
 </html>
