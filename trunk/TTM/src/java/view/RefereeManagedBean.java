@@ -20,10 +20,6 @@ import model.Player;
 import model.Referee;
 import model.Tournament;
 
-/**
- *
- * @author Natan
- */
 @Named(value = "refereeManagedBean")
 @SessionScoped
 public class RefereeManagedBean implements Serializable{

@@ -12,7 +12,7 @@
             <h:commandButton action="#{User.logout}" value="Logout" rendered="#{User.logged}"/>
             <h:commandButton action="create" value="Create Account" rendered="#{!User.logged}"/>
             <h:commandButton action="trackplayer" value="Track Player" rendered="#{User.logged}"/>
-            <h:commandButton action="#{User.homeOutcome}" value="Home"/>
+            <h:commandButton action="#{User.homeOutcome}" value="Home" rendered="#{User.logged}"/>
         </h:form>
     </h:body>
 </html>
