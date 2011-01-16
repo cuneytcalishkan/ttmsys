@@ -4,12 +4,13 @@
  */
 package view;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -25,8 +26,8 @@ import model.Tournament;
 import model.TournamentJoinRequest;
 
 @Named(value = "managerManagedBean")
-@Dependent
-public class ManagerManagedBean {
+@SessionScoped
+public class ManagerManagedBean implements Serializable{
 
     @PersistenceContext
     private EntityManager em;

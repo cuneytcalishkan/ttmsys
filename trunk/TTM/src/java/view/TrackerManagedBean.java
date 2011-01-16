@@ -14,11 +14,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
-import model.Manager;
 import model.Player;
-import model.Referee;
 import model.RegisteredUser;
-import model.Umpire;
 
 @Named(value = "trackerManagedBean")
 @Dependent

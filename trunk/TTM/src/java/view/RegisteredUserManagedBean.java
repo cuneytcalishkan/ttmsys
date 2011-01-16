@@ -4,6 +4,7 @@
  */
 package view;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +29,7 @@ import model.Umpire;
 
 @ManagedBean(name = "User")
 @SessionScoped
-public class RegisteredUserManagedBean {
+public class RegisteredUserManagedBean implements Serializable {
 
     public static final String USER_SESSION_KEY = "user";
     private String username;
