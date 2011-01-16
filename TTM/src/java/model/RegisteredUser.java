@@ -55,9 +55,7 @@ public class RegisteredUser implements Serializable {
         if (trackList == null) {
             trackList = new ArrayList<Player>();
         }
-        if (!trackList.contains(p)) {
-            trackList.add(p);
-        }
+        trackList.add(p);
     }
 
     public void removeFromTrackList(Player p) {
