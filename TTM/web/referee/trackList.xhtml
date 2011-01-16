@@ -18,9 +18,9 @@
                         <h:outputText value="#{item}"/>
                     </h:column>
                     <h:column>
-                        <h:commandLink value="Remove" actionListener="#{refereeManagedBean.removePlayer}">
+                        <h:commandButton value="Remove" actionListener="#{refereeManagedBean.removePlayer}">
                             <f:attribute name="player" value="#{item}"/>
-                        </h:commandLink>
+                        </h:commandButton>
                     </h:column>
                 </h:dataTable>
             </h:form>
