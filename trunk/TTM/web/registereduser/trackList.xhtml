@@ -15,7 +15,12 @@
                         <f:facet name="header">
                             <h:outputText value="Player"/>
                         </f:facet>
-                        <h:outputText value="#{item.toString}"/>
+                        <h:outputText value="#{item}"/>
+                    </h:column>
+                    <h:column>
+                        <h:commandLink value="Remove" actionListener="#{User.removePlayer}">
+                            <f:attribute name="player" value="#{item}"/>
+                        </h:commandLink>
                     </h:column>
                 </h:dataTable>
             </h:form>

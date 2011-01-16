@@ -39,9 +39,7 @@
                     <h:inputTextarea id="report" value="#{tournamentManagedBean.report}"/>
                     <h:message for="report" style="color:red"/>
 
-                    <h:commandButton value="Create" actionListener="#{tournamentManagedBean.createTournament}" action="#{tournamentManagedBean.newTournament}">
-                        <f:attribute name="manager" value="#{managerManagedBean.manager}"/>
-                    </h:commandButton>
+                    <h:commandButton value="Create" action="#{tournamentManagedBean.createTournament}"/>
                     <h:commandButton type="reset" value="Reset"/>
                 </h:panelGrid>
             </h:form>

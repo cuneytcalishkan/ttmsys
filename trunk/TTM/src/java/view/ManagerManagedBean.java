@@ -19,6 +19,7 @@ import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 import model.Manager;
 import model.MembershipRequest;
+import model.Player;
 import model.RegisteredUser;
 import model.Tournament;
 import model.TournamentJoinRequest;
@@ -39,8 +40,7 @@ public class ManagerManagedBean {
         manager = (Manager) context.getExternalContext().getSessionMap().get(RegisteredUserManagedBean.USER_SESSION_KEY);
     }
 
-    public void createTournament(){
-        
+    public void createTournament() {
     }
 
     public List<Tournament> getTournaments() {
@@ -120,6 +120,27 @@ public class ManagerManagedBean {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("Operation Failed"));
         }
+    }
+
+    public void removePlayer(ActionEvent event) {
+        Player p = (Player) event.getComponent().getAttributes().get("player");
+        manager.removeFromTrackList(p);
+        try {
+            utx.begin();
+            em.persist(em.merge(manager));
+            utx.commit();
+        } catch (Exception e) {
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
+        }
+    }
+
+    public List<Player> getTrackList() {
+        Query q = em.createQuery("SELECT t FROM Manager p JOIN p.trackList t");
+        manager.setTrackList(q.getResultList());
+        return manager.getTrackList();
     }
 
     public Manager getManager() {

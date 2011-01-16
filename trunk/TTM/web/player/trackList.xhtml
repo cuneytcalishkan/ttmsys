@@ -7,10 +7,10 @@
         <title>Tracked Players</title>
     </h:head>
     <h:body>
-        <h2>Players Tracked</h2>
+        <h2>Tracked Players</h2>
         <f:view>
             <h:form>
-                <h:dataTable value="#{umpireManagedBean.trackList}" var="item" border="1">
+                <h:dataTable value="#{playerManagedBean.trackList}" var="item" border="1">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Player"/>
@@ -18,7 +18,7 @@
                         <h:outputText value="#{item}"/>
                     </h:column>
                     <h:column>
-                        <h:commandLink value="Remove" actionListener="#{umpireManagedBean.removePlayer}">
+                        <h:commandLink value="Remove" actionListener="#{playerManagedBean.removePlayer}">
                             <f:attribute name="player" value="#{item}"/>
                         </h:commandLink>
                     </h:column>

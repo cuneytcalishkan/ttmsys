@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.faces.bean.RequestScoped;
-import javax.faces.event.ActionEvent;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -36,8 +36,9 @@ public class TournamentManagedBean {
     public TournamentManagedBean() {
     }
 
-    public void createTournament(ActionEvent event) {
-        Manager manager = (Manager) event.getComponent().getAttributes().get("manager");
+    public String createTournament() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        Manager manager = (Manager) context.getExternalContext().getSessionMap().get(RegisteredUserManagedBean.USER_SESSION_KEY);
         Tournament t = new Tournament(name, type, startDate, endDate, prize);
         t.setReport(report);
         t.setManager(manager);
@@ -53,9 +54,6 @@ public class TournamentManagedBean {
             } catch (Exception ex) {
             }
         }
-    }
-
-    public String newTournament() {
         return "manager:index";
     }
 
