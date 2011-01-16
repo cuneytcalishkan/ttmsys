@@ -21,7 +21,7 @@ public class MembershipRequest implements Serializable {
     private String name;
     @Column(nullable = false)
     private String surname;
-    @Column(nullable = false)
+    @Column(nullable = false, unique= true)
     private String username;
     @Column(nullable = false)
     private String password;

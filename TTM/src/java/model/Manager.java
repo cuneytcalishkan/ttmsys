@@ -6,11 +6,9 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.TransactionAttribute;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 
 @Entity
 @DiscriminatorValue(value = "manager")
@@ -18,8 +16,6 @@ public class Manager extends RegisteredUser {
 
     @OneToMany(mappedBy = "manager")
     private List<Tournament> tournaments;
-    @OneToMany
-    private List<MembershipRequest> membershipRequests;
     @OneToMany
     private List<TournamentJoinRequest> tournamentRequests;
 
@@ -34,39 +30,31 @@ public class Manager extends RegisteredUser {
     }
 
     public void verifyTournamentRequest(TournamentJoinRequest tjr, boolean ok) {
-        if (ok) {
-            if (tournaments.contains(tjr.getTournament())) {
+        if (tournaments.contains(tjr.getTournament())) {
+            if (ok) {
                 tournaments.get(tournaments.indexOf(tjr)).joinTournament(tjr.getTeam());
-                tournamentRequests.remove(tjr);
             }
+            tournamentRequests.remove(tjr);
         }
     }
 
-    public RegisteredUser verifyMembership(MembershipRequest mr, boolean ok) {
-        try {
-            if (!ok) {
-                return null;
-            } else {
-                if (mr.getType().equals("manager")) {
-                    return new Manager(mr.getName(), mr.getSurname(), mr.getUsername(), mr.getPassword());
-                } else if (mr.getType().equals("player")) {
-                    return new Player(mr.getName(), mr.getSurname(), mr.getUsername(), mr.getPassword());
-                } else if (mr.getType().equals("referee")) {
-                    return new Referee(mr.getName(), mr.getSurname(), mr.getUsername(), mr.getPassword());
-                } else if (mr.getType().equals("umpire")) {
-                    return new Umpire(mr.getName(), mr.getSurname(), mr.getUsername(), mr.getPassword());
-                } else {
-                    return new RegisteredUser(mr.getName(), mr.getSurname(), mr.getUsername(), mr.getPassword());
-                }
-            }
-        } finally {
-            membershipRequests.remove(mr);
+    public RegisteredUser verifyMembership(MembershipRequest mr) {
+
+        if (mr.getType().equals("manager")) {
+            return new Manager(mr.getName(), mr.getSurname(), mr.getUsername(), mr.getPassword());
+        } else if (mr.getType().equals("player")) {
+            return new Player(mr.getName(), mr.getSurname(), mr.getUsername(), mr.getPassword());
+        } else if (mr.getType().equals("referee")) {
+            return new Referee(mr.getName(), mr.getSurname(), mr.getUsername(), mr.getPassword());
+        } else if (mr.getType().equals("umpire")) {
+            return new Umpire(mr.getName(), mr.getSurname(), mr.getUsername(), mr.getPassword());
+        } else {
+            return new RegisteredUser(mr.getName(), mr.getSurname(), mr.getUsername(), mr.getPassword());
         }
     }
 
     private void init() {
         tournaments = new ArrayList<Tournament>();
-        membershipRequests = new ArrayList<MembershipRequest>();
         tournamentRequests = new ArrayList<TournamentJoinRequest>();
     }
 
@@ -76,15 +64,6 @@ public class Manager extends RegisteredUser {
         }
         if (!tournamentRequests.contains(tjr)) {
             tournamentRequests.add(tjr);
-        }
-    }
-
-    public void addMembershipRequest(MembershipRequest mr) {
-        if (membershipRequests == null) {
-            membershipRequests = new ArrayList<MembershipRequest>();
-        }
-        if (!getMembershipRequests().contains(mr)) {
-            membershipRequests.add(mr);
         }
     }
 
@@ -100,14 +79,6 @@ public class Manager extends RegisteredUser {
 
     public void setTournaments(List<Tournament> tournaments) {
         this.tournaments = tournaments;
-    }
-
-    public List<MembershipRequest> getMembershipRequests() {
-        return membershipRequests;
-    }
-
-    public void setMembershipRequests(List<MembershipRequest> membershiprequests) {
-        this.membershipRequests = membershiprequests;
     }
 
     public void setTournamentRequests(List<TournamentJoinRequest> tournamentRequests) {

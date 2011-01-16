@@ -166,18 +166,7 @@ public class RegisteredUserManagedBean {
         }
     }
 
-    public Manager getManager() {
-        try {
-            Query getByUsername = em.createQuery("from Manager man left join fetch man.membershipRequests");
-            List<Manager> managers = getByUsername.getResultList();
-            if (managers.isEmpty()) {
-                return null;
-            }
-            return managers.get(0);
-        } catch (NoResultException nre) {
-            return null;
-        }
-    }
+  
 
     public String createUser() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -188,45 +177,23 @@ public class RegisteredUserManagedBean {
                 context.addMessage(null, message);
                 return null;
             }
-            Manager man = getManager();
-            if (man != null) {
-                MembershipRequest mr = new MembershipRequest(name, surname, username, password, type);
-                man.addMembershipRequest(mr);
-                try {
-                    utx.begin();
-                    em.persist(mr);
-                    em.merge(man);
-                    utx.commit();
-                    return "login";
-                } catch (Exception e) {
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            "Error creating user!",
-                            "Unexpected error occurred while creating your account.  Please contact the system Administrator");
-                    context.addMessage(null, message);
-                    Logger.getAnonymousLogger().log(Level.SEVERE,
-                            "Unable to create new user",
-                            e);
-                    return null;
-                }
-            } else {
-                RegisteredUser ruser = new RegisteredUser(name, surname, username, password);
-
-                try {
-                    utx.begin();
-                    em.persist(ruser);
-                    utx.commit();
-                    return "login";
-                } catch (Exception e) {
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            "Error creating user!",
-                            "Unexpected error when creating your account.  Please contact the system Administrator");
-                    context.addMessage(null, message);
-                    Logger.getAnonymousLogger().log(Level.SEVERE,
-                            "Unable to create new user",
-                            e);
-                    return null;
-                }
+            MembershipRequest mr = new MembershipRequest(name, surname, username, password, type);
+            try {
+                utx.begin();
+                em.persist(mr);
+                utx.commit();
+                return "login";
+            } catch (Exception e) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Error creating user!",
+                        "Unexpected error when creating your account.  Please contact the system Administrator");
+                context.addMessage(null, message);
+                Logger.getAnonymousLogger().log(Level.SEVERE,
+                        "Unable to create new user",
+                        e);
+                return null;
             }
+
         } else {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Username '"
