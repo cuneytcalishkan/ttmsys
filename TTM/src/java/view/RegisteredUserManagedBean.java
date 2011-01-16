@@ -25,6 +25,7 @@ import model.MembershipRequest;
 import model.Player;
 import model.Referee;
 import model.RegisteredUser;
+import model.Team;
 import model.Umpire;
 
 @ManagedBean(name = "User")
@@ -133,14 +134,14 @@ public class RegisteredUserManagedBean implements Serializable {
         return context.getExternalContext().getSessionMap().containsKey(USER_SESSION_KEY);
     }
 
-    public List<Player> getTrackList() {
+    public List<Team> getTrackList() {
         Query q = em.createQuery("SELECT t FROM RegisteredUser u JOIN u.trackList t");
         current.setTrackList(q.getResultList());
         return current.getTrackList();
     }
 
     public void removePlayer(ActionEvent event) {
-        Player p = (Player) event.getComponent().getAttributes().get("player");
+        Team p = (Team) event.getComponent().getAttributes().get("player");
         current.removeFromTrackList(p);
         try {
             utx.begin();

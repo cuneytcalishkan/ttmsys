@@ -16,8 +16,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 import model.Match;
-import model.Player;
 import model.Referee;
+import model.Team;
 import model.Tournament;
 
 @Named(value = "refereeManagedBean")
@@ -48,7 +48,7 @@ public class RefereeManagedBean implements Serializable{
         return q.getResultList();
     }
 
-    public List<Player> getTrackList() {
+    public List<Team> getTrackList() {
         Query q = em.createQuery("SELECT t FROM Referee r JOIN r.trackList t");
         referee.setTrackList(q.getResultList());
         return referee.getTrackList();
@@ -79,7 +79,7 @@ public class RefereeManagedBean implements Serializable{
     }
 
         public void removePlayer(ActionEvent event) {
-        Player p = (Player) event.getComponent().getAttributes().get("player");
+        Team p = (Team) event.getComponent().getAttributes().get("player");
         referee.removeFromTrackList(p);
         try {
             utx.begin();

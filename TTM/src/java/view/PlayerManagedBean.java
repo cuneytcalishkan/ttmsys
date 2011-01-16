@@ -17,6 +17,7 @@ import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 import model.Match;
 import model.Player;
+import model.Team;
 
 @Named(value = "playerManagedBean")
 @SessionScoped
@@ -34,7 +35,7 @@ public class PlayerManagedBean implements Serializable{
         current = (Player) context.getExternalContext().getSessionMap().get(RegisteredUserManagedBean.USER_SESSION_KEY);
     }
 
-    public List<Player> getTrackList() {
+    public List<Team> getTrackList() {
         Query q = em.createQuery("SELECT t FROM Player p JOIN p.trackList t");
         current.setTrackList(q.getResultList());
         return current.getTrackList();
@@ -46,7 +47,7 @@ public class PlayerManagedBean implements Serializable{
     }
 
     public void removePlayer(ActionEvent event) {
-        Player p = (Player) event.getComponent().getAttributes().get("player");
+        Team p = (Team) event.getComponent().getAttributes().get("player");
         current.removeFromTrackList(p);
         try {
             utx.begin();
