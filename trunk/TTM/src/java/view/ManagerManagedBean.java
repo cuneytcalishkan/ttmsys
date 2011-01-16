@@ -39,7 +39,11 @@ public class ManagerManagedBean {
         manager = (Manager) context.getExternalContext().getSessionMap().get(RegisteredUserManagedBean.USER_SESSION_KEY);
     }
 
-    public List<Tournament> getTournaments(){
+    public void createTournament(){
+        
+    }
+
+    public List<Tournament> getTournaments() {
         Query q = em.createQuery("SELECT t FROM Manager m JOIN m.tournaments t");
         return q.getResultList();
     }
@@ -116,5 +120,13 @@ public class ManagerManagedBean {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("Operation Failed"));
         }
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 }
