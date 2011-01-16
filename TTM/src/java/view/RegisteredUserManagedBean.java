@@ -172,7 +172,7 @@ public class RegisteredUserManagedBean {
 
     public RegisteredUser getUser() {
         try {
-            Query getByUsername = em.createQuery("from RegisteredUser ru where ru.username = :username");
+            Query getByUsername = em.createQuery("SELECT ru FROM RegisteredUser ru where ru.username = :username");
             getByUsername.setParameter("username", username);
             RegisteredUser user = (RegisteredUser) getByUsername.getSingleResult();
             return user;
