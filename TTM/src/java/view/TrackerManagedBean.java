@@ -4,10 +4,11 @@
  */
 package view;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
@@ -18,8 +19,8 @@ import model.Player;
 import model.RegisteredUser;
 
 @Named(value = "trackerManagedBean")
-@Dependent
-public class TrackerManagedBean {
+@SessionScoped
+public class TrackerManagedBean implements Serializable{
 
     @PersistenceContext
     private EntityManager em;
