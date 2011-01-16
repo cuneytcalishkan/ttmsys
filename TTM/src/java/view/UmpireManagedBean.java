@@ -4,6 +4,7 @@
  */
 package view;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.faces.bean.ManagedBean;
@@ -21,7 +22,7 @@ import model.Umpire;
 
 @ManagedBean
 @SessionScoped
-public class UmpireManagedBean {
+public class UmpireManagedBean implements Serializable {
 
     @PersistenceContext(unitName = "TTMPU")
     private EntityManager em;
