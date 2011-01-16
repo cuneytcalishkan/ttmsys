@@ -115,6 +115,13 @@ public class RegisteredUserManagedBean {
         return context.getExternalContext().getSessionMap().containsKey(USER_SESSION_KEY);
     }
 
+    public List<Player> getTrackList() {
+        Query q = em.createQuery("SELECT t FROM RegisteredUser u JOIN u.trackList t WHERE u.id = :uid");
+        q.setParameter("uid", current.getId());
+        current.setTrackList(q.getResultList());
+        return current.getTrackList();
+    }
+
     public String validateUser() {
         FacesContext context = FacesContext.getCurrentInstance();
         current = getUser();
