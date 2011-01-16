@@ -13,6 +13,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -25,6 +27,7 @@ import javax.persistence.Temporal;
 public class Match implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Column(nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
