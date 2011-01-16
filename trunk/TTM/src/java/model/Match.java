@@ -225,7 +225,7 @@ public class Match implements Serializable {
 
         String result = "";
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-        //result += teams.get(0) + " vs " + teams.get(1) + ", " + df.format(mDate) + ", " + mTime;
+        result += teams.get(0) + " vs " + teams.get(1) + ", " + df.format(mDate) + ", " + mTime;
         return result;
     }
 }
