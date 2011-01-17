@@ -5,7 +5,6 @@
 package view;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -132,12 +131,6 @@ public class RegisteredUserManagedBean implements Serializable {
     public boolean isLogged() {
         FacesContext context = FacesContext.getCurrentInstance();
         return context.getExternalContext().getSessionMap().containsKey(USER_SESSION_KEY);
-    }
-
-    public List<Team> getTrackList() {
-        Query q = em.createQuery("SELECT t FROM RegisteredUser u JOIN u.trackList t");
-        current.setTrackList(q.getResultList());
-        return current.getTrackList();
     }
 
     public void removePlayer(ActionEvent event) {
