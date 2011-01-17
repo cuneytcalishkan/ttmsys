@@ -15,10 +15,9 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.NotSupportedException;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 import model.DoublesTeam;
+import model.Manager;
 import model.Match;
 import model.Player;
 import model.SinglesTeam;
@@ -37,7 +36,6 @@ public class PlayerManagedBean implements Serializable {
     private Player current;
     private Tournament selectedTournament;
     
-    private Team existingTeam;
     private Player otherPlayer;
 
     /** Creates a new instance of PlayerManagedBean */
@@ -79,9 +77,12 @@ public class PlayerManagedBean implements Serializable {
         if(team != null){
             try {
                 TournamentJoinRequest tjr = new TournamentJoinRequest(selectedTournament, team);
+                Manager tManager = selectedTournament.getManager();
+                tManager.addTournamentJoinRequest(tjr);
                 utx.begin();
                 em.persist(team);
                 em.persist(tjr);
+                em.merge(tManager);
                 utx.commit();
                 return "player:index";
             } catch (Exception ex) {
@@ -91,13 +92,16 @@ public class PlayerManagedBean implements Serializable {
         return "player:createTeam";
     }
 
-    public String joinWithExistingTeam(){
-        if(existingTeam != null)
+    public String joinWithExistingTeam(Team team){
+        if(team != null)
         {
             try {
-                TournamentJoinRequest tjr = new TournamentJoinRequest(selectedTournament, existingTeam);
+                TournamentJoinRequest tjr = new TournamentJoinRequest(selectedTournament, team);
+                Manager tManager = selectedTournament.getManager();
+                tManager.addTournamentJoinRequest(tjr);
                 utx.begin();
                 em.persist(tjr);
+                em.merge(tManager);
                 utx.commit();
                 return "player:index";
             } catch (Exception ex) {
@@ -136,16 +140,8 @@ public class PlayerManagedBean implements Serializable {
                 || type.equals(Tournament.MIXED_DOUBLES));
     }
 
-    public void setExistingTeam(Team existingTeam) {
-        this.existingTeam = existingTeam;
-    }
-
     public void setOtherPlayer(Player otherPlayer) {
         this.otherPlayer = otherPlayer;
-    }
-
-    public Team getExistingTeam() {
-        return existingTeam;
     }
 
     public Player getOtherPlayer() {
