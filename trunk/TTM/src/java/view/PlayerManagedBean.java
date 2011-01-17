@@ -63,7 +63,7 @@ public class PlayerManagedBean implements Serializable {
             Query q = em.createQuery("FROM SinglesTeam tm join tm.players p WHERE p.id = :pid");
             //        + "from SinglesTeam t where t.players.id = :pid");
             q.setParameter("pid", current.getId());
-            Team team = (Team) q.getSingleResult();
+            Team team = (Team) q.getResultList().get(0);
             if(team != null)
                 joinWithExistingTeam(team);
             //TODO message
@@ -86,15 +86,16 @@ public class PlayerManagedBean implements Serializable {
 
         if (team != null) {
             try {
-                TournamentJoinRequest tjr = new TournamentJoinRequest(selectedTournament, team);
-                Manager tManager = selectedTournament.getManager();
-                Query q = em.createQuery("select man from Manager AS man left join fetch man.tournamentRequests where man.id = :mid");
-                q.setParameter("mid", tManager.getId());
-                tManager = (Manager) q.getSingleResult();
-                tManager.addTournamentJoinRequest(tjr);
                 utx.begin();
                 em.persist(team);
+                TournamentJoinRequest tjr = new TournamentJoinRequest(selectedTournament, team);
                 em.persist(tjr);
+                Query q = em.createQuery("select man from Manager AS man left join fetch man.tournamentRequests tr"
+                        + " where man.id = :mid");
+                q.setParameter("mid", selectedTournament.getManager().getId());
+                Manager tManager = (Manager) q.getSingleResult();
+                tManager.addTournamentJoinRequest(tjr);
+
                 em.merge(tManager);
                 utx.commit();
                 return "player:index";
@@ -127,7 +128,7 @@ public class PlayerManagedBean implements Serializable {
     }
 
     public List<Team> getExistingTeams() {
-        String query = "select t from DoublesTeam t left join fetch t.players join t.players tp "
+        String query = "select t from DoublesTeam t left join fetch t.players tp "
                 + "WHERE tp.id = :pid";
         Query q = em.createQuery(query);
         q.setParameter("pid", current.getId());
