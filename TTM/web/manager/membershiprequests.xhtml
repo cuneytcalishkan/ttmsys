@@ -36,13 +36,9 @@
                         <h:outputText value="#{item.username}"/>
                     </h:column>
                     <h:column>
-                        <h:commandButton value="Accept" actionListener="#{managerManagedBean.acceptMembershipRequest}">
-                            <f:attribute name="request" value="#{item}"/>
-                        </h:commandButton>
+                        <h:commandButton value="Accept" action="#{managerManagedBean.acceptMembershipRequest(item)}"/>
                         &nbsp;
-                        <h:commandButton value="Deny" actionListener="#{managerManagedBean.denyMembershipRequest}">
-                            <f:attribute name="request" value="#{item}"/>
-                        </h:commandButton>
+                        <h:commandButton value="Deny" action="#{managerManagedBean.denyMembershipRequest(item)}"/>
                     </h:column>
                 </h:dataTable>
             </h:form>

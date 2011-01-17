@@ -64,14 +64,13 @@ public class ManagerManagedBean implements Serializable {
             query = "SELECT team FROM Team AS team LEFT JOIN FETCH team.players WHERE team.id = :tid";
             q = em.createQuery(query);
             q.setParameter("tid", tjr.getTeam().getId());
-            tjr.setTeam((Team)q.getSingleResult());
+            tjr.setTeam((Team) q.getSingleResult());
         }
 
         return manager.getTournamentRequests();
     }
 
-    public void removeTournament(ActionEvent event) {
-        Tournament t = (Tournament) event.getComponent().getAttributes().get("tournament");
+    public void removeTournament(Tournament t) {
         try {
             utx.begin();
             em.remove(em.merge(t));
@@ -86,9 +85,8 @@ public class ManagerManagedBean implements Serializable {
         }
     }
 
-    public void denyTournamentJoinRequest(ActionEvent event) {
+    public void denyTournamentJoinRequest(TournamentJoinRequest req) {
         try {
-            TournamentJoinRequest req = (TournamentJoinRequest) event.getComponent().getAttributes().get("tournamentrequest");
             Query q = em.createQuery("SELECT t FROM Manager m JOIN m.tournaments t");
             manager.setTournaments(q.getResultList());
             manager.verifyTournamentRequest(req, false);
@@ -104,9 +102,8 @@ public class ManagerManagedBean implements Serializable {
 
     }
 
-    public void acceptTournamentJoinRequest(ActionEvent event) {
+    public void acceptTournamentJoinRequest(TournamentJoinRequest req) {
         try {
-            TournamentJoinRequest req = (TournamentJoinRequest) event.getComponent().getAttributes().get("tournamentrequest");
             Query q = em.createQuery("SELECT t FROM Manager m JOIN m.tournaments t");
             manager.setTournaments(q.getResultList());
             manager.verifyTournamentRequest(req, true);
