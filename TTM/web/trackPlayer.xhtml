@@ -5,13 +5,13 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Track Players</title>
+        <title>Track Teams</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
         <ui:include src="header.xhtml"/>
         <hr/>
-        <h2>Players available for tracking</h2>
+        <h2>Teams available for tracking</h2>
         <f:view>
             <h:form>
                 <h:dataTable value="#{trackerManagedBean.trackList}" var="item" border="1">
