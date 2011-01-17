@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Edit Tournament</title>
+    </h:head>
+    <h:body>
+        <ui:include src="../header.xhtml"/>
+        <hr/>
+        <f:view>
+            <h:form>
+                <h:panelGrid columns="3" border="0">
+                    <h:outputLabel value="Name" for="name"/>
+                    <h:inputText id="name" value="#{tournamentManagedBean.current.name}" required="true" requiredMessage="*"/>
+                    <h:message for="name" style="color:red"/>
+
+                    <h:outputLabel value="Type" for="type"/>
+                    <h:inputText id="type" value="#{tournamentManagedBean.current.type}" required="true" requiredMessage="*"/>
+                    <h:message for="type" style="color:red"/>
+
+                    <h:outputLabel value="Start Date" for="startDate"/>
+                    <h:inputText id="startDate" value="#{tournamentManagedBean.current.startDate}" required="true" requiredMessage="*">
+                        <f:convertDateTime pattern="yyyy-MM-dd" type="date"/>
+                    </h:inputText>
+                    <h:message for="startDate" style="color:red"/>
+
+                    <h:outputLabel value="End Date" for="endDate"/>
+                    <h:inputText id="endDate" value="#{tournamentManagedBean.current.endDate}" required="true" requiredMessage="*">
+                        <f:convertDateTime pattern="yyyy-MM-dd" type="date"/>
+                    </h:inputText>
+                    <h:message for="endDate" style="color:red"/>
+
+                    <h:outputLabel value="Prize" for="prize"/>
+                    <h:inputText id="prize" value="#{tournamentManagedBean.current.prize}" required="true" requiredMessage="*"/>
+                    <h:message for="prize" style="color:red"/>
+
+                    <h:outputLabel value="Report" for="report"/>
+                    <h:inputTextarea id="report" value="#{tournamentManagedBean.current.report}"/>
+                    <h:message for="report" style="color:red"/>
+
+                    <h:commandButton value="Save" action="#{tournamentManagedBean.editTournament}"/>
+                    <h:commandButton type="reset" value="Reset"/>
+                </h:panelGrid>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+

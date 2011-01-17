@@ -47,6 +47,11 @@
                         </f:facet>
                         <h:outputText value="#{item.report}"/>
                     </h:column>
+                    <h:column>
+                        <h:commandButton value="Edit" actionListener="#{tournamentManagedBean.linkTournament}" action="manager:editTournament">
+                            <f:attribute name="tournament" value="#{item}"/>
+                        </h:commandButton>
+                    </h:column>
                 </h:dataTable>
                 <p>
                     <h:commandButton value="Create Tournament" action="createTournament.xhtml"/>
