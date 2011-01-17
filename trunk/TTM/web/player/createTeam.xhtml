@@ -17,7 +17,7 @@
         <h2><h:outputText value="Create Team"/></h2>
         <h:outputText value="Player1: #{playerManagedBean.currentPlayer}"/><br/>
         <h:selectOneListbox value="#{playerManagedBean.otherPlayer}" rendered="#{playerManagedBean.doubles}">
-        <f:selectItems value="#{playerManagedBean.otherPlayers}"/>
+            <f:selectItems value="#{playerManagedBean.otherPlayers}"/>
         </h:selectOneListbox><br/>
         <h:commandButton value="Join" action="#{playerManagedBean.createTeamAndJoin}"/>
     </h:body>
