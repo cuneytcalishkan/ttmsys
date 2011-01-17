@@ -201,6 +201,9 @@ public class Tournament implements Serializable {
 
     public List<Draw> getDrawList() {
         ArrayList<Draw> result = new ArrayList<Draw>();
+        if (draw == null) {
+            draw = new Draw();
+        }
         draw.drawList(draw, result);
         return result;
     }
