@@ -6,6 +6,7 @@ package view;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -15,8 +16,10 @@ import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 import model.Manager;
+import model.Team;
 import model.Tournament;
 
 @Named(value = "tournamentManagedBean")
@@ -60,6 +63,16 @@ public class TournamentManagedBean implements Serializable {
         return "manager:index";
     }
 
+    public String[] getTournamentTypes() {
+        String[] result = new String[]{
+            Tournament.MENS_SINGLES,
+            Tournament.WOMENS_SINGLES,
+            Tournament.MENS_DOUBLES,
+            Tournament.WOMENS_DOUBLES,
+            Tournament.MIXED_DOUBLES};
+        return result;
+    }
+
     public void linkTournament(ActionEvent event) {
         current = (Tournament) event.getComponent().getAttributes().get("tournament");
     }
@@ -73,6 +86,23 @@ public class TournamentManagedBean implements Serializable {
             System.out.println(ex.getMessage());
         }
         return "manager:index";
+    }
+
+    public List<Team> getTeams() {
+        String query = "select t from Tournament t left join fetch t.teams "
+                + "where t.id = :tid";
+        Query q = em.createQuery(query);
+        q.setParameter("tid", current.getId());
+        current = (Tournament) q.getSingleResult();
+
+        for (Team team : current.getTeams()) {
+            query = "select team from Team team left join fetch team.players where team.id = :tid";
+            q = em.createQuery(query);
+            q.setParameter("tid", team.getId());
+            team = (Team) q.getSingleResult();
+        }
+
+        return current.getTeams();
     }
 
     public Tournament getCurrent() {
