@@ -89,7 +89,7 @@ public class Draw implements Serializable {
 
     @Override
     public String toString() {
-        return homeTeam + " vs " + awayTeam;
+        return (homeTeam == null ? "-" : homeTeam) + " vs " + (awayTeam == null ? "-" : awayTeam);
     }
 
     public void drawList(Draw d, List<Draw> result) {
