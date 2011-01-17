@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.inject.Named;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
@@ -60,13 +61,24 @@ public class PlayerManagedBean implements Serializable {
     public String applyTournament(Tournament tr) {
         selectedTournament = tr;
         if (!isDoubles()) {
-            Query q = em.createQuery("FROM SinglesTeam tm join tm.players p WHERE p.id = :pid");
-            //        + "from SinglesTeam t where t.players.id = :pid");
+            Team team = null;
+            Query q = em.createQuery("select tm FROM SinglesTeam tm join tm.players p WHERE p.id = :pid");
             q.setParameter("pid", current.getId());
-            Team team = (Team) q.getResultList().get(0);
-            if(team != null)
-                joinWithExistingTeam(team);
-            //TODO message
+            List<SinglesTeam> sTeams = q.getResultList();
+            if(sTeams.isEmpty()){
+                try {
+                    team = new SinglesTeam(current);
+                    utx.begin();
+                    em.persist(team);
+                    utx.commit();
+                } catch (Exception ex) {
+                    Logger.getLogger(PlayerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else{
+                team = (SinglesTeam) sTeams.get(0);
+            }            
+            joinWithExistingTeam(team);
             return "player:index";
         } else {
             return "player:createTeam";
@@ -98,6 +110,8 @@ public class PlayerManagedBean implements Serializable {
 
                 em.merge(tManager);
                 utx.commit();
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.addMessage(null, new FacesMessage("Your request to join tournament is sent to the Manager."));
                 return "player:index";
             } catch (Exception ex) {
                 Logger.getLogger(PlayerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -119,6 +133,8 @@ public class PlayerManagedBean implements Serializable {
                 em.persist(tjr);
                 em.merge(tManager);
                 utx.commit();
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.addMessage(null, new FacesMessage("Your request to join tournament is sent to the Manager."));
                 return "player:index";
             } catch (Exception ex) {
                 Logger.getLogger(PlayerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
