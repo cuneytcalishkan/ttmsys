@@ -74,8 +74,8 @@ public class TournamentManagedBean implements Serializable {
         return result;
     }
 
-    public void linkTournament(ActionEvent event) {
-        current = (Tournament) event.getComponent().getAttributes().get("tournament");
+    public void linkTournament(Tournament t) {
+        current = t;
     }
 
     public String editTournament() {

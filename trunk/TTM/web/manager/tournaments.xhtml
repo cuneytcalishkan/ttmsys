@@ -48,13 +48,9 @@
                         <h:outputText value="#{item.report}"/>
                     </h:column>
                     <h:column>
-                        <h:commandButton value="Edit" actionListener="#{tournamentManagedBean.linkTournament}" action="manager:editTournament">
-                            <f:attribute name="tournament" value="#{item}"/>
-                        </h:commandButton>
+                        <h:commandButton value="Edit" actionListener="#{tournamentManagedBean.linkTournament(item)}" action="manager:editTournament"/>
                         &nbsp;
-                        <h:commandButton value="Delete" actionListener="#{managerManagedBean.removeTournament}">
-                            <f:attribute name="tournament" value="#{item}"/>
-                        </h:commandButton>
+                        <h:commandButton value="Delete" action="#{managerManagedBean.removeTournament(item)}"/>
                     </h:column>
                 </h:dataTable>
                 <p>
