@@ -37,12 +37,16 @@ public class RefereeManagedBean implements Serializable {
     }
 
     public List<Tournament> getTournaments() {
-        Query q = em.createQuery("SELECT m FROM Referee r JOIN r.tournaments m");
+        Query q = em.createQuery("SELECT m FROM Referee r JOIN r.tournaments m"
+                + " where r.id = :rid");
+        q.setParameter("rid", referee.getId());
         return q.getResultList();
     }
 
     public List<Match> getMatches() {
-        Query q = em.createQuery("SELECT m FROM Referee r JOIN r.matches m");
+        Query q = em.createQuery("SELECT m FROM Referee r JOIN r.matches m" 
+                + " where r.id = :rid");
+        q.setParameter("rid", referee.getId());
         return q.getResultList();
     }
 
