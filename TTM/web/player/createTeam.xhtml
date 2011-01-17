@@ -2,13 +2,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Create Team</title>
         <ui:include src="../header.xhtml"/>
     </h:head>
     <h:body>
-        
+        <h2><h:outputText value="Existing Teams"/></h2>
+        <h:selectOneListbox value="#{playerManagedBean.existingTeam}">
+            <f:selectItems value="#{playerManagedBean.existingTeams}"/>
+        </h:selectOneListbox><br/>
+        <h:commandButton value="Join" action="#{playerManagedBean.joinWithExistingTeam}"/>
+        <h2><h:outputText value="Create Team"/></h2>
+        <h:outputText value="Player1: #{playerManagedBean.currentPlayer}"/><br/>
+        <h:selectOneListbox value="#{playerManagedBean.otherPlayer}" rendered="#{playerManagedBean.doubles}">
+        <f:selectItems value="#{playerManagedBean.otherPlayers}"/>
+        </h:selectOneListbox><br/>
+        <h:commandButton value="Join" action="#{playerManagedBean.createTeamAndJoin}"/>
     </h:body>
 </html>
 

@@ -19,7 +19,6 @@ import model.Match;
 import model.Player;
 import model.Team;
 import model.Tournament;
-import model.TournamentJoinRequest;
 
 @Named(value = "playerManagedBean")
 @SessionScoped
@@ -30,6 +29,10 @@ public class PlayerManagedBean implements Serializable {
     @Resource
     private UserTransaction utx;
     private Player current;
+    private Tournament selectedTournament;
+    
+    private Team existingTeam;
+    private Player otherPlayer;
 
     /** Creates a new instance of PlayerManagedBean */
     public PlayerManagedBean() {
@@ -42,9 +45,25 @@ public class PlayerManagedBean implements Serializable {
         return q.getResultList();
     }
 
-    public void applyTournament(Tournament tr)
+    public String applyTournament(Tournament tr)
     {
-        
+        selectedTournament = tr;
+        return "player:createTeam";
+    }
+
+    public String createTeamAndJoin(){
+        return "player:index";
+    }
+
+    public String joinWithExistingTeam(){
+        return "player:index";
+    }
+
+    public List<Team> getExistingTeams(){
+        Query q = em.createQuery("SELECT team FROM Player AS p JOIN p.teams AS team WHERE p.id = :pid");
+        q.setParameter("pid", current.getId());
+        return q.getResultList();
+        //return current.getTeams();
     }
 
     public void removePlayer(ActionEvent event) {
@@ -61,4 +80,38 @@ public class PlayerManagedBean implements Serializable {
             }
         }
     }
+
+    public Player getCurrentPlayer(){
+        return current;
+    }
+
+    public List<Player> getOtherPlayers(){
+        Query q = em.createQuery("from Player");
+        List<Player> players = q.getResultList();
+        players.remove(current);
+        return players;
+    }
+
+    public boolean isDoubles(){
+        String type = selectedTournament.getType();
+        return (type.equals(Tournament.MENS_DOUBLES) || type.equals(Tournament.WOMENS_DOUBLES)
+                || type.equals(Tournament.MIXED_DOUBLES));
+    }
+
+    public void setExistingTeam(Team existingTeam) {
+        this.existingTeam = existingTeam;
+    }
+
+    public void setOtherPlayer(Player otherPlayer) {
+        this.otherPlayer = otherPlayer;
+    }
+
+    public Team getExistingTeam() {
+        return existingTeam;
+    }
+
+    public Player getOtherPlayer() {
+        return otherPlayer;
+    }
+    
 }
