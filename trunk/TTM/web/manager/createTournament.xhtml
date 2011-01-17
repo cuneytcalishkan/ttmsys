@@ -19,7 +19,9 @@
                     <h:message for="name" style="color:red"/>
 
                     <h:outputLabel value="Type" for="type"/>
-                    <h:inputText id="type" value="#{tournamentManagedBean.type}" required="true" requiredMessage="*"/>
+                    <h:selectOneMenu id="type" value="#{tournamentManagedBean.type}" required="true" requiredMessage="*">
+                        <f:selectItems value="#{tournamentManagedBean.tournamentTypes}"/>
+                    </h:selectOneMenu>
                     <h:message for="type" style="color:red"/>
 
                     <h:outputLabel value="Start Date" for="startDate"/>
