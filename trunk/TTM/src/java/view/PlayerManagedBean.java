@@ -60,7 +60,7 @@ public class PlayerManagedBean implements Serializable {
     public String applyTournament(Tournament tr) {
         selectedTournament = tr;
         if (!isDoubles()) {
-            Query q = em.createQuery("select tm FROM SinglesTeam tm join tm.players p WHERE p.id = :pid");
+            Query q = em.createQuery("FROM SinglesTeam tm join tm.players p WHERE p.id = :pid");
             //        + "from SinglesTeam t where t.players.id = :pid");
             q.setParameter("pid", current.getId());
             Team team = (Team) q.getSingleResult();
