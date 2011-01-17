@@ -76,8 +76,11 @@ public class PlayerManagedBean implements Serializable {
         }
         if(team != null){
             try {
-                TournamentJoinRequest tjr = new TournamentJoinRequest(selectedTournament, team);
+                 TournamentJoinRequest tjr = new TournamentJoinRequest(selectedTournament, team);
                 Manager tManager = selectedTournament.getManager();
+                Query q = em.createQuery("select man from Manager AS man left join fetch man.tournamentRequests where man.id = :mid");
+                q.setParameter("mid", tManager.getId());
+                tManager = (Manager) q.getSingleResult();
                 tManager.addTournamentJoinRequest(tjr);
                 utx.begin();
                 em.persist(team);
@@ -98,6 +101,9 @@ public class PlayerManagedBean implements Serializable {
             try {
                 TournamentJoinRequest tjr = new TournamentJoinRequest(selectedTournament, team);
                 Manager tManager = selectedTournament.getManager();
+                Query q = em.createQuery("select man from Manager AS man left join fetch man.tournamentRequests where man.id = :mid");
+                q.setParameter("mid", tManager.getId());
+                tManager = (Manager) q.getSingleResult();
                 tManager.addTournamentJoinRequest(tjr);
                 utx.begin();
                 em.persist(tjr);
