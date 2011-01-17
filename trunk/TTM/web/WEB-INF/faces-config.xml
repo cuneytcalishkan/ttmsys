@@ -26,6 +26,10 @@
             <to-view-id>/player/index.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
+            <from-outcome>player:createTeam</from-outcome>
+            <to-view-id>/player/createTeam.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>referee:index</from-outcome>
             <to-view-id>/referee/index.xhtml</to-view-id>
         </navigation-case>
