@@ -34,8 +34,10 @@ public class TrackerManagedBean implements Serializable {
     }
 
     public List<Team> getUserTrackList() {
-        String query = "SELECT team FROM " + current.getClass().getName() + " AS man JOIN man.trackList AS team";
+        String query = "SELECT team FROM " + current.getClass().getName() +
+                " AS man JOIN man.trackList AS team WHERE man.id = :pid";
         Query q = em.createQuery(query);
+        q.setParameter("pid", current.getId());
         current.setTrackList(q.getResultList());
         for (Team team : current.getTrackList()) {
             query = "SELECT player FROM Team AS team JOIN team.players as player WHERE team.id = :tid";
@@ -47,8 +49,9 @@ public class TrackerManagedBean implements Serializable {
     }
 
     public List<Team> getTrackList() {
-        String query = "SELECT team FROM Team AS team WHERE team NOT IN (SELECT t FROM " + current.getClass().getName() + " AS user JOIN user.trackList t)";
+        String query = "SELECT team FROM Team AS team WHERE team NOT IN (SELECT t FROM " + current.getClass().getName() + " AS user JOIN user.trackList t WHERE user.id = :uid)";
         Query q = em.createQuery(query);
+        q.setParameter("uid", current.getId());
         List<Team> result = q.getResultList();
         for (Team team : result) {
             query = "SELECT player FROM Team AS team JOIN team.players as player WHERE team.id = :tid";
