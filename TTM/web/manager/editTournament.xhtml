@@ -13,7 +13,7 @@
         <f:view>
             <h:panelGrid columns="2" border="0">
                 <h:form>
-                    <h:panelGrid columns="3" border="0">
+                    <h:panelGrid columns="3">
                         <h:outputLabel value="Name" for="name"/>
                         <h:inputText id="name" value="#{tournamentManagedBean.current.name}" required="true" requiredMessage="*"/>
                         <h:message for="name" style="color:red"/>
@@ -50,7 +50,7 @@
                     <h:dataTable value="#{tournamentManagedBean.teams}" var="item">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="Team"/>
+                                <h:outputText value="Teams"/>
                             </f:facet>
                             <h:outputText value="#{item}"/>
                         </h:column>
