@@ -10,15 +10,12 @@ import javax.annotation.Resource;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 import model.Match;
 import model.MatchStatistics;
-import model.Player;
-import model.Team;
 import model.Tournament;
 import model.Umpire;
 
@@ -49,21 +46,6 @@ public class UmpireManagedBean implements Serializable {
         Query q = em.createQuery("SELECT t FROM Umpire u JOIN u.tournaments t");
         current.setTournaments(q.getResultList());
         return current.getTournaments();
-    }
-
-    public void removePlayer(ActionEvent event) {
-        Team p = (Team) event.getComponent().getAttributes().get("player");
-        current.removeFromTrackList(p);
-        try {
-            utx.begin();
-            em.persist(em.merge(current));
-            utx.commit();
-        } catch (Exception e) {
-            try {
-                utx.rollback();
-            } catch (Exception ex) {
-            }
-        }
     }
 
     public String linkStatistics(Match match){

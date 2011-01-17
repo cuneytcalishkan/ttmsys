@@ -10,7 +10,6 @@ import javax.annotation.Resource;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -60,9 +59,22 @@ public class TrackerManagedBean implements Serializable {
         return result;
     }
 
-    public void trackPlayer(ActionEvent event) {
-        Team p = (Team) event.getComponent().getAttributes().get("player");
-        current.addToTrackList(p);
+    public void removeTeam(Team t) {
+        current.removeFromTrackList(t);
+        try {
+            utx.begin();
+            em.persist(em.merge(current));
+            utx.commit();
+        } catch (Exception e) {
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
+        }
+    }
+
+    public void trackTeam(Team t) {
+        current.addToTrackList(t);
         try {
             utx.begin();
             em.persist(em.merge(current));

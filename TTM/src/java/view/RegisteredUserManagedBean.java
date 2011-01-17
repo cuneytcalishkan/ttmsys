@@ -12,7 +12,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -24,7 +23,6 @@ import model.MembershipRequest;
 import model.Player;
 import model.Referee;
 import model.RegisteredUser;
-import model.Team;
 import model.Umpire;
 
 @ManagedBean(name = "User")
@@ -131,21 +129,6 @@ public class RegisteredUserManagedBean implements Serializable {
     public boolean isLogged() {
         FacesContext context = FacesContext.getCurrentInstance();
         return context.getExternalContext().getSessionMap().containsKey(USER_SESSION_KEY);
-    }
-
-    public void removePlayer(ActionEvent event) {
-        Team p = (Team) event.getComponent().getAttributes().get("player");
-        current.removeFromTrackList(p);
-        try {
-            utx.begin();
-            em.persist(em.merge(current));
-            utx.commit();
-        } catch (Exception e) {
-            try {
-                utx.rollback();
-            } catch (Exception ex) {
-            }
-        }
     }
 
     public String validateUser() {
