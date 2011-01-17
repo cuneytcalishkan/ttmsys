@@ -4,12 +4,14 @@
  */
 package view;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,8 +20,8 @@ import model.Manager;
 import model.Tournament;
 
 @Named(value = "tournamentManagedBean")
-@RequestScoped
-public class TournamentManagedBean {
+@SessionScoped
+public class TournamentManagedBean implements Serializable {
 
     private Date startDate;
     private Date endDate;
@@ -31,6 +33,7 @@ public class TournamentManagedBean {
     private EntityManager em;
     @Resource
     private UserTransaction utx;
+    private Tournament current;
 
     /** Creates a new instance of TournamentManagedBean */
     public TournamentManagedBean() {
@@ -55,6 +58,29 @@ public class TournamentManagedBean {
             }
         }
         return "manager:index";
+    }
+
+    public void linkTournament(ActionEvent event) {
+        current = (Tournament) event.getComponent().getAttributes().get("tournament");
+    }
+
+    public String editTournament() {
+        try {
+            utx.begin();
+            em.merge(current);
+            utx.commit();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return "manager:index";
+    }
+
+    public Tournament getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Tournament current) {
+        this.current = current;
     }
 
     public Date getEndDate() {
