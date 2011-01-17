@@ -157,8 +157,14 @@ public class ManagerManagedBean implements Serializable {
     }
 
     public List<Team> getTrackList() {
-        Query q = em.createQuery("SELECT t FROM Manager p JOIN p.trackList t");
+        String query = "SELECT team FROM Manager AS man JOIN man.trackList AS team";
+        Query q = em.createQuery(query);
         manager.setTrackList(q.getResultList());
+        for (Team team : manager.getTrackList()) {
+            query = "SELECT player FROM Team AS team JOIN team.players as player";
+            q = em.createQuery(query);
+            team.setPlayers(q.getResultList());
+        }
         return manager.getTrackList();
     }
 
