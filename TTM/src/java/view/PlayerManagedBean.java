@@ -6,6 +6,8 @@ package view;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -14,11 +16,14 @@ import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.NotSupportedException;
+import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 import model.Match;
 import model.Player;
 import model.Team;
 import model.Tournament;
+import model.TournamentJoinRequest;
 
 @Named(value = "playerManagedBean")
 @SessionScoped
@@ -56,14 +61,31 @@ public class PlayerManagedBean implements Serializable {
     }
 
     public String joinWithExistingTeam(){
-        return "player:index";
+        if(existingTeam != null)
+        {
+            try {
+                TournamentJoinRequest tjr = new TournamentJoinRequest(selectedTournament, existingTeam);
+                utx.begin();
+                em.persist(tjr);
+                utx.commit();
+                return "player:index";
+            } catch (Exception ex) {
+                Logger.getLogger(PlayerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return "player:createTeam";
     }
 
     public List<Team> getExistingTeams(){
-        Query q = em.createQuery("select t from Team t left join fetch t.players join t.players tp "
-                + "WHERE tp.id = :pid AND t.teamType = :type");
+        String query = "select t from DoublesTeam t left join fetch t.players join t.players tp "
+                + "WHERE tp.id = :pid";
+        if(selectedTournament.getType().equals(Tournament.MENS_SINGLES) ||
+                selectedTournament.getType().equals(Tournament.WOMENS_SINGLES))
+            query = "select t from SinglesTeam t left join fetch t.players join t.players tp "
+                + "WHERE tp.id = :pid";
+        Query q = em.createQuery(query);
         q.setParameter("pid", current.getId());
-        q.setParameter("type", selectedTournament.getType());
+        //q.setParameter("team", teamType);
         return q.getResultList();
     }
 
