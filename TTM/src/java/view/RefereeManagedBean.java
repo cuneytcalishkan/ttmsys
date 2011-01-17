@@ -22,7 +22,7 @@ import model.Tournament;
 
 @Named(value = "refereeManagedBean")
 @SessionScoped
-public class RefereeManagedBean implements Serializable{
+public class RefereeManagedBean implements Serializable {
 
     @PersistenceContext(unitName = "TTMPU")
     private EntityManager em;
@@ -48,18 +48,11 @@ public class RefereeManagedBean implements Serializable{
         return q.getResultList();
     }
 
-    public List<Team> getTrackList() {
-        Query q = em.createQuery("SELECT t FROM Referee r JOIN r.trackList t");
-        referee.setTrackList(q.getResultList());
-        return referee.getTrackList();
-    }
-
-    public void linkIT(ActionEvent event){
+    public void linkIT(ActionEvent event) {
         selectedMatch = (Match) event.getComponent().getAttributes().get("match");
     }
 
-    public String editReport()
-    {
+    public String editReport() {
         try {
             utx.begin();
             em.merge(selectedMatch);
@@ -78,7 +71,7 @@ public class RefereeManagedBean implements Serializable{
         this.selectedMatch = selectedMatch;
     }
 
-        public void removePlayer(ActionEvent event) {
+    public void removePlayer(ActionEvent event) {
         Team p = (Team) event.getComponent().getAttributes().get("player");
         referee.removeFromTrackList(p);
         try {

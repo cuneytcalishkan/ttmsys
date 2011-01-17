@@ -51,12 +51,6 @@ public class UmpireManagedBean implements Serializable {
         return current.getTournaments();
     }
 
-    public List<Team> getTrackList() {
-        Query q = em.createQuery("SELECT t FROM Umpire u JOIN u.trackList t");
-        current.setTrackList(q.getResultList());
-        return current.getTrackList();
-    }
-
     public void removePlayer(ActionEvent event) {
         Team p = (Team) event.getComponent().getAttributes().get("player");
         current.removeFromTrackList(p);

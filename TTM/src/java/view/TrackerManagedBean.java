@@ -34,6 +34,18 @@ public class TrackerManagedBean implements Serializable {
         current = (RegisteredUser) context.getExternalContext().getSessionMap().get(RegisteredUserManagedBean.USER_SESSION_KEY);
     }
 
+    public List<Team> getUserTrackList() {
+        String query = "SELECT team FROM " + current.getClass().getName() + " AS man JOIN man.trackList AS team";
+        Query q = em.createQuery(query);
+        current.setTrackList(q.getResultList());
+        for (Team team : current.getTrackList()) {
+            query = "SELECT player FROM Team AS team JOIN team.players as player";
+            q = em.createQuery(query);
+            team.setPlayers(q.getResultList());
+        }
+        return current.getTrackList();
+    }
+
     public List<Team> getTrackList() {
         String query = "SELECT team FROM Team AS team WHERE team NOT IN (SELECT t FROM " + current.getClass().getName() + " AS user JOIN user.trackList t)";
         Query q = em.createQuery(query);

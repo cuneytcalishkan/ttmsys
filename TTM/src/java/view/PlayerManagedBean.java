@@ -21,7 +21,7 @@ import model.Team;
 
 @Named(value = "playerManagedBean")
 @SessionScoped
-public class PlayerManagedBean implements Serializable{
+public class PlayerManagedBean implements Serializable {
 
     @PersistenceContext
     private EntityManager em;
@@ -33,12 +33,6 @@ public class PlayerManagedBean implements Serializable{
     public PlayerManagedBean() {
         FacesContext context = FacesContext.getCurrentInstance();
         current = (Player) context.getExternalContext().getSessionMap().get(RegisteredUserManagedBean.USER_SESSION_KEY);
-    }
-
-    public List<Team> getTrackList() {
-        Query q = em.createQuery("SELECT t FROM Player p JOIN p.trackList t");
-        current.setTrackList(q.getResultList());
-        return current.getTrackList();
     }
 
     public List<Match> getMatches() {
