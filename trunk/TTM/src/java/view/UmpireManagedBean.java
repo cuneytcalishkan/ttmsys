@@ -16,6 +16,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 import model.Match;
+import model.MatchStatistics;
 import model.Player;
 import model.Team;
 import model.Tournament;
@@ -30,6 +31,7 @@ public class UmpireManagedBean implements Serializable {
     @Resource
     private UserTransaction utx;
     private Umpire current;
+    private Match selectedMatch;
 
     /** Creates a new instance of UmpireManagedBean */
     public UmpireManagedBean() {
@@ -69,4 +71,22 @@ public class UmpireManagedBean implements Serializable {
             }
         }
     }
+
+    public String linkStatistics(Match match){
+        selectedMatch = match;
+        return "umpire:editStatistics";
+    }
+
+    public MatchStatistics getStatistics(){
+        return selectedMatch.getStatistics();
+    }
+
+    public Match getSelectedMatch() {
+        return selectedMatch;
+    }
+
+    public void setSelectedMatch(Match selectedMatch) {
+        this.selectedMatch = selectedMatch;
+    }
+    
 }
