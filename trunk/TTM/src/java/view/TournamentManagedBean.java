@@ -18,6 +18,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
+import model.Draw;
 import model.Manager;
 import model.Team;
 import model.Tournament;
@@ -103,6 +104,15 @@ public class TournamentManagedBean implements Serializable {
         }
 
         return current.getTeams();
+    }
+
+    public String generateDraw() {
+        current.generateDraw();
+        return "manager:index";
+    }
+
+    public List<Draw> getDraw() {
+        return current.getDrawList();
     }
 
     public Tournament getCurrent() {

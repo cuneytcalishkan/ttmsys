@@ -5,6 +5,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -89,6 +90,16 @@ public class Draw implements Serializable {
     @Override
     public String toString() {
         return homeTeam + " vs " + awayTeam;
+    }
+
+    public void drawList(Draw d, List<Draw> result) {
+        result.add(d);
+        if (d.homeDraw != null) {
+            drawList(d.homeDraw, result);
+        }
+        if (d.awayDraw != null) {
+            drawList(d.awayDraw, result);
+        }
     }
 
     public String traverse(Draw d, int level) {

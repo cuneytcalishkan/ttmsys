@@ -199,8 +199,14 @@ public class Tournament implements Serializable {
         this.prize = prize;
     }
 
+    public List<Draw> getDrawList() {
+        ArrayList<Draw> result = new ArrayList<Draw>();
+        draw.drawList(draw, result);
+        return result;
+    }
+
     public void generateDraw() {
-        if (teams == null) {
+        if (teams == null || teams.isEmpty()) {
             return;
         }
         java.util.Collections.shuffle(teams);
