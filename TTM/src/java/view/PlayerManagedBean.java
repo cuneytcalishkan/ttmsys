@@ -18,6 +18,8 @@ import javax.transaction.UserTransaction;
 import model.Match;
 import model.Player;
 import model.Team;
+import model.Tournament;
+import model.TournamentJoinRequest;
 
 @Named(value = "playerManagedBean")
 @SessionScoped
@@ -38,6 +40,11 @@ public class PlayerManagedBean implements Serializable {
     public List<Match> getMatches() {
         Query q = em.createQuery("SELECT m FROM Player p JOIN p.matches m");
         return q.getResultList();
+    }
+
+    public void applyTournament(Tournament tr)
+    {
+        
     }
 
     public void removePlayer(ActionEvent event) {
