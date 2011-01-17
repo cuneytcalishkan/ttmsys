@@ -39,8 +39,9 @@ public class TrackerManagedBean implements Serializable {
         Query q = em.createQuery(query);
         current.setTrackList(q.getResultList());
         for (Team team : current.getTrackList()) {
-            query = "SELECT player FROM Team AS team JOIN team.players as player";
+            query = "SELECT player FROM Team AS team JOIN team.players as player WHERE team.id = :tid";
             q = em.createQuery(query);
+            q.setParameter("tid", team.getId());
             team.setPlayers(q.getResultList());
         }
         return current.getTrackList();
@@ -51,8 +52,9 @@ public class TrackerManagedBean implements Serializable {
         Query q = em.createQuery(query);
         List<Team> result = q.getResultList();
         for (Team team : result) {
-            query = "SELECT player FROM Team AS team JOIN team.players as player";
+            query = "SELECT player FROM Team AS team JOIN team.players as player WHERE team.id = :tid";
             q = em.createQuery(query);
+            q.setParameter("tid", team.getId());
             team.setPlayers(q.getResultList());
         }
         return result;
