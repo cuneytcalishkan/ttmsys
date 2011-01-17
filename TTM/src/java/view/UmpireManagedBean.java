@@ -77,6 +77,18 @@ public class UmpireManagedBean implements Serializable {
         return "umpire:editStatistics";
     }
 
+    public String editStatistics(){
+        try {
+            utx.begin();
+            em.persist(em.merge(selectedMatch.getStatistics()));
+            em.merge(selectedMatch);
+            utx.commit();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return "umpire:index";
+    }
+
     public MatchStatistics getStatistics(){
         return selectedMatch.getStatistics();
     }

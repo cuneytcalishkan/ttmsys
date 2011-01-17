@@ -213,6 +213,7 @@ public class Match implements Serializable {
     }
 
     public MatchStatistics getStatistics() {
+        if(statistics == null) statistics = new MatchStatistics();
         return statistics;
     }
 
