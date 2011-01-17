@@ -51,6 +51,10 @@
                         <h:commandButton value="Edit" actionListener="#{tournamentManagedBean.linkTournament}" action="manager:editTournament">
                             <f:attribute name="tournament" value="#{item}"/>
                         </h:commandButton>
+                        &nbsp;
+                        <h:commandButton value="Delete" actionListener="#{managerManagedBean.removeTournament}">
+                            <f:attribute name="tournament" value="#{item}"/>
+                        </h:commandButton>
                     </h:column>
                 </h:dataTable>
                 <p>

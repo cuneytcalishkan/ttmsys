@@ -27,7 +27,7 @@ import model.TournamentJoinRequest;
 
 @Named(value = "managerManagedBean")
 @SessionScoped
-public class ManagerManagedBean implements Serializable{
+public class ManagerManagedBean implements Serializable {
 
     @PersistenceContext
     private EntityManager em;
@@ -46,7 +46,8 @@ public class ManagerManagedBean implements Serializable{
 
     public List<Tournament> getTournaments() {
         Query q = em.createQuery("SELECT t FROM Manager m JOIN m.tournaments t");
-        return q.getResultList();
+        manager.setTournaments(q.getResultList());
+        return manager.getTournaments();
     }
 
     public List<MembershipRequest> getMembershipRequests() {
@@ -56,7 +57,24 @@ public class ManagerManagedBean implements Serializable{
 
     public List<TournamentJoinRequest> getTournamentJoinRequests() {
         Query q = em.createQuery("SELECT r FROM Manager m JOIN m.tournamentRequests r");
-        return q.getResultList();
+        manager.setTournamentRequests(q.getResultList());
+        return manager.getTournamentRequests();
+    }
+
+    public void removeTournament(ActionEvent event) {
+        Tournament t = (Tournament) event.getComponent().getAttributes().get("tournament");
+        try {
+            utx.begin();
+            em.remove(em.merge(t));
+            em.merge(manager);
+            utx.commit();
+        } catch (Exception e) {
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
+            System.out.println(e);
+        }
     }
 
     public void denyTournamentJoinRequest(ActionEvent event) {
