@@ -12,12 +12,9 @@ import javax.annotation.Resource;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.NotSupportedException;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 import model.Match;
 import model.Player;
@@ -85,7 +82,6 @@ public class PlayerManagedBean implements Serializable {
                 + "WHERE tp.id = :pid";
         Query q = em.createQuery(query);
         q.setParameter("pid", current.getId());
-        //q.setParameter("team", teamType);
         return q.getResultList();
     }
 

@@ -16,12 +16,13 @@
     <mapping class="model.Referee"/>
     <mapping class="model.RegisteredUser"/>
     <mapping class="model.Tournament"/>
-    <mapping class="model.Team"/>
     <mapping class="model.Set"/>
     <mapping class="model.Game"/>
     <mapping class="model.Draw"/>
     <mapping class="model.MatchStatistics"/>
     <mapping class="model.MembershipRequest"/>
     <mapping class="model.TournamentJoinRequest"/>
+    <mapping class="model.DoublesTeam"/>
+    <mapping class="model.SinglesTeam"/>
   </session-factory>
 </hibernate-configuration>
