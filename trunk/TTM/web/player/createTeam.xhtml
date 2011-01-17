@@ -33,11 +33,38 @@
         <h:form>
             <h2><h:outputText value="Create Team"/></h2>
             <h:outputText value="Player1: #{playerManagedBean.currentPlayer}"/><br/>
-            <h:outputText value="Player2: " rendered="#{playerManagedBean.doubles}"/>
-            <h:selectOneListbox value="#{playerManagedBean.otherPlayer}" rendered="#{playerManagedBean.doubles}">
-                <f:selectItems value="#{playerManagedBean.otherPlayers}"/>
-            </h:selectOneListbox><br/>
-            <h:commandButton value="Join" action="#{playerManagedBean.createTeamAndJoin}"/>
+            <f:view>
+                <h:form>
+                    <h2><h:outputText value="Player2: " rendered="#{playerManagedBean.doubles}"/></h2>
+                    <h:dataTable value="#{playerManagedBean.otherPlayers}" var="item" rendered="#{playerManagedBean.doubles}">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Name"/>
+                            </f:facet>
+                            <h:outputText value="#{item.name}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Surname"/>
+                            </f:facet>
+                            <h:outputText value="#{item.surname}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Username"/>
+                            </f:facet>
+                            <h:outputText value="#{item.username}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Join With"/>
+                            </f:facet>
+                            <h:commandButton value="Join With" action="#{playerManagedBean.createTeamAndJoin(item)}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </f:view>
+            
         </h:form>
     </h:body>
 </html>
