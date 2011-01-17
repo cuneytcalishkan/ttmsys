@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Add/Edit Statistics</title>
+        <ui:include src="../header.xhtml"/>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="Create/Edit"/></h1>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Aces:" for="aces" />
+                    <h:inputText id="aces" value="#{umpireManagedBean.statistics.aces}" title="Aces" />
+                    <h:outputLabel value="DoubleFauls:" for="doubleFauls" />
+                    <h:inputText id="doubleFauls" value="#{umpireManagedBean.statistics.doubleFauls}" title="DoubleFauls" />
+                    <h:outputLabel value="FirstSPtsWon:" for="firstSPtsWon" />
+                    <h:inputText id="firstSPtsWon" value="#{umpireManagedBean.statistics.firstSPtsWon}" title="FirstSPtsWon" />
+                    <h:outputLabel value="SecondSPtsWon:" for="secondSPtsWon" />
+                    <h:inputText id="secondSPtsWon" value="#{umpireManagedBean.statistics.secondSPtsWon}" title="SecondSPtsWon" />
+                    <h:outputLabel value="ReturnPtsWon:" for="returnPtsWon" />
+                    <h:inputText id="returnPtsWon" value="#{umpireManagedBean.statistics.returnPtsWon}" title="ReturnPtsWon" />
+                    <h:outputLabel value="TotalPtsWon:" for="totalPtsWon" />
+                    <h:inputText id="totalPtsWon" value="#{umpireManagedBean.statistics.totalPtsWon}" title="TotalPtsWon" />
+                </h:panelGrid>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+
