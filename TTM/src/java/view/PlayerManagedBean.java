@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -59,10 +60,11 @@ public class PlayerManagedBean implements Serializable {
     }
 
     public List<Team> getExistingTeams(){
-        Query q = em.createQuery("SELECT team FROM Player AS p JOIN p.teams AS team WHERE p.id = :pid");
+        Query q = em.createQuery("select t from Team t left join fetch t.players join t.players tp "
+                + "WHERE tp.id = :pid AND t.teamType = :type");
         q.setParameter("pid", current.getId());
+        q.setParameter("type", selectedTournament.getType());
         return q.getResultList();
-        //return current.getTeams();
     }
 
     public Player getCurrentPlayer(){
