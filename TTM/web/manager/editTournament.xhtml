@@ -11,9 +11,12 @@
         <ui:include src="../header.xhtml"/>
         <hr/>
         <f:view>
-            <h:panelGrid columns="2" border="0">
+            <h:panelGrid columns="3" border="0">
                 <h:form>
-                    <h:panelGrid columns="3">
+                    <h:panelGrid columns="3" title="Tournament">
+                        <f:facet name="header">
+                            <h:outputText value="Tournament"/>
+                        </f:facet>
                         <h:outputLabel value="Name" for="name"/>
                         <h:inputText id="name" value="#{tournamentManagedBean.current.name}" required="true" requiredMessage="*"/>
                         <h:message for="name" style="color:red"/>
@@ -55,6 +58,17 @@
                             <h:outputText value="#{item}"/>
                         </h:column>
                     </h:dataTable>
+                </h:form>
+                <h:form>
+                    <h:dataTable value="#{tournamentManagedBean.draw}" var="item">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Draw"/>
+                            </f:facet>
+                            <h:outputText value="#{item}"/>
+                        </h:column>
+                    </h:dataTable>
+                    <h:commandButton value="Generate" action="#{tournamentManagedBean.generateDraw}"/>
                 </h:form>
             </h:panelGrid>
         </f:view>
