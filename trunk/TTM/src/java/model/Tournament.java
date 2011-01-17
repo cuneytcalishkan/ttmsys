@@ -71,6 +71,7 @@ public class Tournament implements Serializable {
         umpires = new ArrayList<Umpire>();
         referees = new ArrayList<Referee>();
         courts = new ArrayList<Court>();
+        draw = new Draw();
     }
 
     public Tournament(String name, String type, Date startDate, Date endDate, double prize) {

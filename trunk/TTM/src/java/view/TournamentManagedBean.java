@@ -108,7 +108,7 @@ public class TournamentManagedBean implements Serializable {
 
     public String generateDraw() {
         current.generateDraw();
-        return "manager:index";
+        return "manager:editTournament";
     }
 
     public List<Draw> getDraw() {
