@@ -15,9 +15,13 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.NotSupportedException;
+import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
+import model.DoublesTeam;
 import model.Match;
 import model.Player;
+import model.SinglesTeam;
 import model.Team;
 import model.Tournament;
 import model.TournamentJoinRequest;
@@ -54,7 +58,37 @@ public class PlayerManagedBean implements Serializable {
     }
 
     public String createTeamAndJoin(){
-        return "player:index";
+        Team team = null;
+        if(selectedTournament.getType().equals(Tournament.MENS_SINGLES) ||
+                selectedTournament.getType().equals(Tournament.WOMENS_SINGLES)){
+            try {
+                team = new SinglesTeam(current);
+            } catch (Exception ex) {
+                Logger.getLogger(PlayerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            try {
+                team = new DoublesTeam();
+                team.join(current);
+                team.join(otherPlayer);
+            } catch (Exception ex) {
+                Logger.getLogger(PlayerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if(team != null){
+            try {
+                TournamentJoinRequest tjr = new TournamentJoinRequest(selectedTournament, team);
+                utx.begin();
+                em.persist(team);
+                em.persist(tjr);
+                utx.commit();
+                return "player:index";
+            } catch (Exception ex) {
+                Logger.getLogger(PlayerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return "player:createTeam";
     }
 
     public String joinWithExistingTeam(){

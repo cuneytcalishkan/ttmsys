@@ -9,18 +9,22 @@
         <ui:include src="../header.xhtml"/>
     </h:head>
     <h:body>
-        <h2><h:outputText value="Existing Teams"/></h2>
-        <h:selectOneListbox value="#{playerManagedBean.existingTeam}">
-            <f:selectItems value="#{playerManagedBean.existingTeams}"/>
-        </h:selectOneListbox><br/>
-        <h:commandButton value="Join" action="#{playerManagedBean.joinWithExistingTeam}"/>
-        <h2><h:outputText value="Create Team"/></h2>
-        <h:outputText value="Player1: #{playerManagedBean.currentPlayer}"/><br/>
-        <h:outputText value="Player2: " rendered="#{playerManagedBean.doubles}"/>
-        <h:selectOneListbox value="#{playerManagedBean.otherPlayer}" rendered="#{playerManagedBean.doubles}">
-            <f:selectItems value="#{playerManagedBean.otherPlayers}"/>
-        </h:selectOneListbox><br/>
-        <h:commandButton value="Join" action="#{playerManagedBean.createTeamAndJoin}"/>
+        <h:form>
+            <h2><h:outputText value="Existing Teams"/></h2>
+            <h:selectOneListbox value="#{playerManagedBean.existingTeam}">
+                <f:selectItems value="#{playerManagedBean.existingTeams}"/>
+            </h:selectOneListbox><br/>
+            <h:commandButton value="Join" action="#{playerManagedBean.joinWithExistingTeam}"/>
+        </h:form>
+        <h:form>
+            <h2><h:outputText value="Create Team"/></h2>
+            <h:outputText value="Player1: #{playerManagedBean.currentPlayer}"/><br/>
+            <h:outputText value="Player2: " rendered="#{playerManagedBean.doubles}"/>
+            <h:selectOneListbox value="#{playerManagedBean.otherPlayer}" rendered="#{playerManagedBean.doubles}">
+                <f:selectItems value="#{playerManagedBean.otherPlayers}"/>
+            </h:selectOneListbox><br/>
+            <h:commandButton value="Join" action="#{playerManagedBean.createTeamAndJoin}"/>
+        </h:form>
     </h:body>
 </html>
 
