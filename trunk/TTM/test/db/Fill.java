@@ -7,6 +7,8 @@ package db;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Court;
 import model.DoublesTeam;
 import model.Manager;
@@ -14,6 +16,7 @@ import model.Match;
 import model.Player;
 import model.Referee;
 import model.RegisteredUser;
+import model.SinglesTeam;
 import model.Tournament;
 import model.Umpire;
 import org.hibernate.Session;
@@ -55,7 +58,8 @@ public class Fill {
     @Test
     public void hello() {
         Session s = HibernateUtil.getSessionFactory().openSession();
-        Transaction t = s.beginTransaction();t.begin();
+        Transaction t = s.beginTransaction();
+        t.begin();
         RegisteredUser reg = new RegisteredUser("Registered", "User", "ru", "ru");
         Manager man = new Manager("Manager", "man", "m", "m");
         Player ply = new Player("Player", "pl", "p", "p");
@@ -73,15 +77,23 @@ public class Fill {
         referees.add(ref);
         ArrayList umpires = new ArrayList<Umpire>();
         umpires.add(ump);
-        Court court = new Court("Court1");s.persist(court);
+        Court court = new Court("Court1");
+        s.persist(court);
         cal1.set(2011, 2, 15);
         ArrayList aTeam = new ArrayList<Player>();
         aTeam.add(ply);
-        DoublesTeam team = new DoublesTeam(aTeam);s.persist(team);
+        SinglesTeam team = null;
+        try {
+            team = new SinglesTeam(ply);
+            s.persist(team);
+        } catch (Exception ex) {
+            Logger.getLogger(Fill.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Match match = new Match(cal1.getTime(), new Time(2500), court);
         match.addReferee(ref);
         match.addTeam(team);
-        match.addUmpire(ump);s.persist(match);
+        match.addUmpire(ump);
+        s.persist(match);
         reg.addToTrackList(team);
         tour.setManager(man);
         tour.setReferees(referees);
