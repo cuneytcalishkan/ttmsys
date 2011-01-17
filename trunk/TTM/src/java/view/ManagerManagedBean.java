@@ -141,21 +141,6 @@ public class ManagerManagedBean implements Serializable {
         }
     }
 
-    public void removePlayer(ActionEvent event) {
-        Team p = (Team) event.getComponent().getAttributes().get("player");
-        manager.removeFromTrackList(p);
-        try {
-            utx.begin();
-            em.persist(em.merge(manager));
-            utx.commit();
-        } catch (Exception e) {
-            try {
-                utx.rollback();
-            } catch (Exception ex) {
-            }
-        }
-    }
-
     public Manager getManager() {
         return manager;
     }

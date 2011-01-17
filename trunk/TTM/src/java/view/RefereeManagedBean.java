@@ -17,7 +17,6 @@ import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 import model.Match;
 import model.Referee;
-import model.Team;
 import model.Tournament;
 
 @Named(value = "refereeManagedBean")
@@ -71,18 +70,4 @@ public class RefereeManagedBean implements Serializable {
         this.selectedMatch = selectedMatch;
     }
 
-    public void removePlayer(ActionEvent event) {
-        Team p = (Team) event.getComponent().getAttributes().get("player");
-        referee.removeFromTrackList(p);
-        try {
-            utx.begin();
-            em.persist(em.merge(referee));
-            utx.commit();
-        } catch (Exception e) {
-            try {
-                utx.rollback();
-            } catch (Exception ex) {
-            }
-        }
-    }
 }
