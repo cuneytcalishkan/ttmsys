@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -21,6 +22,8 @@ public class TournamentJoinRequest implements Serializable {
     private Tournament tournament;
     @OneToOne
     private Team team;
+    @ManyToOne
+    private Manager manager;
 
     public TournamentJoinRequest() {
     }
@@ -52,5 +55,13 @@ public class TournamentJoinRequest implements Serializable {
 
     public void setTournament(Tournament tournament) {
         this.tournament = tournament;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 }
