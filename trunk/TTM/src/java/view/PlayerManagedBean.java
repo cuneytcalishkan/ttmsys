@@ -49,6 +49,27 @@ public class PlayerManagedBean implements Serializable {
     }
 
     public String applyTournament(Tournament tr) {
+        // Request Check
+        Query q = em.createQuery("select tjr FROM TournamentJoinRequest tjr"
+                + " join tjr.tournament tour join tjr.team team join team.players p"
+                + " where tour.id = :tid AND p.id = :pid");
+        q.setParameter("tid", tr.getId());
+        q.setParameter("pid", current.getId());
+        if(!q.getResultList().isEmpty()){
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("You have already sent a request for this Tournament."));
+            return "player:index";
+        }
+        // Tournament Check
+        q = em.createQuery("select tour FROM Tournament tour"
+                + " join tour.teams team join team.players p"
+                + " WHERE p.id = :pid");
+        q.setParameter("pid", current.getId());
+        if(!q.getResultList().isEmpty()){
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("You are already participating this Tournament."));
+            return "player:index";
+        }
         selectedTournament = tr;
         if (!isDoubles()) {
             try {
@@ -112,7 +133,7 @@ public class PlayerManagedBean implements Serializable {
     }
 
     public List<Tournament> getTournaments() {
-        Query q = em.createQuery("from Tournament t join t.teams team join team.players p where p.id = :pid ");
+        Query q = em.createQuery("select t from Tournament t join t.teams team join team.players p where p.id = :pid ");
         q.setParameter("pid", current.getId());
         return q.getResultList();
     }
