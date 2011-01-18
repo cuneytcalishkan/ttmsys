@@ -37,6 +37,8 @@ public class ManagerManagedBean implements Serializable {
     private UserTransaction utx;
     private Manager manager;
 
+    private RegisteredUser selectedUser;
+
     /** Creates a new instance of ManagerManagedBean */
     public ManagerManagedBean() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -152,6 +154,31 @@ public class ManagerManagedBean implements Serializable {
         }
     }
 
+    public void removeUser(RegisteredUser user){
+        try {
+            utx.begin();
+            em.remove(em.merge(user));
+            utx.commit();
+        } catch (Exception ex) {
+            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Operation Failed"));
+        }
+    }
+
+    public String editUser(){
+        try {
+            utx.begin();
+            em.merge(selectedUser);
+            utx.commit();
+        } catch (Exception ex) {
+            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Operation Failed"));
+        }
+        return "manager:index";
+    }
+
     public List<RegisteredUser> getUsers(){
         Query q = em.createQuery("from RegisteredUser");
         return q.getResultList();
@@ -171,5 +198,14 @@ public class ManagerManagedBean implements Serializable {
 
     public void setManager(Manager manager) {
         this.manager = manager;
+    }
+
+    public RegisteredUser getSelectedUser() {
+        return selectedUser;
+    }
+
+    public String setSelectedUser(RegisteredUser selectedUser) {
+        this.selectedUser = selectedUser;
+        return "manager:editUser";
     }
 }
