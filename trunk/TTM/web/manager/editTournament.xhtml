@@ -52,6 +52,26 @@
                     </h:panelGrid>
                 </h:form>
                 <h:form>
+                <h:dataTable value="#{tournamentManagedBean.current.referees}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Referees"/>
+                        </f:facet>
+                        <h:outputText value="#{item}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+            <h:form>
+                <h:dataTable value="#{tournamentManagedBean.current.umpires}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Umpires"/>
+                        </f:facet>
+                        <h:outputText value="#{item}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+                <h:form>
                     <h:dataTable value="#{tournamentManagedBean.teams}" var="item">
                         <f:facet name="header">
                             <h:outputText value="Teams"/>
