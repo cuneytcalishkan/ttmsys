@@ -62,6 +62,10 @@
             <to-view-id>/manager/editDraw.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
+            <from-outcome>manager:editUser</from-outcome>
+            <to-view-id>/manager/editUser.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>teamInfo</from-outcome>
             <to-view-id>/teamInfo.xhtml</to-view-id>
         </navigation-case>

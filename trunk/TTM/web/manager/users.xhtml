@@ -38,6 +38,12 @@
                             </f:facet>
                             <h:outputText value="#{managerManagedBean.typeOf(item)}"/>
                         </h:column>
+                        <h:column>
+                            <h:commandButton value="Edit" action="#{managerManagedBean.setSelectedUser(item)}"/>
+                        </h:column>
+                        <h:column>
+                            <h:commandButton value="Remove" action="#{managerManagedBean.removeUser(item)}"/>
+                        </h:column>
                     </h:dataTable>
                 </h:form>
             </h:panelGrid>
