@@ -10,7 +10,6 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 import model.Draw;
 
@@ -32,8 +31,13 @@ public class DrawManagedBean implements Serializable {
 
     public String linkDraw(Draw d) {
         current = d;
-        awayDraw = d.getAwayDraw();
-        homeDraw = d.getHomeDraw();
+        if (d != null) {
+            awayDraw = d.getAwayDraw();
+            homeDraw = d.getHomeDraw();
+        } else {
+            homeDraw = null;
+            awayDraw = null;
+        }
         return "manager:editDraw";
     }
 

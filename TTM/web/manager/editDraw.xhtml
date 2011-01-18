@@ -12,43 +12,41 @@
         <hr/>
         <f:view>
             <h:panelGrid columns="2" border="0">
-                <h:dataTable>
-                    <f:facet name="header">
-                        <h:outputText value="Teams"/>
-                    </f:facet>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Home Team"/>
-                        </f:facet>
-                        <h:outputText value="#{drawManagedBean.current.homeTeam}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Away Team"/>
-                        </f:facet>
-                        <h:outputText value="#{drawManagedBean.current.awayTeam}"/>
-                    </h:column>
-                </h:dataTable>
                 <h:form>
-                    <h:dataTable>
+                    <h:panelGrid columns="2">
+                        <f:facet name="header">
+                            <h:outputText value="Teams"/>
+                        </f:facet>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Home Team"/>
+                            </f:facet>
+                            <h:commandLink value="#{drawManagedBean.current.homeTeam}"
+                                           action="#{teamManagedBean.linkTeam(drawManagedBean.current.homeTeam)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Away Team"/>
+                            </f:facet>
+                            <h:commandLink value="#{drawManagedBean.current.awayTeam}"
+                                           action="#{teamManagedBean.linkTeam(drawManagedBean.current.awayTeam)}"/>
+                        </h:column>
+                    </h:panelGrid>
+                </h:form>
+                <h:form>
+                    <h:panelGrid columns="2" border ="0">
                         <f:facet name="header">
                             <h:outputText value="Draws"/>
                         </f:facet>
                         <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Home Draw"/>
-                            </f:facet>
                             <h:commandLink value="#{drawManagedBean.homeDraw}"
                                            action="#{drawManagedBean.linkDraw(drawManagedBean.homeDraw)}"/>
                         </h:column>
                         <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Away Draw"/>
-                            </f:facet>
                             <h:commandLink value="#{drawManagedBean.awayDraw}"
                                            action="#{drawManagedBean.linkDraw(drawManagedBean.awayDraw)}"/>
                         </h:column>
-                    </h:dataTable>
+                    </h:panelGrid>
                 </h:form>
             </h:panelGrid>
         </f:view>
