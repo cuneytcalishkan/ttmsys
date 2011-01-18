@@ -98,6 +98,9 @@
                         <h:column>
                             <h:commandLink value="#{item}" action="#{teamManagedBean.linkTeam(item)}"/>
                         </h:column>
+                        <h:column>
+                            <h:commandButton value="Remove" action="#{tournamentManagedBean.removeTeam(item)}"/>
+                        </h:column>
                     </h:dataTable>
                 </h:form>
                 <h:form>
