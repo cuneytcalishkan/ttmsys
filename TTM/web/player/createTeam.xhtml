@@ -10,27 +10,6 @@
     </h:head>
     <h:body>
         <h:form>
-            <h2><h:outputText value="Existing Teams"/></h2>
-            <f:view>
-                <h:form>
-                    <h:dataTable value="#{playerManagedBean.existingTeams}" var="item">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Team"/>
-                            </f:facet>
-                            <h:outputText value="#{item}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Join"/>
-                            </f:facet>
-                            <h:commandButton value="Join" action="#{playerManagedBean.joinWithExistingTeam(item)}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:form>
-            </f:view>
-        </h:form>
-        <h:form>
             <h2><h:outputText value="Create Team"/></h2>
             <h:outputText value="Player1: #{playerManagedBean.currentPlayer}"/><br/>
             <f:view>
