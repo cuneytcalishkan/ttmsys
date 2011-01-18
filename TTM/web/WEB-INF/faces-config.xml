@@ -57,6 +57,10 @@
             <from-outcome>manager:editTournament</from-outcome>
             <to-view-id>/manager/editTournament.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>teamInfo</from-outcome>
+            <to-view-id>teamInfo.xhtml</to-view-id>
+        </navigation-case>
 
     </navigation-rule>
 </faces-config>

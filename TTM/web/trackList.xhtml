@@ -18,7 +18,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Team"/>
                             </f:facet>
-                            <h:outputText value="#{item}"/>
+                            <h:commandLink value="#{item}" action="#{teamManagedBean.linkTeam(item)}"/>
                         </h:column>
                         <h:column>
                             <h:commandButton value="Remove" actionListener="#{trackerManagedBean.removeTeam(item)}"/>
