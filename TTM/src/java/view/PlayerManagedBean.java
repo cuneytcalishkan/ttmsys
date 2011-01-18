@@ -45,19 +45,8 @@ public class PlayerManagedBean implements Serializable {
     }
 
     public List<Match> getMatches() {
-        /*Query q = em.createQuery("SELECT teams FROM Player as player JOIN player.teams as teams WHERE player.id = :pid");
-        q.setParameter("pid", current.getId());*/
-        /*List<Team> teams = current.getTeams();//q.getResultList();
-        List<Match> result = new ArrayList<Match>();
-        for (Team team : teams) {
-            //Query q = em.createQuery("SELECT tm FROM Team t join t.matches tm WHERE t.id = :tid");
-            Query q = em.createQuery("fasdsafgfgdshfrom sdfgsMatch m join m.teams t where t.id = :tid");
-            q.setParameter("tid", team.getId());
-            result.addAll(q.getResultList());
-        }
-        return result;*/
-        Query q = em.createQuery("Select m FROM tmatch m");
-        //q.setParameter("pid", current.getId());
+        Query q = em.createQuery("Select m FROM tmatch m join m.teams t join t.players p where p.id = :pid");
+        q.setParameter("pid", current.getId());
         return q.getResultList();
     }
 
