@@ -49,6 +49,40 @@
                     </h:panelGrid>
                 </h:form>
             </h:panelGrid>
+            <h:form rendered="#{drawManagedBean.createMatch}">
+                <h:panelGrid columns="3" border="0">
+                    <f:facet name="header">
+                        <h:outputText value="CREATE MATCH"/>
+                    </f:facet>
+                    <h:panelGrid columns="3" border="0">
+                        <h:outputLabel for="mDate" value="Date"/>
+                        <h:inputText id="mDate" value="#{drawManagedBean.mDate}" required="true" requiredMessage="*"/>
+                        <h:message for="mDate" style="color: red"/>
+
+                        <h:outputLabel for="mTime" value="Time"/>
+                        <h:inputText id="mTime" value="#{drawManagedBean.mTime}" required="true" requiredMessage="*"/>
+                        <h:message for="mTime" style="color: red"/>
+
+                        <h:commandButton value="Create" action="#{drawManagedBean.createMatch}"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="1">
+                        <f:facet name="header">
+                            <h:outputText value="SELECT UMPIRES"/>
+                        </f:facet>
+                        <h:selectManyMenu value="#{drawManagedBean.mUmpires}">
+                            <f:selectItems value="#{drawManagedBean.umpires}"/>
+                        </h:selectManyMenu>
+                    </h:panelGrid>
+                    <h:panelGrid columns="1">
+                        <f:facet name="header">
+                            <h:outputText value="SELECT REFEREES"/>
+                        </f:facet>
+                        <h:selectManyMenu value="#{drawManagedBean.mReferees}">
+                            <f:selectItems value="#{drawManagedBean.referees}"/>
+                        </h:selectManyMenu>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </h:form>
         </f:view>
     </h:body>
 </html>
