@@ -5,11 +5,14 @@
 package controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -44,85 +47,121 @@ public class DrawManagedBean implements Serializable {
 
     /** Creates a new instance of DrawManagedBean */
     public DrawManagedBean() {
+        mUmpires = new ArrayList<Umpire>();
+        mReferees = new ArrayList<Referee>();
+        court = new Court();
     }
 
-    public boolean isCreateMatch() {
+    public boolean canAssignReferee(Referee r) {
+        return !mReferees.contains(r);
+    }
+
+    public boolean canAssignUmpire(Umpire u) {
+        return !mUmpires.contains(u);
+    }
+
+    public String removeUmpire(Umpire u) {
+        mUmpires.remove(u);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Umpire " + u + " has been removed from the match"));
+        return "manager:editDraw";
+    }
+
+    public String removeReferee(Referee r) {
+        mReferees.remove(r);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Referee " + r + " has been removed from the match"));
+        return "manager:editDraw";
+    }
+
+    public String addReferee(Referee r) {
+        if (!mReferees.contains(r)) {
+            mReferees.add(r);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Referee " + r + " has been added to the match"));
+        }
+        return "manager:editDraw";
+    }
+
+    public String addUmpire(Umpire u) {
+        if (!mUmpires.contains(u)) {
+            mUmpires.add(u);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Umpire " + u + " has been added to the match"));
+        }
+        return "manager:editDraw";
+    }
+
+    public boolean isCreatingMatchAllowed() {
         return (current.getHomeTeam() != null && current.getAwayTeam() != null);
     }
 
-    public List<Umpire> getUmpires() {
-        Query q = em.createQuery("FROM Umpire");
+    public List<Umpire> getUmpireList() {
+        Query q = em.createQuery("SELECT u FROM Umpire AS u LEFT JOIN FETCH u.matches");
         return q.getResultList();
     }
 
-    public List<Referee> getReferees() {
-        Query q = em.createQuery("FROM Referee");
+    public List<Referee> getRefereeList() {
+        Query q = em.createQuery("SELECT r FROM Referee AS r LEFT JOIN FETCH r.matches");
         return q.getResultList();
+    }
+
+    public boolean canAssignCourt(Court c) {
+        return !court.equals(c);
     }
 
     public String assignCourt(Court c) {
         court = c;
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Court " + c + " has been assigned to the match"));
         return "manager:editDraw";
     }
 
     public List<Court> getCourtList() {
-        Query q = em.createQuery("FROM Court");
+        Query q = em.createQuery("SELECT c FROM Court AS c LEFT JOIN FETCH c.matches");
         return q.getResultList();
     }
 
     public String createMatch() {
         Match match = new Match(mDate, mTime);
         List<Match> matches = null;
-
-        for (Referee referee : mReferees) {
-            matches = referee.getMatches();
-            matches.add(match);
-            try {
-                utx.begin();
-                em.merge(referee);
-                utx.commit();
-            } catch (Exception e) {
-                try {
-                    utx.rollback();
-                } catch (Exception ex) {
-                }
-            }
-        }
-        match.setReferees(mReferees);
-
-        for (Umpire umpire : mUmpires) {
-            matches = umpire.getMatches();
-            matches.add(match);
-            try {
-                utx.begin();
-                em.merge(umpire);
-                utx.commit();
-            } catch (Exception e) {
-                try {
-                    utx.rollback();
-                } catch (Exception ex) {
-                }
-            }
-        }
-        match.setUmpires(mUmpires);
-
-        matches = court.getMatches();
-        matches.add(match);
-        match.setCourt(court);
-
-        matches = homeTeam.getMatches();
-        matches.add(match);
-        homeTeam.setMatches(matches);
-        match.addTeam(homeTeam);
-
-        matches = awayTeam.getMatches();
-        matches.add(match);
-        awayTeam.setMatches(matches);
-        match.addTeam(awayTeam);
-
-        match.setTournament(tournament);
         try {
             utx.begin();
+            for (Referee referee : mReferees) {
+                matches = referee.getMatches();
+                matches.add(match);
+                em.merge(referee);
+            }
+            match.setReferees(mReferees);
+
+            for (Umpire umpire : mUmpires) {
+                matches = umpire.getMatches();
+                matches.add(match);
+                em.merge(umpire);
+                utx.commit();
+            }
+            match.setUmpires(mUmpires);
+
+            matches = court.getMatches();
+            matches.add(match);
+            court.setMatches(matches);
+            match.setCourt(court);
+
+            matches = homeTeam.getMatches();
+            matches.add(match);
+            homeTeam.setMatches(matches);
+            match.addTeam(homeTeam);
+
+            matches = awayTeam.getMatches();
+            matches.add(match);
+            awayTeam.setMatches(matches);
+            match.addTeam(awayTeam);
+
+            matches = tournament.getMatches();
+            matches.add(match);
+            match.setTournament(tournament);
+            match.setTournament(tournament);
+
             em.merge(court);
             em.merge(homeTeam);
             em.merge(awayTeam);
@@ -140,12 +179,11 @@ public class DrawManagedBean implements Serializable {
 
     public String linkDraw(Draw d) {
         current = d;
-        if (d != null) {
-            awayDraw = d.getAwayDraw();
-            homeDraw = d.getHomeDraw();
-        } else {
-            homeDraw = null;
-            awayDraw = null;
+        if (current != null) {
+            homeTeam = current.getHomeTeam();
+            awayTeam = current.getAwayTeam();
+            awayDraw = current.getAwayDraw();
+            homeDraw = current.getHomeDraw();
         }
         return "manager:editDraw";
     }

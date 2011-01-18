@@ -10,6 +10,7 @@
     <h:body>
         <ui:include src="../header.xhtml"/>
         <hr/>
+        <h:messages style="color: red"></h:messages>
         <f:view>
             <h:panelGrid columns="2" border="0">
                 <h:form>
@@ -49,7 +50,7 @@
                     </h:panelGrid>
                 </h:form>
             </h:panelGrid>
-            <h:panelGrid columns="4" border="0" rendered="#{drawManagedBean.createMatch}">
+            <h:panelGrid columns="4" border="0" rendered="#{drawManagedBean.creatingMatchAllowed}">
                 <f:facet name="header">
                     <h:outputText value="CREATE MATCH"/>
                 </f:facet>
@@ -69,20 +70,40 @@
                     </h:panelGrid>
                 </h:form>
                 <h:panelGrid columns="1">
-                    <f:facet name="header">
-                        <h:outputText value="SELECT UMPIRES"/>
-                    </f:facet>
-                    <h:selectManyMenu value="#{drawManagedBean.mUmpires}">
-                        <f:selectItems value="#{drawManagedBean.umpires}"/>
-                    </h:selectManyMenu>
+                    <h:form>
+                        <h:dataTable value="#{drawManagedBean.umpireList}" var="item">
+                            <f:facet name="header">
+                                <h:outputText value="SELECT UMPIRES"/>
+                            </f:facet>
+                            <h:column>
+                                <h:outputText value="#{item}"/>
+                            </h:column>
+                            <h:column>
+                                <h:commandLink value="Add" action="#{drawManagedBean.addUmpire(item)}"
+                                               rendered="#{drawManagedBean.canAssignUmpire(item)}"/>
+                                <h:commandLink value="Remove" action="#{drawManagedBean.removeUmpire(item)}"
+                                               rendered="#{!drawManagedBean.canAssignUmpire(item)}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
                 </h:panelGrid>
                 <h:panelGrid columns="1">
-                    <f:facet name="header">
-                        <h:outputText value="SELECT REFEREES"/>
-                    </f:facet>
-                    <h:selectManyMenu value="#{drawManagedBean.mReferees}">
-                        <f:selectItems value="#{drawManagedBean.referees}"/>
-                    </h:selectManyMenu>
+                    <h:form>
+                        <h:dataTable value="#{drawManagedBean.refereeList}" var="item">
+                            <f:facet name="header">
+                                <h:outputText value="SELECT REFEREES"/>
+                            </f:facet>
+                            <h:column>
+                                <h:outputText value="#{item}"/>
+                            </h:column>
+                            <h:column>
+                                <h:commandLink value="Add" action="#{drawManagedBean.addReferee(item)}"
+                                               rendered="#{drawManagedBean.canAssignReferee(item)}"/>
+                                <h:commandLink value="Remove" action="#{drawManagedBean.removeReferee(item)}"
+                                               rendered="#{!drawManagedBean.canAssignReferee(item)}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
                 </h:panelGrid>
                 <h:form>
                     <h:panelGrid columns="1">
@@ -93,7 +114,7 @@
                             <h:column>
                                 <h:outputText value="#{item}"/>
                             </h:column>
-                            <h:column rendered="#{!drawManagedBean.court.equals(item)}">
+                            <h:column rendered="#{drawManagedBean.canAssignCourt(item)}">
                                 <h:commandLink value="Assign" action="#{drawManagedBean.assignCourt(item)}"/>
                             </h:column>
                         </h:dataTable>
