@@ -49,11 +49,11 @@
                     </h:panelGrid>
                 </h:form>
             </h:panelGrid>
-            <h:form rendered="#{drawManagedBean.createMatch}">
-                <h:panelGrid columns="3" border="0">
-                    <f:facet name="header">
-                        <h:outputText value="CREATE MATCH"/>
-                    </f:facet>
+            <h:panelGrid columns="4" border="0" rendered="#{drawManagedBean.createMatch}">
+                <f:facet name="header">
+                    <h:outputText value="CREATE MATCH"/>
+                </f:facet>
+                <h:form>
                     <h:panelGrid columns="3" border="0">
                         <h:outputLabel for="mDate" value="Date"/>
                         <h:inputText id="mDate" value="#{drawManagedBean.mDate}" required="true" requiredMessage="*">
@@ -67,24 +67,39 @@
 
                         <h:commandButton value="Create" action="#{drawManagedBean.createMatch}"/>
                     </h:panelGrid>
-                    <h:panelGrid columns="1">
-                        <f:facet name="header">
-                            <h:outputText value="SELECT UMPIRES"/>
-                        </f:facet>
-                        <h:selectManyMenu value="#{drawManagedBean.mUmpires}">
-                            <f:selectItems value="#{drawManagedBean.umpires}"/>
-                        </h:selectManyMenu>
-                    </h:panelGrid>
-                    <h:panelGrid columns="1">
-                        <f:facet name="header">
-                            <h:outputText value="SELECT REFEREES"/>
-                        </f:facet>
-                        <h:selectManyMenu value="#{drawManagedBean.mReferees}">
-                            <f:selectItems value="#{drawManagedBean.referees}"/>
-                        </h:selectManyMenu>
-                    </h:panelGrid>
+                </h:form>
+                <h:panelGrid columns="1">
+                    <f:facet name="header">
+                        <h:outputText value="SELECT UMPIRES"/>
+                    </f:facet>
+                    <h:selectManyMenu value="#{drawManagedBean.mUmpires}">
+                        <f:selectItems value="#{drawManagedBean.umpires}"/>
+                    </h:selectManyMenu>
                 </h:panelGrid>
-            </h:form>
+                <h:panelGrid columns="1">
+                    <f:facet name="header">
+                        <h:outputText value="SELECT REFEREES"/>
+                    </f:facet>
+                    <h:selectManyMenu value="#{drawManagedBean.mReferees}">
+                        <f:selectItems value="#{drawManagedBean.referees}"/>
+                    </h:selectManyMenu>
+                </h:panelGrid>
+                <h:form>
+                    <h:panelGrid columns="1">
+                        <f:facet name="header">
+                            <h:outputText value="ASSIGN COURT"/>
+                        </f:facet>
+                        <h:dataTable value="#{drawManagedBean.courtList}" var="item">
+                            <h:column>
+                                <h:outputText value="#{item}"/>
+                            </h:column>
+                            <h:column rendered="#{!drawManagedBean.court.equals(item)}">
+                                <h:commandLink value="Assign" action="#{drawManagedBean.assignCourt(item)}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGrid>
+                </h:form>
+            </h:panelGrid>
         </f:view>
     </h:body>
 </html>
