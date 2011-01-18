@@ -6,6 +6,7 @@ package view;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -105,18 +106,85 @@ public class TournamentManagedBean implements Serializable {
         return current.getTeams();
     }
 
-    public String generateDraw() {
-        current.generateDraw();
-        try{
+    public String generateDraws() {
+        List<Team> teams = current.getTeams();
+        if (teams == null || teams.isEmpty()) {
+            return "manager:editTournament";
+        }
+        java.util.Collections.shuffle(teams);
+        LinkedList<Team> tteams = new LinkedList<Team>(teams);
+        LinkedList<Draw> draws = new LinkedList<Draw>();
+        int dCount = ((tteams.size() % 2 == 0) ? tteams.size() / 2 : tteams.size() / 2 + 1);
+        for (int i = 0; i < dCount; i++) {
+            Team ht = tteams.removeFirst();
+            Team at = null;
+            if (!tteams.isEmpty()) {
+                at = tteams.removeFirst();
+            }
+            Draw d = new Draw(ht, at);
+            try {
+                utx.begin();
+                em.persist(d);
+                utx.commit();
+            } catch (Exception e) {
+                try {
+                    utx.rollback();
+                } catch (Exception ex) {
+                }
+            }
+            draws.add(d);
+        }
+        generateDrawPairs(draws);
+        try {
             utx.begin();
-            em.persist(em.merge(current));
+            em.merge(current);
             utx.commit();
-        }catch(Exception e){
-            try{
+        } catch (Exception e) {
+            try {
                 utx.rollback();
-            }catch(Exception ex){}
+            } catch (Exception ex) {
+            }
         }
         return "manager:editTournament";
+    }
+
+    private void generateDrawPairs(LinkedList<Draw> draws) {
+        int dCount = ((draws.size() % 2 == 0) ? draws.size() / 2 : draws.size() / 2 + 1);
+        LinkedList<Draw> ddraws = new LinkedList<Draw>();
+        for (int i = 0; i < dCount; i++) {
+            Draw hd = draws.removeFirst();
+            Draw ad = null;
+            if (!draws.isEmpty()) {
+                ad = draws.removeFirst();
+            }
+            Draw d = new Draw(hd, ad);
+            try {
+                utx.begin();
+                em.persist(d);
+                utx.commit();
+            } catch (Exception e) {
+                try {
+                    utx.rollback();
+                } catch (Exception ex) {
+                }
+            }
+            ddraws.add(d);
+        }
+        if (ddraws.size() > 1) {
+            generateDrawPairs(ddraws);
+        } else {
+            current.setDraw(ddraws.removeFirst());
+            try {
+                utx.begin();
+                em.merge(current);
+                utx.commit();
+            } catch (Exception e) {
+                try {
+                    utx.rollback();
+                } catch (Exception ex) {
+                }
+            }
+        }
     }
 
     public List<Draw> getDraw() {
