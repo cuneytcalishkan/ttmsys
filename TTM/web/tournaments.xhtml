@@ -40,6 +40,12 @@
                     </f:facet>
                     <h:outputText value="#{item.prize}"/>
                 </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Details"/>
+                    </f:facet>
+                    <h:commandLink value="Details"/>
+                </h:column>
             </h:dataTable>
         </h:form>
 
@@ -77,6 +83,12 @@
                         <h:outputText value="Prize"/>
                     </f:facet>
                     <h:outputText value="#{item.prize}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Details"/>
+                    </f:facet>
+                    <h:commandLink value="Details"/>
                 </h:column>
                 <h:column rendered="#{mainPageManagedBean.player}">
                     <h:commandButton value="Apply" action="#{playerManagedBean.applyTournament(item)}"/>

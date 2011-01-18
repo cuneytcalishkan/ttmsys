@@ -10,7 +10,7 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:dataTable value="#{mainPageManagedBean.futureTournaments}" var="item" border="1">
+            <h:dataTable value="#{tournamentManagedBean.selectedTournament}" border="1">
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Name"/>
@@ -47,7 +47,7 @@
         <f:view>
             <h:form>
                 <h1><h:outputText value="List"/></h1>
-                <h:dataTable value="#{matches}" var="item">
+                <h:dataTable value="#{tournamentManagedBean.selectedTournament.matches}" var="item">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="AwayTeamScore"/>
