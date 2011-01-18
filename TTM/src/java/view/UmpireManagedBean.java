@@ -37,14 +37,16 @@ public class UmpireManagedBean implements Serializable {
     }
 
     public List<Match> getMatches() {
-        Query q = em.createQuery("SELECT u FROM Umpire u left JOIN fetch u.matches WHERE u.id = :uid");
+        Query q = em.createQuery("SELECT distinct m FROM tmatch m "
+                + "left JOIN fetch m.teams"
+                + " JOIN m.umpires u"
+                + " WHERE u.id = :uid");
         q.setParameter("uid", current.getId());
-        current = (Umpire) q.getSingleResult();
-        return current.getMatches();
+        return q.getResultList();
     }
 
     public List<Tournament> getTournaments() {
-        Query q = em.createQuery("SELECT t FROM Umpire u JOIN u.tournaments t");
+        Query q = em.createQuery("SELECT distinct t FROM Umpire u JOIN u.tournaments t");
         current.setTournaments(q.getResultList());
         return current.getTournaments();
     }
