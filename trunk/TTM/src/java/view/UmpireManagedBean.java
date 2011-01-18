@@ -58,7 +58,7 @@ public class UmpireManagedBean implements Serializable {
         try {
             utx.begin();
             em.persist(em.merge(selectedMatch.getStatistics()));
-            em.merge(selectedMatch);
+            em.persist(em.merge(selectedMatch));
             utx.commit();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

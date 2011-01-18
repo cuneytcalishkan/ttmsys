@@ -16,6 +16,12 @@
                         </f:facet>
                         <h:column>
                             <f:facet name="header">
+                                <h:outputText value="- vs -"/>
+                            </f:facet>
+                            <h:outputText value="#{item.homeTeam} vs #{item.awayTeam}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
                                 <h:outputText value="Date"/>
                             </f:facet>
                             <h:outputText value="#{item.mDate}"/>
