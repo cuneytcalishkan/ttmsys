@@ -47,7 +47,7 @@
                     <f:facet name="header">
                         <h:outputText value="Details"/>
                     </f:facet>
-                    <h:commandLink value="Details"/>
+                    <h:commandLink value="Details" action="#{mainPageManagedBean.getTournamentDetails(item)}"/>
                 </h:column>
             </h:dataTable>
         </h:form>
@@ -91,7 +91,7 @@
                     <f:facet name="header">
                         <h:outputText value="Details"/>
                     </f:facet>
-                    <h:commandLink value="Details"/>
+                    <h:commandLink value="Details" action="#{mainPageManagedBean.getTournamentDetails(item)}"/>
                 </h:column>
                 <h:column rendered="#{mainPageManagedBean.player}">
                     <h:commandButton value="Apply" action="#{playerManagedBean.applyTournament(item)}"/>
