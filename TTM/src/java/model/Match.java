@@ -50,7 +50,7 @@ public class Match implements Serializable {
     private Court court;
     @ManyToOne
     private Tournament tournament;
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private MatchStatistics statistics;
 
     public Match() {
@@ -113,16 +113,20 @@ public class Match implements Serializable {
         }
     }
 
-    public Team getHomeTeam(){
-        if(teams.size() > 0)
+    public Team getHomeTeam() {
+        if (teams.size() > 0) {
             return teams.get(0);
-        else return null;
+        } else {
+            return null;
+        }
     }
 
-    public Team getAwayTeam(){
-        if(teams.size() > 1)
+    public Team getAwayTeam() {
+        if (teams.size() > 1) {
             return teams.get(1);
-        else return null;
+        } else {
+            return null;
+        }
     }
 
     public int getAwayTeamScore() {
@@ -238,7 +242,11 @@ public class Match implements Serializable {
 
         String result = "";
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-        result += (teams.get(0) == null ? "-" : teams.get(0)) + " vs " + (teams.get(1) == null ? "-" : teams.get(1)) + ", " + df.format(mDate) + ", " + mTime;
+        if (teams.size() > 1) {
+            result += (teams.get(0) == null ? "-" : teams.get(0)) + " vs " + (teams.get(1) == null ? "-" : teams.get(1)) + ", " + df.format(mDate) + ", " + mTime;
+        }else{
+            result += (teams.get(0) == null ? "-" : teams.get(0)) + " vs -";
+        }
         return result;
     }
 }
