@@ -29,11 +29,6 @@ public class Referee extends RegisteredUser {
         init();
     }
 
-    @Override
-    public String toString(){
-        return getName() + " " + getSurname();
-    }
-
     private void init() {
         matches = new ArrayList<Match>();
         tournaments = new ArrayList<Tournament>();
