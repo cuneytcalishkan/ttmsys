@@ -60,6 +60,16 @@ public class DrawManagedBean implements Serializable {
         return q.getResultList();
     }
 
+    public String assignCourt(Court c) {
+        court = c;
+        return "manager:editDraw";
+    }
+
+    public List<Court> getCourtList() {
+        Query q = em.createQuery("FROM Court");
+        return q.getResultList();
+    }
+
     public String createMatch() {
         Match match = new Match(mDate, mTime);
         List<Match> matches = null;

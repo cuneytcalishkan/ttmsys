@@ -21,7 +21,7 @@ public class Court implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
     @OneToMany(mappedBy = "court")
     private List<Match> matches;
@@ -72,7 +72,7 @@ public class Court implements Serializable {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return name;
     }
 }
