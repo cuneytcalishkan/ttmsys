@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -49,7 +50,7 @@ public class Match implements Serializable {
     private Court court;
     @ManyToOne
     private Tournament tournament;
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private MatchStatistics statistics;
 
     public Match() {
@@ -57,6 +58,7 @@ public class Match implements Serializable {
         teams = new ArrayList<Team>();
         umpires = new ArrayList<Umpire>();
         referees = new ArrayList<Referee>();
+        statistics = new MatchStatistics();
     }
 
     public Match(Date mDate, Time mTime) {
@@ -212,9 +214,6 @@ public class Match implements Serializable {
     }
 
     public MatchStatistics getStatistics() {
-        if (statistics == null) {
-            statistics = new MatchStatistics();
-        }
         return statistics;
     }
 

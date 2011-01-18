@@ -63,7 +63,8 @@ public class PlayerManagedBean implements Serializable {
         // Tournament Check
         q = em.createQuery("select tour FROM Tournament tour"
                 + " join tour.teams team join team.players p"
-                + " WHERE p.id = :pid");
+                + " WHERE tour.id = :tid AND p.id = :pid");
+        q.setParameter("tid", tr.getId());
         q.setParameter("pid", current.getId());
         if(!q.getResultList().isEmpty()){
             FacesContext context = FacesContext.getCurrentInstance();
