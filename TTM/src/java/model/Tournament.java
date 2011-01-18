@@ -75,6 +75,7 @@ public class Tournament implements Serializable {
     }
 
     public Tournament(String name, String type, Date startDate, Date endDate, double prize) {
+        this();
         this.name = name;
         this.type = type;
         this.startDate = startDate;
@@ -202,9 +203,6 @@ public class Tournament implements Serializable {
 
     public List<Draw> getDrawList() {
         ArrayList<Draw> result = new ArrayList<Draw>();
-        if (draw == null) {
-            draw = new Draw();
-        }
         draw.drawList(draw, result);
         return result;
     }

@@ -22,7 +22,9 @@
                         <h:message for="name" style="color:red"/>
 
                         <h:outputLabel value="Type" for="type"/>
-                        <h:inputText id="type" value="#{tournamentManagedBean.current.type}" required="true" requiredMessage="*"/>
+                        <h:selectOneMenu id="type" value="#{tournamentManagedBean.current.type}">
+                            <f:selectItems value="#{tournamentManagedBean.tournamentTypes}"/>
+                        </h:selectOneMenu>
                         <h:message for="type" style="color:red"/>
 
                         <h:outputLabel value="Start Date" for="startDate"/>
@@ -51,20 +53,20 @@
                 </h:form>
                 <h:form>
                     <h:dataTable value="#{tournamentManagedBean.teams}" var="item">
+                        <f:facet name="header">
+                            <h:outputText value="Teams"/>
+                        </f:facet>
                         <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Teams"/>
-                            </f:facet>
                             <h:outputText value="#{item}"/>
                         </h:column>
                     </h:dataTable>
                 </h:form>
                 <h:form>
                     <h:dataTable value="#{tournamentManagedBean.draw}" var="item">
+                        <f:facet name="header">
+                            <h:outputText value="Draw"/>
+                        </f:facet>
                         <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Draw"/>
-                            </f:facet>
                             <h:outputText value="#{item}"/>
                         </h:column>
                     </h:dataTable>
