@@ -16,7 +16,7 @@ public class Manager extends RegisteredUser {
 
     @OneToMany(mappedBy = "manager")
     private List<Tournament> tournaments;
-    @OneToMany
+    @OneToMany(mappedBy = "manager")
     private List<TournamentJoinRequest> tournamentRequests;
 
     public Manager(String name, String surname, String username, String password) {
