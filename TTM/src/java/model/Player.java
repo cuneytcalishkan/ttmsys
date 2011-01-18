@@ -16,8 +16,6 @@ public class Player extends RegisteredUser {
 
     @ManyToMany(mappedBy = "players")
     private List<Team> teams;
-    @ManyToMany(mappedBy = "trackList")
-    private List<RegisteredUser> trackers;
 
     public Player(String name, String surname, String username, String password) {
         super(name, surname, username, password);
@@ -31,7 +29,6 @@ public class Player extends RegisteredUser {
 
     private void init() {
         teams = new ArrayList<Team>();
-        trackers = new ArrayList<RegisteredUser>();
     }
 
     public List<Team> getTeams() {
@@ -53,13 +50,5 @@ public class Player extends RegisteredUser {
     @Override
     public String toString() {
         return getName() + " " + getSurname();
-    }
-
-    public List<RegisteredUser> getTrackers() {
-        return trackers;
-    }
-
-    public void setTrackers(List<RegisteredUser> trackers) {
-        this.trackers = trackers;
     }
 }
