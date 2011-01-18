@@ -205,6 +205,21 @@ public class TournamentManagedBean implements Serializable {
         return null;
     }
 
+    public void addReferee(Referee ref){
+        current = getCurrent();
+        current.addReferee(ref);
+        try {
+            utx.begin();
+            em.merge(current);
+            utx.commit();
+        } catch (Exception e) {
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
+        }
+    }
+
     public String removeUmpire(Umpire ump) {
         current.removeUmpire(ump);
         try {
@@ -220,6 +235,21 @@ public class TournamentManagedBean implements Serializable {
         return null;
     }
 
+    public void addUmpire(Umpire ump){
+        current = getCurrent();
+        current.addUmpire(ump);
+        try {
+            utx.begin();
+            em.merge(current);
+            utx.commit();
+        } catch (Exception e) {
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
+        }
+    }
+
     public String removeCourt(Court court){
         current.removeCourt(court);
         try {
@@ -233,6 +263,21 @@ public class TournamentManagedBean implements Serializable {
             }
         }
         return null;
+    }
+
+    public void addCourt(Court crt){
+        current = getCurrent();
+        current.addCourt(crt);
+        try {
+            utx.begin();
+            em.merge(current);
+            utx.commit();
+        } catch (Exception e) {
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
+        }
     }
 
     public String removeTeam(Team team){
@@ -252,6 +297,33 @@ public class TournamentManagedBean implements Serializable {
 
     public List<Draw> getDraw() {
         return current.getDrawList();
+    }
+
+    public List<Referee> getOtherReferees(){
+        Query q = em.createQuery("SELECT distinct r FROM Referee r "
+                + "where r not in "
+                + "(select rf from Referee rf join rf.tournaments t "
+                + "where t.id = :tid)");
+        q.setParameter("tid", current.getId());
+        return q.getResultList();
+    }
+
+    public List<Umpire> getOtherUmpires(){
+        Query q = em.createQuery("SELECT distinct r FROM Umpire r "
+                + "where r not in "
+                + "(select rf from Umpire rf join rf.tournaments t "
+                + "where t.id = :tid)");
+        q.setParameter("tid", current.getId());
+        return q.getResultList();
+    }
+
+    public List<Court> getOtherCourts(){
+        Query q = em.createQuery("SELECT distinct r FROM Court r "
+                + "where r not in "
+                + "(select rf from Court rf join rf.tournaments t "
+                + "where t.id = :tid)");
+        q.setParameter("tid", current.getId());
+        return q.getResultList();
     }
 
     public Tournament getCurrent() {

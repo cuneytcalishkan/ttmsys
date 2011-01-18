@@ -17,6 +17,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
+import model.Court;
 import model.Manager;
 import model.MembershipRequest;
 import model.Player;
@@ -38,6 +39,7 @@ public class ManagerManagedBean implements Serializable {
     private Manager manager;
 
     private RegisteredUser selectedUser;
+    private String courtName;
 
     /** Creates a new instance of ManagerManagedBean */
     public ManagerManagedBean() {
@@ -190,6 +192,44 @@ public class ManagerManagedBean implements Serializable {
         else if(ru instanceof Umpire) return "Umpire";
         else if(ru instanceof Player) return "Player";
         else return "Registered User";
+    }
+
+    public List<Court> getCourts(){
+        Query q = em.createQuery("from Court");
+        return q.getResultList();
+    }
+
+    public void removeCourt(Court court){
+        try {
+            utx.begin();
+            em.remove(em.merge(court));
+            utx.commit();
+        } catch (Exception ex) {
+            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Operation Failed"));
+        }
+    }
+
+    public void addCourt(){
+        Court newCourt = new Court(courtName);
+        try {
+            utx.begin();
+            em.persist(newCourt);
+            utx.commit();
+        } catch (Exception ex) {
+            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Operation Failed"));
+        }
+    }
+
+    public String getCourtName() {
+        return courtName;
+    }
+
+    public void setCourtName(String courtName) {
+        this.courtName = courtName;
     }
 
     public Manager getManager() {
