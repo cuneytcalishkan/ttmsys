@@ -89,24 +89,33 @@ public class TournamentManagedBean implements Serializable {
     }
 
     public List<Team> getTeams() {
-        String query = "select t from Tournament t left join fetch t.teams "
+        String query = "select t from Tournament t left join fetch t.teams ts left join fetch ts.players "
                 + "where t.id = :tid";
         Query q = em.createQuery(query);
         q.setParameter("tid", current.getId());
         current = (Tournament) q.getSingleResult();
 
-        for (Team team : current.getTeams()) {
-            query = "select team from Team team left join fetch team.players where team.id = :tid";
-            q = em.createQuery(query);
-            q.setParameter("tid", team.getId());
-            team = (Team) q.getSingleResult();
-        }
+//        for (Team team : current.getTeams()) {
+//            query = "select team from Team team left join fetch team.players where team.id = :tid";
+//            q = em.createQuery(query);
+//            q.setParameter("tid", team.getId());
+//            team = (Team) q.getSingleResult();
+//        }
 
         return current.getTeams();
     }
 
     public String generateDraw() {
         current.generateDraw();
+        try{
+            utx.begin();
+            em.merge(current);
+            utx.commit();
+        }catch(Exception e){
+            try{
+                utx.rollback();
+            }catch(Exception ex){}
+        }
         return "manager:editTournament";
     }
 

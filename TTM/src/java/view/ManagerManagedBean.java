@@ -92,7 +92,7 @@ public class ManagerManagedBean implements Serializable {
             manager.verifyTournamentRequest(req, false);
             utx.begin();
             em.remove(em.merge(req));
-            em.persist(em.merge(manager));
+            em.merge(manager);
             utx.commit();
         } catch (Exception ex) {
             Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -106,10 +106,15 @@ public class ManagerManagedBean implements Serializable {
         try {
             Query q = em.createQuery("SELECT t FROM Manager m JOIN m.tournaments t");
             manager.setTournaments(q.getResultList());
+            Team t = req.getTeam();
+            Tournament to = req.getTournament();
+            t.setTournament(to);
             manager.verifyTournamentRequest(req, true);
             utx.begin();
+            em.merge(to);
+            em.merge(t);
             em.remove(em.merge(req));
-            em.persist(em.merge(manager));
+            em.merge(manager);
             utx.commit();
         } catch (Exception ex) {
             Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
