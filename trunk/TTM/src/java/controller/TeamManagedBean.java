@@ -17,7 +17,7 @@ import model.Tournament;
 
 @Named(value = "teamManagedBean")
 @SessionScoped
-public class TeamManagedBean implements Serializable{
+public class TeamManagedBean implements Serializable {
 
     @PersistenceContext
     private EntityManager em;
@@ -36,6 +36,11 @@ public class TeamManagedBean implements Serializable{
         Query q = em.createQuery("SELECT t FROM Team AS t LEFT JOIN FETCH t.matches AS tm WHERE t.id = :tid");
         q.setParameter("tid", current.getId());
         current = (Team) q.getSingleResult();
+        for (Match match : current.getMatches()) {
+            q = em.createQuery("SELECT m FROM tmatch AS m LEFT JOIN FETCH m.teams WHERE m.id = :mid");
+            q.setParameter("mid", match.getId());
+            match = (Match) q.getSingleResult();
+        }
         return current.getMatches();
     }
 
