@@ -4,13 +4,11 @@
  */
 package db;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Court;
-import model.DoublesTeam;
 import model.Manager;
 import model.Match;
 import model.Player;
@@ -89,7 +87,7 @@ public class Fill {
         } catch (Exception ex) {
             Logger.getLogger(Fill.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Match match = new Match(cal1.getTime(), new Time(2500), court);
+        Match match = new Match(cal1.getTime(), "12:00", court);
         match.addReferee(ref);
         match.addTeam(team);
         match.addUmpire(ump);
