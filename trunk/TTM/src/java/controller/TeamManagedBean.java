@@ -33,14 +33,9 @@ public class TeamManagedBean implements Serializable {
     }
 
     public List<Match> getMatches() {
-        Query q = em.createQuery("SELECT t FROM Team AS t LEFT JOIN FETCH t.matches AS tm WHERE t.id = :tid");
+        Query q = em.createQuery("SELECT tm FROM Team AS t JOIN t.matches AS tm LEFT JOIN FETCH tm.teams WHERE t.id = :tid");
         q.setParameter("tid", current.getId());
-        current = (Team) q.getSingleResult();
-        for (Match match : current.getMatches()) {
-            q = em.createQuery("SELECT m FROM tmatch AS m LEFT JOIN FETCH m.teams WHERE m.id = :mid");
-            q.setParameter("mid", match.getId());
-            match = (Match) q.getSingleResult();
-        }
+        current.setMatches(q.getResultList());
         return current.getMatches();
     }
 
