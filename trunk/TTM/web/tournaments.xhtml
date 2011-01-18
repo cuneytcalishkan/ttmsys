@@ -5,6 +5,9 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <hr/>
     <h:panelGrid columns="2" border="0">
+        <f:facet name="header">
+            <h:outputText value="TOURNAMENTS INFO"/>
+        </f:facet>
         <h:form>
             <h:dataTable value="#{mainPageManagedBean.tournaments}" var="item" border="1">
                 <f:facet name="header">
