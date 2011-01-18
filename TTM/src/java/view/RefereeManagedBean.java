@@ -37,17 +37,19 @@ public class RefereeManagedBean implements Serializable {
     }
 
     public List<Tournament> getTournaments() {
-        Query q = em.createQuery("SELECT m FROM Referee r JOIN r.tournaments m"
+        Query q = em.createQuery("SELECT r FROM Referee r LEFT JOIN FETCH r.tournaments m"
                 + " where r.id = :rid");
         q.setParameter("rid", referee.getId());
-        return q.getResultList();
+        referee = (Referee) q.getSingleResult();
+        return referee.getTournaments();
     }
 
     public List<Match> getMatches() {
-        Query q = em.createQuery("SELECT m FROM Referee r JOIN r.matches m" 
+        Query q = em.createQuery("SELECT r FROM Referee r LEFT JOIN FETCH r.matches m"
                 + " where r.id = :rid");
         q.setParameter("rid", referee.getId());
-        return q.getResultList();
+        referee = (Referee) q.getSingleResult();
+        return referee.getMatches();
     }
 
     public void linkIT(ActionEvent event) {
@@ -72,5 +74,4 @@ public class RefereeManagedBean implements Serializable {
     public void setSelectedMatch(Match selectedMatch) {
         this.selectedMatch = selectedMatch;
     }
-
 }

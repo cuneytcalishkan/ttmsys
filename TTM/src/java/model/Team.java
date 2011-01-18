@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +32,7 @@ public abstract class Team implements Serializable {
     private List<Match> matches;
     @ManyToOne
     private Tournament tournament;
-    @ManyToMany(targetEntity = Player.class)
+    @ManyToMany(targetEntity = Player.class, fetch = FetchType.EAGER)
     private List<Player> players;
     @OneToMany(mappedBy = "team")
     private List<MatchStatistics> statistics;

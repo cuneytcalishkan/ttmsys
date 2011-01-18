@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,7 +39,7 @@ public class Match implements Serializable {
     @OneToMany
     @JoinColumn(name = "matchid")
     private List<Set> sets;
-    @ManyToMany(targetEntity = Team.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Team.class)
     private List<Team> teams;
     @ManyToMany(targetEntity = Umpire.class)
     private List<Umpire> umpires;
