@@ -8,9 +8,11 @@
     </h:head>
     <h:body>
         <f:view>
-            <h2>Tournament Join Requests</h2>
             <h:form>
                 <h:dataTable value="#{managerManagedBean.tournamentJoinRequests}" var="item" border="1">
+                    <f:facet name="header">
+                        <h:outputText value="Tournament Join Requests"/>
+                    </f:facet>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Tournament"/>
