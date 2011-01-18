@@ -137,6 +137,14 @@ public class Tournament implements Serializable {
         this.courts = courts;
     }
 
+    public void removeCourt(Court co){
+        courts.remove(co);
+    }
+
+    public void addCourt(Court co){
+        courts.add(co);
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -161,12 +169,36 @@ public class Tournament implements Serializable {
         this.teams = teams;
     }
 
+    public void removeTeam(Team team){
+        teams.remove(team);
+    }
+
+    public void addTeam(Team team){
+        teams.add(team);
+    }
+
     public void setReferees(List<Referee> referees) {
         this.referees = referees;
     }
 
+    public void removeReferee(Referee ref){
+        referees.remove(ref);
+    }
+
+    public void addReferee(Referee ref){
+        referees.add(ref);
+    }
+
     public void setUmpires(List<Umpire> umpires) {
         this.umpires = umpires;
+    }
+
+    public void removeUmpire(Umpire ump){
+        umpires.remove(ump);
+    }
+
+    public void addUmpire(Umpire ump){
+        umpires.add(ump);
     }
 
     public String getReport() {
