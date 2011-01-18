@@ -109,7 +109,7 @@ public class TournamentManagedBean implements Serializable {
         current.generateDraw();
         try{
             utx.begin();
-            em.merge(current);
+            em.persist(em.merge(current));
             utx.commit();
         }catch(Exception e){
             try{

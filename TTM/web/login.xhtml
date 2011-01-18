@@ -1,27 +1,30 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Login to Tennis Tournament Management System</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
-        <h2>Login</h2>
-        <h:messages style="color: red"> </h:messages>
-        <h:form>
-            <p>
-                <h:outputLabel for="username" value="Username"/>
-                <h:inputText id="username" value="#{User.username}"/>
-            </p>
-            <p>
-                <h:outputLabel for="password" value="Password"/>
-                <h:inputSecret id="password" value="#{User.password}"/>
-            </p>
-            <p>
-                <h:commandButton value="Login" action="#{User.validateUser}"/>
-                <h:commandButton value="Create Account" action="create"/>
-            </p>
-        </h:form>
+        <f:view>
+            <h:panelGrid columns="1" border="0">
+                <h:messages style="color: red"> </h:messages>
+                <h:form>
+                    <h:panelGrid columns="2" border="0">
+                        <f:facet name="header">
+                            <h:outputText value="LOGIN"/>
+                        </f:facet>
+                        <h:outputLabel for="username" value="Username"/>
+                        <h:inputText id="username" value="#{User.username}"/>
+                        <h:outputLabel for="password" value="Password"/>
+                        <h:inputSecret id="password" value="#{User.password}"/>
+                        <h:commandButton value="Login" action="#{User.validateUser}"/>
+                        <h:commandButton value="Create Account" action="create"/>
+                    </h:panelGrid>
+                </h:form>
+            </h:panelGrid>
+        </f:view>
     </h:body>
 </html>

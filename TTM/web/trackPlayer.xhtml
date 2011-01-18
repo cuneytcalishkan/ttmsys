@@ -11,21 +11,25 @@
     <h:body>
         <ui:include src="header.xhtml"/>
         <hr/>
-        <h2>Teams available for tracking</h2>
         <f:view>
-            <h:form>
-                <h:dataTable value="#{trackerManagedBean.trackList}" var="item" border="1">
-                    <h:column>
+            <h:panelGrid columns="1" border="0">
+                <h:form>
+                    <h:dataTable value="#{trackerManagedBean.trackList}" var="item" border="1">
                         <f:facet name="header">
-                            <h:outputText value="Team"/>
+                            <h:outputText value="Teams available for tracking"/>
                         </f:facet>
-                        <h:outputText value="#{item}"/>
-                    </h:column>
-                    <h:column>
-                        <h:commandButton value="Track" action="#{trackerManagedBean.trackTeam(item)}"/>
-                    </h:column>
-                </h:dataTable>
-            </h:form>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Team"/>
+                            </f:facet>
+                            <h:outputText value="#{item}"/>
+                        </h:column>
+                        <h:column>
+                            <h:commandButton value="Track" action="#{trackerManagedBean.trackTeam(item)}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </h:panelGrid>
         </f:view>
 
     </h:body>

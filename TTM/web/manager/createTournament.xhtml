@@ -12,42 +12,47 @@
         <ui:include src="../header.xhtml"/>
         <hr/>
         <f:view>
-            <h:form>
-                <h:panelGrid columns="3" border="0">
-                    <h:outputLabel value="Name" for="name"/>
-                    <h:inputText id="name" value="#{tournamentManagedBean.name}" required="true" requiredMessage="*"/>
-                    <h:message for="name" style="color:red"/>
+            <h:panelGrid columns="1" border="0">
+                <h:form>
+                    <h:panelGrid columns="3" border="0">
+                        <f:facet name="header">
+                            <h:outputText value="Create New Tournament"/>
+                        </f:facet>
+                        <h:outputLabel value="Name" for="name"/>
+                        <h:inputText id="name" value="#{tournamentManagedBean.name}" required="true" requiredMessage="*"/>
+                        <h:message for="name" style="color:red"/>
 
-                    <h:outputLabel value="Type" for="type"/>
-                    <h:selectOneMenu id="type" value="#{tournamentManagedBean.type}" required="true" requiredMessage="*">
-                        <f:selectItems value="#{tournamentManagedBean.tournamentTypes}"/>
-                    </h:selectOneMenu>
-                    <h:message for="type" style="color:red"/>
+                        <h:outputLabel value="Type" for="type"/>
+                        <h:selectOneMenu id="type" value="#{tournamentManagedBean.type}" required="true" requiredMessage="*">
+                            <f:selectItems value="#{tournamentManagedBean.tournamentTypes}"/>
+                        </h:selectOneMenu>
+                        <h:message for="type" style="color:red"/>
 
-                    <h:outputLabel value="Start Date" for="startDate"/>
-                    <h:inputText id="startDate" value="#{tournamentManagedBean.startDate}" required="true" requiredMessage="*">
-                        <f:convertDateTime pattern="yyyy-MM-dd" type="date"/>
-                    </h:inputText>
-                    <h:message for="startDate" style="color:red"/>
+                        <h:outputLabel value="Start Date" for="startDate"/>
+                        <h:inputText id="startDate" value="#{tournamentManagedBean.startDate}" required="true" requiredMessage="*">
+                            <f:convertDateTime pattern="yyyy-MM-dd" type="date"/>
+                        </h:inputText>
+                        <h:message for="startDate" style="color:red"/>
 
-                    <h:outputLabel value="End Date" for="endDate"/>
-                    <h:inputText id="endDate" value="#{tournamentManagedBean.endDate}" required="true" requiredMessage="*">
-                        <f:convertDateTime pattern="yyyy-MM-dd" type="date"/>
-                    </h:inputText>
-                    <h:message for="endDate" style="color:red"/>
+                        <h:outputLabel value="End Date" for="endDate"/>
+                        <h:inputText id="endDate" value="#{tournamentManagedBean.endDate}" required="true" requiredMessage="*">
+                            <f:convertDateTime pattern="yyyy-MM-dd" type="date"/>
+                        </h:inputText>
+                        <h:message for="endDate" style="color:red"/>
 
-                    <h:outputLabel value="Prize" for="prize"/>
-                    <h:inputText id="prize" value="#{tournamentManagedBean.prize}" required="true" requiredMessage="*"/>
-                    <h:message for="prize" style="color:red"/>
+                        <h:outputLabel value="Prize" for="prize"/>
+                        <h:inputText id="prize" value="#{tournamentManagedBean.prize}" required="true" requiredMessage="*"/>
+                        <h:message for="prize" style="color:red"/>
 
-                    <h:outputLabel value="Report" for="report"/>
-                    <h:inputTextarea id="report" value="#{tournamentManagedBean.report}"/>
-                    <h:message for="report" style="color:red"/>
+                        <h:outputLabel value="Report" for="report"/>
+                        <h:inputTextarea id="report" value="#{tournamentManagedBean.report}"/>
+                        <h:message for="report" style="color:red"/>
 
-                    <h:commandButton value="Create" action="#{tournamentManagedBean.createTournament}"/>
-                    <h:commandButton type="reset" value="Reset"/>
-                </h:panelGrid>
-            </h:form>
+                        <h:commandButton value="Create" action="#{tournamentManagedBean.createTournament}"/>
+                        <h:commandButton type="reset" value="Reset"/>
+                    </h:panelGrid>
+                </h:form>
+            </h:panelGrid>
         </f:view>
     </h:body>
 </html>
