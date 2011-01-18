@@ -32,7 +32,9 @@ public class Manager extends RegisteredUser {
     public void verifyTournamentRequest(TournamentJoinRequest tjr, boolean ok) {
         if (tournaments.contains(tjr.getTournament())) {
             if (ok) {
-                tournaments.get(tournaments.indexOf(tjr)).joinTournament(tjr.getTeam());
+                Tournament t = tournaments.get(tournaments.indexOf(tjr.getTournament()));
+                t.joinTournament(tjr.getTeam());
+                tjr.getTeam().setTournament(t);
             }
             tournamentRequests.remove(tjr);
         }
