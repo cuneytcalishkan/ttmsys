@@ -129,8 +129,20 @@ public class PlayerManagedBean implements Serializable {
     }
 
     public List<Player> getOtherPlayers() {
-        Query q = em.createQuery("from Player p WHERE p.id != :pid");
+        /*Query q = em.createQuery("select distinct p from Player p "
+                + "WHERE p.id != :pid");
+        Query q = em.createQuery("select distinct p from Player p "
+                + "join p.teams team JOIN team.tournament t "
+                + "WHERE p.id != :pid AND ( not exists(from p.teams) OR t.id != :tid)");*/
+        Query q = em.createQuery("select distinct p from Player p "
+                + "WHERE p.id != :pid AND p not in "
+                + "(select distinct pl from Player pl "
+                + "join pl.teams tm join tm.tournament tr "
+                + "where tr.id = :tid) AND p not in "
+                + "(select distinct pla from TournamentJoinRequest tjr "
+                + "join tjr.team tea join tea.players pla)");
         q.setParameter("pid", current.getId());
+        q.setParameter("tid", selectedTournament.getId());
         List<Player> players = q.getResultList();
         return players;
     }
