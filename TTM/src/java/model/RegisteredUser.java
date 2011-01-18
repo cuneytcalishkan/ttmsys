@@ -51,6 +51,11 @@ public class RegisteredUser implements Serializable {
         this.password = password;
     }
 
+    @Override
+    public String toString(){
+        return name + " " + surname;
+    }
+
     public void addToTrackList(Team p) {
         if (trackList == null) {
             trackList = new ArrayList<Team>();
