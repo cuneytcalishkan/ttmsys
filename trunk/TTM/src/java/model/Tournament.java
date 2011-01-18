@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -39,7 +40,7 @@ public class Tournament implements Serializable {
     private Date endDate;
     @Column(nullable = false)
     private double prize;
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Draw draw;
     @OneToMany(mappedBy = "tournament")
     private List<Team> teams;

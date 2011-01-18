@@ -56,8 +56,8 @@ public class PlayerManagedBean implements Serializable {
             result.addAll(q.getResultList());
         }
         return result;*/
-        Query q = em.createQuery("Select m FROM Match m join m.teams t join t.players p where p.id = :pid");
-        q.setParameter("pid", current);
+        Query q = em.createQuery("Select m FROM tmatch m");
+        //q.setParameter("pid", current.getId());
         return q.getResultList();
     }
 
@@ -106,13 +106,6 @@ public class PlayerManagedBean implements Serializable {
                 TournamentJoinRequest tjr = new TournamentJoinRequest(selectedTournament, team);
                 tjr.setManager(selectedTournament.getManager());
                 em.persist(tjr);
-                /*Query q = em.createQuery("select man from Manager AS man left join fetch man.tournamentRequests tr"
-                        + " where man.id = :mid");
-                q.setParameter("mid", selectedTournament.getManager().getId());
-                Manager tManager = (Manager) q.getSingleResult();
-                tManager.addTournamentJoinRequest(tjr);
-
-                em.merge(tManager);*/
                 utx.commit();
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.addMessage(null, new FacesMessage("Your request to join tournament is sent to the Manager."));
@@ -129,14 +122,8 @@ public class PlayerManagedBean implements Serializable {
             try {
                 TournamentJoinRequest tjr = new TournamentJoinRequest(selectedTournament, team);
                 tjr.setManager(selectedTournament.getManager());
-                /*Manager tManager = selectedTournament.getManager();
-                Query q = em.createQuery("select man from Manager AS man left join fetch man.tournamentRequests where man.id = :mid");
-                q.setParameter("mid", tManager.getId());
-                tManager = (Manager) q.getSingleResult();
-                tManager.addTournamentJoinRequest(tjr);*/
                 utx.begin();
                 em.persist(tjr);
-                //em.merge(tManager);
                 utx.commit();
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.addMessage(null, new FacesMessage("Your request to join tournament is sent to the Manager."));
