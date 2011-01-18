@@ -43,7 +43,7 @@ public class PlayerManagedBean implements Serializable {
     }
 
     public List<Match> getMatches() {
-        Query q = em.createQuery("Select m FROM tmatch m join m.teams t join t.players p where p.id = :pid");
+        Query q = em.createQuery("Select distinct m FROM tmatch m join m.teams t join t.players p where p.id = :pid");
         q.setParameter("pid", current.getId());
         return q.getResultList();
     }
@@ -134,7 +134,7 @@ public class PlayerManagedBean implements Serializable {
     }
 
     public List<Tournament> getTournaments() {
-        Query q = em.createQuery("select t from Tournament t join t.teams team join team.players p where p.id = :pid ");
+        Query q = em.createQuery("select distinct t from Tournament t join t.teams team join team.players p where p.id = :pid ");
         q.setParameter("pid", current.getId());
         return q.getResultList();
     }

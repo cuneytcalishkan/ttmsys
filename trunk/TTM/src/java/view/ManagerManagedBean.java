@@ -13,17 +13,19 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 import model.Manager;
 import model.MembershipRequest;
+import model.Player;
+import model.Referee;
 import model.RegisteredUser;
 import model.Team;
 import model.Tournament;
 import model.TournamentJoinRequest;
+import model.Umpire;
 
 @Named(value = "managerManagedBean")
 @SessionScoped
@@ -148,6 +150,19 @@ public class ManagerManagedBean implements Serializable {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("Operation Failed"));
         }
+    }
+
+    public List<RegisteredUser> getUsers(){
+        Query q = em.createQuery("from RegisteredUser");
+        return q.getResultList();
+    }
+
+    public String typeOf(RegisteredUser ru){
+        if(ru instanceof Manager) return "Manager";
+        else if(ru instanceof Referee) return "Referee";
+        else if(ru instanceof Umpire) return "Umpire";
+        else if(ru instanceof Player) return "Player";
+        else return "Registered User";
     }
 
     public Manager getManager() {
