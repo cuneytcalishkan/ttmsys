@@ -8,9 +8,11 @@
     </h:head>
     <h:body>
         <f:view>
-            <h2><h:outputText value="Membership Requests"/></h2>
             <h:form>
                 <h:dataTable value="#{managerManagedBean.membershipRequests}" var="item" border="1">
+                    <f:facet name="header">
+                        <h:outputText value="Membership Requests"/>
+                    </f:facet>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Name"/>
