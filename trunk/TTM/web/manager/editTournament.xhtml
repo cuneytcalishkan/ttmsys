@@ -57,7 +57,7 @@
                             <h:outputText value="Teams"/>
                         </f:facet>
                         <h:column>
-                            <h:outputText value="#{item}"/>
+                            <h:commandLink value="#{item}" action="#{teamManagedBean.linkTeam(item)}"/>
                         </h:column>
                     </h:dataTable>
                 </h:form>
@@ -67,7 +67,7 @@
                             <h:outputText value="Draw"/>
                         </f:facet>
                         <h:column>
-                            <h:outputText value="#{item}"/>
+                            <h:commandLink value="#{item}" action="#{drawManagedBean.linkDraw(item)}"/>
                         </h:column>
                     </h:dataTable>
                     <h:commandButton value="Generate" action="#{tournamentManagedBean.generateDraws}"/>
