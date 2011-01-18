@@ -31,9 +31,7 @@ public class DrawManagedBean implements Serializable {
     }
 
     public String linkDraw(Draw d) {
-        Query q = em.createQuery("FROM Draw d WHERE d.id = :did");
-        q.setParameter("did", d.getId());
-        current = (Draw) q.getSingleResult();
+        current = d;
         awayDraw = d.getAwayDraw();
         homeDraw = d.getHomeDraw();
         return "manager:editDraw";

@@ -38,14 +38,14 @@
                             <f:facet name="header">
                                 <h:outputText value="Home Draw"/>
                             </f:facet>
-                            <h:commandLink value="#{drawManagedBean.current.homeDraw}"
+                            <h:commandLink value="#{drawManagedBean.homeDraw}"
                                            action="#{drawManagedBean.linkDraw(drawManagedBean.homeDraw)}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Away Draw"/>
                             </f:facet>
-                            <h:commandLink value="#{drawManagedBean.current.awayDraw}"
+                            <h:commandLink value="#{drawManagedBean.awayDraw}"
                                            action="#{drawManagedBean.linkDraw(drawManagedBean.awayDraw)}"/>
                         </h:column>
                     </h:dataTable>
