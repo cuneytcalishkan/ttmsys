@@ -9,7 +9,7 @@
         <ui:include src="header.xhtml"/>
     </h:head>
     <h:body>
-        <h:panelGrid columns="2" border="0">
+        <h:panelGrid columns="3" border="0">
             <h:form>
                 <h:dataTable value="#{mainPageManagedBean.selectedTournament}" var ="item" border="1">
                     <h:column>
@@ -49,6 +49,16 @@
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Referees"/>
+                        </f:facet>
+                        <h:outputText value="#{item}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+            <h:form>
+                <h:dataTable value="#{mainPageManagedBean.selectedTournament.umpires}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Umpires"/>
                         </f:facet>
                         <h:outputText value="#{item}"/>
                     </h:column>

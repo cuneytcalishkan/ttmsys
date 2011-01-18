@@ -189,6 +189,8 @@ public class RegisteredUserManagedBean implements Serializable {
                 utx.begin();
                 em.persist(mr);
                 utx.commit();
+                FacesMessage message = new FacesMessage("Your membership request is sent to the managers.");
+                context.addMessage(null, message);
                 return "index";
             } catch (Exception e) {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
