@@ -60,6 +60,11 @@ public class MainPageManagedBean {
                 + "WHERE t.id = :tid");
         q.setParameter("tid", selectedTournament.getId());
         selectedTournament.setMatches(q.getResultList());
+        q = em.createQuery("select r from Referee r "
+                + "join r.tournaments t "
+                + "where t.id = :tid");
+        q.setParameter("tid", selectedTournament.getId());
+        selectedTournament.setReferees(q.getResultList());
         return selectedTournament;
     }
 
