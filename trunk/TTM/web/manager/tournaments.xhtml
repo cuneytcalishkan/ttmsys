@@ -61,6 +61,32 @@
                     </p>
                 </h:form>
             </f:view>
+            <f:view>
+                <h:panelGrid>
+                <h:form>
+                    <h:dataTable value="#{managerManagedBean.courts}" var="item">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Court Name"/>
+                            </f:facet>
+                            <h:outputText value="#{item.name}"/>
+                        </h:column>
+                        <h:column>
+                            <h:commandLink value="Remove" action="#{managerManagedBean.removeCourt(item)}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+                <h:form>
+                    <h:panelGrid columns="4">
+                        <h:outputText value="Court name:"/>
+                        <h:inputText id="courtName" value="#{managerManagedBean.courtName}" required="true" requiredMessage="*"/>
+                        <h:message for="courtName" style="color: red"/>
+                        <h:commandButton value="Create" action="#{managerManagedBean.addCourt}"/>
+                    </h:panelGrid>
+                </h:form>
+                </h:panelGrid>
+            </f:view>
+
         </h:panelGrid>
     </h:body>
 </html>

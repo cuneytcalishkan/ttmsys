@@ -51,45 +51,91 @@
                         <h:commandButton type="reset" value="Reset"/>
                     </h:panelGrid>
                 </h:form>
-                <h:form>
-                    <h:dataTable value="#{tournamentManagedBean.current.referees}" var="item">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Referees"/>
-                            </f:facet>
-                            <h:outputText value="#{item}"/>
-                        </h:column>
-                        <h:column>
-                            <h:commandButton value="Remove" action="#{tournamentManagedBean.removeReferee(item)}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:form>
-                <h:form>
-                    <h:dataTable value="#{tournamentManagedBean.current.umpires}" var="item">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Umpires"/>
-                            </f:facet>
-                            <h:outputText value="#{item}"/>
-                        </h:column>
-                        <h:column>
-                            <h:commandButton value="Remove" action="#{tournamentManagedBean.removeUmpire(item)}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:form>
-                <h:form>
-                    <h:dataTable value="#{tournamentManagedBean.current.courts}" var="item">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Courts"/>
-                            </f:facet>
-                            <h:outputText value="#{item}"/>
-                        </h:column>
-                        <h:column>
-                            <h:commandButton value="Remove" action="#{tournamentManagedBean.removeCourt(item)}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:form>
+                <h:panelGrid>
+                    <h:form>
+                        <h:dataTable value="#{tournamentManagedBean.current.referees}" var="item">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Referees"/>
+                                </f:facet>
+                                <h:outputText value="#{item}"/>
+                            </h:column>
+                            <h:column>
+                                <h:commandLink value="Remove" action="#{tournamentManagedBean.removeReferee(item)}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                    <h:form>
+                        <h:dataTable value="#{tournamentManagedBean.otherReferees}" var="item">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Other Referees"/>
+                                </f:facet>
+                                <h:outputText value="#{item}"/>
+                            </h:column>
+                            <h:column>
+                                <h:commandLink value="Add" action="#{tournamentManagedBean.addReferee(item)}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+
+                </h:panelGrid>
+                <h:panelGrid>
+                    <h:form>
+                        <h:dataTable value="#{tournamentManagedBean.current.umpires}" var="item">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Umpires"/>
+                                </f:facet>
+                                <h:outputText value="#{item}"/>
+                            </h:column>
+                            <h:column>
+                                <h:commandLink value="Remove" action="#{tournamentManagedBean.removeUmpire(item)}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                    <h:form>
+                        <h:dataTable value="#{tournamentManagedBean.otherUmpires}" var="item">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Other Referees"/>
+                                </f:facet>
+                                <h:outputText value="#{item}"/>
+                            </h:column>
+                            <h:column>
+                                <h:commandLink value="Add" action="#{tournamentManagedBean.addUmpire(item)}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </h:panelGrid>
+                <h:panelGrid>
+                    <h:form>
+                        <h:dataTable value="#{tournamentManagedBean.current.courts}" var="item">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Courts"/>
+                                </f:facet>
+                                <h:outputText value="#{item}"/>
+                            </h:column>
+                            <h:column>
+                                <h:commandLink value="Remove" action="#{tournamentManagedBean.removeCourt(item)}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                    <h:form>
+                        <h:dataTable value="#{tournamentManagedBean.otherCourts}" var="item">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Other Courts"/>
+                                </f:facet>
+                                <h:outputText value="#{item}"/>
+                            </h:column>
+                            <h:column>
+                                <h:commandLink value="Add" action="#{tournamentManagedBean.addCourt(item)}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </h:panelGrid>
                 <h:form>
                     <h:dataTable value="#{tournamentManagedBean.teams}" var="item">
                         <f:facet name="header">

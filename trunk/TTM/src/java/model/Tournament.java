@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
@@ -46,8 +47,10 @@ public class Tournament implements Serializable {
     @OneToMany(mappedBy = "tournament")
     private List<Match> matches;
     @ManyToMany(targetEntity = Umpire.class)
+    @JoinTable(name="tournament_umpire")
     private List<Umpire> umpires;
     @ManyToMany(targetEntity = Referee.class)
+    @JoinTable(name="tournament_referee")
     private List<Referee> referees;
     @ManyToMany(targetEntity = Court.class)
     private List<Court> courts;
