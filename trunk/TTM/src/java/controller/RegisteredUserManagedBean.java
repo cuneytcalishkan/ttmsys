@@ -189,7 +189,7 @@ public class RegisteredUserManagedBean implements Serializable {
                 utx.begin();
                 em.persist(mr);
                 utx.commit();
-                return "login";
+                return "index";
             } catch (Exception e) {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Error creating user!",
