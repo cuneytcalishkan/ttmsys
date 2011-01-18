@@ -124,9 +124,8 @@ public class ManagerManagedBean implements Serializable {
 
     }
 
-    public void acceptMembershipRequest(ActionEvent event) {
+    public void acceptMembershipRequest(MembershipRequest req) {
         try {
-            MembershipRequest req = (MembershipRequest) event.getComponent().getAttributes().get("request");
             RegisteredUser user = manager.verifyMembership(req);
             utx.begin();
             em.remove(em.merge(req));
@@ -139,8 +138,7 @@ public class ManagerManagedBean implements Serializable {
         }
     }
 
-    public void denyMembershipRequest(ActionEvent event) {
-        MembershipRequest req = (MembershipRequest) event.getComponent().getAttributes().get("request");
+    public void denyMembershipRequest(MembershipRequest req) {
         try {
             utx.begin();
             em.remove(em.merge(req));
