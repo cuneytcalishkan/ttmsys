@@ -54,6 +54,7 @@ public class MainPageManagedBean {
     }
 
     public Tournament getSelectedTournament() {
+        if(selectedTournament == null) return null;
         Query q = em.createQuery("SELECT distinct m FROM tmatch m "
                 + "LEFT JOIN FETCH m.teams "
                 + "JOIN m.tournament t "
