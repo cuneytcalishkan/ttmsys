@@ -7,51 +7,49 @@
         <title>Umpire Matches</title>
     </h:head>
     <h:body>
-        <h2>Assigned Matches</h2>
         <f:view>
-            <h:form>
-                <h:dataTable value="#{umpireManagedBean.matches}" var="item" border="1" title="Matches">
-                    <!--<h:column>
+            <h:panelGrid columns="1" border="0">
+                <h:form>
+                    <h:dataTable value="#{umpireManagedBean.matches}" var="item" border="1" title="Matches">
                         <f:facet name="header">
-                            <h:outputText value="Teams"/>
+                            <h:outputText value="Assigned Matches"/>
                         </f:facet>
-                        <h:outputText value="#{item.teams.players.name}"/>
-                    </h:column>-->
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Date"/>
-                        </f:facet>
-                        <h:outputText value="#{item.mDate}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Time"/>
-                        </f:facet>
-                        <h:outputText value="#{item.mTime}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Court"/>
-                        </f:facet>
-                        <h:outputText value="#{item.court.name}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Score"/>
-                        </f:facet>
-                        <h:outputText value="#{item.score}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Statistics"/>
-                        </f:facet>
-                        <h:outputText value="#{item.statistics}"/>
-                    </h:column>
-                    <h:column>
-                        <h:commandButton value="Add/Edit Statistics" action="#{umpireManagedBean.linkStatistics(item)}"/>
-                    </h:column>
-                </h:dataTable>
-            </h:form>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Date"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mDate}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Time"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mTime}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Court"/>
+                            </f:facet>
+                            <h:outputText value="#{item.court.name}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Score"/>
+                            </f:facet>
+                            <h:outputText value="#{item.score}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Statistics"/>
+                            </f:facet>
+                            <h:outputText value="#{item.statistics}"/>
+                        </h:column>
+                        <h:column>
+                            <h:commandButton value="Add/Edit Statistics" action="#{umpireManagedBean.linkStatistics(item)}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </h:panelGrid>
         </f:view>
 
     </h:body>
