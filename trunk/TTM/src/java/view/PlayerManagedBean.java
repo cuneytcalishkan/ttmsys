@@ -47,7 +47,7 @@ public class PlayerManagedBean implements Serializable {
     public List<Match> getMatches() {
         /*Query q = em.createQuery("SELECT teams FROM Player as player JOIN player.teams as teams WHERE player.id = :pid");
         q.setParameter("pid", current.getId());*/
-        List<Team> teams = current.getTeams();//q.getResultList();
+        /*List<Team> teams = current.getTeams();//q.getResultList();
         List<Match> result = new ArrayList<Match>();
         for (Team team : teams) {
             //Query q = em.createQuery("SELECT tm FROM Team t join t.matches tm WHERE t.id = :tid");
@@ -55,7 +55,10 @@ public class PlayerManagedBean implements Serializable {
             q.setParameter("tid", team.getId());
             result.addAll(q.getResultList());
         }
-        return result;
+        return result;*/
+        Query q = em.createQuery("Select m FROM Match m join m.teams t join t.players p where p.id = :pid");
+        q.setParameter("pid", current);
+        return q.getResultList();
     }
 
     public String applyTournament(Tournament tr) {
@@ -101,14 +104,15 @@ public class PlayerManagedBean implements Serializable {
                 utx.begin();
                 em.persist(team);
                 TournamentJoinRequest tjr = new TournamentJoinRequest(selectedTournament, team);
+                tjr.setManager(selectedTournament.getManager());
                 em.persist(tjr);
-                Query q = em.createQuery("select man from Manager AS man left join fetch man.tournamentRequests tr"
+                /*Query q = em.createQuery("select man from Manager AS man left join fetch man.tournamentRequests tr"
                         + " where man.id = :mid");
                 q.setParameter("mid", selectedTournament.getManager().getId());
                 Manager tManager = (Manager) q.getSingleResult();
                 tManager.addTournamentJoinRequest(tjr);
 
-                em.merge(tManager);
+                em.merge(tManager);*/
                 utx.commit();
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.addMessage(null, new FacesMessage("Your request to join tournament is sent to the Manager."));
@@ -124,14 +128,15 @@ public class PlayerManagedBean implements Serializable {
         if (team != null) {
             try {
                 TournamentJoinRequest tjr = new TournamentJoinRequest(selectedTournament, team);
-                Manager tManager = selectedTournament.getManager();
+                tjr.setManager(selectedTournament.getManager());
+                /*Manager tManager = selectedTournament.getManager();
                 Query q = em.createQuery("select man from Manager AS man left join fetch man.tournamentRequests where man.id = :mid");
                 q.setParameter("mid", tManager.getId());
                 tManager = (Manager) q.getSingleResult();
-                tManager.addTournamentJoinRequest(tjr);
+                tManager.addTournamentJoinRequest(tjr);*/
                 utx.begin();
                 em.persist(tjr);
-                em.merge(tManager);
+                //em.merge(tManager);
                 utx.commit();
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.addMessage(null, new FacesMessage("Your request to join tournament is sent to the Manager."));
