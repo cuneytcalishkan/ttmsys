@@ -56,7 +56,9 @@
                     </f:facet>
                     <h:panelGrid columns="3" border="0">
                         <h:outputLabel for="mDate" value="Date"/>
-                        <h:inputText id="mDate" value="#{drawManagedBean.mDate}" required="true" requiredMessage="*"/>
+                        <h:inputText id="mDate" value="#{drawManagedBean.mDate}" required="true" requiredMessage="*">
+                            <f:convertDateTime pattern="yyyy-MM-dd" for="mDate" type="date"/>
+                        </h:inputText>
                         <h:message for="mDate" style="color: red"/>
 
                         <h:outputLabel for="mTime" value="Time"/>

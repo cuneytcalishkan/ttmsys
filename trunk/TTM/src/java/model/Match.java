@@ -5,7 +5,6 @@
 package model;
 
 import java.io.Serializable;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,7 +32,7 @@ public class Match implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date mDate;
     @Column(nullable = false)
-    private Time mTime;
+    private String mTime;
     private int homeTeamScore;
     private int awayTeamScore;
     private String report;
@@ -61,18 +60,18 @@ public class Match implements Serializable {
         statistics = new MatchStatistics();
     }
 
-    public Match(Date mDate, Time mTime) {
+    public Match(Date mDate, String mTime) {
         this();
         this.mDate = mDate;
         this.mTime = mTime;
     }
 
-    public Match(Date mDate, Time mTime, Court court) {
+    public Match(Date mDate, String mTime, Court court) {
         this(mDate, mTime);
         this.court = court;
     }
 
-    public Match(Date mDate, Time mTime, List<Team> teams, Court court) {
+    public Match(Date mDate, String mTime, List<Team> teams, Court court) {
         this(mDate, mTime, court);
         this.teams = teams;
     }
@@ -177,7 +176,7 @@ public class Match implements Serializable {
         this.mDate = mDate;
     }
 
-    public void setmTime(Time mTime) {
+    public void setmTime(String mTime) {
         this.mTime = mTime;
     }
 
@@ -217,7 +216,7 @@ public class Match implements Serializable {
         return mDate;
     }
 
-    public Time getmTime() {
+    public String getmTime() {
         return mTime;
     }
 
@@ -244,7 +243,7 @@ public class Match implements Serializable {
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         if (teams.size() > 1) {
             result += (teams.get(0) == null ? "-" : teams.get(0)) + " vs " + (teams.get(1) == null ? "-" : teams.get(1)) + ", " + df.format(mDate) + ", " + mTime;
-        }else{
+        } else {
             result += (teams.get(0) == null ? "-" : teams.get(0)) + " vs -";
         }
         return result;

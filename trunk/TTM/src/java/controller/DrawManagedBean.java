@@ -5,7 +5,6 @@
 package controller;
 
 import java.io.Serializable;
-import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
@@ -37,7 +36,7 @@ public class DrawManagedBean implements Serializable {
     private Team homeTeam;
     private Team awayTeam;
     private Date mDate;
-    private Time mTime;
+    private String mTime;
     private List<Umpire> mUmpires;
     private List<Referee> mReferees;
     private Court court;
@@ -205,11 +204,11 @@ public class DrawManagedBean implements Serializable {
         this.mReferees = mReferees;
     }
 
-    public Time getmTime() {
+    public String getmTime() {
         return mTime;
     }
 
-    public void setmTime(Time mTime) {
+    public void setmTime(String mTime) {
         this.mTime = mTime;
     }
 
