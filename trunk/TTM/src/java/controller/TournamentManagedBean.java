@@ -18,10 +18,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
+import model.Court;
 import model.Draw;
 import model.Manager;
+import model.Referee;
 import model.Team;
 import model.Tournament;
+import model.Umpire;
 
 @Named(value = "tournamentManagedBean")
 @SessionScoped
@@ -90,14 +93,14 @@ public class TournamentManagedBean implements Serializable {
     }
 
     public List<Team> getTeams() {
-        String query = "select t from Tournament t left join fetch t.teams "
+        String query = "select distinct t from Tournament t left join fetch t.teams "
                 + "where t.id = :tid";
         Query q = em.createQuery(query);
         q.setParameter("tid", current.getId());
         current = (Tournament) q.getSingleResult();
 
         for (Team team : current.getTeams()) {
-            query = "select team from Team team left join fetch team.players where team.id = :tid";
+            query = "select distinct team from Team team where team.id = :tid";
             q = em.createQuery(query);
             q.setParameter("tid", team.getId());
             team = (Team) q.getSingleResult();
@@ -187,11 +190,86 @@ public class TournamentManagedBean implements Serializable {
         }
     }
 
+    public String removeReferee(Referee ref) {
+        current.removeReferee(ref);
+        try {
+            utx.begin();
+            em.merge(current);
+            utx.commit();
+        } catch (Exception e) {
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
+        }
+        return null;
+    }
+
+    public String removeUmpire(Umpire ump) {
+        current.removeUmpire(ump);
+        try {
+            utx.begin();
+            em.merge(current);
+            utx.commit();
+        } catch (Exception e) {
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
+        }
+        return null;
+    }
+
+    public String removeCourt(Court court){
+        current.removeCourt(court);
+        try {
+            utx.begin();
+            em.merge(current);
+            utx.commit();
+        } catch (Exception e) {
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
+        }
+        return null;
+    }
+
+    public String removeTeam(Team team){
+        current.removeTeam(team);
+        try {
+            utx.begin();
+            em.merge(current);
+            utx.commit();
+        } catch (Exception e) {
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
+        }
+        return null;
+    }
+
     public List<Draw> getDraw() {
         return current.getDrawList();
     }
 
     public Tournament getCurrent() {
+        Query q = em.createQuery("select distinct r from Referee r "
+                + "join r.tournaments t "
+                + "where t.id = :tid");
+        q.setParameter("tid", current.getId());
+        current.setReferees(q.getResultList());
+        q = em.createQuery("select distinct u from Umpire u "
+                + "join u.tournaments t "
+                + "where t.id = :tid");
+        q.setParameter("tid", current.getId());
+        current.setUmpires(q.getResultList());
+        q = em.createQuery("select distinct c from Court c "
+                + "join c.tournaments t "
+                + "where t.id = :tid");
+        q.setParameter("tid", current.getId());
+        current.setCourts(q.getResultList());
         return current;
     }
 
