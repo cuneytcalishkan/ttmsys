@@ -13,7 +13,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
 import model.Player;
-import model.RegisteredUser;
 import model.Tournament;
 
 @ManagedBean
@@ -22,6 +21,7 @@ public class MainPageManagedBean {
 
     @PersistenceContext
     private EntityManager em;
+    private Tournament selectedTournament;
 
     /** Creates a new instance of MainPageManagedBean */
     public MainPageManagedBean() {
@@ -52,4 +52,21 @@ public class MainPageManagedBean {
         List list = q.getResultList();
         return list;
     }
+
+    public Tournament getSelectedTournament() {
+        Query q = em.createQuery("SELECT m FROM tmatch m "
+                + "LEFT JOIN FETCH m.teams "
+                + "JOIN m.tournament t "
+                + "WHERE t.id = :tid");
+        q.setParameter("tid", selectedTournament.getId());
+        selectedTournament.setMatches(q.getResultList());
+        return selectedTournament;
+    }
+
+    public String getTournamentDetails(Tournament selectedTournament) {
+        this.selectedTournament = selectedTournament;
+        return "tournamentDetails";
+    }
+
+
 }
