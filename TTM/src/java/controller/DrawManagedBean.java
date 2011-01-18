@@ -8,11 +8,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -62,23 +62,17 @@ public class DrawManagedBean implements Serializable {
 
     public String removeUmpire(Umpire u) {
         mUmpires.remove(u);
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Umpire " + u + " has been removed from the match"));
         return "manager:editDraw";
     }
 
     public String removeReferee(Referee r) {
         mReferees.remove(r);
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Referee " + r + " has been removed from the match"));
         return "manager:editDraw";
     }
 
     public String addReferee(Referee r) {
         if (!mReferees.contains(r)) {
             mReferees.add(r);
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Referee " + r + " has been added to the match"));
         }
         return "manager:editDraw";
     }
@@ -86,8 +80,6 @@ public class DrawManagedBean implements Serializable {
     public String addUmpire(Umpire u) {
         if (!mUmpires.contains(u)) {
             mUmpires.add(u);
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Umpire " + u + " has been added to the match"));
         }
         return "manager:editDraw";
     }
@@ -97,13 +89,23 @@ public class DrawManagedBean implements Serializable {
     }
 
     public List<Umpire> getUmpireList() {
-        Query q = em.createQuery("SELECT u FROM Umpire AS u LEFT JOIN FETCH u.matches");
-        return q.getResultList();
+        Query q = em.createQuery("SELECT distinct u FROM Umpire AS u LEFT JOIN FETCH u.matches "
+                + "join u.tournaments t "
+                + "where t.id = :tid");
+        q.setParameter("tid", tournament.getId());
+        List<Umpire> umps = q.getResultList();
+        umps.removeAll(mUmpires);
+        return umps;
     }
 
     public List<Referee> getRefereeList() {
-        Query q = em.createQuery("SELECT r FROM Referee AS r LEFT JOIN FETCH r.matches");
-        return q.getResultList();
+        Query q = em.createQuery("SELECT distinct r FROM Referee AS r LEFT JOIN FETCH r.matches "
+                + "join r.tournaments t "
+                + "where t.id = :tid");
+        q.setParameter("tid", tournament.getId());
+        List<Referee> refs = q.getResultList();
+        refs.removeAll(mReferees);
+        return refs;
     }
 
     public boolean canAssignCourt(Court c) {
@@ -112,13 +114,11 @@ public class DrawManagedBean implements Serializable {
 
     public String assignCourt(Court c) {
         court = c;
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Court " + c + " has been assigned to the match"));
         return "manager:editDraw";
     }
 
     public List<Court> getCourtList() {
-        Query q = em.createQuery("SELECT c FROM Court AS c LEFT JOIN FETCH c.matches");
+        Query q = em.createQuery("SELECT distinct c FROM Court AS c LEFT JOIN FETCH c.matches");
         return q.getResultList();
     }
 
@@ -127,19 +127,19 @@ public class DrawManagedBean implements Serializable {
         List<Match> matches = null;
         try {
             utx.begin();
-            for (Referee referee : mReferees) {
+            em.persist(match);
+            /*for (Referee referee : mReferees) {
                 matches = referee.getMatches();
                 matches.add(match);
                 em.merge(referee);
-            }
+            }*/
             match.setReferees(mReferees);
 
-            for (Umpire umpire : mUmpires) {
+            /*for (Umpire umpire : mUmpires) {
                 matches = umpire.getMatches();
                 matches.add(match);
                 em.merge(umpire);
-                utx.commit();
-            }
+            }*/
             match.setUmpires(mUmpires);
 
             matches = court.getMatches();
@@ -147,29 +147,31 @@ public class DrawManagedBean implements Serializable {
             court.setMatches(matches);
             match.setCourt(court);
 
-            matches = homeTeam.getMatches();
+            /*matches = homeTeam.getMatches();
             matches.add(match);
-            homeTeam.setMatches(matches);
+            homeTeam.setMatches(matches);*/
             match.addTeam(homeTeam);
 
-            matches = awayTeam.getMatches();
+            /*matches = awayTeam.getMatches();
             matches.add(match);
-            awayTeam.setMatches(matches);
+            awayTeam.setMatches(matches);*/
             match.addTeam(awayTeam);
 
-            matches = tournament.getMatches();
+            /*matches = tournament.getMatches();
             matches.add(match);
-            match.setTournament(tournament);
+            tournament.setMatches(matches);*/
             match.setTournament(tournament);
 
+            em.merge(match);
             em.merge(court);
             em.merge(homeTeam);
             em.merge(awayTeam);
             em.merge(tournament);
-            em.persist(match);
+            
             utx.commit();
         } catch (Exception e) {
             try {
+                Logger.getLogger(DrawManagedBean.class.getName()).log(Level.SEVERE, null, e);
                 utx.rollback();
             } catch (Exception ex) {
             }
@@ -177,7 +179,7 @@ public class DrawManagedBean implements Serializable {
         return "manager:editDraw";
     }
 
-    public String linkDraw(Draw d) {
+    public String linkDraw(Draw d, Tournament tourn) {
         current = d;
         if (current != null) {
             homeTeam = current.getHomeTeam();
@@ -185,6 +187,7 @@ public class DrawManagedBean implements Serializable {
             awayDraw = current.getAwayDraw();
             homeDraw = current.getHomeDraw();
         }
+        tournament = tourn;
         return "manager:editDraw";
     }
 

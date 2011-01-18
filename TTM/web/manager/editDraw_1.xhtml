@@ -69,59 +69,38 @@
                         <h:commandButton value="Create" action="#{drawManagedBean.createMatch}"/>
                     </h:panelGrid>
                 </h:form>
-                <h:panelGrid>
-                    <h:form>
-                        <h:dataTable value="#{drawManagedBean.mReferees}" var="item">
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Referees"/>
-                                </f:facet>
-                                <h:outputText value="#{item}"/>
-                            </h:column>
-                            <h:column>
-                                <h:commandLink value="Remove" action="#{drawManagedBean.removeReferee(item)}"/>
-                            </h:column>
-                        </h:dataTable>
-                    </h:form>
-                    <h:form>
-                        <h:dataTable value="#{drawManagedBean.refereeList}" var="item">
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Other Referees"/>
-                                </f:facet>
-                                <h:outputText value="#{item}"/>
-                            </h:column>
-                            <h:column>
-                                <h:commandLink value="Add" action="#{drawManagedBean.addReferee(item)}"/>
-                            </h:column>
-                        </h:dataTable>
-                    </h:form>
-
-                </h:panelGrid>
-                <h:panelGrid>
-                    <h:form>
-                        <h:dataTable value="#{drawManagedBean.mUmpires}" var="item">
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Umpires"/>
-                                </f:facet>
-                                <h:outputText value="#{item}"/>
-                            </h:column>
-                            <h:column>
-                                <h:commandLink value="Remove" action="#{drawManagedBean.removeUmpire(item)}"/>
-                            </h:column>
-                        </h:dataTable>
-                    </h:form>
+                <h:panelGrid columns="1">
                     <h:form>
                         <h:dataTable value="#{drawManagedBean.umpireList}" var="item">
+                            <f:facet name="header">
+                                <h:outputText value="SELECT UMPIRES"/>
+                            </f:facet>
                             <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Other Umpires"/>
-                                </f:facet>
                                 <h:outputText value="#{item}"/>
                             </h:column>
                             <h:column>
-                                <h:commandLink value="Add" action="#{drawManagedBean.addUmpire(item)}"/>
+                                <h:commandLink value="Add" action="#{drawManagedBean.addUmpire(item)}"
+                                               rendered="#{drawManagedBean.canAssignUmpire(item)}"/>
+                                <h:commandLink value="Remove" action="#{drawManagedBean.removeUmpire(item)}"
+                                               rendered="#{!drawManagedBean.canAssignUmpire(item)}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </h:panelGrid>
+                <h:panelGrid columns="1">
+                    <h:form>
+                        <h:dataTable value="#{drawManagedBean.refereeList}" var="item">
+                            <f:facet name="header">
+                                <h:outputText value="SELECT REFEREES"/>
+                            </f:facet>
+                            <h:column>
+                                <h:outputText value="#{item}"/>
+                            </h:column>
+                            <h:column>
+                                <h:commandLink value="Add" action="#{drawManagedBean.addReferee(item)}"
+                                               rendered="#{drawManagedBean.canAssignReferee(item)}"/>
+                                <h:commandLink value="Remove" action="#{drawManagedBean.removeReferee(item)}"
+                                               rendered="#{!drawManagedBean.canAssignReferee(item)}"/>
                             </h:column>
                         </h:dataTable>
                     </h:form>
@@ -135,9 +114,8 @@
                             <h:column>
                                 <h:outputText value="#{item}"/>
                             </h:column>
-                            <h:column>
-                                <h:commandLink value="Assign" action="#{drawManagedBean.assignCourt(item)}"
-                                               rendered="#{drawManagedBean.canAssignCourt(item)}"/>
+                            <h:column rendered="#{drawManagedBean.canAssignCourt(item)}">
+                                <h:commandLink value="Assign" action="#{drawManagedBean.assignCourt(item)}"/>
                             </h:column>
                         </h:dataTable>
                     </h:panelGrid>
