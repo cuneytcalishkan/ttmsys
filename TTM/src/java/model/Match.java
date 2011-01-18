@@ -113,6 +113,18 @@ public class Match implements Serializable {
         }
     }
 
+    public Team getHomeTeam(){
+        if(teams.size() > 0)
+            return teams.get(0);
+        else return null;
+    }
+
+    public Team getAwayTeam(){
+        if(teams.size() > 1)
+            return teams.get(1);
+        else return null;
+    }
+
     public int getAwayTeamScore() {
         return awayTeamScore;
     }

@@ -13,6 +13,10 @@
             <h:form>
                 <h1><h:outputText value="Create/Edit"/></h1>
                 <h:panelGrid columns="2">
+                    <h:outputLabel value="Home Team Score:" for="hts" />
+                    <h:inputText id="hts" value="#{umpireManagedBean.selectedMatch.homeTeamScore}" title="Home Team Score" />
+                    <h:outputLabel value="Away Team Score:" for="ats" />
+                    <h:inputText id="ats" value="#{umpireManagedBean.selectedMatch.awayTeamScore}" title="Away Team Score" />
                     <h:outputLabel value="Aces:" for="aces" />
                     <h:inputText id="aces" value="#{umpireManagedBean.statistics.aces}" title="Aces" />
                     <h:outputLabel value="DoubleFauls:" for="doubleFauls" />
