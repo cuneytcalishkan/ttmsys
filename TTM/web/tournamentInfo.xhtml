@@ -137,12 +137,6 @@
                             <h:outputText value="#{item.mTime}"/>
                         </h:column>
                         <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Score"/>
-                            </f:facet>
-                            <h:outputText value="#{item.score}"/>
-                        </h:column>
-                        <h:column>
                             <h:commandLink value="Details" action="#{mainPageManagedBean.matchDetails(item)}"/>
                         </h:column>
                     </h:dataTable>

@@ -6,7 +6,7 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Match Details</title>
-        <ui:include src="header.xhtml"/>
+        <ui:include src="../header.xhtml"/>
     </h:head>
     <h:body>
         <hr/>
@@ -112,9 +112,9 @@
                         <h:outputText value="#{item.doubleFauls}"/>
                     </h:column>
                 </h:dataTable>
-
-                <h:commandButton value="Add/Edit Statistics" action="#{umpireManagedBean.linkStatistics(mainPageManagedBean.selectedMatch)}"/>
-
+                <h:form>
+                    <h:commandButton value="Add/Edit Statistics" action="#{umpireManagedBean.linkStatistics(mainPageManagedBean.selectedMatch)}"/>
+                </h:form>
                 <h:form>
                     <h:dataTable value="#{mainPageManagedBean.matchSets}" var="item">
                         <f:facet name="header">
@@ -147,7 +147,7 @@
                         </h:dataTable>
                     </h:form>
                     <h:form>
-                        <h:dataTable value="#{mainPageManagedBean.matchUmpites}" var="item">
+                        <h:dataTable value="#{mainPageManagedBean.matchUmpires}" var="item">
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Umpires"/>

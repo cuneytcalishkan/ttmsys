@@ -52,8 +52,9 @@ public class RefereeManagedBean implements Serializable {
         return q.getResultList();
     }
 
-    public void linkIT(ActionEvent event) {
-        selectedMatch = (Match) event.getComponent().getAttributes().get("match");
+    public String linkMatch(Match match) {
+        selectedMatch = match;
+        return "referee:editReport";
     }
 
     public String editReport() {
@@ -65,11 +66,6 @@ public class RefereeManagedBean implements Serializable {
             System.out.println(ex.getMessage());
         }
         return "referee:index";
-    }
-
-    public String matchDetails(Match match){
-        selectedMatch = match;
-        return "referee:matchDetails";
     }
 
     public Match getSelectedMatch() {
