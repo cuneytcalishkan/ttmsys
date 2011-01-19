@@ -46,8 +46,16 @@
             <to-view-id>/referee/editReport.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
+            <from-outcome>referee:matchDetails</from-outcome>
+            <to-view-id>/referee/matchDetails.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>umpire:index</from-outcome>
             <to-view-id>/umpire/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>umpire:matchDetails</from-outcome>
+            <to-view-id>/umpire/matchDetails.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>umpire:editStatistics</from-outcome>
@@ -72,6 +80,10 @@
         <navigation-case>
             <from-outcome>manager:editUser</from-outcome>
             <to-view-id>/manager/editUser.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>manager:matchDetails</from-outcome>
+            <to-view-id>/manager/matchDetails.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>teamInfo</from-outcome>

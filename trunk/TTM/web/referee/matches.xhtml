@@ -57,9 +57,7 @@
                             <h:outputText value="#{item.report}"/>
                         </h:column>
                         <h:column>
-                            <h:commandButton value="Add/Edit Report" actionListener="#{refereeManagedBean.linkIT}" action="referee:editReport">
-                                <f:attribute name="match" value="#{item}"/>
-                            </h:commandButton>
+                            <h:commandLink value="Details" action="#{refereeManagedBean.matchDetails(item))}"/>
                         </h:column>
                     </h:dataTable>
                 </h:form>

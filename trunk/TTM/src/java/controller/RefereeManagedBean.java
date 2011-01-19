@@ -67,6 +67,11 @@ public class RefereeManagedBean implements Serializable {
         return "referee:index";
     }
 
+    public String matchDetails(Match match){
+        selectedMatch = match;
+        return "referee:matchDetails";
+    }
+
     public Match getSelectedMatch() {
         return selectedMatch;
     }
