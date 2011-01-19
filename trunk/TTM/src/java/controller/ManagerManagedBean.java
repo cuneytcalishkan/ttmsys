@@ -194,6 +194,9 @@ public class ManagerManagedBean implements Serializable {
         if (userCount % pageInterval != 0) {
             pageCount++;
         }
+        if (pageCount < currentPage) {
+            currentPage = pageCount;
+        }
     }
 
     public List<RegisteredUser> getUsers() {
