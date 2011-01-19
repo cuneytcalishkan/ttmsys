@@ -50,6 +50,9 @@
                             </f:facet>
                             <h:outputText value="#{item.score}"/>
                         </h:column>
+                        <h:column>
+                            <h:commandLink value="Details" action="#{mainPageManagedBean.matchDetails(item)}"/>
+                        </h:column>
                     </h:dataTable>
                 </h:form>
             </f:view>
