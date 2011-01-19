@@ -45,8 +45,9 @@
                             <h:outputText value="#{item.score}"/>
                         </h:column>
                         <h:column>
-                            <h:commandButton value="Add/Edit Statistics" action="#{umpireManagedBean.linkStatistics(item)}"/>
+                            <h:commandLink value="Details" action="#{refereeManagedBean.matchDetails(item))}"/>
                         </h:column>
+                        
                     </h:dataTable>
                 </h:form>
             </h:panelGrid>
