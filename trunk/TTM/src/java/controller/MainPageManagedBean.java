@@ -9,11 +9,11 @@ import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
-import model.Manager;
 import model.Match;
 import model.Player;
 import model.Referee;
@@ -39,33 +39,6 @@ public class MainPageManagedBean implements Serializable {
         Object ru = cnt.getExternalContext().getSessionMap().get(RegisteredUserManagedBean.USER_SESSION_KEY);
         if (ru != null) {
             return (ru instanceof Player);
-        }
-        return false;
-    }
-
-    public boolean isUmpire() {
-        FacesContext cnt = FacesContext.getCurrentInstance();
-        Object ru = cnt.getExternalContext().getSessionMap().get(RegisteredUserManagedBean.USER_SESSION_KEY);
-        if (ru != null) {
-            return (ru instanceof Umpire);
-        }
-        return false;
-    }
-
-    public boolean isReferee(){
-        FacesContext cnt = FacesContext.getCurrentInstance();
-        Object ru = cnt.getExternalContext().getSessionMap().get(RegisteredUserManagedBean.USER_SESSION_KEY);
-        if (ru != null) {
-            return (ru instanceof Referee);
-        }
-        return false;
-    }
-
-    public boolean isManager(){
-        FacesContext cnt = FacesContext.getCurrentInstance();
-        Object ru = cnt.getExternalContext().getSessionMap().get(RegisteredUserManagedBean.USER_SESSION_KEY);
-        if (ru != null) {
-            return (ru instanceof Manager);
         }
         return false;
     }
@@ -139,7 +112,16 @@ public class MainPageManagedBean implements Serializable {
         return "matchDetails";
     }
 
-    public List<Referee> getMatchReferees(){
+    public void matchDetailsEvent(ActionEvent e) {
+        selectedMatch = (Match) e.getComponent().getAttributes().get("match");
+        FacesContext fc = FacesContext.getCurrentInstance();
+        fc.getExternalContext().getSessionMap().put("mtch", selectedMatch);
+    }
+
+    public List<Referee> getMatchReferees() {
+        if (selectedMatch == null) {
+            return null;
+        }
         Query q = em.createQuery("Select r from Referee r "
                 + "join r.matches m "
                 + "where m.id = :mid");
@@ -147,7 +129,10 @@ public class MainPageManagedBean implements Serializable {
         return q.getResultList();
     }
 
-    public List<Umpire> getMatchUmpites(){
+    public List<Umpire> getMatchUmpires() {
+        if (selectedMatch == null) {
+            return null;
+        }
         Query q = em.createQuery("Select r from Umpire r "
                 + "join r.matches m "
                 + "where m.id = :mid");
@@ -155,7 +140,13 @@ public class MainPageManagedBean implements Serializable {
         return q.getResultList();
     }
 
-    public List<Set> getMatchSets(){
+    public List<Set> getMatchSets() {
+        if (selectedMatch == null) {
+            selectedMatch = (Match) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("mtch");
+        }
+        if (selectedMatch == null) {
+            return null;
+        }
         Query q = em.createQuery("Select st from tmatch m "
                 + "join m.sets st "
                 + "left join fetch st.games "

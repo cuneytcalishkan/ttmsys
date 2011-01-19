@@ -45,7 +45,9 @@
                             <h:outputText value="#{item.score}"/>
                         </h:column>
                         <h:column>
-                            <h:commandLink value="Details" action="#{refereeManagedBean.matchDetails(item))}"/>
+                            <h:commandLink value="Details" actionListener="#{mainPageManagedBean.matchDetailsEvent}" action="umpire:matchDetails">
+                                <f:attribute name="match" value="#{item}"/>
+                            </h:commandLink>
                         </h:column>
                         
                     </h:dataTable>
