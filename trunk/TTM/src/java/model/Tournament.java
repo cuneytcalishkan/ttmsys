@@ -42,19 +42,19 @@ public class Tournament implements Serializable {
     private double prize;
     @OneToOne(cascade = CascadeType.ALL)
     private Draw draw;
-    @OneToMany(mappedBy = "tournament")
+    @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
     private List<Team> teams;
-    @OneToMany(mappedBy = "tournament")
+    @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
     private List<Match> matches;
-    @ManyToMany(targetEntity = Umpire.class)
-    @JoinTable(name="tournament_umpire")
+    @ManyToMany(targetEntity = Umpire.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "tournament_umpire")
     private List<Umpire> umpires;
-    @ManyToMany(targetEntity = Referee.class)
-    @JoinTable(name="tournament_referee")
+    @ManyToMany(targetEntity = Referee.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "tournament_referee")
     private List<Referee> referees;
-    @ManyToMany(targetEntity = Court.class)
+    @ManyToMany(targetEntity = Court.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Court> courts;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Manager manager;
     private String report;
     @Transient
@@ -84,6 +84,10 @@ public class Tournament implements Serializable {
         this.startDate = startDate;
         this.endDate = endDate;
         this.prize = prize;
+    }
+
+    public void removeMatch(Match m) {
+        matches.remove(m);
     }
 
     public void joinTournament(Team t) {
@@ -140,11 +144,11 @@ public class Tournament implements Serializable {
         this.courts = courts;
     }
 
-    public void removeCourt(Court co){
+    public void removeCourt(Court co) {
         courts.remove(co);
     }
 
-    public void addCourt(Court co){
+    public void addCourt(Court co) {
         courts.add(co);
     }
 
@@ -172,11 +176,11 @@ public class Tournament implements Serializable {
         this.teams = teams;
     }
 
-    public void removeTeam(Team team){
+    public void removeTeam(Team team) {
         teams.remove(team);
     }
 
-    public void addTeam(Team team){
+    public void addTeam(Team team) {
         teams.add(team);
     }
 
@@ -184,11 +188,11 @@ public class Tournament implements Serializable {
         this.referees = referees;
     }
 
-    public void removeReferee(Referee ref){
+    public void removeReferee(Referee ref) {
         referees.remove(ref);
     }
 
-    public void addReferee(Referee ref){
+    public void addReferee(Referee ref) {
         referees.add(ref);
     }
 
@@ -196,11 +200,11 @@ public class Tournament implements Serializable {
         this.umpires = umpires;
     }
 
-    public void removeUmpire(Umpire ump){
+    public void removeUmpire(Umpire ump) {
         umpires.remove(ump);
     }
 
-    public void addUmpire(Umpire ump){
+    public void addUmpire(Umpire ump) {
         umpires.add(ump);
     }
 
