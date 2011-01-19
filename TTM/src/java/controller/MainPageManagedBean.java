@@ -5,6 +5,7 @@
 package controller;
 
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -12,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
+import model.Match;
 import model.Player;
 import model.Tournament;
 
@@ -22,6 +24,7 @@ public class MainPageManagedBean {
     @PersistenceContext
     private EntityManager em;
     private Tournament selectedTournament;
+    private Match selectedMatch;
 
     /** Creates a new instance of MainPageManagedBean */
     public MainPageManagedBean() {
@@ -55,13 +58,7 @@ public class MainPageManagedBean {
 
     public Tournament getSelectedTournament() {
         if(selectedTournament == null) return null;
-        Query q = em.createQuery("SELECT distinct m FROM tmatch m "
-                + "LEFT JOIN FETCH m.teams "
-                + "JOIN m.tournament t "
-                + "WHERE t.id = :tid");
-        q.setParameter("tid", selectedTournament.getId());
-        selectedTournament.setMatches(q.getResultList());
-        q = em.createQuery("select distinct r from Referee r "
+        Query q = em.createQuery("select distinct r from Referee r "
                 + "join r.tournaments t "
                 + "where t.id = :tid");
         q.setParameter("tid", selectedTournament.getId());
@@ -84,10 +81,34 @@ public class MainPageManagedBean {
         return selectedTournament;
     }
 
+    public List<Match> getMatches(){
+        if(selectedTournament == null) return null;
+        Query q = em.createQuery("SELECT distinct m FROM tmatch m "
+                + "LEFT JOIN FETCH m.teams "
+                + "JOIN m.tournament t "
+                + "WHERE t.id = :tid");
+        q.setParameter("tid", selectedTournament.getId());
+        return q.getResultList();
+    }
+
     public String getTournamentDetails(Tournament selectedTournament) {
         this.selectedTournament = selectedTournament;
         return "tournamentDetails";
     }
 
+    public String matchDetails(Match match){
+        this.selectedMatch = match;
+        FacesContext fc = FacesContext.getCurrentInstance();
+        fc.addMessage(null, new FacesMessage("eh be a.k"));
+        return "matchDetails";
+    }
+
+    public Match getSelectedMatch() {
+        return selectedMatch;
+    }
+
+    public void setSelectedMatch(Match selectedMatch) {
+        this.selectedMatch = selectedMatch;
+    }
 
 }

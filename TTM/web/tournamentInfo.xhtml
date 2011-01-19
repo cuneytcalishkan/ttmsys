@@ -10,6 +10,7 @@
     </h:head>
     <h:body>
         <hr/>
+        <h:messages style="color: red"> </h:messages>
         <h:panelGrid columns="5" border="0">
             <h:form>
                 <h:dataTable value="#{mainPageManagedBean.selectedTournament}" var ="item" border="1"  rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
@@ -86,10 +87,9 @@
         </h:panelGrid>
         <hr/>
         <h:panelGrid columns="2" border="0">
-            <f:view>
                 <h:form>
                     <h1><h:outputText value="Matches"/></h1>
-                    <h:dataTable value="#{mainPageManagedBean.selectedTournament.matches}" var="item" border="1" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
+                    <h:dataTable id="hebe" value="#{mainPageManagedBean.matches}" var="item" border="1" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value=" - vs - "/>
@@ -146,9 +146,14 @@
                             </f:facet>
                             <h:outputText value="#{item.report}"/>
                         </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Details"/>
+                            </f:facet>
+                            <h:commandLink value="Detailss" action="login"/>
+                        </h:column>
                     </h:dataTable>
                 </h:form>
-            </f:view>
         </h:panelGrid>
     </h:body>
 </html>
