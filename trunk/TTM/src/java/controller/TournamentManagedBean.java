@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -49,6 +50,15 @@ public class TournamentManagedBean implements Serializable {
     public String createTournament() {
         FacesContext context = FacesContext.getCurrentInstance();
         Manager manager = (Manager) context.getExternalContext().getSessionMap().get(RegisteredUserManagedBean.USER_SESSION_KEY);
+        Date now = new Date();
+        if (startDate.before(now)) {
+            context.addMessage(null, new FacesMessage("The start date of the tournament cannot be earlier than today."));
+            return "createTournament";
+        }
+        if (startDate.after(endDate)) {
+            context.addMessage(null, new FacesMessage("The start date of the tournament cannot be earlier than the end date."));
+            return "createTournament";
+        }
         Tournament t = new Tournament(name, type, startDate, endDate, prize);
         t.setReport(report);
         t.setManager(manager);
@@ -82,6 +92,17 @@ public class TournamentManagedBean implements Serializable {
     }
 
     public String editTournament() {
+        Date now = new Date();
+        if (startDate.before(now)) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("The start date of the tournament cannot be earlier than today."));
+            return "createTournament";
+        }
+        if (startDate.after(endDate)) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("The start date of the tournament cannot be earlier than the end date."));
+            return "createTournament";
+        }
         try {
             utx.begin();
             em.merge(current);
@@ -205,7 +226,7 @@ public class TournamentManagedBean implements Serializable {
         return null;
     }
 
-    public void addReferee(Referee ref){
+    public void addReferee(Referee ref) {
         current = getCurrent();
         current.addReferee(ref);
         try {
@@ -235,7 +256,7 @@ public class TournamentManagedBean implements Serializable {
         return null;
     }
 
-    public void addUmpire(Umpire ump){
+    public void addUmpire(Umpire ump) {
         current = getCurrent();
         current.addUmpire(ump);
         try {
@@ -250,7 +271,7 @@ public class TournamentManagedBean implements Serializable {
         }
     }
 
-    public String removeCourt(Court court){
+    public String removeCourt(Court court) {
         current.removeCourt(court);
         try {
             utx.begin();
@@ -265,7 +286,7 @@ public class TournamentManagedBean implements Serializable {
         return null;
     }
 
-    public void addCourt(Court crt){
+    public void addCourt(Court crt) {
         current = getCurrent();
         current.addCourt(crt);
         try {
@@ -280,7 +301,7 @@ public class TournamentManagedBean implements Serializable {
         }
     }
 
-    public String removeTeam(Team team){
+    public String removeTeam(Team team) {
         current.removeTeam(team);
         try {
             utx.begin();
@@ -299,7 +320,7 @@ public class TournamentManagedBean implements Serializable {
         return current.getDrawList();
     }
 
-    public List<Referee> getOtherReferees(){
+    public List<Referee> getOtherReferees() {
         Query q = em.createQuery("SELECT distinct r FROM Referee r "
                 + "where r not in "
                 + "(select rf from Referee rf join rf.tournaments t "
@@ -308,7 +329,7 @@ public class TournamentManagedBean implements Serializable {
         return q.getResultList();
     }
 
-    public List<Umpire> getOtherUmpires(){
+    public List<Umpire> getOtherUmpires() {
         Query q = em.createQuery("SELECT distinct r FROM Umpire r "
                 + "where r not in "
                 + "(select rf from Umpire rf join rf.tournaments t "
@@ -317,7 +338,7 @@ public class TournamentManagedBean implements Serializable {
         return q.getResultList();
     }
 
-    public List<Court> getOtherCourts(){
+    public List<Court> getOtherCourts() {
         Query q = em.createQuery("SELECT distinct r FROM Court r "
                 + "where r not in "
                 + "(select rf from Court rf join rf.tournaments t "

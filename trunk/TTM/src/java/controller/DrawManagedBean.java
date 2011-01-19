@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -126,51 +128,31 @@ public class DrawManagedBean implements Serializable {
     }
 
     public String createMatch() {
+
+        if (tournament.getStartDate().after(mDate) || tournament.getEndDate().before(mDate)) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Match date must be within the tournament start and end date interval."));
+        }
+
         Match match = new Match(mDate, mTime);
         List<Match> matches = null;
         try {
             utx.begin();
             em.persist(match);
-            /*for (Referee referee : mReferees) {
-                matches = referee.getMatches();
-                matches.add(match);
-                em.merge(referee);
-            }*/
             match.setReferees(mReferees);
-
-            /*for (Umpire umpire : mUmpires) {
-                matches = umpire.getMatches();
-                matches.add(match);
-                em.merge(umpire);
-            }*/
             match.setUmpires(mUmpires);
-
             matches = court.getMatches();
             matches.add(match);
             court.setMatches(matches);
             match.setCourt(court);
-
-            /*matches = homeTeam.getMatches();
-            matches.add(match);
-            homeTeam.setMatches(matches);*/
             match.addTeam(homeTeam);
-
-            /*matches = awayTeam.getMatches();
-            matches.add(match);
-            awayTeam.setMatches(matches);*/
             match.addTeam(awayTeam);
-
-            /*matches = tournament.getMatches();
-            matches.add(match);
-            tournament.setMatches(matches);*/
             match.setTournament(tournament);
-
             em.merge(match);
             em.merge(court);
             em.merge(homeTeam);
             em.merge(awayTeam);
             em.merge(tournament);
-            
             utx.commit();
         } catch (Exception e) {
             try {
