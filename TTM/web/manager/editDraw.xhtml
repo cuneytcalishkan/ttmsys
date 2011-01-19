@@ -41,11 +41,11 @@
                         </f:facet>
                         <h:column>
                             <h:commandLink value="#{drawManagedBean.homeDraw}"
-                                           action="#{drawManagedBean.linkDraw(drawManagedBean.homeDraw)}"/>
+                                           action="#{drawManagedBean.linkDraw(drawManagedBean.homeDraw,drawManagedBean.tournament)}"/>
                         </h:column>
                         <h:column>
                             <h:commandLink value="#{drawManagedBean.awayDraw}"
-                                           action="#{drawManagedBean.linkDraw(drawManagedBean.awayDraw)}"/>
+                                           action="#{drawManagedBean.linkDraw(drawManagedBean.awayDraw,drawManagedBean.tournament)}"/>
                         </h:column>
                     </h:panelGrid>
                 </h:form>
