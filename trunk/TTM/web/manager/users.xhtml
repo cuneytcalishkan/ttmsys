@@ -8,9 +8,14 @@
     </h:head>
     <h:body>
         <f:view>
-            <h:panelGrid columns="2" border="0">
+            <h:panelGrid columns="1" border="0">
                 <h:form>
-                    <h:dataTable value="#{managerManagedBean.users}" var="item" border="1">
+                    <h:commandLink value="Previous Page"  action="#{managerManagedBean.previousPage}"
+                                   rendered="#{managerManagedBean.previousPageDisplayable}"/>
+                    &nbsp;
+                    <h:commandLink value="Next Page" action="#{managerManagedBean.nextPage}"
+                                   rendered="#{managerManagedBean.nextPageDisplayable}"/>
+                    <h:dataTable value="#{managerManagedBean.users}" var="item" border="1" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                         <f:facet name="header">
                             <h:outputText value="User List"/>
                         </f:facet>
