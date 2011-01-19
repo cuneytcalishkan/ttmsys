@@ -76,6 +76,11 @@ public class MainPageManagedBean {
                 + "where t.id = :tid");
         q.setParameter("tid", selectedTournament.getId());
         selectedTournament.setCourts(q.getResultList());
+        q = em.createQuery("select distinct t from Team t "
+                + "join t.tournament to "
+                + "where to.id = :tid");
+        q.setParameter("tid", selectedTournament.getId());
+        selectedTournament.setTeams(q.getResultList());
         return selectedTournament;
     }
 
