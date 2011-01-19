@@ -89,72 +89,65 @@
         </h:panelGrid>
         <hr/>
         <h:panelGrid columns="2" border="0">
-            <h:form>
-                <h:dataTable id="hebe" value="#{mainPageManagedBean.matches}" var="item" border="1" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
-                    <f:facet name="header">
-                        <h:outputText value="Matches"/>
-                    </f:facet>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value=" - vs - "/>
-                        </f:facet>
-                        <h:outputText value="#{item.homeTeam} vs #{item.awayTeam}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="AwayTeamScore"/>
-                        </f:facet>
-                        <h:outputText value="#{item.awayTeamScore}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="HomeTeamScore"/>
-                        </f:facet>
-                        <h:outputText value="#{item.homeTeamScore}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Court"/>
-                        </f:facet>
-                        <h:outputText value="#{item.court}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="mDate"/>
-                        </f:facet>
-                        <h:outputText value="#{item.mDate}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="mTime"/>
-                        </f:facet>
-                        <h:outputText value="#{item.mTime}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Score"/>
-                        </f:facet>
-                        <h:outputText value="#{item.score}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Statistics"/>
-                        </f:facet>
-                        <h:outputText value="#{item.statistics}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Report"/>
-                        </f:facet>
-                        <h:outputText value="#{item.report}"/>
-                    </h:column>
-                    <h:column>
-                        <h:commandLink value="Details" action="#{mainPageManagedBean.matchDetails(item)}"/>
-                    </h:column>
-                </h:dataTable>
-            </h:form>
+            <f:view>
+                <h:form>
+                    <h:dataTable value="#{mainPageManagedBean.matches}" var="item">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="HomeTeam"/>
+                            </f:facet>
+                            <h:outputText value="#{item.homeTeam}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="AwayTeam"/>
+                            </f:facet>
+                            <h:outputText value="#{item.awayTeam}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="AwayTeamScore"/>
+                            </f:facet>
+                            <h:outputText value="#{item.awayTeamScore}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="HomeTeamScore"/>
+                            </f:facet>
+                            <h:outputText value="#{item.homeTeamScore}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Court"/>
+                            </f:facet>
+                            <h:outputText value="#{item.court}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="mDate"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="mTime"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mTime}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Score"/>
+                            </f:facet>
+                            <h:outputText value="#{item.score}"/>
+                        </h:column>
+                        <h:column>
+                            <h:commandLink value="Details" action="#{mainPageManagedBean.matchDetails(item)}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </f:view>
         </h:panelGrid>
     </h:body>
 </html>

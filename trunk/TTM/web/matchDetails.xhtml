@@ -6,15 +6,15 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Match Details</title>
+        <ui:include src="header.xhtml"/>
     </h:head>
     <h:body>
-        <ui:include src="header.xhtml"/>
         <hr/>
         <h:messages style="color: red"> </h:messages>
-        <h:panelGrid columns="5" border="0">
+        <h:panelGrid columns="1" border="0">
             <f:view>
                 <h:form>
-                    <h:dataTable value="#{mainPageManagedBean.selectedMatchDetails}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
+                    <h:dataTable value="#{mainPageManagedBean.selectedMatch}" var="item">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="HomeTeam"/>
@@ -49,7 +49,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Tournament"/>
                             </f:facet>
-                            <h:outputText value="#{item.tournament}"/>
+                            <h:outputText value="#{item.tournament.name}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -71,22 +71,86 @@
                             </f:facet>
                             <h:outputText value="#{item.score}"/>
                         </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Statistics"/>
-                            </f:facet>
-                            <h:outputText value="#{item.statistics}"/>
-                        </h:column>
-                        <h:column>
+                        <h:column rendered="#{mainPageManagedBean.manager}||#{mainPageManagedBean.referee}">
                             <f:facet name="header">
                                 <h:outputText value="Report"/>
                             </f:facet>
-                            <h:outputText value="#{item.report}"/>
+                            <h:outputText value="#{mainPageManagedBean.selectedMatch.report}"/>
                         </h:column>
                     </h:dataTable>
                 </h:form>
             </f:view>
+            <f:view>
+                <h:dataTable value="#{mainPageManagedBean.selectedMatch.statistics}" var="item" border="1">
+                    <f:facet name="header">
+                        <h:outputText value="Statistics"/>
+                    </f:facet>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Aces"/>
+                        </f:facet>
+                        <h:outputText value="#{item.aces}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="First Points Won"/>
+                        </f:facet>
+                        <h:outputText value="#{item.firstSPtsWon}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Second Points Won"/>
+                        </f:facet>
+                        <h:outputText value="#{item.secondSPtsWon}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Return Points Won"/>
+                        </f:facet>
+                        <h:outputText value="#{item.returnPtsWon}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Total Points Won"/>
+                        </f:facet>
+                        <h:outputText value="#{item.totalPtsWon}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Double Fauls"/>
+                        </f:facet>
+                        <h:outputText value="#{item.doubleFauls}"/>
+                    </h:column>
+                    <h:column rendered="#{mainPageManagedBean.umpire}">
+                        <h:commandLink value="Edit Statistics" action="#{umpireManagedBean.linkStatistics(item.match)}"/>
+                    </h:column>
+                </h:dataTable>
+                <h:panelGrid columns="2">
+                    <h:form>
+                        <h:dataTable value="#{mainPageManagedBean.matchReferees}" var="item">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Referees"/>
+                                </f:facet>
+                                <h:outputText value="#{item}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                    <h:form>
+                        <h:dataTable value="#{mainPageManagedBean.matchUmpites}" var="item">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Umpires"/>
+                                </f:facet>
+                                <h:outputText value="#{item}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </h:panelGrid>
 
+            </f:view>
         </h:panelGrid>
     </h:body>
 </html>

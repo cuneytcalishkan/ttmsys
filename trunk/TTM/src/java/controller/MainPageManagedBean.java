@@ -7,16 +7,18 @@ package controller;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
+import model.Manager;
 import model.Match;
 import model.Player;
+import model.Referee;
 import model.Tournament;
+import model.Umpire;
 
 @ManagedBean
 @SessionScoped
@@ -40,6 +42,33 @@ public class MainPageManagedBean implements Serializable {
         return false;
     }
 
+    public boolean isUmpire() {
+        FacesContext cnt = FacesContext.getCurrentInstance();
+        Object ru = cnt.getExternalContext().getSessionMap().get(RegisteredUserManagedBean.USER_SESSION_KEY);
+        if (ru != null) {
+            return (ru instanceof Umpire);
+        }
+        return false;
+    }
+
+    public boolean isReferee(){
+        FacesContext cnt = FacesContext.getCurrentInstance();
+        Object ru = cnt.getExternalContext().getSessionMap().get(RegisteredUserManagedBean.USER_SESSION_KEY);
+        if (ru != null) {
+            return (ru instanceof Referee);
+        }
+        return false;
+    }
+
+    public boolean isManager(){
+        FacesContext cnt = FacesContext.getCurrentInstance();
+        Object ru = cnt.getExternalContext().getSessionMap().get(RegisteredUserManagedBean.USER_SESSION_KEY);
+        if (ru != null) {
+            return (ru instanceof Manager);
+        }
+        return false;
+    }
+
     public List<Tournament> getTournaments() {
         java.util.Date now = new java.util.Date();
         Query q = em.createQuery("SELECT distinct t from Tournament t where t.endDate >= :gr AND t.startDate <= :ls");
@@ -59,7 +88,8 @@ public class MainPageManagedBean implements Serializable {
 
     public Tournament getSelectedTournament() {
         if (selectedTournament == null) {
-            return null;
+            FacesContext cnt = FacesContext.getCurrentInstance();
+            selectedTournament = (Tournament) cnt.getExternalContext().getSessionMap().get("trnm");
         }
         Query q = em.createQuery("select distinct r from Referee r "
                 + "join r.tournaments t "
@@ -98,23 +128,30 @@ public class MainPageManagedBean implements Serializable {
 
     public String getTournamentDetails(Tournament selectedTournament) {
         this.selectedTournament = selectedTournament;
+        FacesContext fc = FacesContext.getCurrentInstance();
+        fc.getExternalContext().getSessionMap().put("trnm", selectedTournament);
         return "tournamentDetails";
     }
 
     public String matchDetails(Match match) {
         this.selectedMatch = match;
-        FacesContext fc = FacesContext.getCurrentInstance();
-        fc.addMessage(null, new FacesMessage("eh be a.k"));
         return "matchDetails";
     }
 
-    public Match getSelectedMatchDetails() {
-
-        Query q = em.createQuery("SELECT DISTINCT m FROM tmatch m "
-                + "LEFT JOIN FETCH m.teams WHERE m.id = :mid");
+    public List<Referee> getMatchReferees(){
+        Query q = em.createQuery("Select r from Referee r "
+                + "join r.matches m "
+                + "where m.id = :mid");
         q.setParameter("mid", selectedMatch.getId());
-        selectedMatch = (Match) q.getSingleResult();
-        return selectedMatch;
+        return q.getResultList();
+    }
+
+    public List<Umpire> getMatchUmpites(){
+        Query q = em.createQuery("Select r from Umpire r "
+                + "join r.matches m "
+                + "where m.id = :mid");
+        q.setParameter("mid", selectedMatch.getId());
+        return q.getResultList();
     }
 
     public Match getSelectedMatch() {
