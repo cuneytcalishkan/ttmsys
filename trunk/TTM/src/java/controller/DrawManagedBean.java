@@ -118,7 +118,10 @@ public class DrawManagedBean implements Serializable {
     }
 
     public List<Court> getCourtList() {
-        Query q = em.createQuery("SELECT distinct c FROM Court AS c LEFT JOIN FETCH c.matches");
+        Query q = em.createQuery("SELECT distinct c FROM Court AS c LEFT JOIN FETCH c.matches "
+                + "join c.tournaments t "
+                + "where t.id = :tid");
+        q.setParameter("tid", tournament.getId());
         return q.getResultList();
     }
 
