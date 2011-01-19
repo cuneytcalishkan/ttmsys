@@ -14,8 +14,11 @@
             <h:outputText value="Player1: #{playerManagedBean.currentPlayer}"/><br/>
             <f:view>
                 <h:form>
-                    <h2><h:outputText value="Player2: " rendered="#{playerManagedBean.doubles}"/></h2>
-                    <h:dataTable value="#{playerManagedBean.otherPlayers}" var="item" rendered="#{playerManagedBean.doubles}">
+
+                    <h:dataTable value="#{playerManagedBean.otherPlayers}" var="item" rendered="#{playerManagedBean.doubles}" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
+                        <f:facet name="header">
+                            <h:outputText value="Player2: " rendered="#{playerManagedBean.doubles}"/>
+                        </f:facet>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Name"/>
@@ -43,7 +46,7 @@
                     </h:dataTable>
                 </h:form>
             </f:view>
-            
+
         </h:form>
     </h:body>
 </html>

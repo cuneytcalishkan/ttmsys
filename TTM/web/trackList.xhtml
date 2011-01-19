@@ -10,7 +10,7 @@
         <f:view>
             <h:panelGrid columns="1" border="0">
                 <h:form>
-                    <h:dataTable value="#{trackerManagedBean.userTrackList}" var="item" border="1">
+                    <h:dataTable value="#{trackerManagedBean.userTrackList}" var="item" border="1" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                         <f:facet name="header">
                             <h:outputText value="Tracked Teams"/>
                         </f:facet>

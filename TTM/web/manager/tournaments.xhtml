@@ -10,7 +10,7 @@
         <h:panelGrid columns="2" border="0">
             <f:view>
                 <h:form>
-                    <h:dataTable value="#{managerManagedBean.tournaments}" var="item" border="1">
+                    <h:dataTable value="#{managerManagedBean.tournaments}" var="item" border="1" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                         <f:facet name="header">
                             <h:outputText value="The tournaments you are responsible"/>
                         </f:facet>
@@ -64,7 +64,7 @@
             <f:view>
                 <h:panelGrid>
                 <h:form>
-                    <h:dataTable value="#{managerManagedBean.courts}" var="item">
+                    <h:dataTable value="#{managerManagedBean.courts}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Court Name"/>

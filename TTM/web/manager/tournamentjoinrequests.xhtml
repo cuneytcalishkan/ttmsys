@@ -9,7 +9,7 @@
     <h:body>
         <f:view>
             <h:form>
-                <h:dataTable value="#{managerManagedBean.tournamentJoinRequests}" var="item" border="1">
+                <h:dataTable value="#{managerManagedBean.tournamentJoinRequests}" var="item" border="1" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                     <f:facet name="header">
                         <h:outputText value="Tournament Join Requests"/>
                     </f:facet>

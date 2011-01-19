@@ -71,7 +71,7 @@
                 </h:form>
                 <h:panelGrid>
                     <h:form>
-                        <h:dataTable value="#{drawManagedBean.mReferees}" var="item">
+                        <h:dataTable value="#{drawManagedBean.mReferees}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Referees"/>
@@ -84,7 +84,7 @@
                         </h:dataTable>
                     </h:form>
                     <h:form>
-                        <h:dataTable value="#{drawManagedBean.refereeList}" var="item">
+                        <h:dataTable value="#{drawManagedBean.refereeList}" var="item"  rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Other Referees"/>
@@ -100,7 +100,7 @@
                 </h:panelGrid>
                 <h:panelGrid>
                     <h:form>
-                        <h:dataTable value="#{drawManagedBean.mUmpires}" var="item">
+                        <h:dataTable value="#{drawManagedBean.mUmpires}" var="item"  rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Umpires"/>
@@ -113,7 +113,7 @@
                         </h:dataTable>
                     </h:form>
                     <h:form>
-                        <h:dataTable value="#{drawManagedBean.umpireList}" var="item">
+                        <h:dataTable value="#{drawManagedBean.umpireList}" var="item"  rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Other Umpires"/>
@@ -131,7 +131,7 @@
                         <f:facet name="header">
                             <h:outputText value="ASSIGN COURT"/>
                         </f:facet>
-                        <h:dataTable value="#{drawManagedBean.courtList}" var="item">
+                        <h:dataTable value="#{drawManagedBean.courtList}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                             <h:column>
                                 <h:outputText value="#{item}"/>
                             </h:column>

@@ -12,7 +12,7 @@
         <hr/>
         <h:panelGrid columns="5" border="0">
             <h:form>
-                <h:dataTable value="#{mainPageManagedBean.selectedTournament}" var ="item" border="1">
+                <h:dataTable value="#{mainPageManagedBean.selectedTournament}" var ="item" border="1"  rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Name"/>
@@ -46,7 +46,7 @@
                 </h:dataTable>
             </h:form>
             <h:form>
-                <h:dataTable value="#{mainPageManagedBean.selectedTournament.referees}" var="item">
+                <h:dataTable value="#{mainPageManagedBean.selectedTournament.referees}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Referees"/>
@@ -56,7 +56,7 @@
                 </h:dataTable>
             </h:form>
             <h:form>
-                <h:dataTable value="#{mainPageManagedBean.selectedTournament.umpires}" var="item">
+                <h:dataTable value="#{mainPageManagedBean.selectedTournament.umpires}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Umpires"/>
@@ -66,7 +66,7 @@
                 </h:dataTable>
             </h:form>
             <h:form>
-                <h:dataTable value="#{mainPageManagedBean.selectedTournament.courts}" var="item">
+                <h:dataTable value="#{mainPageManagedBean.selectedTournament.courts}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Courts"/>
@@ -75,7 +75,7 @@
                     </h:column>
                 </h:dataTable>
             </h:form>
-            <h:dataTable value="#{mainPageManagedBean.selectedTournament.teams}" var="item" border="1">
+            <h:dataTable value="#{mainPageManagedBean.selectedTournament.teams}" var="item" border="1" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Teams"/>
@@ -89,7 +89,7 @@
             <f:view>
                 <h:form>
                     <h1><h:outputText value="Matches"/></h1>
-                    <h:dataTable value="#{mainPageManagedBean.selectedTournament.matches}" var="item" border="1">
+                    <h:dataTable value="#{mainPageManagedBean.selectedTournament.matches}" var="item" border="1" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value=" - vs - "/>
