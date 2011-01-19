@@ -23,6 +23,8 @@ public class Draw implements Serializable {
     @OneToOne
     private Team awayTeam;
     @OneToOne
+    private Team winnerTeam;
+    @OneToOne
     private Draw homeDraw;
     @OneToOne
     private Draw awayDraw;
@@ -115,5 +117,13 @@ public class Draw implements Serializable {
             result += traverse(d.awayDraw, level + 1);
         }
         return result;
+    }
+
+    public Team getWinnerTeam() {
+        return winnerTeam;
+    }
+
+    public void setWinnerTeam(Team winnerTeam) {
+        this.winnerTeam = winnerTeam;
     }
 }
