@@ -12,6 +12,7 @@
         <ui:include src="header.xhtml"/>
         <hr/>
         <f:view>
+            <h:messages style="color: red"/>
             <h:panelGrid columns="1" border="0">
                 <h:form>
                     <h:dataTable value="#{trackerManagedBean.trackList}" var="item" border="1"  rowClasses="jsfcrud_odd_row,jsfcrud_even_row">

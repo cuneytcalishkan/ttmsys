@@ -6,9 +6,12 @@ package controller;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,31 +37,21 @@ public class TrackerManagedBean implements Serializable {
     }
 
     public List<Team> getUserTrackList() {
-        String query = "SELECT team FROM " + current.getClass().getName() +
-                " AS man JOIN man.trackList AS team WHERE man.id = :pid";
+        String query = "SELECT DISTINCT team FROM " + current.getClass().getSimpleName()
+                + " AS user JOIN user.trackList AS team WHERE user.id = :pid";
         Query q = em.createQuery(query);
         q.setParameter("pid", current.getId());
         current.setTrackList(q.getResultList());
-//        for (Team team : current.getTrackList()) {
-//            query = "SELECT player FROM Team AS team JOIN team.players as player WHERE team.id = :tid";
-//            q = em.createQuery(query);
-//            q.setParameter("tid", team.getId());
-//            team.setPlayers(q.getResultList());
-//        }
         return current.getTrackList();
     }
 
     public List<Team> getTrackList() {
-        String query = "SELECT team FROM Team AS team WHERE team NOT IN (SELECT t FROM " + current.getClass().getName() + " AS user JOIN user.trackList t WHERE user.id = :uid)";
+        String query = "SELECT DISTINCT team FROM Team AS team WHERE team NOT IN "
+                + "(SELECT DISTINCT ut  FROM " + current.getClass().getSimpleName() + " AS user "
+                + "JOIN user.trackList AS ut WHERE user.id = :uid )";
         Query q = em.createQuery(query);
         q.setParameter("uid", current.getId());
         List<Team> result = q.getResultList();
-        for (Team team : result) {
-            query = "SELECT player FROM Team AS team JOIN team.players as player WHERE team.id = :tid";
-            q = em.createQuery(query);
-            q.setParameter("tid", team.getId());
-            team.setPlayers(q.getResultList());
-        }
         return result;
     }
 
@@ -66,7 +59,7 @@ public class TrackerManagedBean implements Serializable {
         current.removeFromTrackList(t);
         try {
             utx.begin();
-            em.persist(em.merge(current));
+            em.merge(current);
             utx.commit();
         } catch (Exception e) {
             try {
@@ -80,12 +73,14 @@ public class TrackerManagedBean implements Serializable {
         current.addToTrackList(t);
         try {
             utx.begin();
-            em.persist(em.merge(current));
+            em.merge(current);
             utx.commit();
         } catch (Exception e) {
             try {
+                Logger.getLogger(TrackerManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
                 utx.rollback();
             } catch (Exception ex) {
+                Logger.getLogger(TrackerManagedBean.class.getName()).log(Level.SEVERE, ex.getMessage());
             }
         }
     }
