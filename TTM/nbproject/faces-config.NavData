@@ -2,38 +2,38 @@
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
     <Scope Scope="Project">
-        <Node id="referee/tournaments.xhtml" x="150" y="900" zoom="true"/>
-        <Node id="trackPlayer.xhtml" x="150" y="150" zoom="true"/>
-        <Node id="manager/editUser.xhtml" x="1150" y="600" zoom="true"/>
-        <Node id="manager/tournaments.xhtml" x="400" y="300" zoom="true"/>
-        <Node id="manager/editTournament.xhtml" x="150" y="1050" zoom="true"/>
-        <Node id="tournamentInfo.xhtml" x="150" y="450" zoom="true"/>
-        <Node id="header.xhtml" x="650" y="750" zoom="true"/>
-        <Node id="manager/index.xhtml" x="900" y="450" zoom="true"/>
-        <Node id="umpire/tournaments.xhtml" x="650" y="600" zoom="true"/>
-        <Node id="player/index.xhtml" x="1400" y="150" zoom="true"/>
-        <Node id="teamInfo.xhtml" x="650" y="150" zoom="true"/>
-        <Node id="manager/membershiprequests.xhtml" x="400" y="750" zoom="true"/>
-        <Node id="login.xhtml" x="900" y="150" zoom="true"/>
-        <Node id="manager/users.xhtml" x="650" y="300" zoom="true"/>
-        <Node id="umpire/editStatistics.xhtml" x="400" y="900" zoom="true"/>
-        <Node id="player/createTeam.xhtml" x="1900" y="150" zoom="true"/>
-        <Node id="player/matches.xhtml" x="1650" y="300" zoom="true"/>
-        <Node id="referee/matches.xhtml" x="1400" y="300" zoom="true"/>
-        <Node id="manager/createTournament.xhtml" x="1150" y="450" zoom="true"/>
-        <Node id="main.xhtml" x="400" y="150" zoom="true"/>
-        <Node id="tournaments.xhtml" x="400" y="450" zoom="true"/>
-        <Node id="referee/editReport.xhtml" x="150" y="750" zoom="true"/>
-        <Node id="matchInfo.xhtml" x="150" y="600" zoom="true"/>
-        <Node id="player/tournaments.xhtml" x="1150" y="150" zoom="true"/>
-        <Node id="umpire/index.xhtml" x="1650" y="150" zoom="true"/>
-        <Node id="manager/editDraw.xhtml" x="1400" y="450" zoom="true"/>
-        <Node id="umpire/matches.xhtml" x="150" y="300" zoom="true"/>
-        <Node id="manager/tournamentjoinrequests.xhtml" x="900" y="300" zoom="true"/>
-        <Node id="trackList.xhtml" x="400" y="600" zoom="true"/>
-        <Node id="registereduser/index.xhtml" x="1150" y="300" zoom="true"/>
-        <Node id="referee/index.xhtml" x="900" y="600" zoom="true"/>
-        <Node id="newUser.xhtml" x="650" y="450" zoom="true"/>
+        <Node id="referee/tournaments.xhtml" x="650" y="450" zoom="true"/>
+        <Node id="matchDetails.xhtml" x="405" y="150" zoom="true"/>
+        <Node id="trackPlayer.xhtml" x="900" y="450" zoom="true"/>
+        <Node id="manager/tournaments.xhtml" x="1400" y="150" zoom="true"/>
+        <Node id="manager/editUser.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="manager/editTournament.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="tournamentInfo.xhtml" x="150" y="750" zoom="true"/>
+        <Node id="header.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="manager/index.xhtml" x="650" y="750" zoom="true"/>
+        <Node id="umpire/tournaments.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="player/index.xhtml" x="1650" y="150" zoom="true"/>
+        <Node id="teamInfo.xhtml" x="1900" y="150" zoom="true"/>
+        <Node id="manager/membershiprequests.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="login.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="manager/users.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="player/createTeam.xhtml" x="1150" y="450" zoom="true"/>
+        <Node id="umpire/editStatistics.xhtml" x="1150" y="600" zoom="true"/>
+        <Node id="player/matches.xhtml" x="150" y="1050" zoom="true"/>
+        <Node id="referee/matches.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="manager/createTournament.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="main.xhtml" x="900" y="600" zoom="true"/>
+        <Node id="tournaments.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="referee/editReport.xhtml" x="1400" y="450" zoom="true"/>
+        <Node id="umpire/index.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="player/tournaments.xhtml" x="400" y="900" zoom="true"/>
+        <Node id="manager/editDraw.xhtml" x="1400" y="300" zoom="true"/>
+        <Node id="umpire/matches.xhtml" x="650" y="600" zoom="true"/>
+        <Node id="manager/tournamentjoinrequests.xhtml" x="55" y="150" zoom="true"/>
+        <Node id="trackList.xhtml" x="400" y="750" zoom="true"/>
+        <Node id="registereduser/index.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="referee/index.xhtml" x="150" y="900" zoom="true"/>
+        <Node id="newUser.xhtml" x="1650" y="300" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>

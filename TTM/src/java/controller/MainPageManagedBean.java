@@ -4,10 +4,11 @@
  */
 package controller;
 
+import java.io.Serializable;
 import java.util.List;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,8 +19,8 @@ import model.Player;
 import model.Tournament;
 
 @ManagedBean
-@RequestScoped
-public class MainPageManagedBean {
+@SessionScoped
+public class MainPageManagedBean implements Serializable {
 
     @PersistenceContext
     private EntityManager em;
@@ -30,10 +31,10 @@ public class MainPageManagedBean {
     public MainPageManagedBean() {
     }
 
-    public boolean isPlayer(){
+    public boolean isPlayer() {
         FacesContext cnt = FacesContext.getCurrentInstance();
         Object ru = cnt.getExternalContext().getSessionMap().get(RegisteredUserManagedBean.USER_SESSION_KEY);
-        if(ru != null){
+        if (ru != null) {
             return (ru instanceof Player);
         }
         return false;
@@ -57,7 +58,9 @@ public class MainPageManagedBean {
     }
 
     public Tournament getSelectedTournament() {
-        if(selectedTournament == null) return null;
+        if (selectedTournament == null) {
+            return null;
+        }
         Query q = em.createQuery("select distinct r from Referee r "
                 + "join r.tournaments t "
                 + "where t.id = :tid");
@@ -81,8 +84,10 @@ public class MainPageManagedBean {
         return selectedTournament;
     }
 
-    public List<Match> getMatches(){
-        if(selectedTournament == null) return null;
+    public List<Match> getMatches() {
+        if (selectedTournament == null) {
+            return null;
+        }
         Query q = em.createQuery("SELECT distinct m FROM tmatch m "
                 + "LEFT JOIN FETCH m.teams "
                 + "JOIN m.tournament t "
@@ -96,11 +101,20 @@ public class MainPageManagedBean {
         return "tournamentDetails";
     }
 
-    public String matchDetails(Match match){
+    public String matchDetails(Match match) {
         this.selectedMatch = match;
         FacesContext fc = FacesContext.getCurrentInstance();
         fc.addMessage(null, new FacesMessage("eh be a.k"));
         return "matchDetails";
+    }
+
+    public Match getSelectedMatchDetails() {
+
+        Query q = em.createQuery("SELECT DISTINCT m FROM tmatch m "
+                + "LEFT JOIN FETCH m.teams WHERE m.id = :mid");
+        q.setParameter("mid", selectedMatch.getId());
+        selectedMatch = (Match) q.getSingleResult();
+        return selectedMatch;
     }
 
     public Match getSelectedMatch() {
@@ -110,5 +124,4 @@ public class MainPageManagedBean {
     public void setSelectedMatch(Match selectedMatch) {
         this.selectedMatch = selectedMatch;
     }
-
 }

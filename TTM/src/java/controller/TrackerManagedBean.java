@@ -39,12 +39,12 @@ public class TrackerManagedBean implements Serializable {
         Query q = em.createQuery(query);
         q.setParameter("pid", current.getId());
         current.setTrackList(q.getResultList());
-        for (Team team : current.getTrackList()) {
-            query = "SELECT player FROM Team AS team JOIN team.players as player WHERE team.id = :tid";
-            q = em.createQuery(query);
-            q.setParameter("tid", team.getId());
-            team.setPlayers(q.getResultList());
-        }
+//        for (Team team : current.getTrackList()) {
+//            query = "SELECT player FROM Team AS team JOIN team.players as player WHERE team.id = :tid";
+//            q = em.createQuery(query);
+//            q.setParameter("tid", team.getId());
+//            team.setPlayers(q.getResultList());
+//        }
         return current.getTrackList();
     }
 
