@@ -7,7 +7,6 @@
         <Node id="manager/editUser.xhtml" x="1150" y="600" zoom="true"/>
         <Node id="manager/tournaments.xhtml" x="400" y="300" zoom="true"/>
         <Node id="manager/editTournament.xhtml" x="150" y="1050" zoom="true"/>
-        <Node id="test.xhtml" x="150" y="600" zoom="true"/>
         <Node id="tournamentInfo.xhtml" x="150" y="450" zoom="true"/>
         <Node id="header.xhtml" x="650" y="750" zoom="true"/>
         <Node id="manager/index.xhtml" x="900" y="450" zoom="true"/>
@@ -25,14 +24,15 @@
         <Node id="main.xhtml" x="400" y="150" zoom="true"/>
         <Node id="tournaments.xhtml" x="400" y="450" zoom="true"/>
         <Node id="referee/editReport.xhtml" x="150" y="750" zoom="true"/>
+        <Node id="matchInfo.xhtml" x="150" y="600" zoom="true"/>
         <Node id="player/tournaments.xhtml" x="1150" y="150" zoom="true"/>
         <Node id="umpire/index.xhtml" x="1650" y="150" zoom="true"/>
         <Node id="manager/editDraw.xhtml" x="1400" y="450" zoom="true"/>
         <Node id="umpire/matches.xhtml" x="150" y="300" zoom="true"/>
         <Node id="manager/tournamentjoinrequests.xhtml" x="900" y="300" zoom="true"/>
         <Node id="trackList.xhtml" x="400" y="600" zoom="true"/>
-        <Node id="referee/index.xhtml" x="900" y="600" zoom="true"/>
         <Node id="registereduser/index.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="referee/index.xhtml" x="900" y="600" zoom="true"/>
         <Node id="newUser.xhtml" x="650" y="450" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>

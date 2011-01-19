@@ -22,6 +22,10 @@
             <to-view-id>/tournamentInfo.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
+            <from-outcome>matchDetails</from-outcome>
+            <to-view-id>/matchInfo.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>manager:index</from-outcome>
             <to-view-id>/manager/index.xhtml</to-view-id>
         </navigation-case>
