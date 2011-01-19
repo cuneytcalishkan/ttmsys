@@ -9,7 +9,7 @@
     <h:body>
         <f:view>
             <h:form>
-                <h:dataTable value="#{managerManagedBean.membershipRequests}" var="item" border="1">
+                <h:dataTable value="#{managerManagedBean.membershipRequests}" var="item" border="1" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                     <f:facet name="header">
                         <h:outputText value="Membership Requests"/>
                     </f:facet>

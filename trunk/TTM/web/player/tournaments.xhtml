@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:panelGrid columns="2" border="0">
         <h:form>
-            <h:dataTable value="#{playerManagedBean.tournaments}" var="item" border="1">
+            <h:dataTable value="#{playerManagedBean.tournaments}" var="item" border="1"  rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                 <f:facet name="header">
                         <h:outputText value="Your Tournaments"/>
                     </f:facet>

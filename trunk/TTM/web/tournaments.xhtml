@@ -9,7 +9,7 @@
             <h:outputText value="TOURNAMENTS INFO"/>
         </f:facet>
         <h:form>
-            <h:dataTable value="#{mainPageManagedBean.tournaments}" var="item" border="1">
+            <h:dataTable value="#{mainPageManagedBean.tournaments}" var="item" border="1" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                 <f:facet name="header">
                     <h:outputText value="Current Tournaments"/>
                 </f:facet>
@@ -53,7 +53,7 @@
         </h:form>
 
         <h:form>
-            <h:dataTable value="#{mainPageManagedBean.futureTournaments}" var="item" border="1">
+            <h:dataTable value="#{mainPageManagedBean.futureTournaments}" var="item" border="1" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                 <f:facet name="header">
                     <h:outputText value="Future Tournaments"/>
                 </f:facet>
