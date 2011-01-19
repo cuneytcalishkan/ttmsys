@@ -37,9 +37,11 @@ public class ManagerManagedBean implements Serializable {
     @Resource
     private UserTransaction utx;
     private Manager manager;
-
     private RegisteredUser selectedUser;
     private String courtName;
+    private int currentPage = 1;
+    private int pageInterval = 10;
+    private int pageCount = 0;
 
     /** Creates a new instance of ManagerManagedBean */
     public ManagerManagedBean() {
@@ -139,6 +141,7 @@ public class ManagerManagedBean implements Serializable {
             em.remove(em.merge(req));
             em.persist(user);
             utx.commit();
+            countPages();
         } catch (Exception ex) {
             Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             FacesContext context = FacesContext.getCurrentInstance();
@@ -158,11 +161,12 @@ public class ManagerManagedBean implements Serializable {
         }
     }
 
-    public void removeUser(RegisteredUser user){
+    public void removeUser(RegisteredUser user) {
         try {
             utx.begin();
             em.remove(em.merge(user));
             utx.commit();
+            countPages();
         } catch (Exception ex) {
             Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             FacesContext context = FacesContext.getCurrentInstance();
@@ -170,7 +174,7 @@ public class ManagerManagedBean implements Serializable {
         }
     }
 
-    public String editUser(){
+    public String editUser() {
         try {
             utx.begin();
             em.merge(selectedUser);
@@ -183,25 +187,67 @@ public class ManagerManagedBean implements Serializable {
         return "manager:index";
     }
 
-    public List<RegisteredUser> getUsers(){
-        Query q = em.createQuery("from RegisteredUser");
+    private void countPages() {
+        int userCount;
+        userCount = ((Number) em.createQuery("select count(*) from RegisteredUser").getSingleResult()).intValue();
+        pageCount = userCount / pageInterval;
+        if (userCount % pageInterval != 0) {
+            pageCount++;
+        }
+    }
+
+    public List<RegisteredUser> getUsers() {
+        Query q = null;
+        if (pageCount == 0) {
+            countPages();
+        }
+        q = em.createQuery("from RegisteredUser");
+        q.setFirstResult((currentPage - 1) * pageInterval);
+        q.setMaxResults(pageInterval);
         return q.getResultList();
     }
 
-    public String typeOf(RegisteredUser ru){
-        if(ru instanceof Manager) return "Manager";
-        else if(ru instanceof Referee) return "Referee";
-        else if(ru instanceof Umpire) return "Umpire";
-        else if(ru instanceof Player) return "Player";
-        else return "Registered User";
+    public boolean isNextPageDisplayable() {
+        if (pageCount == 0) {
+            countPages();
+        }
+        return currentPage < pageCount;
     }
 
-    public List<Court> getCourts(){
+    public boolean isPreviousPageDisplayable() {
+        return currentPage > 1;
+    }
+
+    public String nextPage() {
+        currentPage++;
+        return "manager:index";
+    }
+
+    public String previousPage() {
+        currentPage--;
+        return "manager:index";
+    }
+
+    public String typeOf(RegisteredUser ru) {
+        if (ru instanceof Manager) {
+            return "Manager";
+        } else if (ru instanceof Referee) {
+            return "Referee";
+        } else if (ru instanceof Umpire) {
+            return "Umpire";
+        } else if (ru instanceof Player) {
+            return "Player";
+        } else {
+            return "Registered User";
+        }
+    }
+
+    public List<Court> getCourts() {
         Query q = em.createQuery("from Court");
         return q.getResultList();
     }
 
-    public void removeCourt(Court court){
+    public void removeCourt(Court court) {
         try {
             utx.begin();
             em.remove(em.merge(court));
@@ -213,7 +259,7 @@ public class ManagerManagedBean implements Serializable {
         }
     }
 
-    public void addCourt(){
+    public void addCourt() {
         Court newCourt = new Court(courtName);
         try {
             utx.begin();
@@ -249,5 +295,29 @@ public class ManagerManagedBean implements Serializable {
     public String setSelectedUser(RegisteredUser selectedUser) {
         this.selectedUser = selectedUser;
         return "manager:editUser";
+    }
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentFetchIndex) {
+        this.currentPage = currentFetchIndex;
+    }
+
+    public int getPageInterval() {
+        return pageInterval;
+    }
+
+    public void setPageInterval(int pageInterval) {
+        this.pageInterval = pageInterval;
+    }
+
+    public int getPAgeCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(int userCount) {
+        this.pageCount = userCount;
     }
 }
