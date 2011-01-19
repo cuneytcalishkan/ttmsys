@@ -65,18 +65,6 @@
                             </f:facet>
                             <h:outputText value="#{item.mTime}"/>
                         </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Score"/>
-                            </f:facet>
-                            <h:outputText value="#{item.score}"/>
-                        </h:column>
-                        <h:column rendered="#{mainPageManagedBean.manager}||#{mainPageManagedBean.referee}">
-                            <f:facet name="header">
-                                <h:outputText value="Report"/>
-                            </f:facet>
-                            <h:outputText value="#{mainPageManagedBean.selectedMatch.report}"/>
-                        </h:column>
                     </h:dataTable>
                 </h:form>
             </f:view>
@@ -123,10 +111,27 @@
                         </f:facet>
                         <h:outputText value="#{item.doubleFauls}"/>
                     </h:column>
-                    <h:column rendered="#{mainPageManagedBean.umpire}">
-                        <h:commandLink value="Edit Statistics" action="#{umpireManagedBean.linkStatistics(item.match)}"/>
-                    </h:column>
                 </h:dataTable>
+                <h:form>
+                    <h:dataTable value="#{mainPageManagedBean.matchSets}" var="item">
+                        <f:facet name="header">
+                            <h:outputText value="Sets"/>
+                        </f:facet>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="HomeTeamScore"/>
+                            </f:facet>
+                            <h:outputText value="#{item.homeTeamScore}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="AwayTeamScore"/>
+                            </f:facet>
+                            <h:outputText value="#{item.awayTeamScore}"/>
+                        </h:column>
+
+                    </h:dataTable>
+                </h:form>
                 <h:panelGrid columns="2">
                     <h:form>
                         <h:dataTable value="#{mainPageManagedBean.matchReferees}" var="item">

@@ -17,6 +17,7 @@ import model.Manager;
 import model.Match;
 import model.Player;
 import model.Referee;
+import model.Set;
 import model.Tournament;
 import model.Umpire;
 
@@ -149,6 +150,15 @@ public class MainPageManagedBean implements Serializable {
     public List<Umpire> getMatchUmpites(){
         Query q = em.createQuery("Select r from Umpire r "
                 + "join r.matches m "
+                + "where m.id = :mid");
+        q.setParameter("mid", selectedMatch.getId());
+        return q.getResultList();
+    }
+
+    public List<Set> getMatchSets(){
+        Query q = em.createQuery("Select st from tmatch m "
+                + "join m.sets st "
+                + "left join fetch st.games "
                 + "where m.id = :mid");
         q.setParameter("mid", selectedMatch.getId());
         return q.getResultList();
