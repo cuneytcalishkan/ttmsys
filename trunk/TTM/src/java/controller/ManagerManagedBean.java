@@ -51,7 +51,9 @@ public class ManagerManagedBean implements Serializable {
     }
 
     public List<Tournament> getTournaments() {
-        Query q = em.createQuery("SELECT t FROM Manager m JOIN m.tournaments t");
+        Query q = em.createQuery("SELECT distinct t FROM Manager m JOIN m.tournaments t "
+                + "where m.id = :mid");
+        q.setParameter("mid", manager.getId());
         manager.setTournaments(q.getResultList());
         return manager.getTournaments();
     }
