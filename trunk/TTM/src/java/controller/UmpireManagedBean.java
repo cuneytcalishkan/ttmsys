@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -16,8 +17,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
+import model.Draw;
 import model.Match;
 import model.MatchStatistics;
+import model.Team;
 import model.Tournament;
 import model.Umpire;
 
@@ -72,6 +75,27 @@ public class UmpireManagedBean implements Serializable {
             }
         }
         return "umpire:index";
+    }
+
+    public boolean canAssignWinner(Tournament t, Team tm) {
+        return !tm.equals(t.getDraw().getWinnerTeam());
+    }
+
+    public String selectWinner(Team winner, Tournament t) {
+        Draw d = t.getDraw();
+        d.setWinnerTeam(winner);
+        try {
+            utx.begin();
+            em.merge(d);
+            utx.commit();
+        } catch (Exception e) {
+            Logger.getLogger(UmpireManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
+        }
+        return "umpire:matchDetails";
     }
 
     public MatchStatistics getStatistics() {
