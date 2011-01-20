@@ -176,9 +176,21 @@ public class TournamentManagedBean implements Serializable {
         LinkedList<Draw> ddraws = new LinkedList<Draw>();
         for (int i = 0; i < dCount; i++) {
             Draw hd = draws.removeFirst();
+            if (hd != null && hd.getHomeDraw() != null) {
+                hd.setHomeTeam(hd.getHomeDraw().getWinnerTeam());
+            }
+            if (hd != null && hd.getAwayDraw() != null) {
+                hd.setAwayTeam(hd.getAwayDraw().getWinnerTeam());
+            }
             Draw ad = null;
             if (!draws.isEmpty()) {
                 ad = draws.removeFirst();
+                if (ad != null && ad.getHomeDraw() != null) {
+                    ad.setHomeTeam(ad.getHomeDraw().getWinnerTeam());
+                }
+                if (ad != null && ad.getAwayDraw() != null) {
+                    ad.setAwayTeam(ad.getAwayDraw().getWinnerTeam());
+                }
             }
             Draw d = new Draw(hd, ad);
             try {
