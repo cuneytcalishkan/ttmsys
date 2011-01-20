@@ -11,26 +11,67 @@
         <ui:include src="../header.xhtml"/>
         <hr/>
         <f:view>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <f:facet name="header">
-                        <h:outputText value="Create/Edit"/>
-                    </f:facet>
-                    <h:outputLabel value="HomeTeamScore:" for="homeTeamScore" />
-                    <h:inputText id="homeTeamScore" value="#{setManagedBean.set.homeTeamScore}" title="HomeTeamScore" />
-                    <h:outputLabel value="AwayTeamScore:" for="awayTeamScore" />
-                    <h:inputText id="awayTeamScore" value="#{setManagedBean.set.awayTeamScore}" title="AwayTeamScore" />
-                    <h:column>
-                        &nbsp;
-                    </h:column>
-                    <h:column>
-                        <h:commandButton value="Save" action="#{setManagedBean.addSet}"/>
-                        <h:commandButton type="reset" value="Reset"/>
-                    </h:column>
+            <h:panelGrid columns="2">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <f:facet name="header">
+                            <h:outputText value="Create/Edit"/>
+                        </f:facet>
+                        <h:outputLabel value="HomeTeamScore:" for="homeTeamScore" />
+                        <h:inputText id="homeTeamScore" value="#{setManagedBean.set.homeTeamScore}" title="HomeTeamScore" />
+                        <h:outputLabel value="AwayTeamScore:" for="awayTeamScore" />
+                        <h:inputText id="awayTeamScore" value="#{setManagedBean.set.awayTeamScore}" title="AwayTeamScore" />
+                        <h:column>
+                            &nbsp;
+                        </h:column>
+                        <h:column>
+                            <h:commandButton value="Save" action="#{setManagedBean.addSet}"/>
+                            <h:commandButton type="reset" value="Reset"/>
+                        </h:column>
+                    </h:panelGrid>
+                </h:form>
+                <h:panelGrid>
+                    <f:view>
+                        <h:form>
+                            <h:dataTable value="#{setManagedBean.set.games}" var="item">
+                                <f:facet name="header">
+                                    <h:outputText value="Games"/>
+                                </f:facet>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Home Team Score"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.homeTeamScore}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Away Team Score"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.awayTeamScore}"/>
+                                </h:column>
+                                <h:column>
+                                    <h:commandLink value="Edit" action="#{setManagedBean.editGame(item)}"/>
+                                </h:column>
+                                <h:column>
+                                    <h:commandLink value="Remove" action="#{setManagedBean.removeGame(item)}"/>
+                                </h:column>
+                            </h:dataTable>
+                            <h:panelGrid columns="2">
+                                <f:facet name="header">
+                                    <h:outputText value="New Game"/>
+                                </f:facet>
+                                <h:outputText value="Home Team Score"/>
+                                <h:inputText value="#{setManagedBean.newGame.homeTeamScore}"/>
+                                <h:outputText value="Away Team Score"/>
+                                <h:inputText value="#{setManagedBean.newGame.awayTeamScore}"/>
+                                &nbsp;
+                                <h:commandButton value="Add" action="#{setManagedBean.addGame}"/>
+                            </h:panelGrid>
+                        </h:form>
+                    </f:view>
                 </h:panelGrid>
-            </h:form>
+            </h:panelGrid>
         </f:view>
-
     </h:body>
 </html>
 

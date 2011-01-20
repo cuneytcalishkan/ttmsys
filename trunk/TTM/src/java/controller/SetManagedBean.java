@@ -5,6 +5,7 @@
 package controller;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -13,15 +14,11 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
+import model.Game;
 import model.Match;
 import model.Set;
 
-/**
- *
- * @author Natan
- */
 @Named(value = "setManagedBean")
 @SessionScoped
 public class SetManagedBean implements Serializable {
@@ -33,13 +30,17 @@ public class SetManagedBean implements Serializable {
     private Set set;
     private Match match;
     private boolean isNew;
+    private boolean isGameNew;
+    private Game newGame;
 
     /** Creates a new instance of SetManagedBean */
     public SetManagedBean() {
+        newGame = new Game();
+        isGameNew = true;
     }
 
     public String linkSet(Set set, Match match) {
-        Query q = em.createQuery("select s from tmatch m "
+        Query q = em.createQuery("select distinct s from tmatch m "
                 + "join m.sets s "
                 + "left join fetch s.games "
                 + "where m.id =:mid");
@@ -53,6 +54,58 @@ public class SetManagedBean implements Serializable {
             isNew = true;
         }
         return "umpire:editSet";
+    }
+
+    public void addGame() {
+        if(isGameNew)
+            set.addGame(newGame);
+        if (!isNew) {
+            try {
+                utx.begin();
+                em.persist(em.merge(newGame));
+                em.merge(set);
+                utx.commit();
+            } catch (Exception ex) {
+                Logger.getLogger(SetManagedBean.class.getName()).log(Level.SEVERE, ex.getMessage());
+                try {
+                    utx.rollback();
+                } catch (Exception e) {
+                }
+            }
+        }
+        newGame = new Game();
+        isGameNew = true;
+    }
+
+    public void removeGame(Game game) {
+        set.removeGame(game);
+        if (!isNew) {
+            try {
+                utx.begin();
+                em.remove(em.merge(game));
+                em.merge(set);
+                utx.commit();
+            } catch (Exception ex) {
+                Logger.getLogger(SetManagedBean.class.getName()).log(Level.SEVERE, ex.getMessage());
+                try {
+                    utx.rollback();
+                } catch (Exception e) {
+                }
+            }
+        }
+    }
+
+    public void editGame(Game game){
+        newGame = game;
+        isGameNew = false;
+    }
+
+    public Game getNewGame() {
+        return newGame;
+    }
+
+    public void setNewGame(Game newGame) {
+        this.newGame = newGame;
     }
 
     public Set getSet() {
@@ -69,6 +122,9 @@ public class SetManagedBean implements Serializable {
             if (!isNew) {
                 em.merge(set);
             } else {
+                for(Game game : set.getGames()){
+                    em.persist(em.merge(game));
+                }
                 em.persist(em.merge(set));
                 match.addSet(set);
                 em.merge(match);
@@ -86,7 +142,7 @@ public class SetManagedBean implements Serializable {
     }
 
     public void removeSet(Set s, Match m) {
-        Query q = em.createQuery("select s from tmatch m "
+        Query q = em.createQuery("select distinct s from tmatch m "
                 + "join m.sets s "
                 + "left join fetch s.games "
                 + "where m.id =:mid");
