@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Edit Match</title>
+        <ui:include src="../header.xhtml"/>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="Create/Edit"/></h1>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="AwayTeamScore:" for="awayTeamScore" />
+                    <h:inputText id="awayTeamScore" value="#{tournamentManagedBean.selectedMatch.awayTeamScore}" title="AwayTeamScore" />
+                    <h:outputLabel value="HomeTeamScore:" for="homeTeamScore" />
+                    <h:inputText id="homeTeamScore" value="#{tournamentManagedBean.selectedMatch.homeTeamScore}" title="HomeTeamScore" />
+                    <h:outputLabel value="mDate:" for="mDate" />
+                    <h:inputText id="mDate" value="#{tournamentManagedBean.selectedMatch.mDate}" title="mDate" required="true" requiredMessage="The mDate field is required.">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="mTime:" for="mTime" />
+                    <h:inputText id="mTime" value="#{tournamentManagedBean.selectedMatch.mTime}" title="mTime" required="true" requiredMessage="The mTime field is required."/>
+                    <h:outputLabel value="Report:" for="report" />
+                    <h:inputText id="report" value="#{tournamentManagedBean.selectedMatch.report}" title="Report" />
+                </h:panelGrid>
+            </h:form>
+        </f:view>
+        <h:panelGrid>
+                    <h:form>
+                        <h:dataTable value="#{tournamentManagedBean.selectedMatch.referees}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Referees"/>
+                                </f:facet>
+                                <h:outputText value="#{item}"/>
+                            </h:column>
+                            <h:column>
+                                <h:commandLink value="Remove" action="#{drawManagedBean.removeReferee(item)}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                    <h:form>
+                        <h:dataTable value="#{drawManagedBean.refereeList}" var="item"  rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Other Referees"/>
+                                </f:facet>
+                                <h:outputText value="#{item}"/>
+                            </h:column>
+                            <h:column>
+                                <h:commandLink value="Add" action="#{drawManagedBean.addReferee(item)}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+
+                </h:panelGrid>
+                <h:panelGrid>
+                    <h:form>
+                        <h:dataTable value="#{drawManagedBean.mUmpires}" var="item"  rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Umpires"/>
+                                </f:facet>
+                                <h:outputText value="#{item}"/>
+                            </h:column>
+                            <h:column>
+                                <h:commandLink value="Remove" action="#{drawManagedBean.removeUmpire(item)}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                    <h:form>
+                        <h:dataTable value="#{drawManagedBean.umpireList}" var="item"  rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Other Umpires"/>
+                                </f:facet>
+                                <h:outputText value="#{item}"/>
+                            </h:column>
+                            <h:column>
+                                <h:commandLink value="Add" action="#{drawManagedBean.addUmpire(item)}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </h:panelGrid>
+                <h:form>
+                    <h:panelGrid columns="1">
+                        <f:facet name="header">
+                            <h:outputText value="ASSIGN COURT"/>
+                        </f:facet>
+                        <h:dataTable value="#{drawManagedBean.courtList}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
+                            <h:column>
+                                <h:outputText value="#{item}"/>
+                            </h:column>
+                            <h:column>
+                                <h:commandLink value="Assign" action="#{drawManagedBean.assignCourt(item)}"
+                                               rendered="#{drawManagedBean.canAssignCourt(item)}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGrid>
+                </h:form>
+    </h:body>
+</html>
+
