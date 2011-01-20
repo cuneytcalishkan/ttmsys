@@ -37,16 +37,16 @@ public class Match implements Serializable {
     private int homeTeamScore;
     private int awayTeamScore;
     private String report;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "matchid")
     private List<Set> sets;
     @ManyToMany(targetEntity = Team.class)
     private List<Team> teams;
     @ManyToMany(targetEntity = Umpire.class)
-    @JoinTable(name="tmatch_umpire")
+    @JoinTable(name = "tmatch_umpire")
     private List<Umpire> umpires;
     @ManyToMany(targetEntity = Referee.class)
-    @JoinTable(name="tmatch_referee")
+    @JoinTable(name = "tmatch_referee")
     private List<Referee> referees;
     @ManyToOne
     private Court court;
