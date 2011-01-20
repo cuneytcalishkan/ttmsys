@@ -122,7 +122,7 @@ public class MainPageManagedBean implements Serializable {
         if (selectedMatch == null) {
             return null;
         }
-        Query q = em.createQuery("Select r from Referee r "
+        Query q = em.createQuery("Select distinct r from Referee r "
                 + "join r.matches m "
                 + "where m.id = :mid");
         q.setParameter("mid", selectedMatch.getId());
@@ -133,7 +133,7 @@ public class MainPageManagedBean implements Serializable {
         if (selectedMatch == null) {
             return null;
         }
-        Query q = em.createQuery("Select r from Umpire r "
+        Query q = em.createQuery("Select distinct r from Umpire r "
                 + "join r.matches m "
                 + "where m.id = :mid");
         q.setParameter("mid", selectedMatch.getId());
@@ -147,7 +147,7 @@ public class MainPageManagedBean implements Serializable {
         if (selectedMatch == null) {
             return null;
         }
-        Query q = em.createQuery("Select st from tmatch m "
+        Query q = em.createQuery("Select distinct st from tmatch m "
                 + "join m.sets st "
                 + "left join fetch st.games "
                 + "where m.id = :mid");

@@ -41,9 +41,13 @@ public class Set implements Serializable {
         if (games == null) {
             games = new ArrayList<Game>();
         }
-        if (!games.contains(g)) {
+        
             games.add(g);
-        }
+        
+    }
+
+    public void removeGame(Game g){
+        games.remove(g);
     }
 
     public void setAwayTeamScore(int awayTeamScore) {
