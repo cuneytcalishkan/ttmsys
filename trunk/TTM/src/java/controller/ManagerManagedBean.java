@@ -87,11 +87,11 @@ public class ManagerManagedBean implements Serializable {
             em.merge(manager);
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, e);
             try {
                 utx.rollback();
             } catch (Exception ex) {
             }
-            System.out.println(e);
         }
     }
 
@@ -104,10 +104,12 @@ public class ManagerManagedBean implements Serializable {
             em.remove(em.merge(req));
             em.merge(manager);
             utx.commit();
-        } catch (Exception ex) {
-            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Operation Failed"));
+        } catch (Exception e) {
+            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, e);
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
         }
 
     }
@@ -126,12 +128,13 @@ public class ManagerManagedBean implements Serializable {
             em.remove(em.merge(req));
             em.merge(manager);
             utx.commit();
-        } catch (Exception ex) {
-            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Operation Failed"));
+        } catch (Exception e) {
+            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, e);
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
         }
-
     }
 
     public void acceptMembershipRequest(MembershipRequest req) {
@@ -142,10 +145,12 @@ public class ManagerManagedBean implements Serializable {
             em.persist(user);
             utx.commit();
             countPages();
-        } catch (Exception ex) {
-            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Operation Failed"));
+        } catch (Exception e) {
+            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, e);
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
         }
     }
 
@@ -154,10 +159,12 @@ public class ManagerManagedBean implements Serializable {
             utx.begin();
             em.remove(em.merge(req));
             utx.commit();
-        } catch (Exception ex) {
-            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Operation Failed"));
+        } catch (Exception e) {
+            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, e);
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
         }
     }
 
@@ -167,10 +174,12 @@ public class ManagerManagedBean implements Serializable {
             em.remove(em.merge(user));
             utx.commit();
             countPages();
-        } catch (Exception ex) {
-            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Operation Failed"));
+        } catch (Exception e) {
+            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, e);
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
         }
     }
 
@@ -179,10 +188,12 @@ public class ManagerManagedBean implements Serializable {
             utx.begin();
             em.merge(selectedUser);
             utx.commit();
-        } catch (Exception ex) {
-            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Operation Failed"));
+        } catch (Exception e) {
+            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, e);
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
         }
         return "manager:index";
     }
@@ -255,10 +266,12 @@ public class ManagerManagedBean implements Serializable {
             utx.begin();
             em.remove(em.merge(court));
             utx.commit();
-        } catch (Exception ex) {
-            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Operation Failed"));
+        } catch (Exception e) {
+            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, e);
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
         }
     }
 
@@ -268,10 +281,12 @@ public class ManagerManagedBean implements Serializable {
             utx.begin();
             em.persist(newCourt);
             utx.commit();
-        } catch (Exception ex) {
-            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Operation Failed"));
+        } catch (Exception e) {
+            Logger.getLogger(ManagerManagedBean.class.getName()).log(Level.SEVERE, null, e);
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
         }
     }
 

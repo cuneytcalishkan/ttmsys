@@ -6,6 +6,8 @@ package controller;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -51,24 +53,28 @@ public class UmpireManagedBean implements Serializable {
         return current.getTournaments();
     }
 
-    public String linkStatistics(Match match){
+    public String linkStatistics(Match match) {
         selectedMatch = match;
         return "umpire:editStatistics";
     }
 
-    public String editStatistics(){
+    public String editStatistics() {
         try {
             utx.begin();
             em.persist(em.merge(selectedMatch.getStatistics()));
             em.persist(em.merge(selectedMatch));
             utx.commit();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+        } catch (Exception e) {
+            Logger.getLogger(UmpireManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
         }
         return "umpire:index";
     }
 
-    public MatchStatistics getStatistics(){
+    public MatchStatistics getStatistics() {
         return selectedMatch.getStatistics();
     }
 
@@ -79,5 +85,4 @@ public class UmpireManagedBean implements Serializable {
     public void setSelectedMatch(Match selectedMatch) {
         this.selectedMatch = selectedMatch;
     }
-    
 }

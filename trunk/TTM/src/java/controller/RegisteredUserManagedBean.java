@@ -193,13 +193,11 @@ public class RegisteredUserManagedBean implements Serializable {
                 context.addMessage(null, message);
                 return "index";
             } catch (Exception e) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        "Error creating user!",
-                        "Unexpected error when creating your account.  Please contact the system Administrator");
-                context.addMessage(null, message);
-                Logger.getAnonymousLogger().log(Level.SEVERE,
-                        "Unable to create new user",
-                        e);
+                Logger.getLogger(RegisteredUserManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
+                try {
+                    utx.rollback();
+                } catch (Exception ex) {
+                }
                 return null;
             }
 
