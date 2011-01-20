@@ -2,17 +2,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Add/Edit Report</title>
-        <ui:include src="../header.xhtml"/>
     </h:head>
     <h:body>
+        <ui:include src="../header.xhtml"/>
+        <hr/>
         <h:form>
-            <h:outputText value="#{refereeManagedBean.selectedMatch}"/><br/>
-            <h2><h:outputText value="The Report"/></h2>
-            <h:inputTextarea id="report" value="#{refereeManagedBean.selectedMatch.report}"/><br/>
-            <h:commandButton value="Add/Edit Report" action="#{refereeManagedBean.editReport}"/>
+            <h:panelGrid columns="2" border="0">
+                <f:facet name="header">
+                    <h:outputText value="#{refereeManagedBean.selectedMatch}"/>
+                </f:facet>
+                <h:outputText value="The Report"/>
+                <h:inputTextarea id="report" value="#{refereeManagedBean.selectedMatch.report}" rows="10" cols="20"/>
+                <h:column>
+                    &nbsp;
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Add/Edit Report" action="#{refereeManagedBean.editReport}"/>
+                    <h:commandButton value="Reset" type="reset"/>    
+                </h:column>
+            </h:panelGrid>
         </h:form>
     </h:body>
 </html>

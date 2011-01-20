@@ -12,13 +12,16 @@
         <hr/>
         <f:view>
             <h:form>
-                <h1><h:outputText value="Create/Edit"/></h1>
                 <h:panelGrid columns="2">
+                    <f:facet name="header">
+                        <h:outputText value="Create/Edit"/>
+                    </f:facet>
                     <h:outputLabel value="HomeTeamScore:" for="homeTeamScore" />
                     <h:inputText id="homeTeamScore" value="#{setManagedBean.set.homeTeamScore}" title="HomeTeamScore" />
                     <h:outputLabel value="AwayTeamScore:" for="awayTeamScore" />
                     <h:inputText id="awayTeamScore" value="#{setManagedBean.set.awayTeamScore}" title="AwayTeamScore" />
                     <h:commandButton value="Save" action="#{setManagedBean.addSet}"/>
+                    <h:commandButton type="reset" value="Reset"/>
                 </h:panelGrid>
             </h:form>
         </f:view>
