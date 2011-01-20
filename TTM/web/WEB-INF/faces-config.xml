@@ -62,6 +62,10 @@
             <to-view-id>/umpire/editStatistics.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
+            <from-outcome>umpire:editSet</from-outcome>
+            <to-view-id>/umpire/editSet.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>registereduser:index</from-outcome>
             <to-view-id>/registereduser/index.xhtml</to-view-id>
         </navigation-case>
