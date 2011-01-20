@@ -123,8 +123,7 @@ public class TournamentManagedBean implements Serializable {
                 + "where t.id = :tid";
         Query q = em.createQuery(query);
         q.setParameter("tid", current.getId());
-        current = (Tournament) q.getSingleResult();
-        return current.getTeams();
+        return q.getResultList();
     }
 
     public String generateDraws() {
