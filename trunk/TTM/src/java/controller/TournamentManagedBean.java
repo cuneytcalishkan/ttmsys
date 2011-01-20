@@ -22,6 +22,7 @@ import javax.transaction.UserTransaction;
 import model.Court;
 import model.Draw;
 import model.Manager;
+import model.Match;
 import model.Referee;
 import model.Team;
 import model.Tournament;
@@ -42,6 +43,7 @@ public class TournamentManagedBean implements Serializable {
     @Resource
     private UserTransaction utx;
     private Tournament current;
+    
 
     /** Creates a new instance of TournamentManagedBean */
     public TournamentManagedBean() {
@@ -363,6 +365,12 @@ public class TournamentManagedBean implements Serializable {
                 + "where t.id = :tid");
         q.setParameter("tid", current.getId());
         current.setCourts(q.getResultList());
+        q = em.createQuery("SELECT distinct m FROM tmatch m "
+                + "LEFT JOIN FETCH m.teams "
+                + "JOIN m.tournament t "
+                + "WHERE t.id = :tid");
+        q.setParameter("tid", current.getId());
+        current.setMatches(q.getResultList());
         return current;
     }
 
@@ -416,5 +424,20 @@ public class TournamentManagedBean implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void removeMatch(Match match){
+        current.removeMatch(match);
+        try {
+            utx.begin();
+            em.merge(current);
+            em.remove(em.merge(match));
+            utx.commit();
+        } catch (Exception e) {
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
+        }
     }
 }

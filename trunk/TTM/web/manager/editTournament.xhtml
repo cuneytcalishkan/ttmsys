@@ -98,7 +98,7 @@
                         <h:dataTable value="#{tournamentManagedBean.otherUmpires}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Other Referees"/>
+                                    <h:outputText value="Other Umpires"/>
                                 </f:facet>
                                 <h:outputText value="#{item}"/>
                             </h:column>
@@ -160,9 +160,74 @@
                     </h:dataTable>
                     <h:commandButton value="Generate" action="#{tournamentManagedBean.generateDraws}"/>
                 </h:form>
+
+
+            </h:panelGrid>
+
+            <hr/>
+            <h:panelGrid>
+                <h:form>
+                    <h:dataTable value="#{tournamentManagedBean.current.matches}" var="item">
+                        <f:facet name="header">
+                            <h:outputText value="Matches"/>
+                        </f:facet>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="HomeTeam"/>
+                            </f:facet>
+                            <h:outputText value="#{item.homeTeam}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="AwayTeam"/>
+                            </f:facet>
+                            <h:outputText value="#{item.awayTeam}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Court"/>
+                            </f:facet>
+                            <h:outputText value="#{item.court}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="mDate"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="mTime"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mTime}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Score"/>
+                            </f:facet>
+                            <h:outputText value="#{item.score}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Report"/>
+                            </f:facet>
+                            <h:outputText value="#{item.report}"/>
+                        </h:column>
+                        <h:column>
+                            <h:commandLink value="Details" action="#{mainPageManagedBean.matchDetails(item)}"/>
+                        </h:column>
+                        <h:column>
+                            <h:commandLink value="Edit" action="#{matchManagedBean.linkMatch(item,tournamentManagedBean.current)}"/>
+                        </h:column>
+                        <h:column>
+                            <h:commandLink value="Remove" action="#{tournamentManagedBean.removeMatch(item)}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
             </h:panelGrid>
         </f:view>
-
     </h:body>
 </html>
 

@@ -25,10 +25,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-/**
- *
- * @author Natan
- */
 public class Fill {
 
     public Fill() {

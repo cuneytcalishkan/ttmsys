@@ -82,8 +82,8 @@
             <to-view-id>/manager/editUser.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-outcome>manager:matchDetails</from-outcome>
-            <to-view-id>/manager/matchDetails.xhtml</to-view-id>
+            <from-outcome>manager:editMatch</from-outcome>
+            <to-view-id>/manager/editMatch.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>teamInfo</from-outcome>
