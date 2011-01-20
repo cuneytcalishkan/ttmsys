@@ -107,15 +107,16 @@ public abstract class Team implements Serializable {
         if (this.id != other.id) {
             return false;
         }
+        if (this.players != other.players && (this.players == null || !this.players.equals(other.players))) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 7;
+        hash = 37 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
     }
-
-    
 }
