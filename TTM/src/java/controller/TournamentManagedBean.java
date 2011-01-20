@@ -43,7 +43,6 @@ public class TournamentManagedBean implements Serializable {
     @Resource
     private UserTransaction utx;
     private Tournament current;
-    
 
     /** Creates a new instance of TournamentManagedBean */
     public TournamentManagedBean() {
@@ -70,7 +69,7 @@ public class TournamentManagedBean implements Serializable {
             em.persist(em.merge(manager));
             utx.commit();
         } catch (Exception e) {
-            Logger.getLogger(TournamentManagedBean.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(TournamentManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
             try {
                 utx.rollback();
             } catch (Exception ex) {
@@ -109,8 +108,12 @@ public class TournamentManagedBean implements Serializable {
             utx.begin();
             em.merge(current);
             utx.commit();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+        } catch (Exception e) {
+            Logger.getLogger(TournamentManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
         }
         return "manager:index";
     }
@@ -121,14 +124,6 @@ public class TournamentManagedBean implements Serializable {
         Query q = em.createQuery(query);
         q.setParameter("tid", current.getId());
         current = (Tournament) q.getSingleResult();
-
-        for (Team team : current.getTeams()) {
-            query = "select distinct team from Team team where team.id = :tid";
-            q = em.createQuery(query);
-            q.setParameter("tid", team.getId());
-            team = (Team) q.getSingleResult();
-        }
-
         return current.getTeams();
     }
 
@@ -153,6 +148,7 @@ public class TournamentManagedBean implements Serializable {
                 em.persist(d);
                 utx.commit();
             } catch (Exception e) {
+                Logger.getLogger(TournamentManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
                 try {
                     utx.rollback();
                 } catch (Exception ex) {
@@ -166,6 +162,7 @@ public class TournamentManagedBean implements Serializable {
             em.merge(current);
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(TournamentManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
             try {
                 utx.rollback();
             } catch (Exception ex) {
@@ -189,6 +186,7 @@ public class TournamentManagedBean implements Serializable {
                 em.persist(d);
                 utx.commit();
             } catch (Exception e) {
+                Logger.getLogger(TournamentManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
                 try {
                     utx.rollback();
                 } catch (Exception ex) {
@@ -205,6 +203,7 @@ public class TournamentManagedBean implements Serializable {
                 em.merge(current);
                 utx.commit();
             } catch (Exception e) {
+                Logger.getLogger(TournamentManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
                 try {
                     utx.rollback();
                 } catch (Exception ex) {
@@ -220,6 +219,7 @@ public class TournamentManagedBean implements Serializable {
             em.merge(current);
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(TournamentManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
             try {
                 utx.rollback();
             } catch (Exception ex) {
@@ -236,6 +236,7 @@ public class TournamentManagedBean implements Serializable {
             em.merge(current);
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(TournamentManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
             try {
                 utx.rollback();
             } catch (Exception ex) {
@@ -250,6 +251,7 @@ public class TournamentManagedBean implements Serializable {
             em.merge(current);
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(TournamentManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
             try {
                 utx.rollback();
             } catch (Exception ex) {
@@ -266,6 +268,7 @@ public class TournamentManagedBean implements Serializable {
             em.merge(current);
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(TournamentManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
             try {
                 utx.rollback();
             } catch (Exception ex) {
@@ -280,6 +283,7 @@ public class TournamentManagedBean implements Serializable {
             em.merge(current);
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(TournamentManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
             try {
                 utx.rollback();
             } catch (Exception ex) {
@@ -296,6 +300,7 @@ public class TournamentManagedBean implements Serializable {
             em.merge(current);
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(TournamentManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
             try {
                 utx.rollback();
             } catch (Exception ex) {
@@ -310,6 +315,7 @@ public class TournamentManagedBean implements Serializable {
             em.merge(current);
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(TournamentManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
             try {
                 utx.rollback();
             } catch (Exception ex) {
@@ -426,7 +432,7 @@ public class TournamentManagedBean implements Serializable {
         this.type = type;
     }
 
-    public void removeMatch(Match match){
+    public void removeMatch(Match match) {
         current.removeMatch(match);
         try {
             utx.begin();
@@ -434,6 +440,7 @@ public class TournamentManagedBean implements Serializable {
             em.remove(em.merge(match));
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(TournamentManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
             try {
                 utx.rollback();
             } catch (Exception ex) {
