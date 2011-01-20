@@ -119,7 +119,7 @@ public class TournamentManagedBean implements Serializable {
     }
 
     public List<Team> getTeams() {
-        String query = "select distinct t from Tournament t left join fetch t.teams "
+        String query = "select distinct tm from Team tm join tm.tournament t "
                 + "where t.id = :tid";
         Query q = em.createQuery(query);
         q.setParameter("tid", current.getId());
@@ -312,6 +312,7 @@ public class TournamentManagedBean implements Serializable {
         current.removeTeam(team);
         try {
             utx.begin();
+            em.remove(em.merge(team));
             em.merge(current);
             utx.commit();
         } catch (Exception e) {
