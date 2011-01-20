@@ -1,744 +1,543 @@
--- phpMyAdmin SQL Dump
--- version 2.10.2
--- http://www.phpmyadmin.net
+-- MySQL dump 10.13  Distrib 5.5.8, for Win64 (x86)
 --
--- Anamakine: localhost
--- Üretim Zamanı: 19 Ocak 2011 saat 17:34:07
--- Sunucu sürümü: 5.0.45
--- PHP Sürümü: 5.2.3
+-- Host: localhost    Database: ttms
+-- ------------------------------------------------------
+-- Server version	5.5.8
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Veritabanı: `ttms`
+-- Table structure for table `court`
 --
 
--- --------------------------------------------------------
-
---
--- Tablo yapısı: `court`
---
-
+DROP TABLE IF EXISTS `court`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `court` (
-  `id` bigint(20) NOT NULL auto_increment,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Tablo döküm verisi `court`
+-- Dumping data for table `court`
 --
 
-INSERT INTO `court` VALUES (3, 'Court no:1');
-INSERT INTO `court` VALUES (2, 'Court no:2');
-INSERT INTO `court` VALUES (4, 'Court no:3');
-INSERT INTO `court` VALUES (5, 'Court no:4');
-INSERT INTO `court` VALUES (6, 'Court no:5');
-INSERT INTO `court` VALUES (7, 'Court no:6');
-INSERT INTO `court` VALUES (8, 'Court no:7');
-INSERT INTO `court` VALUES (9, 'Court no:8');
-INSERT INTO `court` VALUES (10, 'Court no:9');
-INSERT INTO `court` VALUES (11, 'Court no:10');
-
--- --------------------------------------------------------
+LOCK TABLES `court` WRITE;
+/*!40000 ALTER TABLE `court` DISABLE KEYS */;
+INSERT INTO `court` VALUES (3,'Court no:1'),(2,'Court no:2'),(4,'Court no:3'),(5,'Court no:4'),(6,'Court no:5'),(7,'Court no:6'),(8,'Court no:7'),(9,'Court no:8'),(10,'Court no:9'),(11,'Court no:10');
+/*!40000 ALTER TABLE `court` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Tablo yapısı: `draw`
+-- Table structure for table `draw`
 --
 
+DROP TABLE IF EXISTS `draw`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `draw` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `awayDraw_id` bigint(20) default NULL,
-  `awayTeam_id` bigint(20) default NULL,
-  `homeDraw_id` bigint(20) default NULL,
-  `homeTeam_id` bigint(20) default NULL,
-  `winnerTeam_id` bigint(20) default NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `awayDraw_id` bigint(20) DEFAULT NULL,
+  `awayTeam_id` bigint(20) DEFAULT NULL,
+  `homeDraw_id` bigint(20) DEFAULT NULL,
+  `homeTeam_id` bigint(20) DEFAULT NULL,
+  `winnerTeam_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Tablo döküm verisi `draw`
+-- Dumping data for table `draw`
 --
 
-INSERT INTO `draw` VALUES (1, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `draw` VALUES (2, NULL, 3, NULL, 2, NULL);
-INSERT INTO `draw` VALUES (3, NULL, NULL, 2, NULL, NULL);
-INSERT INTO `draw` VALUES (4, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `draw` VALUES (5, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `draw` VALUES (6, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `draw` VALUES (7, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `draw` VALUES (8, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `draw` VALUES (9, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `draw` VALUES (10, NULL, 35, NULL, 22, NULL);
-INSERT INTO `draw` VALUES (11, NULL, 40, NULL, 24, NULL);
-INSERT INTO `draw` VALUES (12, NULL, 43, NULL, 38, NULL);
-INSERT INTO `draw` VALUES (13, NULL, 27, NULL, 34, NULL);
-INSERT INTO `draw` VALUES (14, NULL, 6, NULL, 13, NULL);
-INSERT INTO `draw` VALUES (15, NULL, NULL, NULL, 47, NULL);
-INSERT INTO `draw` VALUES (16, 11, NULL, 10, NULL, NULL);
-INSERT INTO `draw` VALUES (17, 13, NULL, 12, NULL, NULL);
-INSERT INTO `draw` VALUES (18, 15, NULL, 14, NULL, NULL);
-INSERT INTO `draw` VALUES (19, 17, NULL, 16, NULL, NULL);
-INSERT INTO `draw` VALUES (20, NULL, NULL, 18, NULL, NULL);
-INSERT INTO `draw` VALUES (21, 20, NULL, 19, NULL, NULL);
-INSERT INTO `draw` VALUES (22, NULL, 13, NULL, 34, NULL);
-INSERT INTO `draw` VALUES (23, NULL, 40, NULL, 35, NULL);
-INSERT INTO `draw` VALUES (24, NULL, 6, NULL, 22, NULL);
-INSERT INTO `draw` VALUES (25, NULL, 27, NULL, 43, NULL);
-INSERT INTO `draw` VALUES (26, NULL, 47, NULL, 38, NULL);
-INSERT INTO `draw` VALUES (27, NULL, NULL, NULL, 24, NULL);
-INSERT INTO `draw` VALUES (28, 23, NULL, 22, NULL, NULL);
-INSERT INTO `draw` VALUES (29, 25, NULL, 24, NULL, NULL);
-INSERT INTO `draw` VALUES (30, 27, NULL, 26, NULL, NULL);
-INSERT INTO `draw` VALUES (31, 29, NULL, 28, NULL, NULL);
-INSERT INTO `draw` VALUES (32, NULL, NULL, 30, NULL, NULL);
-INSERT INTO `draw` VALUES (33, 32, NULL, 31, NULL, NULL);
-INSERT INTO `draw` VALUES (34, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `draw` VALUES (35, NULL, 26, NULL, 9, NULL);
-INSERT INTO `draw` VALUES (36, NULL, 21, NULL, 29, NULL);
-INSERT INTO `draw` VALUES (37, NULL, 11, NULL, 20, NULL);
-INSERT INTO `draw` VALUES (38, NULL, 32, NULL, 5, NULL);
-INSERT INTO `draw` VALUES (39, NULL, 51, NULL, 33, NULL);
-INSERT INTO `draw` VALUES (40, 36, NULL, 35, NULL, NULL);
-INSERT INTO `draw` VALUES (41, 38, NULL, 37, NULL, NULL);
-INSERT INTO `draw` VALUES (42, NULL, NULL, 39, NULL, NULL);
-INSERT INTO `draw` VALUES (43, 41, NULL, 40, NULL, NULL);
-INSERT INTO `draw` VALUES (44, NULL, NULL, 42, NULL, NULL);
-INSERT INTO `draw` VALUES (45, 44, NULL, 43, NULL, NULL);
-INSERT INTO `draw` VALUES (46, NULL, 23, NULL, 37, NULL);
-INSERT INTO `draw` VALUES (47, NULL, 42, NULL, 31, NULL);
-INSERT INTO `draw` VALUES (48, NULL, 25, NULL, 46, NULL);
-INSERT INTO `draw` VALUES (49, NULL, 41, NULL, 39, NULL);
-INSERT INTO `draw` VALUES (50, 47, NULL, 46, NULL, NULL);
-INSERT INTO `draw` VALUES (51, 49, NULL, 48, NULL, NULL);
-INSERT INTO `draw` VALUES (52, 51, NULL, 50, NULL, NULL);
-INSERT INTO `draw` VALUES (53, NULL, 48, NULL, 17, NULL);
-INSERT INTO `draw` VALUES (54, NULL, 28, NULL, 49, NULL);
-INSERT INTO `draw` VALUES (55, NULL, 7, NULL, 18, NULL);
-INSERT INTO `draw` VALUES (56, 54, NULL, 53, NULL, NULL);
-INSERT INTO `draw` VALUES (57, NULL, NULL, 55, NULL, NULL);
-INSERT INTO `draw` VALUES (58, 57, NULL, 56, NULL, NULL);
-INSERT INTO `draw` VALUES (59, NULL, 30, NULL, 16, NULL);
-INSERT INTO `draw` VALUES (60, NULL, 8, NULL, 50, NULL);
-INSERT INTO `draw` VALUES (61, NULL, 12, NULL, 4, NULL);
-INSERT INTO `draw` VALUES (62, NULL, NULL, NULL, 19, NULL);
-INSERT INTO `draw` VALUES (63, 60, NULL, 59, NULL, NULL);
-INSERT INTO `draw` VALUES (64, 62, NULL, 61, NULL, NULL);
-INSERT INTO `draw` VALUES (65, 64, NULL, 63, NULL, NULL);
-
--- --------------------------------------------------------
+LOCK TABLES `draw` WRITE;
+/*!40000 ALTER TABLE `draw` DISABLE KEYS */;
+INSERT INTO `draw` VALUES (1,NULL,NULL,NULL,NULL,NULL),(2,NULL,3,NULL,2,NULL),(3,NULL,NULL,2,NULL,NULL),(4,NULL,NULL,NULL,NULL,NULL),(5,NULL,NULL,NULL,NULL,NULL),(6,NULL,NULL,NULL,NULL,NULL),(7,NULL,NULL,NULL,NULL,NULL),(8,NULL,NULL,NULL,NULL,NULL),(9,NULL,NULL,NULL,NULL,NULL),(10,NULL,35,NULL,22,NULL),(11,NULL,40,NULL,24,NULL),(12,NULL,43,NULL,38,NULL),(13,NULL,27,NULL,34,NULL),(14,NULL,6,NULL,13,NULL),(15,NULL,NULL,NULL,47,NULL),(16,11,NULL,10,NULL,NULL),(17,13,NULL,12,NULL,NULL),(18,15,NULL,14,NULL,NULL),(19,17,NULL,16,NULL,NULL),(20,NULL,NULL,18,NULL,NULL),(21,20,NULL,19,NULL,NULL),(22,NULL,13,NULL,34,NULL),(23,NULL,40,NULL,35,NULL),(24,NULL,6,NULL,22,NULL),(25,NULL,27,NULL,43,NULL),(26,NULL,47,NULL,38,NULL),(27,NULL,NULL,NULL,24,NULL),(28,23,NULL,22,NULL,NULL),(29,25,NULL,24,NULL,NULL),(30,27,NULL,26,NULL,NULL),(31,29,NULL,28,NULL,NULL),(32,NULL,NULL,30,NULL,NULL),(33,32,NULL,31,NULL,NULL),(34,NULL,NULL,NULL,NULL,NULL),(35,NULL,26,NULL,9,NULL),(36,NULL,21,NULL,29,NULL),(37,NULL,11,NULL,20,NULL),(38,NULL,32,NULL,5,NULL),(39,NULL,51,NULL,33,NULL),(40,36,NULL,35,NULL,NULL),(41,38,NULL,37,NULL,NULL),(42,NULL,NULL,39,NULL,NULL),(43,41,NULL,40,NULL,NULL),(44,NULL,NULL,42,NULL,NULL),(45,44,NULL,43,NULL,NULL),(46,NULL,23,NULL,37,NULL),(47,NULL,42,NULL,31,NULL),(48,NULL,25,NULL,46,NULL),(49,NULL,41,NULL,39,NULL),(50,47,NULL,46,NULL,NULL),(51,49,NULL,48,NULL,NULL),(52,51,NULL,50,NULL,NULL),(53,NULL,48,NULL,17,NULL),(54,NULL,28,NULL,49,NULL),(55,NULL,7,NULL,18,NULL),(56,54,NULL,53,NULL,NULL),(57,NULL,NULL,55,NULL,NULL),(58,57,NULL,56,NULL,NULL),(59,NULL,30,NULL,16,NULL),(60,NULL,8,NULL,50,NULL),(61,NULL,12,NULL,4,NULL),(62,NULL,NULL,NULL,19,NULL),(63,60,NULL,59,NULL,NULL),(64,62,NULL,61,NULL,NULL),(65,64,NULL,63,NULL,NULL);
+/*!40000 ALTER TABLE `draw` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Tablo yapısı: `game`
+-- Table structure for table `game`
 --
 
+DROP TABLE IF EXISTS `game`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `game` (
-  `id` bigint(20) NOT NULL auto_increment,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `awayTeamScore` int(11) NOT NULL,
   `homeTeamScore` int(11) NOT NULL,
-  `setid` bigint(20) default NULL,
-  PRIMARY KEY  (`id`),
+  `setid` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `FK21C0128E9AA4FA` (`setid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Tablo döküm verisi `game`
+-- Dumping data for table `game`
 --
 
-
--- --------------------------------------------------------
+LOCK TABLES `game` WRITE;
+/*!40000 ALTER TABLE `game` DISABLE KEYS */;
+INSERT INTO `game` VALUES (34,2,2,NULL),(33,3,3,NULL),(32,31,31,8),(5,2,2,8),(31,1,1,8),(38,1,1,15),(37,2,2,15),(36,3,3,15),(35,1,1,NULL),(39,2,1,16),(42,0,0,NULL),(41,0,1,16),(43,0,0,NULL),(44,0,0,16);
+/*!40000 ALTER TABLE `game` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Tablo yapısı: `matchstatistics`
+-- Table structure for table `matchstatistics`
 --
 
+DROP TABLE IF EXISTS `matchstatistics`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `matchstatistics` (
-  `id` bigint(20) NOT NULL auto_increment,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `aces` int(11) NOT NULL,
   `doubleFauls` int(11) NOT NULL,
   `firstSPtsWon` int(11) NOT NULL,
   `returnPtsWon` int(11) NOT NULL,
   `secondSPtsWon` int(11) NOT NULL,
   `totalPtsWon` int(11) NOT NULL,
-  `team_id` bigint(20) default NULL,
-  PRIMARY KEY  (`id`),
+  `team_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `FK97316CA824EDBC5F` (`team_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Tablo döküm verisi `matchstatistics`
+-- Dumping data for table `matchstatistics`
 --
 
-INSERT INTO `matchstatistics` VALUES (1, 0, 0, 0, 0, 0, 0, NULL);
-INSERT INTO `matchstatistics` VALUES (2, 0, 0, 0, 0, 0, 0, NULL);
-INSERT INTO `matchstatistics` VALUES (3, 0, 0, 0, 0, 0, 0, NULL);
-INSERT INTO `matchstatistics` VALUES (4, 0, 0, 0, 0, 0, 0, NULL);
-INSERT INTO `matchstatistics` VALUES (5, 0, 0, 0, 0, 0, 0, NULL);
-
--- --------------------------------------------------------
+LOCK TABLES `matchstatistics` WRITE;
+/*!40000 ALTER TABLE `matchstatistics` DISABLE KEYS */;
+INSERT INTO `matchstatistics` VALUES (1,0,0,0,0,0,0,NULL),(2,0,0,0,0,0,0,NULL),(3,0,0,0,0,0,0,NULL),(5,32,0,0,0,0,0,NULL);
+/*!40000 ALTER TABLE `matchstatistics` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Tablo yapısı: `membershiprequest`
+-- Table structure for table `membershiprequest`
 --
 
+DROP TABLE IF EXISTS `membershiprequest`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `membershiprequest` (
-  `id` bigint(20) NOT NULL auto_increment,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=58 ;
+) ENGINE=MyISAM AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Tablo döküm verisi `membershiprequest`
+-- Dumping data for table `membershiprequest`
 --
 
-
--- --------------------------------------------------------
+LOCK TABLES `membershiprequest` WRITE;
+/*!40000 ALTER TABLE `membershiprequest` DISABLE KEYS */;
+/*!40000 ALTER TABLE `membershiprequest` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Tablo yapısı: `mset`
+-- Table structure for table `mset`
 --
 
+DROP TABLE IF EXISTS `mset`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mset` (
-  `id` bigint(20) NOT NULL auto_increment,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `awayTeamScore` int(11) NOT NULL,
   `homeTeamScore` int(11) NOT NULL,
-  `matchid` bigint(20) default NULL,
-  PRIMARY KEY  (`id`),
+  `matchid` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `FK3348D5DF39840` (`matchid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Tablo döküm verisi `mset`
+-- Dumping data for table `mset`
 --
 
-
--- --------------------------------------------------------
+LOCK TABLES `mset` WRITE;
+/*!40000 ALTER TABLE `mset` DISABLE KEYS */;
+INSERT INTO `mset` VALUES (1,0,0,NULL),(5,0,0,NULL),(3,0,1,NULL),(15,1,2,NULL),(7,1,1,NULL),(8,1,2,2),(16,1,2,2);
+/*!40000 ALTER TABLE `mset` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Tablo yapısı: `registereduser`
+-- Table structure for table `registereduser`
 --
 
+DROP TABLE IF EXISTS `registereduser`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `registereduser` (
   `usertype` varchar(31) NOT NULL,
-  `id` bigint(20) NOT NULL auto_increment,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=63 ;
+) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Tablo döküm verisi `registereduser`
+-- Dumping data for table `registereduser`
 --
 
-INSERT INTO `registereduser` VALUES ('umpire', 1, 'Umpire', 'u', 'ump', 'u');
-INSERT INTO `registereduser` VALUES ('registereduser', 2, 'Registered', 'ru', 'User', 'ru');
-INSERT INTO `registereduser` VALUES ('manager', 3, 'Manager', 'm', 'man', 'm');
-INSERT INTO `registereduser` VALUES ('player', 4, 'Player', 'p', 'pl', 'p');
-INSERT INTO `registereduser` VALUES ('referee', 5, 'Referee', 'r', 'rf', 'r');
-INSERT INTO `registereduser` VALUES ('player', 16, 'Çağla', 'cagla', 'Büyükakçay', 'cagla');
-INSERT INTO `registereduser` VALUES ('manager', 7, 'Fırat', 'fir', 'Şahindal', 'fir');
-INSERT INTO `registereduser` VALUES ('player', 17, 'Irina', 'irina', 'Begu', 'irina');
-INSERT INTO `registereduser` VALUES ('player', 10, 'John', 'john', 'Andrews', 'john');
-INSERT INTO `registereduser` VALUES ('player', 11, 'Boris', 'boris', 'Becker', 'boris');
-INSERT INTO `registereduser` VALUES ('player', 12, 'Mike', 'mike', 'Bryan', 'mike');
-INSERT INTO `registereduser` VALUES ('player', 13, 'Roy', 'roy', 'Emerson', 'roy');
-INSERT INTO `registereduser` VALUES ('player', 14, 'Phil', 'ph', 'Dent', 'phil');
-INSERT INTO `registereduser` VALUES ('player', 15, 'Albert', 'alb', 'Costa', 'alb');
-INSERT INTO `registereduser` VALUES ('player', 18, 'Alice', 'ali', 'Canepa', 'ali');
-INSERT INTO `registereduser` VALUES ('player', 19, 'Maret', 'mar', 'Ani', 'mar');
-INSERT INTO `registereduser` VALUES ('manager', 20, 'Pat', 'pat', 'Du Pre', 'pat');
-INSERT INTO `registereduser` VALUES ('manager', 21, 'Thierry', 'champ', 'Champion', 'champ');
-INSERT INTO `registereduser` VALUES ('referee', 22, 'Tim', 'tim', 'Gullikson', 'tim');
-INSERT INTO `registereduser` VALUES ('referee', 23, 'Richard', 'rich', 'Gasquet', 'rich');
-INSERT INTO `registereduser` VALUES ('referee', 24, 'Neale', 'nea', 'Fraser', 'nea');
-INSERT INTO `registereduser` VALUES ('referee', 25, 'Robert', 'rob', 'Falkenburg', 'rob');
-INSERT INTO `registereduser` VALUES ('umpire', 26, 'Jan', 'jan', 'Gunnarsson', 'jan');
-INSERT INTO `registereduser` VALUES ('umpire', 27, 'Lew', 'hoad', 'Hoad', 'hoad');
-INSERT INTO `registereduser` VALUES ('umpire', 28, 'Nicolas', 'nico', 'Kiefer', 'nico');
-INSERT INTO `registereduser` VALUES ('umpire', 29, 'Rene', 'rene', 'Lacoste', 'rene');
-INSERT INTO `registereduser` VALUES ('umpire', 30, 'Johan', 'joh', 'Kriek', 'joh');
-INSERT INTO `registereduser` VALUES ('registereduser', 31, 'Kristie', 'kris', 'Boogert', 'kris');
-INSERT INTO `registereduser` VALUES ('registereduser', 32, 'Angela', 'angel', 'Buxton', 'angel');
-INSERT INTO `registereduser` VALUES ('registereduser', 33, 'Belinda', 'bel', 'Cortwell', 'bel');
-INSERT INTO `registereduser` VALUES ('player', 34, 'Melinda', 'mel', 'Czink', 'mel');
-INSERT INTO `registereduser` VALUES ('player', 35, 'Lottie', 'lot', 'Dod', 'lot');
-INSERT INTO `registereduser` VALUES ('player', 36, 'Sandra', 'san', 'Dopfer', 'san');
-INSERT INTO `registereduser` VALUES ('player', 37, 'Jo', 'jo', 'Durie', 'jo');
-INSERT INTO `registereduser` VALUES ('player', 38, 'Robyn', 'eb', 'Ebbern', 'eb');
-INSERT INTO `registereduser` VALUES ('player', 39, 'Chris', 'chris', 'Evert', 'chris');
-INSERT INTO `registereduser` VALUES ('player', 40, 'Patty', 'fen', 'Fendick', 'fen');
-INSERT INTO `registereduser` VALUES ('player', 41, 'Donna', 'don', 'Faber', 'don');
-INSERT INTO `registereduser` VALUES ('player', 42, 'Sara', 'sara', 'Errani', 'sara');
-INSERT INTO `registereduser` VALUES ('player', 43, 'Eva', 'eva', 'Dyrberg', 'eva');
-INSERT INTO `registereduser` VALUES ('player', 44, 'Amy', 'amy', 'Frazier', 'amy');
-INSERT INTO `registereduser` VALUES ('player', 45, 'Arthur', 'art', 'Ashe', 'art');
-INSERT INTO `registereduser` VALUES ('player', 46, 'Paul', 'paul', 'Annacone', 'paul');
-INSERT INTO `registereduser` VALUES ('player', 47, 'Victor', 'vic', 'Amaya', 'vic');
-INSERT INTO `registereduser` VALUES ('player', 48, 'Mario', 'mario', 'Ancic', 'mario');
-INSERT INTO `registereduser` VALUES ('player', 49, 'Juan', 'juan', 'Aguileri', 'juan');
-INSERT INTO `registereduser` VALUES ('player', 50, 'Andre', 'and', 'Agassi', 'and');
-INSERT INTO `registereduser` VALUES ('player', 51, 'Luis', 'luis', 'Ayala', 'luis');
-INSERT INTO `registereduser` VALUES ('player', 52, 'Jeremy', 'jerr', 'Bates', 'jerr');
-INSERT INTO `registereduser` VALUES ('player', 53, 'James', 'jam', 'Blake', 'jam');
-INSERT INTO `registereduser` VALUES ('player', 54, 'Galo', 'gal', 'Blanco', 'gal');
-INSERT INTO `registereduser` VALUES ('player', 55, 'Tom', 'tom', 'Brown', 'tom');
-INSERT INTO `registereduser` VALUES ('player', 56, 'Bob', 'bob', 'Bryan', 'bob');
-INSERT INTO `registereduser` VALUES ('player', 57, 'Phil', 'ph', 'Dent', 'ph');
-INSERT INTO `registereduser` VALUES ('player', 58, 'Mark', 'mark', 'Cox', 'mark');
-INSERT INTO `registereduser` VALUES ('player', 59, 'Ross', 'ross', 'Case', 'ross');
-INSERT INTO `registereduser` VALUES ('player', 60, 'Roger', 'rog', 'Federer', 'rog');
-INSERT INTO `registereduser` VALUES ('player', 61, 'Ken', 'ken', 'Flach', 'ken');
-INSERT INTO `registereduser` VALUES ('player', 62, 'Rafael', 'raf', 'Nadal', 'raf');
-
--- --------------------------------------------------------
+LOCK TABLES `registereduser` WRITE;
+/*!40000 ALTER TABLE `registereduser` DISABLE KEYS */;
+INSERT INTO `registereduser` VALUES ('umpire',1,'Umpire','u','ump','u'),('registereduser',2,'Registered','ru','User','ru'),('manager',3,'Manager','m','man','m'),('player',4,'Player','p','pl','p'),('referee',5,'Referee','r','rf','r'),('player',16,'Çağla','cagla','Büyükakçay','cagla'),('manager',7,'Fırat','fir','Şahindal','fir'),('player',17,'Irina','irina','Begu','irina'),('player',10,'John','john','Andrews','john'),('player',11,'Boris','boris','Becker','boris'),('player',12,'Mike','mike','Bryan','mike'),('player',13,'Roy','roy','Emerson','roy'),('player',14,'Phil','ph','Dent','phil'),('player',15,'Albert','alb','Costa','alb'),('player',18,'Alice','ali','Canepa','ali'),('player',19,'Maret','mar','Ani','mar'),('manager',20,'Pat','pat','Du Pre','pat'),('manager',21,'Thierry','champ','Champion','champ'),('referee',22,'Tim','tim','Gullikson','tim'),('referee',23,'Richard','rich','Gasquet','rich'),('referee',24,'Neale','nea','Fraser','nea'),('referee',25,'Robert','rob','Falkenburg','rob'),('umpire',26,'Jan','jan','Gunnarsson','jan'),('umpire',27,'Lew','hoad','Hoad','hoad'),('umpire',28,'Nicolas','nico','Kiefer','nico'),('umpire',29,'Rene','rene','Lacoste','rene'),('umpire',30,'Johan','joh','Kriek','joh'),('registereduser',31,'Kristie','kris','Boogert','kris'),('registereduser',32,'Angela','angel','Buxton','angel'),('registereduser',33,'Belinda','bel','Cortwell','bel'),('player',34,'Melinda','mel','Czink','mel'),('player',35,'Lottie','lot','Dod','lot'),('player',36,'Sandra','san','Dopfer','san'),('player',37,'Jo','jo','Durie','jo'),('player',38,'Robyn','eb','Ebbern','eb'),('player',39,'Chris','chris','Evert','chris'),('player',40,'Patty','fen','Fendick','fen'),('player',41,'Donna','don','Faber','don'),('player',42,'Sara','sara','Errani','sara'),('player',43,'Eva','eva','Dyrberg','eva'),('player',44,'Amy','amy','Frazier','amy'),('player',45,'Arthur','art','Ashe','art'),('player',46,'Paul','paul','Annacone','paul'),('player',47,'Victor','vic','Amaya','vic'),('player',48,'Mario','mario','Ancic','mario'),('player',49,'Juan','juan','Aguileri','juan'),('player',50,'Andre','and','Agassi','and'),('player',51,'Luis','luis','Ayala','luis'),('player',52,'Jeremy','jerr','Bates','jerr'),('player',53,'James','jam','Blake','jam'),('player',54,'Galo','gal','Blanco','gal'),('player',55,'Tom','tom','Brown','tom'),('player',56,'Bob','bob','Bryan','bob'),('player',57,'Phil','ph','Dent','ph'),('player',58,'Mark','mark','Cox','mark'),('player',59,'Ross','ross','Case','ross'),('player',60,'Roger','rog','Federer','rog'),('player',61,'Ken','ken','Flach','ken'),('player',62,'Rafael','raf','Nadal','raf');
+/*!40000 ALTER TABLE `registereduser` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Tablo yapısı: `registereduser_team`
+-- Table structure for table `registereduser_team`
 --
 
+DROP TABLE IF EXISTS `registereduser_team`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `registereduser_team` (
   `RegisteredUser_id` bigint(20) NOT NULL,
   `trackList_id` bigint(20) NOT NULL,
   KEY `FK5AB625EF650E583F` (`RegisteredUser_id`),
   KEY `FK5AB625EFA14F2ED3` (`trackList_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Tablo döküm verisi `registereduser_team`
+-- Dumping data for table `registereduser_team`
 --
 
-INSERT INTO `registereduser_team` VALUES (2, 1);
-INSERT INTO `registereduser_team` VALUES (3, 9);
-INSERT INTO `registereduser_team` VALUES (3, 4);
-INSERT INTO `registereduser_team` VALUES (3, 12);
-INSERT INTO `registereduser_team` VALUES (3, 33);
-INSERT INTO `registereduser_team` VALUES (5, 26);
-INSERT INTO `registereduser_team` VALUES (5, 16);
-
--- --------------------------------------------------------
+LOCK TABLES `registereduser_team` WRITE;
+/*!40000 ALTER TABLE `registereduser_team` DISABLE KEYS */;
+INSERT INTO `registereduser_team` VALUES (2,1),(3,9),(3,4),(3,12),(3,33),(5,26),(5,16);
+/*!40000 ALTER TABLE `registereduser_team` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Tablo yapısı: `team`
+-- Table structure for table `team`
 --
 
+DROP TABLE IF EXISTS `team`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `team` (
   `teamtype` varchar(31) NOT NULL,
-  `id` bigint(20) NOT NULL auto_increment,
-  `tournament_id` bigint(20) default NULL,
-  PRIMARY KEY  (`id`),
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `tournament_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `FK27B67D1A0F591F` (`tournament_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
+) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Tablo döküm verisi `team`
+-- Dumping data for table `team`
 --
 
-INSERT INTO `team` VALUES ('singles', 12, 5);
-INSERT INTO `team` VALUES ('singles', 19, 5);
-INSERT INTO `team` VALUES ('doubles', 18, 4);
-INSERT INTO `team` VALUES ('singles', 4, 5);
-INSERT INTO `team` VALUES ('doubles', 5, 6);
-INSERT INTO `team` VALUES ('singles', 6, 2);
-INSERT INTO `team` VALUES ('doubles', 7, 4);
-INSERT INTO `team` VALUES ('singles', 8, 5);
-INSERT INTO `team` VALUES ('doubles', 9, 6);
-INSERT INTO `team` VALUES ('doubles', 11, 6);
-INSERT INTO `team` VALUES ('singles', 13, 2);
-INSERT INTO `team` VALUES ('doubles', 17, 4);
-INSERT INTO `team` VALUES ('singles', 16, 5);
-INSERT INTO `team` VALUES ('doubles', 20, 6);
-INSERT INTO `team` VALUES ('doubles', 21, 6);
-INSERT INTO `team` VALUES ('singles', 22, 2);
-INSERT INTO `team` VALUES ('doubles', 23, 3);
-INSERT INTO `team` VALUES ('singles', 24, 2);
-INSERT INTO `team` VALUES ('doubles', 25, 3);
-INSERT INTO `team` VALUES ('doubles', 26, 6);
-INSERT INTO `team` VALUES ('singles', 27, 2);
-INSERT INTO `team` VALUES ('doubles', 28, 4);
-INSERT INTO `team` VALUES ('doubles', 29, 6);
-INSERT INTO `team` VALUES ('singles', 30, 5);
-INSERT INTO `team` VALUES ('doubles', 31, 3);
-INSERT INTO `team` VALUES ('doubles', 32, 6);
-INSERT INTO `team` VALUES ('doubles', 33, 6);
-INSERT INTO `team` VALUES ('singles', 34, 2);
-INSERT INTO `team` VALUES ('singles', 35, 2);
-INSERT INTO `team` VALUES ('doubles', 48, 4);
-INSERT INTO `team` VALUES ('doubles', 37, 3);
-INSERT INTO `team` VALUES ('singles', 38, 2);
-INSERT INTO `team` VALUES ('doubles', 39, 3);
-INSERT INTO `team` VALUES ('singles', 40, 2);
-INSERT INTO `team` VALUES ('doubles', 41, 3);
-INSERT INTO `team` VALUES ('doubles', 42, 3);
-INSERT INTO `team` VALUES ('singles', 43, 2);
-INSERT INTO `team` VALUES ('doubles', 49, 4);
-INSERT INTO `team` VALUES ('doubles', 46, 3);
-INSERT INTO `team` VALUES ('singles', 47, 2);
-INSERT INTO `team` VALUES ('singles', 50, 5);
-INSERT INTO `team` VALUES ('doubles', 51, 6);
-
--- --------------------------------------------------------
+LOCK TABLES `team` WRITE;
+/*!40000 ALTER TABLE `team` DISABLE KEYS */;
+INSERT INTO `team` VALUES ('singles',12,5),('singles',19,5),('doubles',18,4),('singles',4,5),('doubles',5,6),('singles',6,2),('doubles',7,4),('singles',8,5),('doubles',9,6),('doubles',11,6),('singles',13,2),('doubles',17,4),('singles',16,5),('doubles',20,6),('doubles',21,6),('singles',22,2),('doubles',23,3),('singles',24,2),('doubles',25,3),('doubles',26,6),('singles',27,2),('doubles',28,4),('doubles',29,6),('singles',30,5),('doubles',31,3),('doubles',32,6),('doubles',33,6),('singles',34,2),('singles',35,2),('doubles',48,4),('doubles',37,3),('singles',38,2),('doubles',39,3),('singles',40,2),('doubles',41,3),('doubles',42,3),('singles',43,2),('doubles',49,4),('doubles',46,3),('singles',47,2),('singles',50,5),('doubles',51,6);
+/*!40000 ALTER TABLE `team` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Tablo yapısı: `team_registereduser`
+-- Table structure for table `team_registereduser`
 --
 
+DROP TABLE IF EXISTS `team_registereduser`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `team_registereduser` (
   `teams_id` bigint(20) NOT NULL,
   `players_id` bigint(20) NOT NULL,
   KEY `FKC2BE878F2177FC2E` (`players_id`),
   KEY `FKC2BE878F17510A66` (`teams_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Tablo döküm verisi `team_registereduser`
+-- Dumping data for table `team_registereduser`
 --
 
-INSERT INTO `team_registereduser` VALUES (1, 4);
-INSERT INTO `team_registereduser` VALUES (18, 61);
-INSERT INTO `team_registereduser` VALUES (3, 4);
-INSERT INTO `team_registereduser` VALUES (4, 10);
-INSERT INTO `team_registereduser` VALUES (5, 10);
-INSERT INTO `team_registereduser` VALUES (5, 17);
-INSERT INTO `team_registereduser` VALUES (6, 17);
-INSERT INTO `team_registereduser` VALUES (7, 11);
-INSERT INTO `team_registereduser` VALUES (7, 10);
-INSERT INTO `team_registereduser` VALUES (8, 11);
-INSERT INTO `team_registereduser` VALUES (9, 19);
-INSERT INTO `team_registereduser` VALUES (9, 18);
-INSERT INTO `team_registereduser` VALUES (10, 19);
-INSERT INTO `team_registereduser` VALUES (11, 13);
-INSERT INTO `team_registereduser` VALUES (12, 15);
-INSERT INTO `team_registereduser` VALUES (13, 18);
-INSERT INTO `team_registereduser` VALUES (16, 62);
-INSERT INTO `team_registereduser` VALUES (17, 39);
-INSERT INTO `team_registereduser` VALUES (17, 62);
-INSERT INTO `team_registereduser` VALUES (18, 12);
-INSERT INTO `team_registereduser` VALUES (19, 61);
-INSERT INTO `team_registereduser` VALUES (20, 34);
-INSERT INTO `team_registereduser` VALUES (20, 15);
-INSERT INTO `team_registereduser` VALUES (21, 61);
-INSERT INTO `team_registereduser` VALUES (21, 16);
-INSERT INTO `team_registereduser` VALUES (22, 34);
-INSERT INTO `team_registereduser` VALUES (23, 34);
-INSERT INTO `team_registereduser` VALUES (23, 48);
-INSERT INTO `team_registereduser` VALUES (24, 35);
-INSERT INTO `team_registereduser` VALUES (25, 35);
-INSERT INTO `team_registereduser` VALUES (25, 43);
-INSERT INTO `team_registereduser` VALUES (26, 59);
-INSERT INTO `team_registereduser` VALUES (26, 40);
-INSERT INTO `team_registereduser` VALUES (27, 36);
-INSERT INTO `team_registereduser` VALUES (28, 59);
-INSERT INTO `team_registereduser` VALUES (28, 13);
-INSERT INTO `team_registereduser` VALUES (29, 36);
-INSERT INTO `team_registereduser` VALUES (29, 62);
-INSERT INTO `team_registereduser` VALUES (30, 59);
-INSERT INTO `team_registereduser` VALUES (31, 37);
-INSERT INTO `team_registereduser` VALUES (31, 19);
-INSERT INTO `team_registereduser` VALUES (32, 37);
-INSERT INTO `team_registereduser` VALUES (32, 56);
-INSERT INTO `team_registereduser` VALUES (33, 38);
-INSERT INTO `team_registereduser` VALUES (33, 12);
-INSERT INTO `team_registereduser` VALUES (34, 38);
-INSERT INTO `team_registereduser` VALUES (35, 16);
-INSERT INTO `team_registereduser` VALUES (36, 38);
-INSERT INTO `team_registereduser` VALUES (36, 51);
-INSERT INTO `team_registereduser` VALUES (37, 16);
-INSERT INTO `team_registereduser` VALUES (37, 18);
-INSERT INTO `team_registereduser` VALUES (38, 39);
-INSERT INTO `team_registereduser` VALUES (39, 39);
-INSERT INTO `team_registereduser` VALUES (39, 46);
-INSERT INTO `team_registereduser` VALUES (40, 40);
-INSERT INTO `team_registereduser` VALUES (41, 40);
-INSERT INTO `team_registereduser` VALUES (41, 17);
-INSERT INTO `team_registereduser` VALUES (42, 36);
-INSERT INTO `team_registereduser` VALUES (42, 44);
-INSERT INTO `team_registereduser` VALUES (43, 41);
-INSERT INTO `team_registereduser` VALUES (44, 41);
-INSERT INTO `team_registereduser` VALUES (44, 50);
-INSERT INTO `team_registereduser` VALUES (45, 42);
-INSERT INTO `team_registereduser` VALUES (46, 42);
-INSERT INTO `team_registereduser` VALUES (46, 51);
-INSERT INTO `team_registereduser` VALUES (47, 42);
-INSERT INTO `team_registereduser` VALUES (48, 15);
-INSERT INTO `team_registereduser` VALUES (48, 14);
-INSERT INTO `team_registereduser` VALUES (49, 53);
-INSERT INTO `team_registereduser` VALUES (49, 52);
-INSERT INTO `team_registereduser` VALUES (50, 53);
-INSERT INTO `team_registereduser` VALUES (51, 53);
-INSERT INTO `team_registereduser` VALUES (51, 43);
-
--- --------------------------------------------------------
+LOCK TABLES `team_registereduser` WRITE;
+/*!40000 ALTER TABLE `team_registereduser` DISABLE KEYS */;
+INSERT INTO `team_registereduser` VALUES (1,4),(18,61),(3,4),(4,10),(5,10),(5,17),(6,17),(7,11),(7,10),(8,11),(9,19),(9,18),(10,19),(11,13),(12,15),(13,18),(16,62),(17,39),(17,62),(18,12),(19,61),(20,34),(20,15),(21,61),(21,16),(22,34),(23,34),(23,48),(24,35),(25,35),(25,43),(26,59),(26,40),(27,36),(28,59),(28,13),(29,36),(29,62),(30,59),(31,37),(31,19),(32,37),(32,56),(33,38),(33,12),(34,38),(35,16),(36,38),(36,51),(37,16),(37,18),(38,39),(39,39),(39,46),(40,40),(41,40),(41,17),(42,36),(42,44),(43,41),(44,41),(44,50),(45,42),(46,42),(46,51),(47,42),(48,15),(48,14),(49,53),(49,52),(50,53),(51,53),(51,43);
+/*!40000 ALTER TABLE `team_registereduser` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Tablo yapısı: `tmatch`
+-- Table structure for table `tmatch`
 --
 
+DROP TABLE IF EXISTS `tmatch`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tmatch` (
-  `id` bigint(20) NOT NULL auto_increment,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `awayTeamScore` int(11) NOT NULL,
   `homeTeamScore` int(11) NOT NULL,
   `mDate` date NOT NULL,
   `mTime` varchar(255) NOT NULL,
-  `report` varchar(255) default NULL,
-  `court_id` bigint(20) default NULL,
-  `statistics_id` bigint(20) default NULL,
-  `tournament_id` bigint(20) default NULL,
-  PRIMARY KEY  (`id`),
+  `report` varchar(255) DEFAULT NULL,
+  `court_id` bigint(20) DEFAULT NULL,
+  `statistics_id` bigint(20) DEFAULT NULL,
+  `tournament_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `FKCC2001D11A0F591F` (`tournament_id`),
   KEY `FKCC2001D1C024DD9A` (`statistics_id`),
   KEY `FKCC2001D1C55A36B5` (`court_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Tablo döküm verisi `tmatch`
+-- Dumping data for table `tmatch`
 --
 
-INSERT INTO `tmatch` VALUES (1, 0, 0, '2011-11-11', '13:13', NULL, 2, 4, 6);
-INSERT INTO `tmatch` VALUES (2, 0, 0, '2011-02-02', '12:12', NULL, 8, 5, 6);
-
--- --------------------------------------------------------
+LOCK TABLES `tmatch` WRITE;
+/*!40000 ALTER TABLE `tmatch` DISABLE KEYS */;
+INSERT INTO `tmatch` VALUES (2,12,2,'2011-02-01','12:12','çok şükür2',8,5,6);
+/*!40000 ALTER TABLE `tmatch` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Tablo yapısı: `tmatch_referee`
+-- Table structure for table `tmatch_referee`
 --
 
+DROP TABLE IF EXISTS `tmatch_referee`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tmatch_referee` (
   `matches_id` bigint(20) NOT NULL,
   `referees_id` bigint(20) NOT NULL,
   KEY `FKC9AA20B247EB44C2` (`referees_id`),
   KEY `FKC9AA20B24B568647` (`matches_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Tablo döküm verisi `tmatch_referee`
+-- Dumping data for table `tmatch_referee`
 --
 
-INSERT INTO `tmatch_referee` VALUES (1, 5);
-INSERT INTO `tmatch_referee` VALUES (2, 23);
-INSERT INTO `tmatch_referee` VALUES (2, 22);
-
--- --------------------------------------------------------
+LOCK TABLES `tmatch_referee` WRITE;
+/*!40000 ALTER TABLE `tmatch_referee` DISABLE KEYS */;
+INSERT INTO `tmatch_referee` VALUES (2,23),(2,22);
+/*!40000 ALTER TABLE `tmatch_referee` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Tablo yapısı: `tmatch_team`
+-- Table structure for table `tmatch_team`
 --
 
+DROP TABLE IF EXISTS `tmatch_team`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tmatch_team` (
   `matches_id` bigint(20) NOT NULL,
   `teams_id` bigint(20) NOT NULL,
   KEY `FKE6BFE82B4B568647` (`matches_id`),
   KEY `FKE6BFE82B17510A66` (`teams_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Tablo döküm verisi `tmatch_team`
+-- Dumping data for table `tmatch_team`
 --
 
-INSERT INTO `tmatch_team` VALUES (2, 33);
-INSERT INTO `tmatch_team` VALUES (2, 51);
-
--- --------------------------------------------------------
+LOCK TABLES `tmatch_team` WRITE;
+/*!40000 ALTER TABLE `tmatch_team` DISABLE KEYS */;
+INSERT INTO `tmatch_team` VALUES (2,33),(2,51);
+/*!40000 ALTER TABLE `tmatch_team` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Tablo yapısı: `tmatch_umpire`
+-- Table structure for table `tmatch_umpire`
 --
 
+DROP TABLE IF EXISTS `tmatch_umpire`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tmatch_umpire` (
   `matches_id` bigint(20) NOT NULL,
   `umpires_id` bigint(20) NOT NULL,
   KEY `FK6F2E02B24B568647` (`matches_id`),
   KEY `FK6F2E02B2610E45F4` (`umpires_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Tablo döküm verisi `tmatch_umpire`
+-- Dumping data for table `tmatch_umpire`
 --
 
-INSERT INTO `tmatch_umpire` VALUES (1, 1);
-INSERT INTO `tmatch_umpire` VALUES (2, 28);
-INSERT INTO `tmatch_umpire` VALUES (2, 29);
-
--- --------------------------------------------------------
+LOCK TABLES `tmatch_umpire` WRITE;
+/*!40000 ALTER TABLE `tmatch_umpire` DISABLE KEYS */;
+INSERT INTO `tmatch_umpire` VALUES (2,28),(2,27);
+/*!40000 ALTER TABLE `tmatch_umpire` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Tablo yapısı: `tournament`
+-- Table structure for table `tournament`
 --
 
+DROP TABLE IF EXISTS `tournament`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tournament` (
-  `id` bigint(20) NOT NULL auto_increment,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `endDate` date NOT NULL,
   `name` varchar(255) NOT NULL,
   `prize` double NOT NULL,
-  `report` varchar(255) default NULL,
+  `report` varchar(255) DEFAULT NULL,
   `startDate` date NOT NULL,
   `type` varchar(255) NOT NULL,
-  `draw_id` bigint(20) default NULL,
-  `manager_id` bigint(20) default NULL,
-  PRIMARY KEY  (`id`),
+  `draw_id` bigint(20) DEFAULT NULL,
+  `manager_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `FK3B743609ECB67EFF` (`draw_id`),
   KEY `FK3B743609CF2F20B5` (`manager_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Tablo döküm verisi `tournament`
+-- Dumping data for table `tournament`
 --
 
-INSERT INTO `tournament` VALUES (7, '2011-02-01', 'Friendly Match', 1, '', '2010-12-31', 'Men''s Singles', 9, 3);
-INSERT INTO `tournament` VALUES (2, '2011-02-27', 'Women''s Tournament', 10000, '', '2011-02-08', 'Women''s Singles', 33, 3);
-INSERT INTO `tournament` VALUES (3, '2011-03-11', 'Women''s Doubles Tournament', 20000, '', '2011-02-10', 'Women''s Doubles', 52, 3);
-INSERT INTO `tournament` VALUES (4, '2011-03-02', 'Men''s Doubles Tournament', 20000, '', '2011-02-03', 'Men''s Doubles', 58, 3);
-INSERT INTO `tournament` VALUES (5, '2011-05-02', 'Men''s Tournament', 10000, '', '2011-04-03', 'Men''s Singles', 65, 3);
-INSERT INTO `tournament` VALUES (6, '2011-06-11', 'Mixed Doubles Tournament', 20000, '', '2011-04-24', 'Mixed Doubles', 45, 3);
-INSERT INTO `tournament` VALUES (8, '2059-12-31', 'Fırat''s Tournament', 9999999, 'Saygılar.', '1985-03-20', 'Women''s Doubles', 34, 7);
-
--- --------------------------------------------------------
+LOCK TABLES `tournament` WRITE;
+/*!40000 ALTER TABLE `tournament` DISABLE KEYS */;
+INSERT INTO `tournament` VALUES (7,'2011-02-01','Friendly Match',1,'','2010-12-31','Men\'s Singles',9,3),(2,'2011-02-27','Women\'s Tournament',10000,'','2011-02-08','Women\'s Singles',33,3),(3,'2011-03-11','Women\'s Doubles Tournament',20000,'','2011-02-10','Women\'s Doubles',52,3),(4,'2011-03-02','Men\'s Doubles Tournament',20000,'','2011-02-03','Men\'s Doubles',58,3),(5,'2011-05-02','Men\'s Tournament',10000,'','2011-04-03','Men\'s Singles',65,3),(6,'2011-06-11','Mixed Doubles Tournament',20000,'','2011-04-24','Mixed Doubles',45,3),(8,'2059-12-31','Fırat\'s Tournament',9999999,'Saygılar.','1985-03-20','Women\'s Doubles',34,7);
+/*!40000 ALTER TABLE `tournament` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Tablo yapısı: `tournamentjoinrequest`
+-- Table structure for table `tournament_court`
 --
 
-CREATE TABLE `tournamentjoinrequest` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `manager_id` bigint(20) default NULL,
-  `team_id` bigint(20) default NULL,
-  `tournament_id` bigint(20) default NULL,
-  PRIMARY KEY  (`id`),
-  KEY `FK9F7AEC3C1A0F591F` (`tournament_id`),
-  KEY `FK9F7AEC3C24EDBC5F` (`team_id`),
-  KEY `FK9F7AEC3CCF2F20B5` (`manager_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
-
---
--- Tablo döküm verisi `tournamentjoinrequest`
---
-
-
--- --------------------------------------------------------
-
---
--- Tablo yapısı: `tournament_court`
---
-
+DROP TABLE IF EXISTS `tournament_court`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tournament_court` (
   `tournaments_id` bigint(20) NOT NULL,
   `courts_id` bigint(20) NOT NULL,
   KEY `FKE70C8FB532C1D2D8` (`courts_id`),
   KEY `FKE70C8FB527E7EBBE` (`tournaments_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Tablo döküm verisi `tournament_court`
+-- Dumping data for table `tournament_court`
 --
 
-INSERT INTO `tournament_court` VALUES (2, 8);
-INSERT INTO `tournament_court` VALUES (3, 3);
-INSERT INTO `tournament_court` VALUES (4, 6);
-INSERT INTO `tournament_court` VALUES (4, 2);
-INSERT INTO `tournament_court` VALUES (4, 5);
-INSERT INTO `tournament_court` VALUES (4, 8);
-INSERT INTO `tournament_court` VALUES (4, 10);
-INSERT INTO `tournament_court` VALUES (3, 5);
-INSERT INTO `tournament_court` VALUES (3, 2);
-INSERT INTO `tournament_court` VALUES (3, 9);
-INSERT INTO `tournament_court` VALUES (3, 10);
-INSERT INTO `tournament_court` VALUES (2, 9);
-INSERT INTO `tournament_court` VALUES (2, 3);
-INSERT INTO `tournament_court` VALUES (2, 10);
-INSERT INTO `tournament_court` VALUES (5, 7);
-INSERT INTO `tournament_court` VALUES (5, 10);
-INSERT INTO `tournament_court` VALUES (5, 9);
-INSERT INTO `tournament_court` VALUES (5, 6);
-INSERT INTO `tournament_court` VALUES (6, 2);
-INSERT INTO `tournament_court` VALUES (6, 5);
-INSERT INTO `tournament_court` VALUES (6, 7);
-INSERT INTO `tournament_court` VALUES (6, 9);
-INSERT INTO `tournament_court` VALUES (6, 10);
-INSERT INTO `tournament_court` VALUES (6, 8);
-INSERT INTO `tournament_court` VALUES (7, 6);
-INSERT INTO `tournament_court` VALUES (7, 2);
-INSERT INTO `tournament_court` VALUES (8, 4);
-INSERT INTO `tournament_court` VALUES (8, 3);
-
--- --------------------------------------------------------
+LOCK TABLES `tournament_court` WRITE;
+/*!40000 ALTER TABLE `tournament_court` DISABLE KEYS */;
+INSERT INTO `tournament_court` VALUES (2,8),(3,3),(4,6),(4,2),(4,5),(4,8),(4,10),(3,5),(3,2),(3,9),(3,10),(2,9),(2,3),(2,10),(5,7),(5,10),(5,9),(5,6),(6,2),(6,5),(6,7),(6,9),(6,10),(6,8),(7,6),(7,2),(8,4),(8,3);
+/*!40000 ALTER TABLE `tournament_court` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Tablo yapısı: `tournament_referee`
+-- Table structure for table `tournament_referee`
 --
 
+DROP TABLE IF EXISTS `tournament_referee`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tournament_referee` (
   `tournaments_id` bigint(20) NOT NULL,
   `referees_id` bigint(20) NOT NULL,
   KEY `FK8CBEE0CA47EB44C2` (`referees_id`),
   KEY `FK8CBEE0CA27E7EBBE` (`tournaments_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Tablo döküm verisi `tournament_referee`
+-- Dumping data for table `tournament_referee`
 --
 
-INSERT INTO `tournament_referee` VALUES (2, 22);
-INSERT INTO `tournament_referee` VALUES (2, 24);
-INSERT INTO `tournament_referee` VALUES (3, 24);
-INSERT INTO `tournament_referee` VALUES (3, 23);
-INSERT INTO `tournament_referee` VALUES (3, 25);
-INSERT INTO `tournament_referee` VALUES (4, 22);
-INSERT INTO `tournament_referee` VALUES (4, 23);
-INSERT INTO `tournament_referee` VALUES (4, 25);
-INSERT INTO `tournament_referee` VALUES (5, 25);
-INSERT INTO `tournament_referee` VALUES (5, 22);
-INSERT INTO `tournament_referee` VALUES (5, 24);
-INSERT INTO `tournament_referee` VALUES (6, 25);
-INSERT INTO `tournament_referee` VALUES (6, 22);
-INSERT INTO `tournament_referee` VALUES (6, 23);
-INSERT INTO `tournament_referee` VALUES (7, 23);
-INSERT INTO `tournament_referee` VALUES (7, 22);
-INSERT INTO `tournament_referee` VALUES (8, 5);
-
--- --------------------------------------------------------
+LOCK TABLES `tournament_referee` WRITE;
+/*!40000 ALTER TABLE `tournament_referee` DISABLE KEYS */;
+INSERT INTO `tournament_referee` VALUES (2,22),(2,24),(3,24),(3,23),(3,25),(4,22),(4,23),(4,25),(5,25),(5,22),(5,24),(6,25),(6,22),(6,23),(7,23),(7,22),(8,5);
+/*!40000 ALTER TABLE `tournament_referee` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Tablo yapısı: `tournament_umpire`
+-- Table structure for table `tournament_umpire`
 --
 
+DROP TABLE IF EXISTS `tournament_umpire`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tournament_umpire` (
   `tournaments_id` bigint(20) NOT NULL,
   `umpires_id` bigint(20) NOT NULL,
   KEY `FK64F4DF9A27E7EBBE` (`tournaments_id`),
   KEY `FK64F4DF9A610E45F4` (`umpires_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Tablo döküm verisi `tournament_umpire`
+-- Dumping data for table `tournament_umpire`
 --
 
-INSERT INTO `tournament_umpire` VALUES (2, 30);
-INSERT INTO `tournament_umpire` VALUES (2, 29);
-INSERT INTO `tournament_umpire` VALUES (2, 28);
-INSERT INTO `tournament_umpire` VALUES (3, 26);
-INSERT INTO `tournament_umpire` VALUES (3, 1);
-INSERT INTO `tournament_umpire` VALUES (3, 27);
-INSERT INTO `tournament_umpire` VALUES (4, 28);
-INSERT INTO `tournament_umpire` VALUES (4, 30);
-INSERT INTO `tournament_umpire` VALUES (4, 27);
-INSERT INTO `tournament_umpire` VALUES (4, 1);
-INSERT INTO `tournament_umpire` VALUES (5, 29);
-INSERT INTO `tournament_umpire` VALUES (5, 27);
-INSERT INTO `tournament_umpire` VALUES (5, 1);
-INSERT INTO `tournament_umpire` VALUES (5, 30);
-INSERT INTO `tournament_umpire` VALUES (6, 26);
-INSERT INTO `tournament_umpire` VALUES (6, 28);
-INSERT INTO `tournament_umpire` VALUES (6, 29);
-INSERT INTO `tournament_umpire` VALUES (6, 27);
-INSERT INTO `tournament_umpire` VALUES (7, 28);
-INSERT INTO `tournament_umpire` VALUES (7, 27);
-INSERT INTO `tournament_umpire` VALUES (8, 29);
-INSERT INTO `tournament_umpire` VALUES (8, 27);
+LOCK TABLES `tournament_umpire` WRITE;
+/*!40000 ALTER TABLE `tournament_umpire` DISABLE KEYS */;
+INSERT INTO `tournament_umpire` VALUES (2,30),(2,29),(2,28),(3,26),(3,1),(3,27),(4,28),(4,30),(4,27),(4,1),(5,29),(5,27),(5,1),(5,30),(6,28),(6,29),(6,27),(7,28),(7,27),(8,29),(8,27);
+/*!40000 ALTER TABLE `tournament_umpire` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tournamentjoinrequest`
+--
+
+DROP TABLE IF EXISTS `tournamentjoinrequest`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tournamentjoinrequest` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `manager_id` bigint(20) DEFAULT NULL,
+  `team_id` bigint(20) DEFAULT NULL,
+  `tournament_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK9F7AEC3C1A0F591F` (`tournament_id`),
+  KEY `FK9F7AEC3C24EDBC5F` (`team_id`),
+  KEY `FK9F7AEC3CCF2F20B5` (`manager_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tournamentjoinrequest`
+--
+
+LOCK TABLES `tournamentjoinrequest` WRITE;
+/*!40000 ALTER TABLE `tournamentjoinrequest` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tournamentjoinrequest` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2011-01-20 17:29:34
