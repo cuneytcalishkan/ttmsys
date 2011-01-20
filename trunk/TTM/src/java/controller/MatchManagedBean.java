@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -43,6 +45,11 @@ public class MatchManagedBean implements Serializable {
     }
 
     public String save() {
+        if (selectedMatch.getmDate().before(tournament.getStartDate()) || selectedMatch.getmDate().after(tournament.getEndDate())) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Match date must be between the tournament start and end date."));
+            return "manager:editTournament";
+        }
         try {
             utx.begin();
             em.merge(selectedMatch);
