@@ -11,31 +11,38 @@
         <ui:include src="../header.xhtml"/>
         <hr/>
         <f:view>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <f:facet name="header">
-                        <h:outputText value="Create/Edit"/>
-                    </f:facet>
-                    <h:outputLabel value="Home Team Score:" for="hts" />
-                    <h:inputText id="hts" value="#{umpireManagedBean.selectedMatch.homeTeamScore}" title="Home Team Score" />
-                    <h:outputLabel value="Away Team Score:" for="ats" />
-                    <h:inputText id="ats" value="#{umpireManagedBean.selectedMatch.awayTeamScore}" title="Away Team Score" />
-                    <h:outputLabel value="Aces:" for="aces" />
-                    <h:inputText id="aces" value="#{umpireManagedBean.statistics.aces}" title="Aces" />
-                    <h:outputLabel value="DoubleFauls:" for="doubleFauls" />
-                    <h:inputText id="doubleFauls" value="#{umpireManagedBean.statistics.doubleFauls}" title="DoubleFauls" />
-                    <h:outputLabel value="FirstSPtsWon:" for="firstSPtsWon" />
-                    <h:inputText id="firstSPtsWon" value="#{umpireManagedBean.statistics.firstSPtsWon}" title="FirstSPtsWon" />
-                    <h:outputLabel value="SecondSPtsWon:" for="secondSPtsWon" />
-                    <h:inputText id="secondSPtsWon" value="#{umpireManagedBean.statistics.secondSPtsWon}" title="SecondSPtsWon" />
-                    <h:outputLabel value="ReturnPtsWon:" for="returnPtsWon" />
-                    <h:inputText id="returnPtsWon" value="#{umpireManagedBean.statistics.returnPtsWon}" title="ReturnPtsWon" />
-                    <h:outputLabel value="TotalPtsWon:" for="totalPtsWon" />
-                    <h:inputText id="totalPtsWon" value="#{umpireManagedBean.statistics.totalPtsWon}" title="TotalPtsWon" />
-                    <h:commandButton value="Save" action="#{umpireManagedBean.editStatistics}"/>
-                    <h:commandButton value="Reset" type="reset"/>
-                </h:panelGrid>
-            </h:form>
+
+            <h:panelGrid columns="1" border="0">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <f:facet name="header">
+                            <h:outputText value="Create/Edit"/>
+                        </f:facet>
+                        <h:outputLabel value="Home Team Score:" for="hts" />
+                        <h:inputText id="hts" value="#{umpireManagedBean.selectedMatch.homeTeamScore}" title="Home Team Score" />
+                        <h:outputLabel value="Away Team Score:" for="ats" />
+                        <h:inputText id="ats" value="#{umpireManagedBean.selectedMatch.awayTeamScore}" title="Away Team Score" />
+                        <h:outputLabel value="Aces:" for="aces" />
+                        <h:inputText id="aces" value="#{umpireManagedBean.statistics.aces}" title="Aces" />
+                        <h:outputLabel value="DoubleFauls:" for="doubleFauls" />
+                        <h:inputText id="doubleFauls" value="#{umpireManagedBean.statistics.doubleFauls}" title="DoubleFauls" />
+                        <h:outputLabel value="FirstSPtsWon:" for="firstSPtsWon" />
+                        <h:inputText id="firstSPtsWon" value="#{umpireManagedBean.statistics.firstSPtsWon}" title="FirstSPtsWon" />
+                        <h:outputLabel value="SecondSPtsWon:" for="secondSPtsWon" />
+                        <h:inputText id="secondSPtsWon" value="#{umpireManagedBean.statistics.secondSPtsWon}" title="SecondSPtsWon" />
+                        <h:outputLabel value="ReturnPtsWon:" for="returnPtsWon" />
+                        <h:inputText id="returnPtsWon" value="#{umpireManagedBean.statistics.returnPtsWon}" title="ReturnPtsWon" />
+                        <h:outputLabel value="TotalPtsWon:" for="totalPtsWon" />
+                        <h:inputText id="totalPtsWon" value="#{umpireManagedBean.statistics.totalPtsWon}" title="TotalPtsWon" />
+                        &nbsp;
+                        <h:column>
+                            <h:commandButton value="Save" action="#{umpireManagedBean.editStatistics}"/>
+                            <h:commandButton value="Reset" type="reset"/>
+                        </h:column>
+                    </h:panelGrid>
+                </h:form>
+            </h:panelGrid>
+
         </f:view>
 
     </h:body>

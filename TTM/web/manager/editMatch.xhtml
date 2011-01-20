@@ -10,7 +10,10 @@
     <h:body>
         <ui:include src="../header.xhtml"/>
         <hr/>
-        <h:panelGrid columns="6">
+        <h:panelGrid columns="4">
+            <f:facet name="header">
+                <h:outputText value="#{matchManagedBean.selectedMatch}"/>
+            </f:facet>
             <f:view>
                 <h:form>
                     <h:panelGrid columns="2">
