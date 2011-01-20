@@ -46,15 +46,15 @@ public class Tournament implements Serializable {
     private List<Team> teams;
     @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
     private List<Match> matches;
-    @ManyToMany(targetEntity = Umpire.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(targetEntity = Umpire.class)
     @JoinTable(name = "tournament_umpire")
     private List<Umpire> umpires;
-    @ManyToMany(targetEntity = Referee.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(targetEntity = Referee.class)
     @JoinTable(name = "tournament_referee")
     private List<Referee> referees;
-    @ManyToMany(targetEntity = Court.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(targetEntity = Court.class)
     private List<Court> courts;
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     private Manager manager;
     private String report;
     @Transient
