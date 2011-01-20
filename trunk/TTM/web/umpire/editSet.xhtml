@@ -20,8 +20,13 @@
                     <h:inputText id="homeTeamScore" value="#{setManagedBean.set.homeTeamScore}" title="HomeTeamScore" />
                     <h:outputLabel value="AwayTeamScore:" for="awayTeamScore" />
                     <h:inputText id="awayTeamScore" value="#{setManagedBean.set.awayTeamScore}" title="AwayTeamScore" />
-                    <h:commandButton value="Save" action="#{setManagedBean.addSet}"/>
-                    <h:commandButton type="reset" value="Reset"/>
+                    <h:column>
+                        &nbsp;
+                    </h:column>
+                    <h:column>
+                        <h:commandButton value="Save" action="#{setManagedBean.addSet}"/>
+                        <h:commandButton type="reset" value="Reset"/>
+                    </h:column>
                 </h:panelGrid>
             </h:form>
         </f:view>
