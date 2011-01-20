@@ -259,4 +259,8 @@ public class Match implements Serializable {
         }
         return result;
     }
+
+    public void removeSet(Set s) {
+        sets.remove(s);
+    }
 }
