@@ -167,7 +167,7 @@
             <hr/>
             <h:panelGrid>
                 <h:form>
-                    <h:dataTable value="#{tournamentManagedBean.current.matches}" var="item">
+                    <h:dataTable value="#{tournamentManagedBean.current.matches}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                         <f:facet name="header">
                             <h:outputText value="Matches"/>
                         </f:facet>

@@ -14,7 +14,7 @@
         <h:panelGrid columns="1" border="0">
             <f:view>
                 <h:form>
-                    <h:dataTable value="#{mainPageManagedBean.selectedMatch}" var="item">
+                    <h:dataTable value="#{mainPageManagedBean.selectedMatch}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="HomeTeam"/>
@@ -69,14 +69,14 @@
                             <f:facet name="header">
                                 <h:outputText value="Report"/>
                             </f:facet>
-                            <h:outputText value="#{item.report}"/>
-                            <h:commandButton value="Edit Report" action="#{refereeManagedBean.linkMatch(mainPageManagedBean.selectedMatch)}"/>
+                            <h:outputText value="#{item.report}"/><br/>
+                            <h:commandLink value="Edit" action="#{refereeManagedBean.linkMatch(mainPageManagedBean.selectedMatch)}"/>
                         </h:column>
                     </h:dataTable>
                 </h:form>
             </f:view>
             <f:view>
-                <h:dataTable value="#{mainPageManagedBean.selectedMatch.statistics}" var="item" border="1">
+                <h:dataTable value="#{mainPageManagedBean.selectedMatch.statistics}" var="item" border="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                     <f:facet name="header">
                         <h:outputText value="Statistics"/>
                     </f:facet>
@@ -118,7 +118,7 @@
                     </h:column>
                 </h:dataTable>
                 <h:form>
-                    <h:dataTable value="#{mainPageManagedBean.matchSets}" var="item">
+                    <h:dataTable value="#{mainPageManagedBean.matchSets}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                         <f:facet name="header">
                             <h:outputText value="Sets"/>
                         </f:facet>
@@ -139,7 +139,7 @@
                 </h:form>
                 <h:panelGrid columns="2">
                     <h:form>
-                        <h:dataTable value="#{mainPageManagedBean.matchReferees}" var="item">
+                        <h:dataTable value="#{mainPageManagedBean.matchReferees}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Referees"/>
@@ -149,7 +149,7 @@
                         </h:dataTable>
                     </h:form>
                     <h:form>
-                        <h:dataTable value="#{mainPageManagedBean.matchUmpires}" var="item">
+                        <h:dataTable value="#{mainPageManagedBean.matchUmpires}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Umpires"/>
