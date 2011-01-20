@@ -14,22 +14,25 @@
             <f:view>
                 <h:form>
                     <h:panelGrid columns="2">
+                        <f:facet name="header">
+                            <h:outputText value="Add/Edit Match"/>
+                        </f:facet>
                         <h:outputLabel value="AwayTeamScore:" for="awayTeamScore" />
                         <h:inputText id="awayTeamScore" value="#{matchManagedBean.selectedMatch.awayTeamScore}" title="AwayTeamScore" />
                         <h:outputLabel value="HomeTeamScore:" for="homeTeamScore" />
                         <h:inputText id="homeTeamScore" value="#{matchManagedBean.selectedMatch.homeTeamScore}" title="HomeTeamScore" />
                         <h:outputLabel value="mDate:" for="mDate" />
-                        <h:inputText id="mDate" value="#{matchManagedBean.selectedMatch.mDate}" title="mDate" required="true" requiredMessage="The mDate field is required.">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        <h:inputText id="Date" value="#{matchManagedBean.selectedMatch.mDate}" title="mDate" required="true" requiredMessage="The mDate field is required.">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
                         </h:inputText>
                         <h:outputLabel value="mTime:" for="mTime" />
-                        <h:inputText id="mTime" value="#{matchManagedBean.selectedMatch.mTime}" title="mTime" required="true" requiredMessage="The mTime field is required."/>
+                        <h:inputText id="Time" value="#{matchManagedBean.selectedMatch.mTime}" title="mTime" required="true" requiredMessage="The mTime field is required."/>
                         <h:outputLabel value="Report:" for="report" />
                         <h:inputTextarea id="report" value="#{matchManagedBean.selectedMatch.report}" title="Report" />
                         &nbsp;
                         <h:column>
-                            <h:commandButton value="Reset" type="reset"/>
                             <h:commandButton value="Save" action="#{matchManagedBean.save}"/>
+                            <h:commandButton value="Reset" type="reset"/>
                         </h:column>
                     </h:panelGrid>
                 </h:form>
