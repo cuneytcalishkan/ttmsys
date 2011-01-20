@@ -191,15 +191,15 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="mDate"/>
+                                <h:outputText value="Date"/>
                             </f:facet>
                             <h:outputText value="#{item.mDate}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="mTime"/>
+                                <h:outputText value="Time"/>
                             </f:facet>
                             <h:outputText value="#{item.mTime}"/>
                         </h:column>
