@@ -97,6 +97,10 @@ public class Match implements Serializable {
         }
     }
 
+    public void removeReferee(Referee r) {
+        referees.remove(r);
+    }
+
     public void addUmpire(Umpire u) {
         if (umpires == null) {
             umpires = new ArrayList<Umpire>();
@@ -104,6 +108,10 @@ public class Match implements Serializable {
         if (!umpires.contains(u)) {
             umpires.add(u);
         }
+    }
+
+    public void removeUmpire(Umpire u){
+        umpires.remove(u);
     }
 
     public void addTeam(Team t) {
