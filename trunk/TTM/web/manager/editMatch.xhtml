@@ -9,28 +9,29 @@
         <ui:include src="../header.xhtml"/>
     </h:head>
     <h:body>
+        <h:panelGrid columns="6">
         <f:view>
             <h:form>
-                <h1><h:outputText value="Create/Edit"/></h1>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="AwayTeamScore:" for="awayTeamScore" />
-                    <h:inputText id="awayTeamScore" value="#{tournamentManagedBean.selectedMatch.awayTeamScore}" title="AwayTeamScore" />
+                    <h:inputText id="awayTeamScore" value="#{matchManagedBean.selectedMatch.awayTeamScore}" title="AwayTeamScore" />
                     <h:outputLabel value="HomeTeamScore:" for="homeTeamScore" />
-                    <h:inputText id="homeTeamScore" value="#{tournamentManagedBean.selectedMatch.homeTeamScore}" title="HomeTeamScore" />
+                    <h:inputText id="homeTeamScore" value="#{matchManagedBean.selectedMatch.homeTeamScore}" title="HomeTeamScore" />
                     <h:outputLabel value="mDate:" for="mDate" />
-                    <h:inputText id="mDate" value="#{tournamentManagedBean.selectedMatch.mDate}" title="mDate" required="true" requiredMessage="The mDate field is required.">
+                    <h:inputText id="mDate" value="#{matchManagedBean.selectedMatch.mDate}" title="mDate" required="true" requiredMessage="The mDate field is required.">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
                     <h:outputLabel value="mTime:" for="mTime" />
-                    <h:inputText id="mTime" value="#{tournamentManagedBean.selectedMatch.mTime}" title="mTime" required="true" requiredMessage="The mTime field is required."/>
+                    <h:inputText id="mTime" value="#{matchManagedBean.selectedMatch.mTime}" title="mTime" required="true" requiredMessage="The mTime field is required."/>
                     <h:outputLabel value="Report:" for="report" />
-                    <h:inputText id="report" value="#{tournamentManagedBean.selectedMatch.report}" title="Report" />
+                    <h:inputTextarea id="report" value="#{matchManagedBean.selectedMatch.report}" title="Report" />
+                    <h:commandButton value="Save" action="#{matchManagedBean.save}"/>
                 </h:panelGrid>
             </h:form>
         </f:view>
         <h:panelGrid>
                     <h:form>
-                        <h:dataTable value="#{tournamentManagedBean.selectedMatch.referees}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
+                        <h:dataTable value="#{matchManagedBean.matchReferees}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Referees"/>
@@ -38,12 +39,12 @@
                                 <h:outputText value="#{item}"/>
                             </h:column>
                             <h:column>
-                                <h:commandLink value="Remove" action="#{drawManagedBean.removeReferee(item)}"/>
+                                <h:commandLink value="Remove" action="#{matchManagedBean.removeReferee(item)}"/>
                             </h:column>
                         </h:dataTable>
                     </h:form>
                     <h:form>
-                        <h:dataTable value="#{drawManagedBean.refereeList}" var="item"  rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
+                        <h:dataTable value="#{matchManagedBean.otherReferees}" var="item"  rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Other Referees"/>
@@ -51,7 +52,7 @@
                                 <h:outputText value="#{item}"/>
                             </h:column>
                             <h:column>
-                                <h:commandLink value="Add" action="#{drawManagedBean.addReferee(item)}"/>
+                                <h:commandLink value="Add" action="#{matchManagedBean.addReferee(item)}"/>
                             </h:column>
                         </h:dataTable>
                     </h:form>
@@ -59,7 +60,7 @@
                 </h:panelGrid>
                 <h:panelGrid>
                     <h:form>
-                        <h:dataTable value="#{drawManagedBean.mUmpires}" var="item"  rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
+                        <h:dataTable value="#{matchManagedBean.matchUmpires}" var="item"  rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Umpires"/>
@@ -67,12 +68,12 @@
                                 <h:outputText value="#{item}"/>
                             </h:column>
                             <h:column>
-                                <h:commandLink value="Remove" action="#{drawManagedBean.removeUmpire(item)}"/>
+                                <h:commandLink value="Remove" action="#{matchManagedBean.removeUmpire(item)}"/>
                             </h:column>
                         </h:dataTable>
                     </h:form>
                     <h:form>
-                        <h:dataTable value="#{drawManagedBean.umpireList}" var="item"  rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
+                        <h:dataTable value="#{matchManagedBean.otherUmpires}" var="item"  rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Other Umpires"/>
@@ -80,7 +81,7 @@
                                 <h:outputText value="#{item}"/>
                             </h:column>
                             <h:column>
-                                <h:commandLink value="Add" action="#{drawManagedBean.addUmpire(item)}"/>
+                                <h:commandLink value="Add" action="#{matchManagedBean.addUmpire(item)}"/>
                             </h:column>
                         </h:dataTable>
                     </h:form>
@@ -90,17 +91,18 @@
                         <f:facet name="header">
                             <h:outputText value="ASSIGN COURT"/>
                         </f:facet>
-                        <h:dataTable value="#{drawManagedBean.courtList}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
+                        <h:dataTable value="#{matchManagedBean.courts}" var="item" rowClasses="jsfcrud_odd_row,jsfcrud_even_row">
                             <h:column>
                                 <h:outputText value="#{item}"/>
                             </h:column>
                             <h:column>
-                                <h:commandLink value="Assign" action="#{drawManagedBean.assignCourt(item)}"
-                                               rendered="#{drawManagedBean.canAssignCourt(item)}"/>
+                                <h:commandLink value="Assign" action="#{matchManagedBean.assignCourt(item)}"
+                                               rendered="#{matchManagedBean.canAssignCourt(item)}"/>
                             </h:column>
                         </h:dataTable>
                     </h:panelGrid>
                 </h:form>
+            </h:panelGrid>
     </h:body>
 </html>
 
