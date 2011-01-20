@@ -110,49 +110,57 @@
                         <h:outputText value="#{item.doubleFauls}"/>
                     </h:column>
                 </h:dataTable>
-                <h:form>
-                    <h:dataTable value="#{mainPageManagedBean.matchSets}" var="item">
-                        <f:facet name="header">
-                            <h:outputText value="Sets"/>
-                        </f:facet>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="HomeTeamScore"/>
-                            </f:facet>
-                            <h:outputText value="#{item.homeTeamScore}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="AwayTeamScore"/>
-                            </f:facet>
-                            <h:outputText value="#{item.awayTeamScore}"/>
-                        </h:column>
-
-                    </h:dataTable>
-                </h:form>
-                <h:panelGrid columns="2">
+                <h:panelGrid columns="3">
                     <h:form>
-                        <h:dataTable value="#{mainPageManagedBean.matchReferees}" var="item">
+                        <h:dataTable value="#{mainPageManagedBean.matchSets}" var="item">
+                            <f:facet name="header">
+                                <h:outputText value="Sets and Games"/>
+                            </f:facet>
                             <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Referees"/>
-                                </f:facet>
-                                <h:outputText value="#{item}"/>
+                                <h:dataTable value="#{item.games}" var="game">
+                                    <f:facet name="header">
+                                        <center>
+                                        <h:outputText value="#{item.homeTeamScore} - #{item.awayTeamScore}"/>
+                                        </center>
+                                    </f:facet>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Home Team Score"/>
+                                        </f:facet>
+                                        <h:outputText value="#{game.homeTeamScore}"/>
+                                    </h:column><h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Away Team Score"/>
+                                        </f:facet>
+                                        <h:outputText value="#{game.awayTeamScore}"/>
+                                    </h:column>
+                                </h:dataTable>
                             </h:column>
                         </h:dataTable>
                     </h:form>
-                    <h:form>
-                        <h:dataTable value="#{mainPageManagedBean.matchUmpires}" var="item">
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Umpires"/>
-                                </f:facet>
-                                <h:outputText value="#{item}"/>
-                            </h:column>
-                        </h:dataTable>
-                    </h:form>
+                    <h:panelGrid columns="2">
+                        <h:form>
+                            <h:dataTable value="#{mainPageManagedBean.matchReferees}" var="item">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Referees"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item}"/>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                        <h:form>
+                            <h:dataTable value="#{mainPageManagedBean.matchUmpires}" var="item">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Umpires"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item}"/>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </h:panelGrid>
                 </h:panelGrid>
-
             </f:view>
         </h:panelGrid>
     </h:body>
