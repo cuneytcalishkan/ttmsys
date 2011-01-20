@@ -61,6 +61,7 @@ public class TrackerManagedBean implements Serializable {
             em.merge(current);
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(TrackerManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
             try {
                 utx.rollback();
             } catch (Exception ex) {
@@ -75,11 +76,10 @@ public class TrackerManagedBean implements Serializable {
             em.merge(current);
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(TrackerManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
             try {
-                Logger.getLogger(TrackerManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
                 utx.rollback();
             } catch (Exception ex) {
-                Logger.getLogger(TrackerManagedBean.class.getName()).log(Level.SEVERE, ex.getMessage());
             }
         }
     }

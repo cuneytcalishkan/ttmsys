@@ -2,11 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controller;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -20,7 +21,7 @@ import model.Referee;
 import model.Tournament;
 import model.Umpire;
 
-@Named(value="matchManagedBean")
+@Named(value = "matchManagedBean")
 @SessionScoped
 public class MatchManagedBean implements Serializable {
 
@@ -35,18 +36,19 @@ public class MatchManagedBean implements Serializable {
     public MatchManagedBean() {
     }
 
-    public String linkMatch(Match match, Tournament tournament){
+    public String linkMatch(Match match, Tournament tournament) {
         selectedMatch = match;
         this.tournament = tournament;
         return "manager:editMatch";
     }
 
-    public String save(){
+    public String save() {
         try {
             utx.begin();
             em.merge(selectedMatch);
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(MatchManagedBean.class.getName()).log(Level.SEVERE, null, e);
             try {
                 utx.rollback();
             } catch (Exception ex) {
@@ -63,7 +65,7 @@ public class MatchManagedBean implements Serializable {
         this.selectedMatch = selectedMatch;
     }
 
-     public List<Referee> getMatchReferees() {
+    public List<Referee> getMatchReferees() {
         if (selectedMatch == null) {
             return null;
         }
@@ -98,13 +100,14 @@ public class MatchManagedBean implements Serializable {
         return q.getResultList();
     }
 
-    public void addReferee(Referee referee){
+    public void addReferee(Referee referee) {
         selectedMatch.addReferee(referee);
         try {
             utx.begin();
             em.merge(selectedMatch);
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(MatchManagedBean.class.getName()).log(Level.SEVERE, null, e);
             try {
                 utx.rollback();
             } catch (Exception ex) {
@@ -112,13 +115,14 @@ public class MatchManagedBean implements Serializable {
         }
     }
 
-    public void removeReferee(Referee referee){
+    public void removeReferee(Referee referee) {
         selectedMatch.removeReferee(referee);
         try {
             utx.begin();
             em.merge(selectedMatch);
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(MatchManagedBean.class.getName()).log(Level.SEVERE, null, e);
             try {
                 utx.rollback();
             } catch (Exception ex) {
@@ -126,13 +130,14 @@ public class MatchManagedBean implements Serializable {
         }
     }
 
-    public void addUmpire(Umpire umpire){
+    public void addUmpire(Umpire umpire) {
         selectedMatch.addUmpire(umpire);
         try {
             utx.begin();
             em.merge(selectedMatch);
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(MatchManagedBean.class.getName()).log(Level.SEVERE, null, e);
             try {
                 utx.rollback();
             } catch (Exception ex) {
@@ -140,13 +145,14 @@ public class MatchManagedBean implements Serializable {
         }
     }
 
-    public void removeUmpire(Umpire umpire){
+    public void removeUmpire(Umpire umpire) {
         selectedMatch.removeUmpire(umpire);
         try {
             utx.begin();
             em.merge(selectedMatch);
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(MatchManagedBean.class.getName()).log(Level.SEVERE, null, e);
             try {
                 utx.rollback();
             } catch (Exception ex) {
@@ -173,22 +179,22 @@ public class MatchManagedBean implements Serializable {
         return q.getResultList();
     }
 
-    public boolean canAssignCourt(Court court){
-        return (! court.equals(selectedMatch.getCourt()));
+    public boolean canAssignCourt(Court court) {
+        return (!court.equals(selectedMatch.getCourt()));
     }
 
-    public void assignCourt(Court court){
+    public void assignCourt(Court court) {
         selectedMatch.setCourt(court);
         try {
             utx.begin();
             em.merge(selectedMatch);
             utx.commit();
         } catch (Exception e) {
+            Logger.getLogger(MatchManagedBean.class.getName()).log(Level.SEVERE, null, e);
             try {
                 utx.rollback();
             } catch (Exception ex) {
             }
         }
     }
-
 }

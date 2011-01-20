@@ -6,11 +6,12 @@ package controller;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -62,8 +63,12 @@ public class RefereeManagedBean implements Serializable {
             utx.begin();
             em.merge(selectedMatch);
             utx.commit();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+        } catch (Exception e) {
+            Logger.getLogger(RefereeManagedBean.class.getName()).log(Level.SEVERE, e.getMessage());
+            try {
+                utx.rollback();
+            } catch (Exception ex) {
+            }
         }
         return "referee:index";
     }

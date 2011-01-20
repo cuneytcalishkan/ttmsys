@@ -57,7 +57,7 @@ public class PlayerManagedBean implements Serializable {
                 + " where tour.id = :tid AND p.id = :pid");
         q.setParameter("tid", tr.getId());
         q.setParameter("pid", current.getId());
-        if(!q.getResultList().isEmpty()){
+        if (!q.getResultList().isEmpty()) {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("You have already sent a request for this Tournament."));
             return "player:index";
@@ -68,7 +68,7 @@ public class PlayerManagedBean implements Serializable {
                 + " WHERE tour.id = :tid AND p.id = :pid");
         q.setParameter("tid", tr.getId());
         q.setParameter("pid", current.getId());
-        if(!q.getResultList().isEmpty()){
+        if (!q.getResultList().isEmpty()) {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("You are already participating this Tournament."));
             return "player:index";
@@ -82,12 +82,16 @@ public class PlayerManagedBean implements Serializable {
                 em.persist(team);
                 TournamentJoinRequest tjr = new TournamentJoinRequest(selectedTournament, team);
                 tjr.setManager(selectedTournament.getManager());
-                em.persist(tjr);                
+                em.persist(tjr);
                 utx.commit();
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.addMessage(null, new FacesMessage("Your request to join tournament is sent to the Manager."));
-            } catch (Exception ex) {
-                Logger.getLogger(PlayerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception e) {
+                Logger.getLogger(PlayerManagedBean.class.getName()).log(Level.SEVERE, null, e);
+                try {
+                    utx.rollback();
+                } catch (Exception ex) {
+                }
             }
             return "player:index";
         } else {
@@ -117,8 +121,12 @@ public class PlayerManagedBean implements Serializable {
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.addMessage(null, new FacesMessage("Your request to join tournament is sent to the Manager."));
                 return "player:index";
-            } catch (Exception ex) {
-                Logger.getLogger(PlayerManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception e) {
+                Logger.getLogger(PlayerManagedBean.class.getName()).log(Level.SEVERE, null, e);
+                try {
+                    utx.rollback();
+                } catch (Exception ex) {
+                }
             }
         }
         return "player:createTeam";
