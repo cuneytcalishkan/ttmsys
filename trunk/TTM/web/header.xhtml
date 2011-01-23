@@ -3,10 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html">
     <h:head>
-        <title>Header</title>
+        <title>Web Based Tennis Tournament Management System</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
+        <h1>Web Based Tennis Tournament Management System</h1>
         <h:form>
             <h:outputLabel value="Logged in as:#{User.current.name} #{User.current.surname} " rendered="#{User.logged}"/>
             <h:commandButton action="login" value="Login" rendered="#{!User.logged}"/>
